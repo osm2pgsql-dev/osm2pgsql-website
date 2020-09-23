@@ -67,7 +67,7 @@ checkpoint_timeout = 10min
 checkpoint_completion_target = 0.9
 ```
 
-See more in docs on http://nominatim.org/release-docs/latest/admin/Installation/
+See more in docs on https://nominatim.org/release-docs/latest/admin/Installation/
 
 For details see also the [Resource Consumption section in the Server
 Configuration
