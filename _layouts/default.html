@@ -1,13 +1,42 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1"/>
-        <meta charset="utf-8">
-        <title>{{ page.title }} - osm2pgsql</title>
-    </head>
-    <body>
-        <div id="content">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta charset="utf-8">
+    <title>{{ page.title }}{% if layout.news %} - News{% endif %} - osm2pgsql</title>
+    <link rel="stylesheet" href="{% link css/main.css %}">
+    {% feed_meta %}
+</head>
+<body>
+    <div id="top"><a href="{% link index.md %}">osm2pgsql</a></div>
+    <header>
+        <nav>
+            <div id="menu-toggle">
+                <input type="checkbox"/>
+                <span></span>
+                <span></span>
+                <span></span>
+                <ul id="menu">
+                    <li><a href="{% link index.md %}">Home</a></li>
+                    <li><a href="{% link news/index.md %}">News</a></li>
+                    <li><a href="{% link doc/index.md %}">Documentation</a></li>
+                    <li><a href="{% link support/index.md %}">Support</a></li>
+                    <li><a href="{% link contribute/index.md %}">Contribute</a></li>
+                    <li><a href="{% link sponsors/index.md %}">Sponsors</a></li>
+                    <li><a id="menu-code" href="https://github.com/openstreetmap/osm2pgsql">Code</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <main>
 {{ content }}
-        </div>
-    </body>
+    </main>
+{% if page.footer != false %}
+    <footer>
+        <p><a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" src="{% link img/cc-by-sa.png %}" width="44" height="16"/></a><br />This website is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>. <span class="noprint">Help maintain it on <a href="https://github.com/openstreetmap/osm2pgsql-website">Github</a>
+        (<a href="{{ site.github.repository_url }}/tree/master/{{ page.path }}" target="_blank">Source of this page</a>).</span></p>
+        <p>Last change: {{ page.last_modified_at | date_to_long_string }} | <a href="{% link contact.md %}">Imprint/Contact</a></p>
+    </footer>
+{% endif %}
+</body>
 </html>

@@ -1,0 +1,488 @@
+
+/* ---------------- variables ---------------- */
+
+:root {
+    --osm2pgsql-color-darker: #2b4ab5;
+    --osm2pgsql-color-dark: #4b6ac5;
+    --osm2pgsql-color-light: #a0c0ff;
+    --osm2pgsql-color-news: #ffa500;
+    --osm2pgsql-color-menu-text: #ffffff;
+    --osm2pgsql-color-menu-hover: #e0e0e0;
+}
+
+/* ---------------- document structure ---------------- */
+
+body {
+    font-family: Verdana, sans-serif;
+    margin: 0;
+    max-width: 1200px;
+    line-height: 130%;
+}
+
+@media screen and (min-width: 1000px) {
+    body {
+        margin: 0 auto;
+    }
+}
+
+header {
+    position: absolute;
+    top: 0;
+    padding: 0;
+    width: 100%;
+    max-width: 1200px;
+    z-index: 1;
+}
+
+@media print {
+    header, .noprint {
+        display: none;
+    }
+}
+
+main {
+    position: relative;
+    top: 60px;
+    padding: 0 20px;
+    max-width: 1200px;
+}
+
+footer {
+    position: relative;
+    top: 60px;
+    border-top: 1px solid #e0e0e0;
+    text-align: center;
+    font-size: 90%;
+    color: #606060;
+    max-width: 1200px;
+    padding-bottom: 10px;
+    margin: 30px 20px 0 20px;
+}
+
+section {
+    position: relative;
+    margin-top: 24px;
+    border-top: 1px solid var(--osm2pgsql-color-light);
+}
+
+/* ---------------- top ---------------- */
+
+#top {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 20px;
+    padding: 10px;
+    background-color: var(--osm2pgsql-color-dark);
+    text-align: center;
+}
+
+#top a {
+    color: var(--osm2pgsql-color-menu-text);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+#top a:hover {
+    color: var(--osm2pgsql-color-menu-hover);
+}
+
+@media screen and (min-width: 1000px) {
+    #top {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 400px;
+        padding-top: 120px;
+        font-size: 18pt;
+        transform: rotate(-25deg) translate(-105px, -130px);
+    }
+}
+
+@media screen and (max-width: 999px) {
+    #top {
+        font-size: 18px;
+    }
+}
+
+/* ---------------- main menu ---------------- */
+
+nav {
+    position: absolute;
+}
+
+a#menu-code {
+    background-image: url('/img/github.png');
+    background-repeat: no-repeat;
+    background-size: 16px 16px;
+}
+
+@media screen and (min-width: 1000px) {
+    #menu-toggle span, #menu-toggle input {
+        display: none;
+    }
+
+    nav {
+        top: 20px;
+        right: 0;
+        font-size: 120%;
+        padding-right: 20px;
+    }
+
+    nav ul {
+        width: 100%;
+        list-style: none;
+        margin: 0;
+    }
+
+    nav ul > li {
+        position: relative;
+        float: left;
+        margin-left: 10px;
+        height: 2ex;
+    }
+
+    #menu a {
+        background-color: var(--osm2pgsql-color-dark);
+        color: var(--osm2pgsql-color-menu-text);
+        text-decoration: none;
+        padding: 3px 8px;
+        border-radius: 2px;
+    }
+
+    #menu a:hover {
+        color: var(--osm2pgsql-color-menu-hover);
+    }
+
+    a#menu-code {
+        padding-left: 30px;
+        background-position: 8px center;
+    }
+}
+
+@media screen and (max-width: 999px) {
+    nav {
+        width: 100%;
+    }
+
+    #menu-toggle {
+        display: block;
+        position: absolute;
+        top: 9px;
+        right: 14px;
+        z-index: 1;
+    }
+
+    #menu-toggle a {
+        text-decoration: none;
+        color: #ffffff;
+    }
+
+    #menu-toggle a:hover {
+        color: #e0e0e0;
+    }
+
+    #menu-toggle input {
+        display: block;
+        width: 40px;
+        height: 32px;
+        position: absolute;
+        top: -7px;
+        left: -5px;
+        cursor: pointer;
+        opacity: 0;
+        z-index: 2;
+        -webkit-touch-callout: none;
+    }
+
+    div#menu-toggle span {
+        position: relative;
+        display: block;
+        width: 27px;
+        height: 4px;
+        margin-bottom: 5px;
+        background-color: #ffffff;
+        border-radius: 3px;
+        z-index: 1;
+
+        transform-origin: 4px 0px;
+        transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+                    background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+                    opacity 0.55s ease;
+    }
+
+    #menu-toggle span:first-child {
+        transform-origin: 0% 0%;
+    }
+
+    #menu-toggle span:nth-last-child(2) {
+        transform-origin: 0% 100%;
+    }
+
+    #menu-toggle input:checked ~ span {
+        transform: rotate(45deg) scale(1.1, 1.1) translate(0px, 1px);
+    }
+
+    #menu-toggle input:checked ~ span:nth-last-child(3) {
+        opacity: 0;
+        transform: scale(0.2, 0.2);
+    }
+
+    #menu-toggle input:checked ~ span:nth-last-child(2) {
+        transform: rotate(-45deg) scale(1.1, 1.1);
+    }
+
+    #menu {
+        position: absolute;
+        width: 200px;
+        margin: -100px 0 0 50px;
+        padding: 110px 20px 20px 20px;
+        background-color: var(--osm2pgsql-color-dark);
+        list-style-type: none;
+        -webkit-font-smoothing: antialiased;
+
+        transform: none;
+        transform-origin: 0% 0%;
+        transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+    }
+
+    #menu li {
+        padding: 6px 0;
+        font-size: 160%;
+    }
+
+    #menu-toggle input:checked ~ ul {
+        transform: translate(-100%, 0);
+    }
+
+    a#menu-code {
+        padding-left: 24px;
+        background-position: 0px 3px;
+    }
+}
+
+/* ---------------- common elements ---------------- */
+
+h1, h2, h2 a {
+    color: var(--osm2pgsql-color-dark);
+    text-decoration: none;
+}
+
+a {
+    color: var(--osm2pgsql-color-darker);
+}
+
+a:visited {
+    color: black;
+}
+
+h1 {
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 240%;
+}
+
+h2 img {
+    position: relative;
+    top: 3px;
+}
+
+ul, ol {
+    padding-left: 16px;
+}
+
+dt {
+    font-weight: bold;
+}
+
+dd {
+    margin-left: 20px;
+}
+
+pre {
+    background-color: #f0f0f0;
+    padding: 2px 6px;
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+}
+
+div.note {
+    border: 1px solid #ffa0a0;
+    border-radius: 2px;
+    padding: 0 10px 0 40px;
+    background-image: url('/img/warning.png');
+    background-repeat: no-repeat;
+    background-position: 8px 8px;
+    background-size: 20px 20px;
+}
+
+/* ---------------- news box on home page ---------------- */
+
+@media screen and (max-width: 999px) {
+    a#news-rss {
+        display: none;
+    }
+}
+
+@media screen and (min-width: 1000px) {
+    #newsbox {
+        position: relative;
+        float: right;
+        width: 26em;
+        min-height: 100px;
+        background-color: #ffffff;
+        border: 1px solid var(--osm2pgsql-color-news);
+        border-radius: 2px;
+        padding: 10px;
+        margin-left: 10px;
+        z-index: 1;
+    }
+
+    #newsbox section {
+        border: none;
+    }
+
+    #newsbox h2 {
+        position: relative;
+        top: -20px;
+        margin: 0 115px;
+        padding: 0;
+        border: none;
+        text-align: center;
+        background-color: #ffffff;
+    }
+
+    #newsbox h2 a {
+        color: var(--osm2pgsql-color-news);
+        text-decoration: none;
+    }
+
+    a#news-rss {
+        position: absolute;
+        right: 4px;
+        top: 4px;
+    }
+}
+
+/* ---------------- news pages ---------------- */
+
+.post-meta {
+    color: var(--osm2pgsql-color-dark);
+    font-size: 140%;
+    text-align: center;
+}
+
+div.news-date {
+    text-align: center;
+    color: #808080;
+    font-size: 120%;
+}
+
+.news-list article {
+    margin-bottom: 30px;
+}
+
+.news-list h2 {
+    margin: 3px 0 0 80px;
+}
+
+.news-text {
+    margin-left: 80px;
+}
+
+div.news-date-small {
+    position: relative;
+    top: -1px;
+    float: left;
+    width: 5em;
+    border-radius: 2px;
+    text-align: center;
+    background-color: var(--osm2pgsql-color-dark);
+    color: #ffffff;
+    margin-right: 20px;
+}
+
+/* ---------------- documentation pages ---------------- */
+
+div.edit {
+    position: absolute;
+    top: 6px;
+    right: 0;
+    text-align: right;
+    font-size: 160%;
+}
+
+div.edit a {
+    border: 1px solid var(--osm2pgsql-color-light);
+    border-radius: 2px;
+    padding: 0 3px;
+    text-decoration: none;
+}
+
+@media screen and (min-width: 1600px) {
+    div.toc {
+        position: absolute;
+        left: -190px;
+        width: 180px;
+    }
+}
+
+/* ---------------- flex container on doc page ---------------- */
+
+.container {
+    display: flex;
+    align-content: stretch;
+    flex-wrap: wrap;
+    margin: -10px;
+}
+
+.box {
+    margin: 10px;
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    padding: 0 16px 4px 16px;
+    flex-grow: 1;
+    text-decoration: none;
+    color: #000000;
+}
+
+.box2 {
+    width: 40%;
+    background-color: #e8f0f8;
+    border: 1px solid var(--osm2pgsql-color-light);
+}
+
+.box2 h2 {
+    margin-top: 10px;
+    border: none;
+}
+
+.box3 {
+    width: 25%;
+    font-size: 80%;
+}
+
+.box3 img {
+    float: left;
+    padding: 12px 8px 8px 0;
+}
+
+/* ---------------- sponsor images ---------------- */
+
+#sponsorlist {
+    display: flex;
+    align-content: stretch;
+    flex-wrap: wrap;
+}
+
+#sponsorlist div {
+    padding: 4px 40px 4px 0;
+    margin: auto 0;
+}
+
+#sponsorlist a {
+    font-weight: bold;
+    text-decoration: none;
+    color: black;
+}
+

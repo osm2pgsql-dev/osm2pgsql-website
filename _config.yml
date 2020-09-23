@@ -14,20 +14,22 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 title: osm2pgsql
-email: jochen@topf.org
 description: >- # this means to ignore newlines until "baseurl:"
   osm2pgsql
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
-#twitter_username: jekyllrb
-#github_username:  jekyll
-
+url: "https://osm2pgsql.org"
+osm2pgsql:
+    latest_version: 1.3.0
+github:
+    repository_url: https://github.com/openstreetmap/osm2pgsql-website
+#
 # Build settings
 markdown: kramdown
 theme: minima
-#plugins:
-#  - jekyll-feed
-
+plugins:
+  - jekyll-feed
+  - jekyll-last-modified-at
+#
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
 # to override the default setting.
@@ -39,3 +41,12 @@ theme: minima
 #   - vendor/cache/
 #   - vendor/gems/
 #   - vendor/ruby/
+#
+feed:
+    path: news/feed.xml
+collections:
+    manual:
+        output: true
+    posts:
+        output: true
+        permalink: /news/:year/:month/:day/:title:output_ext

@@ -1,0 +1,29 @@
+---
+layout: doc
+title: Osm2pgsql Manual
+---
+
+{% assign chapters = site.manual | sort: 'chapter' %}
+
+<div class="note">
+    <p>This manual is work-in-progress. It is incomplete, only contains
+    some fragments so far.</p>
+</div
+
+<div class="toc">
+    <p><b>Table of Contents</b></p>
+    <ol>
+{% for oc in chapters %}<li><a href="#{{ oc.title | slugify }}">{{ oc.title }}</a></li>
+{% endfor %}
+    </ol>
+</div>
+
+<article>
+{% for oc in chapters %}
+<section>
+    <h2 id="{{ oc.title | slugify }}">{{ oc.chapter }}. {{ oc.title }}</h2>
+    <div class="edit" title="Edit this section"><a href="{{ site.github.repository_url }}/tree/master/{{ oc.relative_path }}">&#9998;</a></div>
+{{ oc.content }}
+</section>
+{% endfor %}
+</article>
