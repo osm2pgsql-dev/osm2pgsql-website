@@ -67,7 +67,7 @@ or the [#osm-dev IRC channel](https://wiki.openstreetmap.org/wiki/IRC).
 Commercial support for osm2pgsql is available from several companies and
 freelancers. You can contact the osm2pgsql developers <a
 href="https://github.com/lonvia">Sarah Hoffmann</a> or <a
-href="https://jochentopf.com/">Jochen Topf</a> or have a look at <a
+href="https://www.jochentopf.com/">Jochen Topf</a> or have a look at <a
 href="{% link sponsors/index.md %}">our sponsors</a> who also offer some osm2pgsql-related
 services.
 

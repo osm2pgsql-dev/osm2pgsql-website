@@ -53,7 +53,7 @@ OSM wiki also contains some more information, some of it outdated.
     get started.</p>
 </a>
 
-<a class="box box3" href="https://postgresql.org/">
+<a class="box box3" href="https://www.postgresql.org/">
     <img src="{% link img/postgresql.png %}" width="30" height="31" alt="PostgreSQL"/>
 
     <p>You'll need to understand how PostgreSQL works to make the most out of

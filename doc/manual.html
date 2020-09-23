@@ -22,7 +22,7 @@ title: Osm2pgsql Manual
 {% for oc in chapters %}
 <section>
     <h2 id="{{ oc.title | slugify }}">{{ oc.chapter }}. {{ oc.title }}</h2>
-    <div class="edit" title="Edit this section"><a href="{{ site.github.repository_url }}/tree/master/{{ oc.relative_path }}">&#9998;</a></div>
+    <div class="edit" title="Edit this section"><a href="{{ site.github.repository_url }}/blob/master/{{ oc.relative_path }}">&#9998;</a></div>
 {{ oc.content }}
 </section>
 {% endfor %}

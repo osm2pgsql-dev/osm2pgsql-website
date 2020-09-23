@@ -20,7 +20,7 @@ we are and in what areas we see need for work. It is incomplete.
 <section markdown="1">
 ## Tests and Continuous Integration
 
-[![Travis Build Status](https://secure.travis-ci.org/openstreetmap/osm2pgsql.svg?branch=master)](https://travis-ci.org/openstreetmap/osm2pgsql)
+[![Travis Build Status](https://api.travis-ci.org/openstreetmap/osm2pgsql.svg?branch=master)](https://travis-ci.org/openstreetmap/osm2pgsql)
 [![Appveyor Build Status](https://ci.appveyor.com/api/projects/status/7abwls7hfmb83axj/branch/master?svg=true)](https://ci.appveyor.com/project/openstreetmap/osm2pgsql/branch/master)
 [![macOS Build Status](https://github.com/openstreetmap/osm2pgsql/workflows/OSX%20CI/badge.svg?branch=master)](https://github.com/openstreetmap/osm2pgsql/actions)
 

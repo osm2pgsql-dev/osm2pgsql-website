@@ -18,7 +18,7 @@ or days. You can save yourself a lot of trouble doing some trial runs starting
 with small extracts and working your way up, observing memory and disk usage
 along the way.
 
-It helps to be familiar with the [PostgreSQL](https://postgresql.org/) database
-system and the [PostGIS](https://postgis.net/) extension to it as well as the
-[SQL](https://en.wikipedia.org/wiki/SQL) database query language.
+It helps to be familiar with the [PostgreSQL](https://www.postgresql.org/)
+database system and the [PostGIS](https://postgis.net/) extension to it as well
+as the [SQL](https://en.wikipedia.org/wiki/SQL) database query language.
 
