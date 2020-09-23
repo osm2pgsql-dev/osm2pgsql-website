@@ -53,6 +53,7 @@ footer {
     position: relative;
     top: 60px;
     border-top: 1px solid #e0e0e0;
+    clear: both;
     text-align: center;
     font-size: 90%;
     color: #606060;
@@ -287,6 +288,7 @@ h1 {
     text-transform: uppercase;
     text-align: center;
     font-size: 240%;
+    line-height: 120%;
 }
 
 h2 img {
@@ -733,5 +735,74 @@ table.proj img {
 
 table.proj td {
     padding: 10px;
+}
+
+/* ---------------- examples ---------------- */
+
+.download {
+    position: relative;
+}
+
+.download img {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    width: 20px;
+    height: 20px;
+    padding: 4px;
+    background-color: #e0e0e0;
+    border-radius: 2px;
+    z-index: 1;
+}
+
+.example {
+    flex-grow: 1;
+    margin: 10px;
+    height: 100px;
+    padding: 0;
+    text-decoration: none;
+    color: #000000;
+    width: 30%;
+    min-width: 300px;
+    border: 1px solid var(--osm2pgsql-color-light);
+    border-radius: 2px;
+    margin-top: 10px;
+}
+
+.example img {
+    width: 100px;
+    height: 100px;
+    float: right;
+    padding-left: 10px;
+}
+
+.example h2,
+.example p {
+    margin-top: 6px;
+    padding: 0 6px;
+}
+
+img.floatright {
+    float: right;
+    padding: 2px;
+    margin-left: 10px;
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+}
+
+img.fullwidth {
+    max-width: calc(100% - 2px);
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+}
+
+.map {
+    width: calc(100% - 4px);
+    height: 400px;
+    background-color: #f0f0f0;
+    border: 1px solid #e0e0e0;
+    padding: 1px;
+    clear: both;
 }
 

@@ -75,6 +75,14 @@ Resource friendly
 
 <section markdown="1">
 
+## Examples
+
+{%- include examples.md -%}
+
+</section>
+
+<section markdown="1">
+
 ## Sponsors
 
 Developing and supporting osm2pgsql takes a huge amount of effort. We thank the
