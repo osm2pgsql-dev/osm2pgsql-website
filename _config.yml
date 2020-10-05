@@ -57,6 +57,11 @@ defaults:
     -
         scope:
             path: ""
+        values:
+            layout: default
+    -
+        scope:
+            path: ""
             type: manpages
         values:
             layout: manpage
