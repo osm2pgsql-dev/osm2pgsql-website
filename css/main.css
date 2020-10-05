@@ -486,3 +486,28 @@ div.edit a {
     color: black;
 }
 
+/* ---------------- man pages ---------------- */
+
+.manpage-version {
+    text-align: center;
+    font-size: 120%;
+    color: var(--osm2pgsql-color-dark);
+}
+
+.manpage h1 {
+    color: #404040;
+    text-align: left;
+}
+
+.manpage strong {
+    color: #404040;
+}
+
+.manpage dt {
+    color: #404040;
+}
+
+.manpage dd {
+    padding-bottom: 6px;
+}
+

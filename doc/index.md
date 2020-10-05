@@ -19,7 +19,7 @@ title: Documentation
     <p>The manual contains all the details about running osm2pgsql.</p>
 </a>
 
-<a class="box box2" href="{% link doc/man.md %}">
+<a class="box box2" href="{% link doc/man/index.md %}">
     <h2><img src="{% link img/document.svg %}" width="16" height="16" alt=""/> Man Page</h2>
 
     <p>The man page has a short overview about running the osm2pgsql command.</p>

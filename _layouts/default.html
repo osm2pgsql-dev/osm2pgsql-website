@@ -3,7 +3,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <meta charset="utf-8">
-    <title>{{ page.title }}{% if layout.news %} - News{% endif %} - osm2pgsql</title>
+    <title>{{ page.title }}{% if layout.title_section %} - {{ layout.title_section }}{% endif %} - osm2pgsql</title>
     <link rel="stylesheet" href="{% link css/main.css %}">
     {% feed_meta %}
 </head>

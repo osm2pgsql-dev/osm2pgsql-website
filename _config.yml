@@ -45,8 +45,18 @@ plugins:
 feed:
     path: news/feed.xml
 collections:
+    manpages:
+        output: true
+        permalink: doc/man/:name.html
     manual:
         output: false
     posts:
         output: true
         permalink: /news/:year/:month/:day/:title:output_ext
+defaults:
+    -
+        scope:
+            path: ""
+            type: manpages
+        values:
+            layout: manpage
