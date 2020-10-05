@@ -46,7 +46,7 @@ feed:
     path: news/feed.xml
 collections:
     manual:
-        output: true
+        output: false
     posts:
         output: true
         permalink: /news/:year/:month/:day/:title:output_ext
