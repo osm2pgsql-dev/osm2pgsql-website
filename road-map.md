@@ -70,7 +70,6 @@ Issues:
 * [965](https://github.com/openstreetmap/osm2pgsql/issues/965)
 * [1010](https://github.com/openstreetmap/osm2pgsql/issues/1010)
 * [1028](https://github.com/openstreetmap/osm2pgsql/issues/1028)
-* [1035](https://github.com/openstreetmap/osm2pgsql/issues/1035)
 * [1167](https://github.com/openstreetmap/osm2pgsql/issues/1167)
 
 ### Code Cleanup and Modernization
@@ -129,8 +128,6 @@ Issues:
 * [142](https://github.com/openstreetmap/osm2pgsql/issues/142)
 * [272](https://github.com/openstreetmap/osm2pgsql/issues/272)
 * [1079](https://github.com/openstreetmap/osm2pgsql/issues/1079)
-* [1165](https://github.com/openstreetmap/osm2pgsql/issues/1165)
-* [1242](https://github.com/openstreetmap/osm2pgsql/issues/1242)
 * [PR 1241](https://github.com/openstreetmap/osm2pgsql/pull/1241)
 
 ### Progress Output and Logging
@@ -225,7 +222,6 @@ Some new features might only be available in the flex output.
 * [1086](https://github.com/openstreetmap/osm2pgsql/issues/1086)
 * [1130](https://github.com/openstreetmap/osm2pgsql/issues/1130)
 * [1164](https://github.com/openstreetmap/osm2pgsql/issues/1164)
-* [1165](https://github.com/openstreetmap/osm2pgsql/issues/1165)
 
 ### Processing Flexibility and Performance
 
@@ -270,10 +266,10 @@ expiry calculations based on output tables, not data input.
 
 Issues:
 
-* [776](https://github.com/openstreetmap/osm2pgsql/issues/776)
-* [709](https://github.com/openstreetmap/osm2pgsql/issues/709)
-* [461](https://github.com/openstreetmap/osm2pgsql/issues/461)
 * [38](https://github.com/openstreetmap/osm2pgsql/issues/38)
+* [461](https://github.com/openstreetmap/osm2pgsql/issues/461)
+* [709](https://github.com/openstreetmap/osm2pgsql/issues/709)
+* [776](https://github.com/openstreetmap/osm2pgsql/issues/776)
 
 ### Debugging and Testing Support for Style Writers
 
@@ -302,7 +298,6 @@ Issues:
 * [768](https://github.com/openstreetmap/osm2pgsql/issues/768)
 * [796](https://github.com/openstreetmap/osm2pgsql/issues/796)
 * [1085](https://github.com/openstreetmap/osm2pgsql/issues/1085)
-* [PR 1058](https://github.com/openstreetmap/osm2pgsql/pull/1058)
 
 ### Better Relation Support
 
