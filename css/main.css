@@ -1,11 +1,11 @@
 
-/* ---------------- variables ---------------- */
+/* ---------------- set up colors ---------------- */
 
 :root {
-    --osm2pgsql-color-darker: #2b4ab5;
-    --osm2pgsql-color-dark: #4b6ac5;
-    --osm2pgsql-color-light: #a0c0ff;
-    --osm2pgsql-color-news: #ffa500;
+    --osm2pgsql-color-darker: #2b4ab5; /* darker blue */
+    --osm2pgsql-color-dark: #4b6ac5; /* dark blue */
+    --osm2pgsql-color-light: #a0c0ff; /* light blue */
+    --osm2pgsql-color-news: #ffa500; /* orange */
     --osm2pgsql-color-menu-text: #ffffff;
     --osm2pgsql-color-menu-hover: #e0e0e0;
 }
@@ -276,6 +276,10 @@ a:visited {
     color: black;
 }
 
+a.extlink:before {
+    content: '\2192' ' ';
+}
+
 h1 {
     text-transform: uppercase;
     text-align: center;
@@ -287,8 +291,18 @@ h2 img {
     top: 3px;
 }
 
+code {
+    background-color: #f0f0f0;
+    padding: 0 2px;
+    border-radius: 2px;
+}
+
+pre code {
+    padding: 0;
+}
+
 ul, ol {
-    padding-left: 16px;
+    padding-left: 24px;
 }
 
 dt {
@@ -306,14 +320,32 @@ pre {
     border-radius: 2px;
 }
 
-div.note {
+.note {
     border: 1px solid #ffa0a0;
     border-radius: 2px;
-    padding: 0 10px 0 40px;
     background-image: url('/img/warning.png');
     background-repeat: no-repeat;
     background-position: 8px 8px;
     background-size: 20px 20px;
+    background-color: #fff0f0;
+}
+
+.wip {
+    border: 1px solid #a0a0ff;
+    border-radius: 2px;
+    background-image: url('/img/wip.png');
+    background-repeat: no-repeat;
+    background-position: 8px 8px;
+    background-size: 20px 20px;
+    background-color: #f0f0ff;
+}
+
+div.note {
+    padding: 0 10px 0 40px;
+}
+
+p.note, p.wip {
+    padding: 10px 10px 10px 40px;
 }
 
 /* ---------------- news box on home page ---------------- */
@@ -402,31 +434,6 @@ div.news-date-small {
     margin-right: 20px;
 }
 
-/* ---------------- documentation pages ---------------- */
-
-div.edit {
-    position: absolute;
-    top: 6px;
-    right: 0;
-    text-align: right;
-    font-size: 160%;
-}
-
-div.edit a {
-    border: 1px solid var(--osm2pgsql-color-light);
-    border-radius: 2px;
-    padding: 0 3px;
-    text-decoration: none;
-}
-
-@media screen and (min-width: 1600px) {
-    div.toc {
-        position: absolute;
-        left: -190px;
-        width: 180px;
-    }
-}
-
 /* ---------------- flex container on doc page ---------------- */
 
 .container {
@@ -486,7 +493,7 @@ div.edit a {
     color: black;
 }
 
-/* ---------------- software list ---------------- */
+/* ---------------- contribute: software list ---------------- */
 
 table.software-versions {
     border-top: 1px solid #e0e0e0;
@@ -496,21 +503,21 @@ table.software-versions {
 }
 
 table.software-versions tbody tr:nth-child(even) {
-   background-color: #f0f0f0;
+    background-color: #f0f0f0;
 }
 
 table.software-versions td {
-    padding: 2px 4px;
     height: 2em;
     border-left: 1px solid #e0e0e0;
+    padding: 2px 4px;
 }
 
 table.software-versions th {
-    background-color: #e0e0e0;
-    padding: 2px 4px;
     height: 2em;
-    border-left: 1px solid #e0e0e0;
     min-width: 7em;
+    border-left: 1px solid #e0e0e0;
+    padding: 2px 4px;
+    background-color: #e0e0e0;
 }
 
 /* ---------------- man pages ---------------- */
@@ -536,5 +543,173 @@ table.software-versions th {
 
 .manpage dd {
     padding-bottom: 6px;
+}
+
+/* ---------------- manual ---------------- */
+
+.version {
+    background-color: #e0f0e0;
+    padding: 0 2px;
+    border-radius: 2px;
+    border: 1px solid #e0e0e0;
+}
+
+.table-note {
+    margin-top: 4px;
+    text-align: right;
+    font-style: italic;
+}
+
+.table-note:before {
+    content: '(*) ';
+}
+
+/* ---------------- manual: table of contents ---------------- */
+
+.toc ol {
+    list-style: none;
+}
+
+.toc li {
+    text-indent: -24px;
+    line-height: 150%;
+}
+
+@media screen and (min-width: 400px) and (max-width: 1599px) {
+    .toc li.appendix a:before {
+        content: 'Appendix ';
+    }
+}
+
+@media screen and (min-width: 1600px) {
+    div.toc {
+        position: fixed;
+        left: 20px;
+        width: 200px;
+    }
+}
+
+/* ---------------- manual: auto-numbering ---------------- */
+
+article.manual {
+    counter-reset: chapter appendix;
+}
+
+article.manual section {
+    counter-reset: section;
+}
+
+article.manual section.chapter h2:before {
+    counter-increment: chapter;
+    content: counter(chapter) ' ';
+}
+
+article.manual section.appendix h2:before {
+    counter-increment: appendix;
+    content: 'Appendix ' counter(appendix, upper-alpha) ': ';
+}
+
+article.manual section.chapter h3:before {
+    counter-increment: section;
+    content: counter(chapter) '.' counter(section) ' ';
+}
+
+article.manual section.appendix h3:before {
+    counter-increment: section;
+    content: counter(appendix, upper-alpha) '.' counter(section) ' ';
+}
+
+/* ---------------- manual: edit button ---------------- */
+
+div.edit {
+    position: absolute;
+    top: 6px;
+    right: 0;
+    text-align: right;
+    font-size: 160%;
+}
+
+div.edit a {
+    border: 1px solid var(--osm2pgsql-color-light);
+    border-radius: 2px;
+    padding: 0 3px;
+    text-decoration: none;
+}
+
+/* ---------------- manual: desc table ---------------- */
+
+table.desc {
+    border: 1px solid var(--osm2pgsql-color-light);
+    border-spacing: 0;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+table.desc tbody tr:nth-child(even) {
+   background-color: #f0f0f0;
+}
+
+table.desc th {
+    background-color: var(--osm2pgsql-color-light);
+    text-align: left;
+    padding: 4px 8px;
+    white-space: nowrap;
+    width: 50px;
+}
+
+table.desc td {
+    padding: 4px 8px;
+    vertical-align: top;
+    white-space: nowrap;
+    font-family: monospace;
+}
+
+table.desc td code {
+    border: 1px solid #ffffff;
+}
+
+table.desc th:last-of-type {
+    white-space: normal;
+    width: auto;
+}
+
+table.desc td:last-of-type {
+    white-space: normal;
+    font-family: Verdana, sans-serif;
+}
+
+/* ---------------- manual: lib table ---------------- */
+
+table.lib {
+    width: 100%;
+    border-spacing: 0;
+    border-collapse: collapse;
+    margin-bottom: 30px;
+}
+
+table.lib th {
+    width: 7em;
+    padding: 4px;
+    vertical-align: top;
+    text-align: left;
+}
+
+table.lib th:after {
+    content: ':';
+}
+
+table.lib td {
+    border: 1px solid #e0e0e0;
+    background-color: #f0f0f0;
+    padding: 4px;
+}
+
+.lib-name td {
+    font-weight: bold;
+}
+
+.lib-syno td, .lib-exam td {
+    font-family: monospace;
+    white-space: pre;
 }
 

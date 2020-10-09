@@ -1,6 +1,8 @@
 ---
 version: 1.3.0
 ---
+{::options header_offset="1"/}
+
 # NAME
 
 osm2pgsql - Openstreetmap data to PostgreSQL converter

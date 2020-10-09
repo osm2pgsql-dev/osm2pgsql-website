@@ -3,25 +3,31 @@ layout: doc
 title: Osm2pgsql Manual
 ---
 
-{% assign chapters = site.manual | sort: 'chapter' %}
+{%- assign chapters = site.manual | sort: 'chapter' -%}
 
 <div class="note">
-    <p>This manual is work-in-progress. It is incomplete, only contains
-    some fragments so far.</p>
-</div
+    <p>This manual is work-in-progress. It is incomplete and some parts are
+    assembled from bits and pieces here or there and don't fit well together
+    yet.</p>
+</div>
 
 <div class="toc">
     <p><b>Table of Contents</b></p>
     <ol>
-{% for oc in chapters %}<li><a href="#{{ oc.title | slugify }}">{{ oc.title }}</a></li>
-{% endfor %}
+{% for oc in chapters %}
+{%-   if oc.appendix -%}
+        <li class="appendix"><a href="#{{ oc.title | slugify }}">{{ oc.appendix }}: {{ oc.title }}</a></li>
+{%-   else -%}
+        <li><a href="#{{ oc.title | slugify }}">{{ oc.chapter }}. {{ oc.title }}</a></li>
+{%-   endif -%}
+{% endfor -%}
     </ol>
 </div>
 
-<article>
+<article class="manual">
 {% for oc in chapters %}
-<section>
-    <h2 id="{{ oc.title | slugify }}">{{ oc.chapter }}. {{ oc.title }}</h2>
+<section class="{% if oc.appendix %}appendix{% else %}chapter{% endif %}">
+    <h2 id="{{ oc.title | slugify }}">{{ oc.title }}</h2>
     <div class="edit" title="Edit this section"><a href="{{ site.github.repository_url }}/blob/master/{{ oc.relative_path }}">&#9998;</a></div>
 {{ oc.content }}
 </section>

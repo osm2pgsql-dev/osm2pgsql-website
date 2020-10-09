@@ -48,3 +48,21 @@ This is most likely because you are running out of memory. Due to the way
 Linux system "overcommit" memory, osm2pgsql can not detect that it is running
 out of memory, so it can't tell you what's going on.
 
+### Osm2pgsql created table columns I can't access.
+
+Osm2pgsql usually creates table columns in your database that are named after
+the OSM tag used, for instance, the `name` tag might end up in a column called
+`name`. Sometimes this leads to problems when the tags contains unusual
+characters, for instance the tag `addr:city` contains the colon character.
+Another problem are reserved names in the PostgreSQL database, for instance
+`natural`.
+
+These names are allowed in PostgreSQL, but they need to be quoted with double
+quotes (`"""`). Osm2pgsql does this quoting, so it doesn't have any problem
+with these. But not all software does this.
+
+You can define in the config file which columns you want, and, if you are using
+the flex output, decide on how exactly your columns should be named and used.
+There you can, for instance, create a column named `addr_city` and fill it
+with the value of the `addr:city` tag.
+
