@@ -486,6 +486,33 @@ div.edit a {
     color: black;
 }
 
+/* ---------------- software list ---------------- */
+
+table.software-versions {
+    border-top: 1px solid #e0e0e0;
+    border-bottom: 1px solid #e0e0e0;
+    border-right: 1px solid #e0e0e0;
+    border-spacing: 0;
+}
+
+table.software-versions tbody tr:nth-child(even) {
+   background-color: #f0f0f0;
+}
+
+table.software-versions td {
+    padding: 2px 4px;
+    height: 2em;
+    border-left: 1px solid #e0e0e0;
+}
+
+table.software-versions th {
+    background-color: #e0e0e0;
+    padding: 2px 4px;
+    height: 2em;
+    border-left: 1px solid #e0e0e0;
+    min-width: 7em;
+}
+
 /* ---------------- man pages ---------------- */
 
 .manpage-version {

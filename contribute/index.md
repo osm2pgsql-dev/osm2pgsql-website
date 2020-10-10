@@ -34,6 +34,13 @@ yet.)
 </section>
 
 <section markdown="1">
+## Software we depend on
+
+[Dependencies]({% link contribute/dependencies.md %}).
+
+</section>
+
+<section markdown="1">
 ## License
 
 The software *osm2pgsql* is available under the [GNU General Public License](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
