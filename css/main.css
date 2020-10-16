@@ -1,5 +1,5 @@
 
-/* ---------------- set up colors ---------------- */
+/* ---------------- set up variables ---------------- */
 
 :root {
     --osm2pgsql-color-darker: #2b4ab5; /* darker blue */
@@ -8,12 +8,13 @@
     --osm2pgsql-color-news: #ffa500; /* orange */
     --osm2pgsql-color-menu-text: #ffffff;
     --osm2pgsql-color-menu-hover: #e0e0e0;
+    --osm2pgsql-font: Verdana, sans-serif;
 }
 
 /* ---------------- document structure ---------------- */
 
 body {
-    font-family: Verdana, sans-serif;
+    font-family: var(--osm2pgsql-font);
     margin: 0;
     max-width: 1200px;
     line-height: 130%;
@@ -35,7 +36,8 @@ header {
 }
 
 @media print {
-    header, .noprint {
+    header,
+    .noprint {
         display: none;
     }
 }
@@ -118,7 +120,8 @@ a#menu-code {
 }
 
 @media screen and (min-width: 1000px) {
-    #menu-toggle span, #menu-toggle input {
+    #menu-toggle span,
+    #menu-toggle input {
         display: none;
     }
 
@@ -204,10 +207,9 @@ a#menu-code {
         background-color: #ffffff;
         border-radius: 3px;
         z-index: 1;
-
-        transform-origin: 4px 0px;
-        transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
-                    background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+        transform-origin: 4px 0;
+        transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0),
+                    background 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0),
                     opacity 0.55s ease;
     }
 
@@ -220,7 +222,7 @@ a#menu-code {
     }
 
     #menu-toggle input:checked ~ span {
-        transform: rotate(45deg) scale(1.1, 1.1) translate(0px, 1px);
+        transform: rotate(45deg) scale(1.1, 1.1) translate(0, 1px);
     }
 
     #menu-toggle input:checked ~ span:nth-last-child(3) {
@@ -240,10 +242,9 @@ a#menu-code {
         background-color: var(--osm2pgsql-color-dark);
         list-style-type: none;
         -webkit-font-smoothing: antialiased;
-
         transform: none;
         transform-origin: 0% 0%;
-        transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+        transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0);
     }
 
     #menu li {
@@ -257,13 +258,15 @@ a#menu-code {
 
     a#menu-code {
         padding-left: 24px;
-        background-position: 0px 3px;
+        background-position: 0 3px;
     }
 }
 
 /* ---------------- common elements ---------------- */
 
-h1, h2, h2 a {
+h1,
+h2,
+h2 a {
     color: var(--osm2pgsql-color-dark);
     text-decoration: none;
 }
@@ -276,7 +279,7 @@ a:visited {
     color: black;
 }
 
-a.extlink:before {
+a.extlink::before {
     content: '\2192' ' ';
 }
 
@@ -301,7 +304,8 @@ pre code {
     padding: 0;
 }
 
-ul, ol {
+ul,
+ol {
     padding-left: 24px;
 }
 
@@ -344,7 +348,8 @@ div.note {
     padding: 0 10px 0 40px;
 }
 
-p.note, p.wip {
+p.note,
+p.wip {
     padding: 10px 10px 10px 40px;
 }
 
@@ -560,7 +565,7 @@ table.software-versions th {
     font-style: italic;
 }
 
-.table-note:before {
+.table-note::before {
     content: '(*) ';
 }
 
@@ -576,7 +581,7 @@ table.software-versions th {
 }
 
 @media screen and (min-width: 400px) and (max-width: 1599px) {
-    .toc li.appendix a:before {
+    .toc li.appendix a::before {
         content: 'Appendix ';
     }
 }
@@ -599,22 +604,22 @@ article.manual section {
     counter-reset: section;
 }
 
-article.manual section.chapter h2:before {
+article.manual section.chapter h2::before {
     counter-increment: chapter;
     content: counter(chapter) ' ';
 }
 
-article.manual section.appendix h2:before {
+article.manual section.appendix h2::before {
     counter-increment: appendix;
     content: 'Appendix ' counter(appendix, upper-alpha) ': ';
 }
 
-article.manual section.chapter h3:before {
+article.manual section.chapter h3::before {
     counter-increment: section;
     content: counter(chapter) '.' counter(section) ' ';
 }
 
-article.manual section.appendix h3:before {
+article.manual section.appendix h3::before {
     counter-increment: section;
     content: counter(appendix, upper-alpha) '.' counter(section) ' ';
 }
@@ -646,7 +651,7 @@ table.desc {
 }
 
 table.desc tbody tr:nth-child(even) {
-   background-color: #f0f0f0;
+    background-color: #f0f0f0;
 }
 
 table.desc th {
@@ -675,7 +680,7 @@ table.desc th:last-of-type {
 
 table.desc td:last-of-type {
     white-space: normal;
-    font-family: Verdana, sans-serif;
+    font-family: var(--osm2pgsql-font);
 }
 
 /* ---------------- manual: lib table ---------------- */
@@ -694,7 +699,7 @@ table.lib th {
     text-align: left;
 }
 
-table.lib th:after {
+table.lib th::after {
     content: ':';
 }
 
@@ -708,7 +713,8 @@ table.lib td {
     font-weight: bold;
 }
 
-.lib-syno td, .lib-exam td {
+.lib-syno td,
+.lib-exam td {
     font-family: monospace;
     white-space: pre;
 }
