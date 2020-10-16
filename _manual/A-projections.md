@@ -15,7 +15,7 @@ The default is always "Web Mercator".
 
 ### Latlong (WGS84)
 
-[EPSG:4326](http://epsg.io/4326){:.extlink}
+[EPSG:4326](https://epsg.io/4326){:.extlink}
 
 The original latitude & longitude coordinates from OpenStreetMap in the WGS84
 coordinate reference system. This is typically chosen if you want to do some
@@ -27,7 +27,7 @@ kind of analytics on the data or reproject it later.
 
 ### Web Mercator
 
-[EPSG:3857](http://epsg.io/3857){:.extlink}
+[EPSG:3857](https://epsg.io/3857){:.extlink}
 
 This is the projection used most often for tiled web maps. It is the default
 in osm2pgsql.
