@@ -50,7 +50,7 @@ decide what versions need to be supported.
 <tbody>
 {%- for package in page.packages -%}
     <tr>
-        <td><a href="https://repology.org/project/{{ package }}">{{ package }}</a></td>
+        <td><a href="https://repology.org/project/{{ package }}/versions">{{ package }}</a></td>
 {%- for repos in page.repositories -%}
         <td><img src="https://repology.org/badge/version-for-repo/{{ repos.id }}/{{ package }}.svg?header="/></td>
 {%- endfor -%}

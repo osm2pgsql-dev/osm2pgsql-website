@@ -66,7 +66,7 @@ There are two steps when updating an existing database.
 The second step is done with osm2pgsql in "append" mode, for the first step
 there are several options. We recommend the
 [`pyosmium_get_changes.py`](https://docs.osmcode.org/pyosmium/latest/tools_get_changes.html){:.extlink}
-tool from the [PyOsmium](https://osmcode.org/pyosmium){:.extlink} project.
+tool from the [PyOsmium](https://osmcode.org/pyosmium/){:.extlink} project.
 With it, downloading all changes since you ran the program the last time is
 just a single command.
 
@@ -94,7 +94,7 @@ Before some OSM data file can be given to osm2pgsql it is sometimes necessary
 to prepare it in some way. This chapter explains some options.
 
 For most of these steps, the recommended application is the
-[osmium](https://osmcode.org/osmium-tool){:.extlink} command line tool, which
+[osmium](https://osmcode.org/osmium-tool/){:.extlink} command line tool, which
 offers a wide range of functionality of slicing and dicing OSM data.
 
 One handy command is [`osmium
