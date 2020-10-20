@@ -1,6 +1,6 @@
 ---
-chapter: 23
-appendix: D
+chapter: 22
+appendix: C
 title: Command Line Options
 ---
 

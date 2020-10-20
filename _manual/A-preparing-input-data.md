@@ -1,6 +1,6 @@
 ---
-chapter: 22
-appendix: C
+chapter: 20
+appendix: A
 title: Getting and Preparing OSM Data
 ---
 

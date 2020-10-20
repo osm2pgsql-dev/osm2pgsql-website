@@ -1,5 +1,5 @@
 ---
-chapter: 4
+chapter: 5
 title: Running osm2pgsql
 ---
 

@@ -719,3 +719,19 @@ table.lib td {
     white-space: pre;
 }
 
+/* ---------------- manual: projections table ---------------- */
+
+table.proj {
+    border: 1px solid var(--osm2pgsql-color-light);
+    border-spacing: 0;
+    width: 100%;
+}
+
+table.proj img {
+    width: 128px;
+}
+
+table.proj td {
+    padding: 10px;
+}
+
