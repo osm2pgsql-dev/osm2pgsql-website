@@ -3,13 +3,13 @@ repositories:
     - id: debian_testing
       name: Deb Testing
     - id: debian_stable
-      name: Deb Stable
+      name: Deb Stable (Buster)
     - id: debian_oldstable
-      name: Deb Oldstable
+      name: Deb Oldstable (Stretch)
     - id: ubuntu_20_04
-      name: Ubuntu 20.4
+      name: Ubuntu 20.4 (Focal)
     - id: ubuntu_18_04
-      name: Ubuntu 18.4
+      name: Ubuntu 18.4 (Bionic)
     - id: fedora_rawhide
       name: Fedora Rawhide
     - id: fedora_32
