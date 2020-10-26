@@ -7,25 +7,25 @@ title: Documentation
 <div class="container">
 
 <a class="box box2" href="{% link doc/install.md %}">
-    <h2><img src="{% link img/download.svg %}" width="16" height="16" alt=""/> Installation</h2>
+    <h2><img src="{% link img/download.svg %}" alt=""/> Installation</h2>
 
     <p>Instructions for downloading and installing osm2pgsql on different architectures.</p>
 </a>
 
 <a class="box box2" href="{% link doc/manual.html %}">
-    <h2><img src="{% link img/book.svg %}" width="20" height="20" alt=""/> Manual</h2>
+    <h2><img src="{% link img/book.svg %}" alt=""/> Manual</h2>
 
     <p>The manual contains all the details about running osm2pgsql.</p>
 </a>
 
 <a class="box box2" href="{% link doc/man/index.md %}">
-    <h2><img src="{% link img/document.svg %}" width="16" height="16" alt=""/> Man Page</h2>
+    <h2><img src="{% link img/document.svg %}" alt=""/> Man Page</h2>
 
     <p>The man page has a short overview about running the osm2pgsql command.</p>
 </a>
 
 <a class="box box2" href="{% link doc/faq.md %}">
-    <h2><img src="{% link img/faq.svg %}" width="20" height="20" alt=""/> FAQ</h2>
+    <h2><img src="{% link img/faq.svg %}" alt=""/> FAQ</h2>
 
     <p>The FAQ is a list of frequently asked questions and answers.</p>
 </a>
@@ -36,8 +36,8 @@ More documentation is available in the [`docs` directory of the
 repository](https://github.com/openstreetmap/osm2pgsql/tree/master/docs). In
 time this will be moved here.
 
-The [osm2pgsql page](https://wiki.openstreetmap.org/wiki/Osm2pgsql) on the
-OSM wiki also contains some more information, some of it outdated.
+The [osm2pgsql page](https://wiki.openstreetmap.org/wiki/Osm2pgsql){:.extlink}
+on the OSM wiki also contains some more information, some of it outdated.
 
 <section markdown="1" style="margin-top: 40px;">
 ## Related Documentation

@@ -23,7 +23,7 @@ space is tight, because you don't need to store data needed only for updates.
 In this mode osm2pgsql is used with the `-c, --create` command line option.
 This is also the default mode. The following command lines are equivalent:
 
-```
+```sh
 osm2pgsql -c OSMFILE
 osm2pgsql --create OSMFILE
 osm2pgsql OSMFILE
@@ -45,7 +45,7 @@ In this mode osm2pgsql is used the first time with the `-c, --create` command
 line option (this is also the default mode) and, additionally the `-s, --slim`
 options. The following command lines are equivalent:
 
-```
+```sh
 osm2pgsql -c -s OSMFILE
 osm2pgsql --create --slim OSMFILE
 osm2pgsql --slim OSMFILE
@@ -54,7 +54,7 @@ osm2pgsql --slim OSMFILE
 For the update runs the `-a, --append` and `-s, --slim` options must be used.
 The following command lines are equivalent:
 
-```
+```sh
 osm2pgsql -a -s OSMFILE
 osm2pgsql --append --slim OSMFILE
 ```

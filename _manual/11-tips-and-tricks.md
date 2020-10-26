@@ -52,7 +52,7 @@ value.
 In the flex config you can add such a column to your tables with something
 like this:
 
-```
+```lua
 ...
 { column = 'id', type = 'serial', create_only = true },
 ...
@@ -78,7 +78,7 @@ it `create_only`. In our example case the type of the column should be the
 PostgreSQL type `GEOMETRY(Point, 3857)`, because we don't want osm2pgsql to
 do anything special here, just create the column with this type as is.
 
-```
+```lua
 polygons_table = osm2pgsql.define_area_table('polygons', {
     { column = 'tags', type = 'hstore' },
     { column = 'geom', type = 'geometry' },
@@ -89,7 +89,7 @@ polygons_table = osm2pgsql.define_area_table('polygons', {
 
 After running osm2pgsql as usual, run the following SQL command:
 
-```
+```sql
 UPDATE polygons SET center = ST_Centroid(geom) WHERE center IS NULL;
 ```
 

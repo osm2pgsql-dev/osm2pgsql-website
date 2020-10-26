@@ -293,7 +293,10 @@ h1 {
 
 h2 img {
     position: relative;
-    top: 3px;
+    top: 2px;
+    width: 1em;
+    height: 1em;
+    padding-right: 0.3em;
 }
 
 code {
@@ -355,6 +358,13 @@ p.wip {
     padding: 10px 10px 10px 40px;
 }
 
+img.inline {
+    position: relative;
+    top: 1px;
+    width: 1em;
+    height: 1em;
+}
+
 /* ---------------- news box on home page ---------------- */
 
 @media screen and (max-width: 999px) {
@@ -383,8 +393,9 @@ p.wip {
 
     #newsbox h2 {
         position: relative;
-        top: -20px;
-        margin: 0 115px;
+        top: calc(-0.8em - 4px);
+        width: 3.6em;
+        margin: 0 auto;
         padding: 0;
         border: none;
         text-align: center;
@@ -421,24 +432,18 @@ div.news-date {
     margin-bottom: 30px;
 }
 
-.news-list h2 {
-    margin: 3px 0 0 80px;
-}
-
 .news-text {
-    margin-left: 80px;
+    margin-left: 7em;
 }
 
 div.news-date-small {
-    position: relative;
-    top: -1px;
     float: left;
     width: 5em;
     border-radius: 2px;
     text-align: center;
     background-color: var(--osm2pgsql-color-dark);
     color: #ffffff;
-    margin-right: 20px;
+    margin-right: 2em;
 }
 
 /* ---------------- flex container on doc page ---------------- */
@@ -520,8 +525,7 @@ table.software-versions td {
 }
 
 table.software-versions th {
-    height: 2em;
-    min-width: 7em;
+    width: 9%;
     border-left: 1px solid #e0e0e0;
     padding: 2px 4px;
     background-color: #e0e0e0;
@@ -591,6 +595,7 @@ table.software-versions th {
 @media screen and (min-width: 1600px) {
     div.toc {
         position: fixed;
+        top: 128px;
         left: 20px;
         width: 200px;
     }
@@ -758,7 +763,6 @@ table.proj td {
 .example {
     flex-grow: 1;
     margin: 10px;
-    height: 100px;
     padding: 0;
     text-decoration: none;
     color: #000000;
@@ -773,7 +777,7 @@ table.proj td {
     width: 100px;
     height: 100px;
     float: right;
-    padding-left: 10px;
+    padding: 1px 1px 1px 10px;
 }
 
 .example h2,

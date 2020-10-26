@@ -25,12 +25,13 @@ for upgrading information.
 ## Getting Help
 
 If you need help with osm2pgsql,
-[help.osm.org](https://help.openstreetmap.org/) should be your first
+[help.osm.org](https://help.openstreetmap.org/){:.extlink} should be your first
 destination.
 
 Before asking your question, have a look at existing [questions about
-osm2pgsql](https://help.openstreetmap.org/tags/osm2pgsql/) on that site, maybe
-yours has already been answered. Note that some answers are outdated.
+osm2pgsql](https://help.openstreetmap.org/tags/osm2pgsql/){:.extlink} on that
+site, maybe yours has already been answered. Note that some answers are
+outdated.
 </section>
 
 <section markdown="1">
@@ -39,7 +40,7 @@ yours has already been answered. Note that some answers are outdated.
 ## Reporting Bugs
 
 You can report bugs and problems by opening an issue on Github. Check [existing
-issues](https://github.com/openstreetmap/osm2pgsql/issues) first.
+issues](https://github.com/openstreetmap/osm2pgsql/issues){:.extlink} first.
 
 Please describe
 * what you are trying to achieve in the end,
@@ -55,19 +56,19 @@ output.
 <section markdown="1">
 ## Discuss Bugs, Features and Ideas
 
-You can ask questions or discuss bugs, features and ideas on the
-[OSM developer mailing list](https://lists.openstreetmap.org/listinfo/dev)
-or the [#osm-dev IRC channel](https://wiki.openstreetmap.org/wiki/IRC).
+You can ask questions or discuss bugs, features and ideas on the [OSM developer
+mailing list](https://lists.openstreetmap.org/listinfo/dev){:.extlink} or the
+[#osm-dev IRC channel](https://wiki.openstreetmap.org/wiki/IRC){:.extlink}.
 </section>
 
 <section markdown="1">
 ## Commercial support
 
 Commercial support for osm2pgsql is available from several companies and
-freelancers. You can contact the osm2pgsql developers <a
-href="https://github.com/lonvia">Sarah Hoffmann</a> or <a
-href="https://www.jochentopf.com/">Jochen Topf</a> or have a look at <a
-href="{% link sponsors/index.md %}">our sponsors</a> who also offer some osm2pgsql-related
+freelancers. You can contact the osm2pgsql developers [Sarah
+Hoffmann](https://github.com/lonvia){:.extlink} or [Jochen
+Topf](https://www.jochentopf.com/){:.extlink} or have a look at [our
+sponsors]({% link sponsors/index.md %}) who also offer some osm2pgsql-related
 services.
 
 </section>

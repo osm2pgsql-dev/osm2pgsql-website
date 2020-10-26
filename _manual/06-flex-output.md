@@ -202,7 +202,7 @@ this data. If you are not interested in that OSM object, simply return from the
 function. If you want to add the OSM object to some table call the `add_row()`
 function on that table:
 
-```
+```lua
 -- definition of the table:
 table_pois = osm2pgsql.define_node_table('pois', {
     { column = 'tags', type = 'hstore' },
@@ -281,7 +281,7 @@ need the information from the relation to be rendered correctly and return
 those ids in a Lua table with the only field 'ways'. This is usually done with
 a function like this:
 
-```
+```lua
 function osm2pgsql.select_relation_members(relation)
     if relation.tags.type == 'route' then
         return { ways = osm2pgsql.way_member_ids(relation) }

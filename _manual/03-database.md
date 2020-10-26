@@ -32,7 +32,7 @@ steps.
 
 Here are typical commands used:
 
-```
+```sh
 sudo -u postgres createuser osmuser
 sudo -u postgres createdb --encoding=UTF8 --owner=osmuser osm
 sudo -u postgres psql osm --command='CREATE EXTENSION postgis;'

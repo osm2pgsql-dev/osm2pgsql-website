@@ -15,5 +15,5 @@ can discuss options with you.
 
 We are currently not set up to receive small donations. If you want to donate
 small amounts of money, we suggest you support the [OpenStreetMap
-Foundation](https://osmfoundation.org/) or one of its local chapters.
+Foundation](https://osmfoundation.org/){:.extlink} or one of its local chapters.
 
