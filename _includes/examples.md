@@ -1,4 +1,6 @@
 
+These examples show some use cases of osm2pgsql and highlight some features.
+
 <div class="container">
 
 <a class="example" href="{% link examples/raster-tiles/index.md %}">
