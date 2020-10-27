@@ -64,3 +64,5 @@ defaults:
             type: manpages
         values:
             layout: manpage
+exclude:
+    - _manual/options
