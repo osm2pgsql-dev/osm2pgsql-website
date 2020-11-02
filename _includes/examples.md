@@ -38,4 +38,17 @@ These examples show some use cases of osm2pgsql and highlight some features.
     and your use case.</p>
 </a>
 
+<a class="example" href="{% link examples/road-length/index.md %}">
+    <h2>Geospatial Analysis</h2>
+    <p>An osm2pgsql database is well-suited for geospatial analysis using
+    the power of the PostGIS database extension.</p>
+</a>
+
+<a class="example" href="{% link examples/export/index.md %}">
+    <img src="{% link examples/export/export.svg %}"/>
+    <h2>Exporting OSM data</h2>
+    <p>Osm2pgsql and a database can be used as a step in exporting OSM data
+    into many different GIS formats.</p>
+</a>
+
 </div>
