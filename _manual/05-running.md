@@ -70,8 +70,10 @@ To get help or the program version run with the following options:
 
 ### Database connection
 
-In create and append mode you have to tell osm2pgsql which database to access
-using the following command line options:
+In create and append mode you have to tell osm2pgsql which database to access.
+If left unset, it will attempt to connect to the default database (usually the
+username) using a unix domain socket. Most usage only requires setting
+`-d, --database`.
 
 {% include_relative options/database.md %}
 
@@ -126,7 +128,7 @@ osm2pgsql. See [Appendix C](#getting-an-preparing-osm-data) for options.
 The middle keeps track of all OSM objects read by osm2pgsql and the
 relationships between those objects. It knows, for instance, which ways are
 used by which nodes, or which members a relation has. It also keeps track of
-all node locations. It information is necessary to build way geometries from
+all node locations. This information is necessary to build way geometries from
 way nodes and relation geometries from members and it is necessary when
 updating data, because OSM change files only contain changes objects themselves
 and not all the related objects needed for creating an objects geometry.
@@ -181,7 +183,8 @@ The *multi* Output
 The *null* Output
 
 : The *null* output doesn't write the data anywhere. It is used for testing and
-  benchmarking, not for normal operation.
+  benchmarking, not for normal operation. If `--slim` is used with the null
+  output, the middle tables are still generated.
 
 Here are the command line options pertaining to the outputs (see later chapters
 for command line options only used for specific outputs):

@@ -22,7 +22,8 @@ output, though. So it will not go away anytime soon.)
 
 The pgsql output always creates a fixed list of four tables shown in the
 following table. The `PREFIX` can be set with the `-p, --prefix` option, the
-default is `planet_osm`.
+default is `planet_osm`. (Note that this option is also interpreted by the
+middle!)
 
 | Table          | Description |
 | -------------- | --- |
@@ -129,6 +130,136 @@ import them from the input file. You can use the `--keep-coastlines` parameter
 to change this behavior if you want coastlines in your database. See [the OSM
 wiki](https://wiki.openstreetmap.org/wiki/Coastline){:.extlink} for more
 information on coastline processing.
+
+### Use of hstore
+
+Hstore is a [PostgreSQL data
+type](http://www.postgresql.org/docs/current/static/hstore.html) that allows
+storing arbitrary key-value pairs. It needs to be installed on the database
+with `CREATE EXTENSION hstore;`
+
+osm2pgsql has five hstore options
+
+* `--hstore` or `-k` adds any tags not already in a conventional column to
+  a hstore column. With the standard stylesheet this would result in tags like
+  highway appearing in a conventional column while tags not in the style like
+  `name:en` or `lanes:forward` would appear only in the hstore column.
+
+* `--hstore-all` or `-j` adds all tags to a hstore column, even if they're
+  already stored in a conventional column. With the standard stylesheet this
+  would result in tags like highway appearing in conventional column and the
+  hstore column while tags not in the style like `name:en` or
+  `lanes:forward` would appear only in the hstore column.
+
+* `--hstore-column` or `-z`, which adds an additional column for tags
+  starting with a specified string, e.g. `--hstore-column 'name:'` produces
+  a hstore column that contains all `name:xx` tags
+
+* `--hstore-match-only` modifies the above options and prevents objects from
+  being added if they only have tags in the hstore column and no conventional
+  tags.
+
+* `--hstore-add-index` adds a GIN index to the hstore columns. This can
+  speed up arbitrary queries, but for most purposes partial indexes will be
+  faster.
+
+Either `--hstore` or `--hstore-all` when combined with `--hstore-match-only`
+should give the same rows as no hstore, just with the additional hstore column.
+
+Hstore is used to give more flexibility in using additional tags without
+reimporting the database, at the cost of a
+[less speed and more space.](http://www.paulnorman.ca/blog/2014/03/osm2pgsql-and-hstore/)
+
+### Lua tag transformations
+
+The pgsql output supports [Lua](https://lua.org/) scripts to rewrite tags
+before they enter the database.
+
+Note that this is a totally different mechanism than the [Lua scripts used in
+the flex output](#the-style-file).
+{:.note}
+
+This allows you to unify disparate tagging (for example, `highway=path;
+foot=yes` and `highway=footway`) and perform complex queries, potentially more
+efficiently than writing them as rules in your Mapnik or other stylesheet.
+
+#### How to
+
+Pass a Lua script to osm2pgsql using the command line switch `--tag-transform-script`:
+
+```sh
+osm2pgsql -d gis -S your.style --tag-transform-script your.lua --hstore-all extract.osm.pbf
+```
+
+This Lua script needs to implement the following functions:
+
+```lua
+function filter_tags_node(tags, num_tags)
+return filter, tags
+
+function filter_tags_way(tags, num_tags)
+return filter, tags, polygon, roads
+
+function filter_basic_tags_rel(tags, num_tags)
+return filter, tags
+```
+
+These take a set of tags as a Lua key-value table, and an integer which is the
+number of tags supplied.
+
+The first return value is `filter`, a flag which you should set to `1` if the
+way/node/relation should be filtered out and not added to the database, `0`
+otherwise. (They will still end up in the slim mode tables, but not in the
+rendering tables.)
+
+The second return value is `tags`, a transformed (or unchanged) set of tags.
+
+`filter_tags_way` returns two additional flags. `poly` should be `1` if the way
+should be treated as a polygon, `0` as a line. `roads` should be `1` if the way
+should be added to the `planet_osm_roads` table, `0` otherwise.
+
+    function filter_tags_relation_member(tags, member_tags,
+        roles, num_members)
+    return filter, tags, member_superseded, boundary,
+        polygon, roads
+
+The function `filter_tags_relation_member` is more complex and can handle more
+advanced relation tagging, such as multipolygons that take their tags from the
+member ways.
+
+This function is called with the tags from the relation; a set of tags for each
+of the member ways (member relations and nodes are ignored); the set of roles
+for each of the member ways; and the number of members. The tag and role sets
+are both arrays (indexed tables) of hashes (tables).
+
+As usual, it should return a filter flag, and a transformed set of tags to be
+applied to the relation in later processing.
+
+The third return value, `member_superseded`, is obsolete and will be ignored.
+
+The fourth and fifth return values, `boundary` and `polygon`, are flags that
+specify if the relation should be processed as a line, a polygon, or both (e.g.
+administrative boundaries).
+
+The final return value, `roads`, is `1` if the geometry should be added to the
+`planet_osm_roads` table.
+
+There is a sample tag transform lua script in the repository as an example,
+which (nearly) replicates current processing and can be used as a template for
+one's own scripts.
+
+#### In practice
+
+There is inevitably a performance hit with any extra processing. The sample Lua
+tag transformation is a little slower than the C++-based default. However,
+extensive Lua pre-processing may save you further processing in your Mapnik (or
+other) stylesheet.
+
+Test your Lua script with small excerpts before applying it to a whole country
+or even the planet.
+
+Where possible, add new tags, don't replace existing ones; otherwise you will
+be faced with a reimport if you decide to change your transformation.
 
 ### Pgsql Output command line options
 

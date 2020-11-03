@@ -38,8 +38,10 @@ In some cases osm2pgsql will split up Multi\* geometries into simple geometries
 and add each one in its own database row. This can make rendering faster,
 because the renderer can deal with several smaller geometries instead of having
 to handle one large geometry. But, depending on what you are doing with the
-data, in can also lead to problems. See the flex and pgsql output chapters
-for details how to configure this.
+data, in can also lead to problems. [This
+blogpost](http://www.paulnorman.ca/blog/2014/03/osm2pgsql-multipolygons/){:.extlink}
+has some deeper discussion of this issue. See the flex and pgsql output
+chapters for details how to configure this.
 
 It will also mean that your id columns are not unique, because there are now
 multiple rows created from the same OSM object. See the [Primary Keys and
@@ -165,3 +167,10 @@ library](https://proj.org/){:.extlink}, it supports all projections supported
 by that library.
 
 </td></tr></table>
+
+Note that mapping styles often depend on the projection used. Most mapping
+style configurations will enable or disable certain rendering styles depending
+on the map scale or zoom level. But a meaningful scale will depend on the
+projection. Most styles you encounter are probably made for Web Mercator
+and will need changes to get nice maps in other projections.
+

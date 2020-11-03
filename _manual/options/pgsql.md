@@ -6,9 +6,9 @@
 |               | \--latlong                        | Store data in degrees of latitude & longitude. |
 | -m            | \--merc                           | Store data in Spherical Mercator (Web Mercator, EPSG:3857) (the default). |
 | -E SRID       | \--proj=SRID                      | Use projection EPSG:SRID. |
-| -p PREFIX     | \--prefix=PREFIX                  | Prefix for table names (default: `planet_osm`). |
+| -p PREFIX     | \--prefix=PREFIX                  | Prefix for table names (default: `planet_osm`). This option affects the middle as well as the pgsql output table names. |
 |               | \--tag-transform-script=SCRIPT    | Specify a lua script to handle tag filtering and normalisation. The script contains callback functions for nodes, ways and relations, which each take a set of tags and returns a transformed, filtered set of tags which are then written to the database. |
-| -x            | \--extra-attributes               | Include attributes for each object in the database. This includes the username, userid, timestamp and version. Note: this option also requires additional entries in your style file. |
+| -x            | \--extra-attributes               | Include attributes (user name, user id, changeset id, timestamp and version). This also requires additional entries in your style file. |
 | -k            | \--hstore                         | Add tags without column to an additional hstore (key/value) column to PostgreSQL tables. |
 | -j            | \--hstore-all                     | Add all tags to an additional hstore (key/value) column in PostgreSQL tables. |
 | -z KEY_PREFIX | \--hstore-column=KEY_PREFIX       | Add an additional hstore (key/value) column containing all tags that start with the specified string, eg \--hstore-column "name:" will produce an extra hstore column that contains all `name:xx` tags |
