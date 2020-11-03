@@ -10,6 +10,8 @@ repositories:
       name: Ubuntu 20.4 (Focal)
     - id: ubuntu_18_04
       name: Ubuntu 18.4 (Bionic)
+    - id: ubuntu_16_04
+      name: Ubuntu 16.4 (Xenial)
     - id: fedora_rawhide
       name: Fedora Rawhide
     - id: fedora_32
