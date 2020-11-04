@@ -5,7 +5,7 @@ title: Road Map
 
 # Road Map for Osm2pgsql
 
-Current as of 2020-09-23.
+Current as of 2020-11-04.
 
 This document is a kind of road map for osm2pgsql development. It's not to be
 understood as a definite "this is what we'll do" document, but as a rough
@@ -88,28 +88,12 @@ that particular piece of code is touched anyway.
 
 ### Documentation
 
-The documentation for osm2pgsql is not well organized and split up between the
-[docs](https://github.com/openstreetmap/osm2pgsql/tree/master/docs) directory
-(including the man page) and the [the OSM
-wiki](https://wiki.openstreetmap.org/wiki/Osm2pgsql). Some docs are on
+The documentation for osm2pgsql has recently moved to a new website at
+osm2pgsql.org. Lots of examples have been put on the website, too.
+There is still a lot of work to be done to complete the docs. The [the
+information from the wiki](https://wiki.openstreetmap.org/wiki/Osm2pgsql) needs
+to be integrated. Some docs are on
 [switch2osm.org](https://switch2osm.org/serving-tiles/manually-building-a-tile-server-20-04-lts/).
-
-The documentation is incomplete and it can be very difficult to understand,
-especially for a beginner, what all the possible options are and how they
-should be used in real-world use cases.
-
-The documentation should probably be moved to its own website and be split
-into
-
-* reference documentation for users
-* how-to and/or tutorial type documentation
-* internal documentation (for developers)
-
-Issues:
-
-* [120](https://github.com/openstreetmap/osm2pgsql/issues/120)
-* [190](https://github.com/openstreetmap/osm2pgsql/issues/190)
-* [831](https://github.com/openstreetmap/osm2pgsql/issues/831)
 
 ### Configuration / Command Line
 

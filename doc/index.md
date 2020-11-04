@@ -32,10 +32,6 @@ title: Documentation
 
 </div>
 
-More documentation is available in the [`docs` directory of the
-repository](https://github.com/openstreetmap/osm2pgsql/tree/master/docs). In
-time this will be moved here.
-
 The [osm2pgsql page](https://wiki.openstreetmap.org/wiki/Osm2pgsql){:.extlink}
 on the OSM wiki also contains some more information, some of it outdated.
 
