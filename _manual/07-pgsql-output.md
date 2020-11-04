@@ -37,7 +37,7 @@ All tables contain a geometry column named `way` (which is not the most
 intuitive name, but it can't be changed now because of backwards
 compatibility).
 
-### Style file
+### Style File
 
 Some aspects of how the pgsql output converts OSM data into PostgreSQL tables
 can be configured via a style file. The [default style
@@ -76,7 +76,7 @@ Possible values for the flags are:
 The style file may also contain comments. Any text between a `#` and the end of
 the line will be ignored.
 
-#### Special 'tags'
+#### Special 'Tags'
 
 There are several special values that can be used in the tag column (second
 column) of the style file for creating additional fields in the database which
@@ -131,7 +131,7 @@ to change this behavior if you want coastlines in your database. See [the OSM
 wiki](https://wiki.openstreetmap.org/wiki/Coastline){:.extlink} for more
 information on coastline processing.
 
-### Use of hstore
+### Use of Hstore
 
 Hstore is a [PostgreSQL data
 type](http://www.postgresql.org/docs/current/static/hstore.html){:.extlink}
@@ -187,7 +187,7 @@ possibly using quite a lot of space. This is especially true for the majority
 of nodes that have no tags at all, so they would normally not appear in your
 output tables. You might want to use `--hstore-match-only` in that case.
 
-### Lua tag transformations
+### Lua Tag Transformations
 
 The pgsql output supports [Lua](https://lua.org/) scripts to rewrite tags
 before they enter the database.
@@ -200,7 +200,7 @@ This allows you to unify disparate tagging (for example, `highway=path;
 foot=yes` and `highway=footway`) and perform complex queries, potentially more
 efficiently than writing them as rules in your Mapnik or other stylesheet.
 
-#### How to
+#### How To
 
 Pass a Lua script to osm2pgsql using the command line switch `--tag-transform-script`:
 
@@ -265,7 +265,7 @@ There is a sample tag transform lua script in the repository as an example,
 which (nearly) replicates current processing and can be used as a template for
 one's own scripts.
 
-#### In practice
+#### In Practice
 
 There is inevitably a performance hit with any extra processing. The sample Lua
 tag transformation is a little slower than the C++-based default. However,
@@ -278,7 +278,7 @@ or even the planet.
 Where possible, add new tags, don't replace existing ones; otherwise you will
 be faced with a reimport if you decide to change your transformation.
 
-### Pgsql Output command line options
+### Pgsql Output Command Line Options
 
 These are the command line options interpreted by the pgsql output:
 

@@ -11,7 +11,7 @@ If you are new to osm2pgsql we recommend you try the *import only* approach
 first and use a small extract of the OSM data.
 {: .note}
 
-#### Import only
+#### Import Only
 
 OSM data is imported once into the database and will not change afterwards. If
 you want to update the data, you have to delete it and do a full re-import.
@@ -68,7 +68,7 @@ To get help or the program version run with the following options:
 
 {% include_relative options/help-version.md %}
 
-### Database connection
+### Database Connection
 
 In create and append mode you have to tell osm2pgsql which database to access.
 If left unset, it will attempt to connect to the default database (usually the
@@ -86,7 +86,7 @@ See the [PostgreSQL
 documentation](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING){:.extlink}
 for details.
 
-### Processing the OSM data
+### Processing the OSM Data
 
 <img src="{% link img/osm2pgsql-overview.svg %}" width="350" style="float: right;"/>
 

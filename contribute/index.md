@@ -34,7 +34,7 @@ yet.)
 </section>
 
 <section markdown="1">
-## Software we depend on
+## Software we Depend On
 
 [Dependencies]({% link contribute/dependencies.md %}).
 

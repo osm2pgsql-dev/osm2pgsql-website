@@ -26,14 +26,14 @@ These examples show some use cases of osm2pgsql and highlight some features.
 
 <a class="example" href="{% link examples/buildings/index.md %}">
     <img src="{% link examples/buildings/brasilia2.png %}"/>
-    <h2>Building map</h2>
+    <h2>Building Map</h2>
     <p>Need only a few feature types? Import only what you need for a quick
     map.</p>
 </a>
 
 <a class="example" href="{% link examples/antarctica/index.md %}">
     <img src="{% link examples/antarctica/antarctica1.png %}"/>
-    <h2>Antarctica map</h2>
+    <h2>Antarctica Map</h2>
     <p>Osm2pgsql can use many different projections to fit the area covered
     and your use case.</p>
 </a>
@@ -46,7 +46,7 @@ These examples show some use cases of osm2pgsql and highlight some features.
 
 <a class="example" href="{% link examples/export/index.md %}">
     <img src="{% link examples/export/export.svg %}"/>
-    <h2>Exporting OSM data</h2>
+    <h2>Exporting OSM Data</h2>
     <p>Osm2pgsql and a database can be used as a step in exporting OSM data
     into many different GIS formats.</p>
 </a>

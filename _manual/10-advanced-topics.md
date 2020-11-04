@@ -3,7 +3,7 @@ chapter: 10
 title: Advanced Topics
 ---
 
-### Parallel processing
+### Parallel Processing
 
 Some parts of the osm2pgsql processing can run in parallel. Depending on the
 hardware resources of you machine, this can make things faster or slower or

@@ -63,7 +63,7 @@ mailing list](https://lists.openstreetmap.org/listinfo/dev){:.extlink} or the
 </section>
 
 <section markdown="1">
-## Commercial support
+## Commercial Support
 
 Commercial support for osm2pgsql is available from several companies and
 freelancers. You can contact the osm2pgsql developers [Sarah

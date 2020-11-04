@@ -58,7 +58,7 @@ configuration. You may also set `--cache` to 0 to disable node caching
 completely. This makes only sense when a flat node file is given and there
 is not enough RAM to fit most of the cache.
 
-### Bucket Index for slim mode
+### Bucket Index for Slim Mode
 
 *Version >= 1.4.0*{: .version} This is only available from osm2pgsql version
 1.4.0!
@@ -83,7 +83,7 @@ way for most users and the "doit-it-yourself" way for expert users. Note that
 once you switched to the new index, older versions of osm2pgsql will not work
 correctly any more.
 
-#### Update for most users
+#### Update for Most Users
 
 This does not work yet. Currently the default is still to create the old type
 of index.
@@ -93,7 +93,7 @@ If your database was created with an older version of osm2pgsql you might want
 to start again from an empty database. Just do a reimport and osm2pgsql will
 use the new space-saving index.
 
-#### Update for expert users
+#### Update for Expert Users
 
 This is only for users who are very familiar with osm2pgsql and PostgreSQL
 operation. You can break your osm2pgsql database beyond repair if something
@@ -135,7 +135,7 @@ CREATE INDEX {prefix}_ways_nodes_bucket_idx ON {prefix}_ways
   WITH (fastupdate = off) TABLESPACE {tablespace};
 ```
 
-#### Id shift (for experts)
+#### Id Shift (for Experts)
 
 When an OSM node is changing, the way node index is used to look up all ways
 that use that particular node and therefore might have to be updated, too.

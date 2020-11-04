@@ -1,6 +1,6 @@
 ---
 layout: examples
-title: Exporting OSM data
+title: Exporting OSM Data
 ---
 
 Osm2pgsql can be used in combination with

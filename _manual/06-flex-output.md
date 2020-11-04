@@ -49,7 +49,7 @@ following fields and functions:
 Osm2pgsql also provides some additional functions in the
 Lua helper library described in [Appendix B](#lua-library-for-flex-output).
 
-#### Defining a table
+#### Defining a Table
 
 You have to define one or more tables where your data should end up. This
 is done with the `osm2pgsql.define_table()` function or one of the slightly
@@ -154,7 +154,7 @@ You can call the following functions on it:
 | add_row() | Add a row to the database table. See below for details. |
 {: .desc}
 
-#### Processing callbacks
+#### Processing Callbacks
 
 You are expected to define one or more of the following functions:
 
@@ -233,7 +233,7 @@ details.
 Note that you can't set the object id, this will be handled for you behind the
 scenes.
 
-### Geometry transformations
+### Geometry Transformations
 
 Currently these geometry transformations are supported:
 
@@ -331,7 +331,7 @@ any extra time you are using. Keep in mind that:
 * Osm2pgsql will create an id index on all way tables to look up ways that
   need to be deleted and re-created in stage 2.
 
-### Type conversions
+### Type Conversions
 
 The `add_row()` command will try its best to convert Lua values into
 corresponding PostgreSQL values. But not all conversions make sense. Here

@@ -11,12 +11,12 @@ the default `planet_osm` prefix.
 It is frequently better to reimport as this will also recluster the tables and
 remove table or index bloat.
 
-#### Upgrade to 0.93: unprojected slim coordinates
+#### Upgrade to 0.93: Unprojected Slim Coordinates
 
 The method of storing coordinates in the middle (slim) tables has changed.
 There is no migration and a reload is required.
 
-#### Upgrade to 0.91: default projection
+#### Upgrade to 0.91: Default Projection
 
 The default projection was moved from 900913 to 3857. This does not effect
 users using `-l` or `-E`, but if using no projection options or `-m` a
@@ -29,7 +29,7 @@ ALTER TABLE planet_osm_line ALTER COLUMN way TYPE geometry(LineString,3857) USIN
 ALTER TABLE planet_osm_polygon ALTER COLUMN way TYPE geometry(Geometry,3857) USING ST_SetSRID(way,3857);
 ```
 
-#### Upgrade to: 0.88.0: z_order changes
+#### Upgrade to: 0.88.0: `z_order` Changes
 
 In version 0.88.0 the `z_order` logic in the pgsql output was changed,
 requiring an increase in `z_order` values. To migrate to the new range of
@@ -45,7 +45,7 @@ right group of 100 for the new logic.
 
 If you are not using the `z_orders` column, this change may be ignored.
 
-#### Upgrade to: 0.87.0 pending removal
+#### Upgrade to: 0.87.0 Pending Removal
 
 Version 0.87.0 moved the in-database tracking of pending ways and relations to
 in-memory, for an increase in speed. This requires removal of the pending
@@ -56,7 +56,7 @@ ALTER TABLE planet_osm_ways DROP COLUMN pending;
 ALTER TABLE planet_osm_rels DROP COLUMN pending;
 ```
 
-#### 32 bit to 64 bit ID migration
+#### 32 Bit to 64 Bit ID Migration
 
 Old databases may have been imported with 32 bit node IDs, while current OSM
 data requires 64 bit IDs. A database this old should not be migrated, but

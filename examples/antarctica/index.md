@@ -17,13 +17,13 @@ projection](https://en.wikipedia.org/wiki/Stereographic_projection){:.extlink}
 ([EPSG 3031](https://epsg.io/3031){:.extlink}), a special projection suitable
 for showing Antarctica.
 
-## Getting and preparing the data
+## Getting and Preparing the Data
 
 Getting the data needed is easy, because Geofabrik offers an Antarctica extract
 for download:
 [antarctica-latest.osm.pbf](https://download.geofabrik.de/antarctica-latest.osm.pbf){:.extlink}
 
-## Running osm2pgsql
+## Running Osm2pgsql
 
 OpenStreetMap contains data about coastlines, ice shelf boundaries as well as
 research stations and other details in Antarctica. We use this here for a rough

@@ -73,7 +73,7 @@ Homebrew](https://formulae.brew.sh/formula/osm2pgsql){:.extlink}. Install with
 brew install osm2pgsql
 ```
 
-## Upgrading an existing installation
+## Upgrading an Existing Installation
 
 Usually you can upgrade an existing installation of osm2pgsql to a new version
 without worries. But sometimes the database format or something like it changes

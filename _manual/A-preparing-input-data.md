@@ -23,9 +23,9 @@ those in other formats and faster to read.
 *OSM change files* usually have the suffix `.osc.gz`. They are used in
 osm2pgsql "append" mode.
 
-### Getting the data
+### Getting the Data
 
-#### The Planet file
+#### The Planet File
 
 The OpenStreetMap project publishes the so-called "planet file", which contains
 a dump of the current full OSM database. This dump is available in XML and PBF
@@ -56,7 +56,7 @@ for updating an osm2pgsql database.
 
 If you can't find a suitable extract, see below for creating your own.
 
-### Updating an existing database
+### Updating an Existing Database
 
 There are two steps when updating an existing database.
 
@@ -88,7 +88,7 @@ from planet.osm.org to update your database. But, because those extracts
 contain data for the whole planet, your database will keep accumulating more
 and more data outside the area of your extract that you don't really need.
 
-### Preparing OSM data for use by osm2pgsql
+### Preparing OSM Data for Use by Osm2pgsql
 
 Before some OSM data file can be given to osm2pgsql it is sometimes necessary
 to prepare it in some way. This chapter explains some options.
@@ -102,7 +102,7 @@ fileinfo`](https://docs.osmcode.org/osmium/latest/osmium-fileinfo.html){:.extlin
 which can tell you a lot about an OSM file, including how many objects it
 contains, whether it is sorted, etc.
 
-#### Creating geographical extracts
+#### Creating Geographical Extracts
 
 You can create your own extracts from the planet file or from existing
 extracts with the [`osmium
@@ -110,7 +110,7 @@ extract`](https://docs.osmcode.org/osmium/latest/osmium-extract.html){:.extlink}
 command. It can create extracts of OSM data from a bounding box or from a
 boundary.
 
-#### Merging OSM data files
+#### Merging OSM Data Files
 
 If you are working with extracts you sometimes have several extracts, lets
 say for different countries, that you want to load into the same database.
@@ -121,7 +121,7 @@ You can use the [`osmium
 merge`](https://docs.osmcode.org/osmium/latest/osmium-merge.html){:.extlink}
 command for this.
 
-#### Merging OSM change files
+#### Merging OSM Change Files
 
 To speed up processing when you have many OSM change files, you can merge
 several change files into larger files and then process the larger files with
@@ -133,7 +133,7 @@ Usually you should not merge change files for more than a day or so when doing
 this, otherwise the amount of changes osm2pgsql has to process in one go
 becomes too large.
 
-#### OSM data with negative ids
+#### OSM Data with Negative Ids
 
 OSM data usually uses positive numbers for the ids of nodes, ways, and
 relations. Negative numbers are sometimes used for inofficial OSM data, for
@@ -154,7 +154,7 @@ processed data might be corrupted. Versions from 1.3.0 warn when you are
 using negative ids. From version 1.4.0 on, only positive ids are allowed.
 {:.note}
 
-#### Handling unsorted OSM data
+#### Handling Unsorted OSM Data
 
 OSM data files are almost always sorted, first nodes in order of their ids,
 then ways in order of their ids, then relations in order of their ids. The
@@ -173,7 +173,7 @@ processed data might be corrupted. Versions from 1.3.0 warn when you are
 using unsorted data. From version 1.4.0 on, only sorted OSM files are allowed.
 {:.note}
 
-#### Working with OSM history data
+#### Working with OSM History Data
 
 OpenStreetMap offers [complete dumps of *all* OSM
 data](https://wiki.openstreetmap.org/wiki/Planet.osm/full){:.extlink} which

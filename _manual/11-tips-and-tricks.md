@@ -67,7 +67,7 @@ data using osm2pgsql, use `CREATE UNIQUE INDEX` to create one. You can also use
 TABLE`](https://www.postgresql.org/docs/current/sql-altertable.html){:.extlink}
 to make the column an "official" primary key column.
 
-### Using `create_only` columns for postprocessed data
+### Using `create_only` Columns for Postprocessed Data
 
 Sometimes it is useful to have data in table rows that osm2pgsql can't create.
 For instance you might want to store the center of polygons for faster

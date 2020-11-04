@@ -1,6 +1,6 @@
 ---
 layout: examples
-title: Buildings
+title: Building Map
 ---
 
 <a href="brasilia2.png"><img class="floatright" src="brasilia2.png" width="250" height="250"/></a>
@@ -15,7 +15,7 @@ As example city we are using
 Brazil. As I write this, it isn't fully mapped yet, some buildings are missing.
 But the distinctive shape of this planned city shows up nevertheless.
 
-## Getting and preparing the data
+## Getting and Preparing the Data
 
 First, we need some data. The smallest extract available from the [Geofabrik
 Download server](https://download.geofabrik.de/) containing the city is the
@@ -47,7 +47,7 @@ osmium extract -p federal-district.osm -o brasilia.osm.pbf centro-oeste-latest.o
 The result is the file `brasilia.osm.pbf` containing all OSM data for the
 federal district.
 
-## Running osm2pgsql
+## Running Osm2pgsql
 
 Now we import this data into the database with osm2pgsql. First we need a
 style file for the flex output that only imports the buildings. We need a
