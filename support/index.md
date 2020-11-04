@@ -39,8 +39,9 @@ outdated.
 
 ## Reporting Bugs
 
-You can report bugs and problems by opening an issue on Github. Check [existing
-issues](https://github.com/openstreetmap/osm2pgsql/issues){:.extlink} first.
+You can report bugs and problems by opening an issue on Github. Please check
+[existing issues](https://github.com/openstreetmap/osm2pgsql/issues){:.extlink}
+first.
 
 Please describe
 * what you are trying to achieve in the end,
@@ -50,7 +51,7 @@ Please describe
 
 Give us details about the system you are using including the osm2pgsql version
 used. Tell us exactly what commands you used and include any relevant log
-output.
+output. If you have several unrelated problems, open separate issues for each.
 </section>
 
 <section markdown="1">

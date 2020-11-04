@@ -4,7 +4,7 @@ title: Installation
 ---
 
 Osm2pgsql works on Linux, Windows, and macOS. We recommend you always use the
-latest released versions, currently version {{ site.osm2pgsql.latest_version }}.
+latest released version, currently {{ site.osm2pgsql.latest_version }}.
 
 ## <img src="{% link img/linux.png %}"/>Installing on Linux
 
@@ -72,4 +72,12 @@ Homebrew](https://formulae.brew.sh/formula/osm2pgsql){:.extlink}. Install with
 ```sh
 brew install osm2pgsql
 ```
+
+## Upgrading an existing installation
+
+Usually you can upgrade an existing installation of osm2pgsql to a new version
+without worries. But sometimes the database format or something like it changes
+and you have to re-import the OSM data, create a new index or so. Please read
+the release information carefully. There is also an appendix in the manual with
+[upgrading information](manual.html#upgrading).
 
