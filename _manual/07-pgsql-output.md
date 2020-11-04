@@ -134,41 +134,58 @@ information on coastline processing.
 ### Use of hstore
 
 Hstore is a [PostgreSQL data
-type](http://www.postgresql.org/docs/current/static/hstore.html) that allows
-storing arbitrary key-value pairs. It needs to be installed on the database
-with `CREATE EXTENSION hstore;`
+type](http://www.postgresql.org/docs/current/static/hstore.html){:.extlink}
+that allows storing arbitrary key-value pairs in a single column. It needs to
+be installed on the database with `CREATE EXTENSION hstore;`
 
-osm2pgsql has five hstore options
+Hstore is used to give more flexibility in using additional tags without
+reimporting the database, at the cost of a
+[less speed and more space.](http://www.paulnorman.ca/blog/2014/03/osm2pgsql-and-hstore/){:.extlink}
+
+By default, the pgsql output will not generate hstore columns. The following
+options are used to add hstore columns of one type or another:
 
 * `--hstore` or `-k` adds any tags not already in a conventional column to
-  a hstore column. With the standard stylesheet this would result in tags like
-  highway appearing in a conventional column while tags not in the style like
-  `name:en` or `lanes:forward` would appear only in the hstore column.
+  a hstore column called `tags`. With the default stylesheet this would result
+  in tags like `highway` appearing in a conventional column while tags not in
+  the style like `name:en` or `lanes:forward` would appear only in the hstore
+  column.
 
-* `--hstore-all` or `-j` adds all tags to a hstore column, even if they're
+* `--hstore-all` or `-j` adds all tags to a hstore column called `tags`, even if they're
   already stored in a conventional column. With the standard stylesheet this
-  would result in tags like highway appearing in conventional column and the
+  would result in tags like `highway` appearing in conventional column and the
   hstore column while tags not in the style like `name:en` or
   `lanes:forward` would appear only in the hstore column.
 
 * `--hstore-column` or `-z`, which adds an additional column for tags
   starting with a specified string, e.g. `--hstore-column 'name:'` produces
-  a hstore column that contains all `name:xx` tags
+  a hstore column that contains all `name:xx` tags. This option can be used
+  multiple times.
+
+You can not use both `--hstore` and `--hstore-all` together.
+
+The following options can be used to modify the behaviour of the hstore
+columns:
 
 * `--hstore-match-only` modifies the above options and prevents objects from
-  being added if they only have tags in the hstore column and no conventional
-  tags.
+  being added if they only have tags in the hstore column and no tags in the
+  non-hstore columns. If neither of the above options is specified, this
+  option is ignored.
 
-* `--hstore-add-index` adds a GIN index to the hstore columns. This can
-  speed up arbitrary queries, but for most purposes partial indexes will be
-  faster.
+* `--hstore-add-index` adds indexes to all hstore columns. This option is
+  ignored if there are no hstore columns. Using indexes can speed up
+  arbitrary queries, but for most purposes partial indexes will be
+  faster. You have to create those yourself.
 
 Either `--hstore` or `--hstore-all` when combined with `--hstore-match-only`
 should give the same rows as no hstore, just with the additional hstore column.
 
-Hstore is used to give more flexibility in using additional tags without
-reimporting the database, at the cost of a
-[less speed and more space.](http://www.paulnorman.ca/blog/2014/03/osm2pgsql-and-hstore/)
+Note that when you are using the `--extra-attributes` option, all your nodes,
+ways, and relations essentially get a few extra tags. Together with the hstore
+options above, the object attributes might end up in your hstore column(s)
+possibly using quite a lot of space. This is especially true for the majority
+of nodes that have no tags at all, so they would normally not appear in your
+output tables. You might want to use `--hstore-match-only` in that case.
 
 ### Lua tag transformations
 
