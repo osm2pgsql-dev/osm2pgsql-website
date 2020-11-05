@@ -10,6 +10,18 @@ functions:
         if it is larger. All parameters must be numbers.
       example: |
         osm2pgsql.clamp(2, 3, 4) ⟶ 3
+    - name: has_prefix
+      synopsis: osm2pgsql.has_prefix(STRING, PREFIX)
+      description: |
+        Returns `true` if the STRING starts with PREFIX.
+      example: |
+        osm2pgsql.has_prefix('addr:city', 'addr:') ⟶ true
+    - name: has_suffix
+      synopsis: osm2pgsql.has_suffix(STRING, SUFFIX)
+      description: |
+        Returns `true` if the STRING ends with SUFFIX.
+      example: |
+        osm2pgsql.has_suffix('tiger:source', ':source') ⟶ true
     - name: make_check_values_func
       synopsis: osm2pgsql.make_check_values_func(VALUES[, DEFAULT])
       description: |
@@ -39,11 +51,12 @@ functions:
       synopsis: osm2pgsql.make_clean_tags_func(KEYS)
       description: |
         Return a function that will remove all tags (in place) from its only
-        argument if the key matches KEYS. KEYS is an array containing keys or
-        key prefixes (ending in `*`). The generated function will return `true`
-        if it removed all tags, `false` if there are still tags left.
+        argument if the key matches KEYS. KEYS is an array containing keys,
+        key prefixes (ending in `*`), or key suffixes (starting with `*`).
+        The generated function will return `true` if it removed all tags,
+        `false` if there are still tags left.
       example: |
-        local clean_tags = osm2pgsql.make_clean_tags_func{'source', 'source:*', 'note'}
+        local clean_tags = osm2pgsql.make_clean_tags_func{'source', 'source:*', '*:source', 'note'}
 
         function osm2pgsql.process_node(node)
             if clean_tags(node.tags) then
