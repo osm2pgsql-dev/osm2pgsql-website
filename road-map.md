@@ -112,7 +112,6 @@ Issues:
 * [142](https://github.com/openstreetmap/osm2pgsql/issues/142)
 * [272](https://github.com/openstreetmap/osm2pgsql/issues/272)
 * [1079](https://github.com/openstreetmap/osm2pgsql/issues/1079)
-* [PR 1241](https://github.com/openstreetmap/osm2pgsql/pull/1241)
 
 ### Progress Output and Logging
 
