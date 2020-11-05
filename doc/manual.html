@@ -33,3 +33,10 @@ title: Osm2pgsql Manual
 </section>
 {% endfor %}
 </article>
+
+<script>
+let headings = document.querySelectorAll('h2, h3, h4');
+Array.prototype.forEach.call(headings, function(heading) {
+    heading.innerHTML += ' <a href="#' + heading.id + '">&#x1F517;</a>';
+});
+</script>

@@ -631,6 +631,19 @@ article.manual section.appendix h3::before {
     content: counter(appendix, upper-alpha) '.' counter(section) ' ';
 }
 
+article.manual h2 a,
+article.manual h3 a,
+article.manual h4 a {
+    display: none;
+}
+
+article.manual h2:hover a,
+article.manual h3:hover a,
+article.manual h4:hover a {
+    display: inline;
+    text-decoration: none;
+}
+
 /* ---------------- manual: edit button ---------------- */
 
 div.edit {
