@@ -36,14 +36,14 @@ following fields and functions:
 
 | Field / Function  | Description |
 | ----------------- | --- |
-| osm2pgsql.version | The version of osm2pgsql as a string. |
-| osm2pgsql.mode    | Either `"create"` or `"append"` depending on the command line options (`-c, --create` or `-a, --append`). |
-| osm2pgsql.stage   | Either `1` or `2` (1st/2nd stage processing of the data). See below. |
-| osm2pgsql.define_node_table(NAME, COLUMNS[, OPTIONS])     | Define a node table. |
-| osm2pgsql.define_way_table(NAME, COLUMNS[, OPTIONS])      | Define a way table. |
-| osm2pgsql.define_relation_table(NAME, COLUMNS[, OPTIONS]) | Define a relation table. |
-| osm2pgsql.define_area_table(NAME, COLUMNS[, OPTIONS])     | Define an area table. |
-| osm2pgsql.define_table(OPTIONS)                           | Define a table. This is the more flexible function behind all the other `define_*_table()` functions. It gives you more control than the more convenient other functions. |
+| version           | The version of osm2pgsql as a string. |
+| mode              | Either `"create"` or `"append"` depending on the command line options (`-c, --create` or `-a, --append`). |
+| stage             | Either `1` or `2` (1st/2nd stage processing of the data). See below. |
+| define_node_table(NAME, COLUMNS[, OPTIONS])     | Define a node table. |
+| define_way_table(NAME, COLUMNS[, OPTIONS])      | Define a way table. |
+| define_relation_table(NAME, COLUMNS[, OPTIONS]) | Define a relation table. |
+| define_area_table(NAME, COLUMNS[, OPTIONS])     | Define an area table. |
+| define_table(OPTIONS)                           | Define a table. This is the more flexible function behind all the other `define_*_table()` functions. It gives you more control than the more convenient other functions. |
 {: .desc}
 
 Osm2pgsql also provides some additional functions in the
