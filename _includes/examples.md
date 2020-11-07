@@ -1,7 +1,7 @@
 
 These examples show some use cases of osm2pgsql and highlight some features.
 
-<div class="container">
+<div class="example-container">
 
 <a class="example" href="{% link examples/raster-tiles/index.md %}">
     <img src="{% link examples/raster-tiles/tiles.png %}"/>
