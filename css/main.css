@@ -610,6 +610,17 @@ article.manual {
     counter-reset: chapter appendix;
 }
 
+article.manual table {
+    display: inline-block;
+}
+
+article.manual table,
+article.manual code,
+article.manual pre,
+article.manual p {
+    overflow-x: auto;
+}
+
 article.manual section {
     counter-reset: section;
 }
@@ -698,7 +709,7 @@ table.desc td code {
 
 table.desc th:last-of-type {
     white-space: normal;
-    width: auto;
+    width: 100%;
 }
 
 table.desc td:last-of-type {
