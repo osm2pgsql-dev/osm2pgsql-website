@@ -14,9 +14,9 @@ If you are having trouble with osm2pgsql and need help, make sure to
 * update to the current release of osm2pgsql before asking questions. Many bugs
   have already been fixed in newer versions.
 
-See the [migrations
-doc](https://github.com/openstreetmap/osm2pgsql/blob/master/docs/migrations.md)
-for upgrading information.
+See the
+[release notes](https://github.com/openstreetmap/osm2pgsql/releases) and the
+[Upgrading appendix in the manual](/doc/manual.html#upgrading) for details.
 </div>
 
 <section markdown="1">

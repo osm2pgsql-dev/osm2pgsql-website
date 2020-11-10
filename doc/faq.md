@@ -12,8 +12,7 @@ with older versions. Usually, you just have to upgrade the osm2pgsql executable
 and you are done. But there are cases where you have to wipe your database
 and start from scratch. See the
 [release notes](https://github.com/openstreetmap/osm2pgsql/releases) and the
-[migration notes](https://github.com/openstreetmap/osm2pgsql/blob/master/docs/migrations.md)
-for details.
+[Upgrading appendix in the manual](/doc/manual.html#upgrading) for details.
 
 ## Problems
 
