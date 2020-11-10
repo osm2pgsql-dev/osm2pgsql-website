@@ -651,6 +651,13 @@ article.manual h4 a {
     display: none;
 }
 
+article.manual h2 svg,
+article.manual h3 svg,
+article.manual h4 svg {
+    width: 1.4ex;
+    height: 1.4ex;
+}
+
 article.manual h2:hover a,
 article.manual h3:hover a,
 article.manual h4:hover a {
