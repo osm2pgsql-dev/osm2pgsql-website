@@ -37,16 +37,6 @@ functions:
             local highway_type = get_highway_value(object.tags.highway)
             ...
         end
-    - name: way_member_ids
-      synopsis: osm2pgsql.way_member_ids(RELATION)
-      description: |
-        Return an array table with the ids of all way members of RELATION.
-      example: |
-        function osm2pgsql.select_relation_members(relation)
-            if relation.tags.type == 'route' then
-                return { ways = osm2pgsql.way_member_ids(relation) }
-            end
-        end
     - name: make_clean_tags_func
       synopsis: osm2pgsql.make_clean_tags_func(KEYS)
       description: |
@@ -64,12 +54,48 @@ functions:
             end
             ...
         end
+    - name: split_string
+      synopsis: osm2pgsql.split_string(STRING[, DELIMITER])
+      description: |
+        Split STRING on DELIMITER (default: ';' (semicolon)) and return an
+        array table with the results. Items in the array will have any
+        whitespace at beginning and end removed.
+      example: |
+        local opening_hours = osm2pgsql.split_string(object.tags.opening_hours)
+    - name: split_unit
+      synopsis: osm2pgsql.split_unit(STRING, DEFAULT_UNIT)
+      description: |
+        Split STRING of the form "VALUE UNIT" (something like "10 mph" or
+        "20km") into the VALUE and the UNIT and return both. The space between
+        the VALUE and UNIT is optional. If there was no unit in the string,
+        the DEFAULT_UNIT will be returned instead. Return `nil` if the STRING
+        doesn't have the right pattern.
+      example: |
+        value, unit = osm2pgsql.split_unit(object.tags.maxspeed, 'km/h')
+    - name: trim
+      synopsis: osm2pgsql.trim(STRING)
+      description: |
+        Return STRING with whitespace characters removed from the beginning
+        and end.
+      example: |
+        local name = osm2pgsql.trim(object.tags.name)
+    - name: way_member_ids
+      synopsis: osm2pgsql.way_member_ids(RELATION)
+      description: |
+        Return an array table with the ids of all way members of RELATION.
+      example: |
+        function osm2pgsql.select_relation_members(relation)
+            if relation.tags.type == 'route' then
+                return { ways = osm2pgsql.way_member_ids(relation) }
+            end
+        end
 ---
 
 The flex output includes a small library of useful Lua helper functions.
 
-Note: These functions are available on the flex output, they cannot be used in
+These functions are available on the flex output, they cannot be used in
 the Lua tag transformations of the pgsql output.
+{:.note}
 
 {% for func in page.functions -%}
 <table class="lib">
