@@ -95,6 +95,10 @@ information from the wiki](https://wiki.openstreetmap.org/wiki/Osm2pgsql) needs
 to be integrated. Some docs are on
 [switch2osm.org](https://switch2osm.org/serving-tiles/manually-building-a-tile-server-20-04-lts/).
 
+Issues:
+
+* [1301](https://github.com/openstreetmap/osm2pgsql/issues/1301)
+
 ### Configuration / Command Line
 
 Currently a lot of osm2pgsql options are only available through the command
