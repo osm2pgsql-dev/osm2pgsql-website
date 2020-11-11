@@ -7,19 +7,22 @@ functions:
       synopsis: osm2pgsql.clamp(VALUE, MIN, MAX)
       description: |
         Return VALUE if it is between MIN and MAX, MIN if it is smaller, or MAX
-        if it is larger. All parameters must be numbers.
+        if it is larger. All parameters must be numbers. If VALUE is `nil`,
+        `nil` is returned.
       example: |
         osm2pgsql.clamp(2, 3, 4) ⟶ 3
     - name: has_prefix
       synopsis: osm2pgsql.has_prefix(STRING, PREFIX)
       description: |
-        Returns `true` if the STRING starts with PREFIX.
+        Returns `true` if the STRING starts with PREFIX. If STRING is `nil`,
+        `nil` is returned.
       example: |
         osm2pgsql.has_prefix('addr:city', 'addr:') ⟶ true
     - name: has_suffix
       synopsis: osm2pgsql.has_suffix(STRING, SUFFIX)
       description: |
-        Returns `true` if the STRING ends with SUFFIX.
+        Returns `true` if the STRING ends with SUFFIX. If STRING is `nil`,
+        `nil` is returned.
       example: |
         osm2pgsql.has_suffix('tiger:source', ':source') ⟶ true
     - name: make_check_values_func
@@ -59,24 +62,26 @@ functions:
       description: |
         Split STRING on DELIMITER (default: ';' (semicolon)) and return an
         array table with the results. Items in the array will have any
-        whitespace at beginning and end removed.
+        whitespace at beginning and end removed. If STRING is `nil`, `nil` is
+        returned.
       example: |
         local opening_hours = osm2pgsql.split_string(object.tags.opening_hours)
     - name: split_unit
       synopsis: osm2pgsql.split_unit(STRING, DEFAULT_UNIT)
       description: |
         Split STRING of the form "VALUE UNIT" (something like "10 mph" or
-        "20km") into the VALUE and the UNIT and return both. The space between
+        "20km") into the VALUE and the UNIT and return both. The VALUE must
+        be a negative or positive integer or real number. The space between
         the VALUE and UNIT is optional. If there was no unit in the string,
         the DEFAULT_UNIT will be returned instead. Return `nil` if the STRING
-        doesn't have the right pattern.
+        doesn't have the right pattern or is `nil`.
       example: |
         value, unit = osm2pgsql.split_unit(object.tags.maxspeed, 'km/h')
     - name: trim
       synopsis: osm2pgsql.trim(STRING)
       description: |
         Return STRING with whitespace characters removed from the beginning
-        and end.
+        and end. If STRING is `nil`, `nil` is returned.
       example: |
         local name = osm2pgsql.trim(object.tags.name)
     - name: way_member_ids
@@ -92,6 +97,7 @@ functions:
 ---
 
 The flex output includes a small library of useful Lua helper functions.
+All functions are in the `osm2pgsql` namespace.
 
 These functions are available on the flex output, they cannot be used in
 the Lua tag transformations of the pgsql output.
