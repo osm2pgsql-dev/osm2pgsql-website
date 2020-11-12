@@ -15,6 +15,7 @@
 {%- endfor %}
 </head>
 <body>
+    <a class="skip-main" href="#main">Skip to main content</a>
     <div id="top"><a href="{% link index.md %}">osm2pgsql</a></div>
     <header>
         <nav>
@@ -34,7 +35,7 @@
             </div>
         </nav>
     </header>
-    <main>
+    <main id="main" tabindex="-1">
 {{ content }}
     </main>
 {% if page.footer != false %}

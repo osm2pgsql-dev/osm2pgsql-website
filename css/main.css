@@ -108,6 +108,30 @@ section {
     }
 }
 
+/* ---------------- skip to main link ---------------- */
+
+a.skip-main {
+    left: -999px;
+    position: absolute;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    z-index: -999;
+}
+
+a.skip-main:focus {
+    left: auto;
+    top: auto;
+    height: auto;
+    width: 15em;
+    text-align: center;
+    overflow: auto;
+    margin: 24px 20px 10px 120px;
+    padding: 10px;
+    z-index: 999;
+}
+
 /* ---------------- main menu ---------------- */
 
 nav {
