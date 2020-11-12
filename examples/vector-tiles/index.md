@@ -7,7 +7,8 @@ javascript:
     - /js/ol.js
 ---
 
-<a href="https://en.wikipedia.org/wiki/File:Brussels_signs.jpg"><img alt="Street sign in Brussels: Rue de la Montagne - Bergstraat" class="floatright" src="Brussels_signs.jpg" width="250" height="167"/></a>
+<a href="https://en.wikipedia.org/wiki/File:Brussels_signs.jpg"><img alt="Street sign in Brussels: Rue de la Montagne - Bergstraat" class="withborder" src="Brussels_signs.jpg" width="250" height="167"/></a>
+{:.flright}
 
 Of course osm2pgsql can also generate the data needed for creating vector
 tiles. In this example we are looking at streets in Brussels. Belgium has

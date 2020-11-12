@@ -3,7 +3,8 @@ layout: examples
 title: Building Map
 ---
 
-<a href="brasilia2.png"><img alt="Map with buildings of a section of Brasília" class="floatright" src="brasilia2.png" width="250" height="250"/></a>
+<a href="brasilia2.png"><img alt="Map with buildings of a section of Brasília" class="withborder" src="brasilia2.png" width="250" height="250"/></a>
+{:.flright}
 
 You don't always have to load all the OSM data into the database to create
 something useful (or beautiful). In this example we take the data from a city

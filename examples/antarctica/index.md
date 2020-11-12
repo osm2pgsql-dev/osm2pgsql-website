@@ -3,7 +3,8 @@ layout: examples
 title: Antarctica Map
 ---
 
-<a href="antarctica2.png"><img alt="Map of McMurdo Sound in Antarctica" class="floatright" src="antarctica2.png" width="250" height="250"/></a>
+<a href="antarctica2.png"><img alt="Map of McMurdo Sound in Antarctica" class="withborder" src="antarctica2.png" width="250" height="250"/></a>
+{:.flright}
 
 Typical maps on the web these days use the Mercator projection. And osm2pgsql
 uses that as the default projection, too. But osm2pgsql can handle basically

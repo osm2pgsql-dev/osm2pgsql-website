@@ -2,9 +2,10 @@
 title: News
 ---
 
-# News
+<a href="{% link news/feed.xml %}"><img src="{% link img/feed.svg %}" width="20" height="20" alt="Atom Feed" title="Atom Feed"/></a>
+{:.flright}
 
-<div style="text-align: right;"><a href="{% link news/feed.xml %}"><img src="{% link img/feed.svg %}" width="20" height="20" alt="Atom Feed" title="Atom Feed"/></a></div>
+# News
 
 <div class="news-list">
 {% for post in site.posts %}

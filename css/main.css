@@ -392,6 +392,18 @@ img.inline {
     height: 1em;
 }
 
+.flright {
+    float: right;
+    margin: 0 0 8px 8px;
+}
+
+.withborder {
+    padding: 2px;
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+}
+
 /* ---------------- news box on home page ---------------- */
 
 @media screen and (max-width: 999px) {
@@ -843,15 +855,6 @@ table.proj td {
 .example p {
     margin-top: 6px;
     padding: 0 6px;
-}
-
-img.floatright {
-    float: right;
-    padding: 2px;
-    margin-left: 10px;
-    background-color: #ffffff;
-    border: 1px solid #e0e0e0;
-    border-radius: 2px;
 }
 
 img.fullwidth {

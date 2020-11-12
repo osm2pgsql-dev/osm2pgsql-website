@@ -20,9 +20,11 @@ See the
 </div>
 
 <section markdown="1">
-<a href="https://help.openstreetmap.org/"><img src="{% link img/osm-help.png %}" width="120" height="39" alt="" style="float: right;"/></a>
 
 ## Getting Help
+
+<a href="https://help.openstreetmap.org/"><img src="{% link img/osm-help.png %}" width="120" height="39" alt="help.openstreetmap.org"/></a>
+{:.flright}
 
 If you need help with osm2pgsql,
 [help.osm.org](https://help.openstreetmap.org/){:.extlink} should be your first
@@ -35,9 +37,11 @@ outdated.
 </section>
 
 <section markdown="1">
-<a href="https://github.com/openstreetmap/osm2pgsql/issues"><img src="{% link img/github-large.png %}" width="36" height="36" alt="" style="float: right;"/></a>
 
 ## Reporting Bugs
+
+<a href="https://github.com/openstreetmap/osm2pgsql/issues"><img src="{% link img/github-large.png %}" width="36" height="36" alt="osm2pgsql on Github"/></a>
+{:.flright}
 
 You can report bugs and problems by opening an issue on Github. Please check
 [existing issues](https://github.com/openstreetmap/osm2pgsql/issues){:.extlink}
