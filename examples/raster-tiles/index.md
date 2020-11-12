@@ -7,7 +7,7 @@ javascript:
     - /js/ol.js
 ---
 
-<img src="{% link examples/raster-tiles/tiles.png %}" style="float: right; position: relative; top: -60px;"/>
+<img alt="" src="{% link examples/raster-tiles/tiles.png %}" style="float: right; position: relative; top: -60px;"/>
 
 This is the "classical" job of osm2pgsql: Import data into a database, then use
 Mapnik or another rendering engine to create raster tiles from the data.

@@ -88,7 +88,7 @@ for details.
 
 ### Processing the OSM Data
 
-<img src="{% link img/osm2pgsql-overview.svg %}" width="350" style="float: right;"/>
+<img alt="Diagram showing overview of osm2pgsql data processing from OSM data to Input, then Middle, then Output and the Database" src="{% link img/osm2pgsql-overview.svg %}" width="350" style="float: right;"/>
 
 Osm2pgsql processing can be separated into multiple steps:
 

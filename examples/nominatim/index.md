@@ -3,7 +3,7 @@ layout: examples
 title: Nominatim
 ---
 
-<a href="https://nominatim.openstreetmap.org/"><img src="nominatim.png" style="float: right; margin: 0 0 20px 20px; border: 1px solid #e0e0e0; border-radius: 2px;" width="500"/></a>
+<a href="https://nominatim.openstreetmap.org/"><img alt="Screenshot of Nominatim with search for 'Paris'" src="nominatim.png" style="float: right; margin: 0 0 20px 20px; border: 1px solid #e0e0e0; border-radius: 2px;" width="500"/></a>
 
 [Nominatim](https://nominatim.org){:.extlink} uses OpenStreetMap data to find
 locations on Earth by name and address (geocoding). It can also do the reverse,

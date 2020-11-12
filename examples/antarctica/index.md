@@ -3,7 +3,7 @@ layout: examples
 title: Antarctica Map
 ---
 
-<a href="antarctica2.png"><img class="floatright" src="antarctica2.png" width="250" height="250"/></a>
+<a href="antarctica2.png"><img alt="Map of McMurdo Sound in Antarctica" class="floatright" src="antarctica2.png" width="250" height="250"/></a>
 
 Typical maps on the web these days use the Mercator projection. And osm2pgsql
 uses that as the default projection, too. But osm2pgsql can handle basically
@@ -47,4 +47,4 @@ we define.
 {%- include_relative antarctica.lua -%}
 ```
 
-<a href="antarctica1.png"><img class="fullwidth" src="antarctica1.png"/></a>
+<a href="antarctica1.png"><img alt="Map of Antarctica with stations" class="fullwidth" src="antarctica1.png"/></a>

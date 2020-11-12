@@ -3,7 +3,7 @@ layout: examples
 title: Building Map
 ---
 
-<a href="brasilia2.png"><img class="floatright" src="brasilia2.png" width="250" height="250"/></a>
+<a href="brasilia2.png"><img alt="Map with buildings of a section of Brasília" class="floatright" src="brasilia2.png" width="250" height="250"/></a>
 
 You don't always have to load all the OSM data into the database to create
 something useful (or beautiful). In this example we take the data from a city
@@ -79,5 +79,5 @@ into [QGIS](https://qgis.org) which has excellent support for
 PostgreSQL/PostGIS layers. After a few clicks loading the database table and
 changing the style, I got this:
 
-<a href="brasilia1.png"><img class="fullwidth" src="brasilia1.png"/></a>
+<a href="brasilia1.png"><img alt="Building map of Brasília" class="fullwidth" src="brasilia1.png"/></a>
 

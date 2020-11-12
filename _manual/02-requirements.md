@@ -6,9 +6,9 @@ title: System Requirements
 ### Operating System
 
 Osm2pgsql works on
-<img class="inline" src="{% link img/linux.png %}"/> Linux,
-<img class="inline" src="{% link img/windows.png %}"/> Windows, and
-<img class="inline" src="{% link img/apple.png %}"/> macOS.
+<img class="inline" alt="" src="{% link img/linux.png %}"/> Linux,
+<img class="inline" alt="" src="{% link img/windows.png %}"/> Windows, and
+<img class="inline" alt="" src="{% link img/apple.png %}"/> macOS.
 
 Osm2pgsql is developed on Linux and most of the developers don't have
 experience with running it on anything but Linux, so it will probably works

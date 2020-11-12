@@ -47,9 +47,9 @@ Valid Geometries
 Portable
 
 : Osm2pgsql is a command line program written in portable C++. It works on
-  <img class="inline" src="{% link img/linux.png %}"/> Linux,
-  <img class="inline" src="{% link img/windows.png %}"/> Windows, and
-  <img class="inline" src="{% link img/apple.png %}"/> macOS.
+  <img class="inline" alt="" src="{% link img/linux.png %}"/> Linux,
+  <img class="inline" alt="" src="{% link img/windows.png %}"/> Windows, and
+  <img class="inline" alt="" src="{% link img/apple.png %}"/> macOS.
 
 Many OSM input formats
 

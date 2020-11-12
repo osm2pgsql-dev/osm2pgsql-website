@@ -6,7 +6,7 @@ title: Installation
 Osm2pgsql works on Linux, Windows, and macOS. We recommend you always use the
 latest released version, currently {{ site.osm2pgsql.latest_version }}.
 
-## <img src="{% link img/linux.png %}"/>Installing on Linux
+## <img alt="" src="{% link img/linux.png %}"/>Installing on Linux
 
 There are [packages of
 osm2pgsql](https://repology.org/project/osm2pgsql){:.extlink} available for
@@ -49,7 +49,7 @@ See the *Building* section in the
 [`README.md`](https://github.com/openstreetmap/osm2pgsql/blob/master/README.md)
 for a list of dependencies and build instructions.
 
-## <img src="{% link img/windows.png %}"/>Installing on Windows
+## <img alt="" src="{% link img/windows.png %}"/>Installing on Windows
 
 ### Using prebuild binaries
 
@@ -64,7 +64,7 @@ Studio 2017 & 2015 are known to work. Follow the usual steps for compiling
 CMake projects.
 
 
-## <img src="{% link img/apple.png %}"/>Installing on macOS
+## <img alt="" src="{% link img/apple.png %}"/>Installing on macOS
 
 Osm2pgsql is [available on
 Homebrew](https://formulae.brew.sh/formula/osm2pgsql){:.extlink}. Install with
