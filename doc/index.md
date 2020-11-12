@@ -35,7 +35,8 @@ title: Documentation
 The [osm2pgsql page](https://wiki.openstreetmap.org/wiki/Osm2pgsql){:.extlink}
 on the OSM wiki also contains some more information, some of it outdated.
 
-<section markdown="1" style="margin-top: 40px;">
+<section markdown="1">
+
 ## Related Documentation
 
 <div class="container">

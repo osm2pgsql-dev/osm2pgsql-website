@@ -5,7 +5,7 @@
     --osm2pgsql-color-darker: #2b4ab5; /* darker blue */
     --osm2pgsql-color-dark: #4b6ac5; /* dark blue */
     --osm2pgsql-color-light: #a0c0ff; /* light blue */
-    --osm2pgsql-color-news: #ffa500; /* orange */
+    --osm2pgsql-color-news: #c61109; /* red */
     --osm2pgsql-color-menu-text: #ffffff;
     --osm2pgsql-color-menu-hover: #e0e0e0;
     --osm2pgsql-font: Verdana, sans-serif;
@@ -308,7 +308,7 @@ a:visited {
 }
 
 a.extlink::before {
-    content: '\2192' ' ';
+    content: '\2192' '\00a0';
 }
 
 h1 {
@@ -496,7 +496,6 @@ div.news-date-small {
 
 .box {
     margin: 10px;
-    border: 1px solid #e0e0e0;
     border-radius: 2px;
     padding: 0 16px 4px 16px;
     flex-grow: 1;
@@ -506,7 +505,7 @@ div.news-date-small {
 
 .box2 {
     width: 40%;
-    background-color: #e8f0f8;
+    background-color: #f8f8ff;
     border: 1px solid var(--osm2pgsql-color-light);
 }
 
@@ -518,6 +517,7 @@ div.news-date-small {
 .box3 {
     width: 25%;
     font-size: 80%;
+    border: 1px solid #e0e0e0;
 }
 
 .box3 img {
