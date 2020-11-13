@@ -563,11 +563,17 @@ table.software-versions td {
     padding: 2px 4px;
 }
 
+table.software-versions tr.groupstart td {
+    border-top: 2px solid #e0e0e0;
+}
+
 table.software-versions th {
-    width: 9%;
+    height: 2em;
+    min-width: 5em;
     border-left: 1px solid #e0e0e0;
     padding: 2px 4px;
     background-color: #e0e0e0;
+    text-align: left;
 }
 
 /* ---------------- man pages ---------------- */
