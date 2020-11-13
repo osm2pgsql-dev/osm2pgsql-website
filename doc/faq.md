@@ -14,6 +14,18 @@ and start from scratch. See the
 [release notes](https://github.com/openstreetmap/osm2pgsql/releases) and the
 [Upgrading appendix in the manual](/doc/manual.html#upgrading) for details.
 
+## Usage
+
+### I want some tables to be in a specific database schema
+
+This is supported starting from version 1.4.0.
+
+* For tables created by the flex output use the `schema` option on the
+  [table creation commands](/doc/manual.html#defining-a-table) in the Lua
+  config file.
+* For tables created by the pgsql output use `--output-pgsql-schema=SCHEMA`.
+* For middle tables use `--middle-schema=SCHEMA`.
+
 ## Problems
 
 ### Why is osm2pgsql so slow?
@@ -64,4 +76,14 @@ You can define in the config file which columns you want, and, if you are using
 the flex output, decide on how exactly your columns should be named and used.
 There you can, for instance, create a column named `addr_city` and fill it
 with the value of the `addr:city` tag.
+
+### I can't find the coastline data
+
+In the pgsql output the `natural=coastline` tag is suppressed by default, even
+if you import the `natural=*` key. The main mapnik map renders coastlines from
+other sources so it does not need them. You can use the `--keep-coastlines`
+parameter to change this behavior if you want coastlines in your database.
+
+See the [Coastline Processing section in the
+manual](/doc/manual.html#coastline-processing)
 
