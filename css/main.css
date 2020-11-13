@@ -68,9 +68,9 @@ section {
     border-top: 1px solid var(--osm2pgsql-color-light);
 }
 
-/* ---------------- top ---------------- */
+/* ---------------- "logo" at top ---------------- */
 
-#top {
+#logo {
     position: absolute;
     top: 0;
     width: 100%;
@@ -80,21 +80,21 @@ section {
     text-align: center;
 }
 
-#top a {
+#logo a {
     color: var(--osm2pgsql-color-menu-text);
     text-decoration: none;
     font-weight: bold;
 }
 
-#top a:hover {
+#logo a:hover {
     color: var(--osm2pgsql-color-menu-hover);
 }
 
 @media screen and (min-width: 1000px) {
-    #top {
+    #logo {
         position: absolute;
         top: 0;
-        left: 0;
+        left: calc(50% - 50vw);
         width: 400px;
         padding-top: 120px;
         font-size: 18pt;
@@ -103,7 +103,7 @@ section {
 }
 
 @media screen and (max-width: 999px) {
-    #top {
+    #logo {
         font-size: 18px;
     }
 }

@@ -15,9 +15,9 @@
 {%- endfor %}
 </head>
 <body>
-    <a class="skip-main" href="#main">Skip to main content</a>
-    <div id="top"><a href="{% link index.md %}">osm2pgsql</a></div>
     <header>
+        <a class="skip-main" href="#main">Skip to main content</a>
+        <div id="logo"><a href="{% link index.md %}">osm2pgsql</a></div>
         <nav>
             <div id="menu-toggle">
                 <input type="checkbox"/>
@@ -38,12 +38,12 @@
     <main id="main" tabindex="-1">
 {{ content }}
     </main>
-{% if page.footer != false %}
+{%- if page.footer != false %}
     <footer>
         <p>This website is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>. <span class="noprint">Help maintain it on <a href="https://github.com/openstreetmap/osm2pgsql-website">Github</a>
         (<a href="{{ site.github.repository_url }}/blob/master/{{ page.path }}" target="_blank">Source of this page</a>).</span></p>
         <p>Last change: {{ page.last_modified_at | date_to_long_string }} | <a href="{% link contact.md %}">Imprint/Contact</a></p>
     </footer>
-{% endif %}
+{%- endif %}
 </body>
 </html>
