@@ -3,8 +3,19 @@ layout: doc
 title: Installation
 ---
 
-Osm2pgsql works on Linux, Windows, and macOS. We recommend you always use the
-latest released version, currently {{ site.osm2pgsql.latest_version }}.
+Osm2pgsql works on Linux, Windows, macOS, and other systems. We recommend you
+always use the latest released version, currently
+{{ site.osm2pgsql.latest_version }}.
+
+<ul>
+    <li><a href="#installing-on-linux">Installing on Linux</a></li>
+    <li><a href="#installing-on-windows">Installing on Windows</a></li>
+    <li><a href="#installing-on-macos">Installing on macOS</a></li>
+    <li><a href="#installing-on-freebsd">Installing on FreeBSD</a></li>
+    <li><a href="#upgrading-an-existing-installation">Upgrading an Existing Installation</a></li>
+</ul>
+
+<section markdown="1">
 
 ## <img alt="" src="{% link img/linux.png %}"/>Installing on Linux
 
@@ -74,6 +85,9 @@ See the *Building* section in the
 [`README.md`](https://github.com/openstreetmap/osm2pgsql/blob/master/README.md)
 for a list of dependencies and build instructions.
 
+</section>
+<section markdown="1">
+
 ## <img alt="" src="{% link img/windows.png %}"/>Installing on Windows
 
 ### Using prebuild binaries
@@ -88,6 +102,8 @@ For native Windows compilation you need a C++11-compatible compiler. Visual
 Studio 2017 & 2015 are known to work. Follow the usual steps for compiling
 CMake projects.
 
+</section>
+<section markdown="1">
 
 ## <img alt="" src="{% link img/apple.png %}"/>Installing on macOS
 
@@ -97,6 +113,9 @@ Homebrew](https://formulae.brew.sh/formula/osm2pgsql){:.extlink}. Install with
 ```sh
 brew install osm2pgsql
 ```
+
+</section>
+<section markdown="1">
 
 ## <img alt="" src="{% link img/freebsd.png %}"/>Installing on FreeBSD
 
@@ -108,6 +127,9 @@ Install with:
 pkg install converters/osm2pgsql
 ```
 
+</section>
+<section markdown="1">
+
 ## Upgrading an Existing Installation
 
 Usually you can upgrade an existing installation of osm2pgsql to a new version
@@ -116,3 +138,4 @@ and you have to re-import the OSM data, create a new index or so. Please read
 the release information carefully. There is also an appendix in the manual with
 [upgrading information](manual.html#upgrading).
 
+</section>

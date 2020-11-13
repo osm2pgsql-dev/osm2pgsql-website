@@ -3,6 +3,8 @@ layout: doc
 title: Frequently Asked Questions (FAQ)
 ---
 
+<section markdown="1">
+
 ## Upgrade
 
 ### What do I have to know about upgrading osm2pgsql to a newer version?
@@ -13,6 +15,9 @@ and you are done. But there are cases where you have to wipe your database
 and start from scratch. See the
 [release notes](https://github.com/openstreetmap/osm2pgsql/releases) and the
 [Upgrading appendix in the manual](/doc/manual.html#upgrading) for details.
+
+</section>
+<section markdown="1">
 
 ## Usage
 
@@ -25,6 +30,9 @@ This is supported starting from version 1.4.0.
   config file.
 * For tables created by the pgsql output use `--output-pgsql-schema=SCHEMA`.
 * For middle tables use `--middle-schema=SCHEMA`.
+
+</section>
+<section markdown="1">
 
 ## Problems
 
@@ -39,7 +47,7 @@ many hours or even days. There are many reasons for this:
   of RAM, for a planet import 64 GB RAM are pretty much the minimum.
 * You have to tune your PostgreSQL config *before* using osm2pgsql. The
   default settings for PostgreSQL on most systems are totally wrong for a
-  large database.
+  large database. Don't forget to restart the database after tuning.
 
 ### An index is not being built and there is no error message.
 
@@ -87,3 +95,4 @@ parameter to change this behavior if you want coastlines in your database.
 See the [Coastline Processing section in the
 manual](/doc/manual.html#coastline-processing)
 
+</section>
