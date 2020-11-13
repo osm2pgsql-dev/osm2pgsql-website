@@ -34,6 +34,31 @@ Fedora has packages of osm2pgsql available. Install with
 dnf install osm2pgsql
 ```
 
+### Installing on openSUSE
+
+First add the "Geo" package repository (adapt URL to the openSUSE version you
+use):
+
+```sh
+zypper ar https://download.opensuse.org/repositories/Application:/Geo/openSUSE_Leap_15.2/ "Geo"
+zypper refresh
+```
+
+Then install osm2pgsql:
+
+```sh
+zypper install osm2pgsql
+```
+
+### Installing on Arch Linux
+
+Build the
+[osm2pgsql-git](https://aur.archlinux.org/packages/osm2pgsql-git/){:.extlink}
+package from the
+[AUR](https://wiki.archlinux.org/index.php/Arch_User_Repository){:.extlink}.
+(Download the tarball and compile/install with `makepkg`, or use an AUR helper
+such as `yaourt`.)
+
 ### Installing from Source / Git
 
 If you can't use the packaged version of osm2pgsql for your distribution, you
@@ -71,6 +96,16 @@ Homebrew](https://formulae.brew.sh/formula/osm2pgsql){:.extlink}. Install with
 
 ```sh
 brew install osm2pgsql
+```
+
+## <img alt="" src="{% link img/freebsd.png %}"/>Installing on FreeBSD
+
+Osm2pgsql is available in [FreeBSD
+Ports](https://www.freebsd.org/cgi/ports.cgi?query=osm2pgsql){:.extlink}.
+Install with:
+
+```sh
+pkg install converters/osm2pgsql
 ```
 
 ## Upgrading an Existing Installation
