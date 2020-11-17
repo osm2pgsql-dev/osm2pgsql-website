@@ -3,6 +3,32 @@ chapter: 10
 title: Advanced Topics
 ---
 
+### Notes on Memory Usage
+
+Importing on OSM file into the database is very demanding in terms of RAM
+usage. Osm2pgsql and PostgreSQL are running in parallel at this point and both
+need memory.
+
+PostgreSQL blocks at least the part of RAM that has been configured with the
+`shared_buffers` parameter during PostgreSQL tuning and needs some memory on
+top of that. (See [Tuning the PostgreSQL
+Server](#tuning-the-postgresql-server)).
+
+Osm2pgsql needs at least 2GB of RAM for its internal data structures,
+potentially more when it has to process very large relations. In addition it
+needs to maintain a cache for node locations. The size of this cache can be
+configured with the parameter `--cache`.
+
+When importing with a flatnode file (option `--flat-nodes`), it is best to
+disable the node cache completely (`--cache=0`) and leave the memory for the
+system cache to speed up accessing the flatnode file.
+
+For imports without a flatnode file, set `--cache` approximately to the size of
+the OSM pbf file you are importing. (Note that the `--cache` setting is in
+MByte). Make sure you leave enough RAM for PostgreSQL and osm2pgsql as
+mentioned above. If the system starts swapping or you are getting out-of-memory
+errors, reduce the cache size or consider using a flatnode file.
+
 ### Parallel Processing
 
 Some parts of the osm2pgsql processing can run in parallel. Depending on the

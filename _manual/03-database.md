@@ -95,17 +95,18 @@ values in the second column are suggestions and good starting point for a
 typical setup, you might have to adjust them for your use case. The settings
 are somewhat geared towards a system with 64GB RAM and a fast SSD.
 
-| Config Option                | Proposed Value  |
-| ---------------------------- | ------ |
-| shared_buffers               | 2GB    |
-| maintenance_work_mem         | 10GB   |
-| autovacuum_work_mem          | 2GB    |
-| work_mem                     | 50MB   |
-| effective_cache_size         | 24GB   |
-| synchronous_commit           | off    |
-| max_wal_size                 | 1GB    |
-| checkpoint_timeout           | 10min  |
-| checkpoint_completion_target | 0.9    |
+| Config Option                | Proposed Value  | Remark |
+| ---------------------------- | ------ | --- |
+| shared_buffers               | 2GB    | |
+| maintenance_work_mem         | 10GB   | |
+| autovacuum_work_mem          | 2GB    | |
+| work_mem                     | 50MB   | |
+| effective_cache_size         | 24GB   | |
+| synchronous_commit           | off    | |
+| checkpoint_segments          | 100    | PostgreSQL <= 9.4 only |
+| max_wal_size                 | 1GB    | PostgreSQL > 9.4 only |
+| checkpoint_timeout           | 10min  | |
+| checkpoint_completion_target | 0.9    | |
 {: .desc}
 
 A higher number for `max_wal_size` means that PostgreSQL needs to run

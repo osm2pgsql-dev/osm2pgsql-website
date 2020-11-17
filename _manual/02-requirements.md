@@ -48,7 +48,8 @@ system with the [PostGIS](https://postgis.net/){:.extlink} extension installed.
 Osm2pgsql aims to support all PostgreSQL and PostGIS versions that are
 currently supported by their respective maintainers. Currently PostgreSQL
 versions 9.6 and above and PostGIS versions 2.2 and above are supported.
-PostgreSQL version 11 or above and PostGIS version 2.4 or above is recommended.
+(Earlier versions might work but are not tested any more.) PostgreSQL version
+11 or above and PostGIS version 2.4 or above is recommended.
 
 In some cases older versions of osm2pgsql have problems with newer database
 software versions. You should always run the newest released osm2pgsql version
