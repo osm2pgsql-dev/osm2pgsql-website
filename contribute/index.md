@@ -32,9 +32,13 @@ yes, this should be unified, but nobody had the time to do that yet.)
 </section>
 
 <section markdown="1">
-## Software we Depend On
+## Compatibility
 
-[Dependencies]({% link contribute/dependencies.md %}).
+We strive to be out-of-the-box compatible with major Linux distributions to
+make use of osm2pgsql as easy as possible for many users. Usually at least
+the last long-term release of the major Linux distributions is supported.
+This [handy list of dependencies]({% link contribute/dependencies.md %})
+helps with that.
 
 </section>
 

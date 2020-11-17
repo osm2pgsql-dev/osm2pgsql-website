@@ -88,6 +88,11 @@ decide what versions need to be supported.
 {%- endfor -%}
     </tr>
 {%- endfor -%}
+
 </tbody>
 </table>
+
+* C++11 should be fully supported from GCC 4.8.1, Clang 3.4.
+* C++14 should be fully supported from GCC 5, Clang 3.4.
+* C++17 should be fully supported from GCC 7, Clang 6.
 
