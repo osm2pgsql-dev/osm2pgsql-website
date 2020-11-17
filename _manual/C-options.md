@@ -14,6 +14,10 @@ This appendix contains an overview of all command line options.
 
 {% include_relative options/help-version.md %}
 
+### Logging Options
+
+{% include_relative options/logging.md %}
+
 ### Database Options
 
 {% include_relative options/database.md %}
