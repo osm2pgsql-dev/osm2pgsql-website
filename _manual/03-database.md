@@ -88,29 +88,48 @@ creating the database for osm2pgsql with `createdb`.
 Usual installs of the PostgreSQL server come with a default configuration
 that isn't well tuned for large databases. You **will** have to change those
 settings and restart PostgreSQL before running osm2pgsql, otherwise your system
-will be much slower than needed.
+will be much slower than necessary.
 
-This section is incomplete and possibly not up to date.
-{:.wip}
+You should tune the following parameters in your `postgresql.conf` file. The
+values in the second column are suggestions and good starting point for a
+typical setup, you might have to adjust them for your use case. The settings
+are somewhat geared towards a system with 64GB RAM and a fast SSD.
 
-You should tune the following parameters in your `postgresql.conf` file:
+| Config Option                | Proposed Value  |
+| ---------------------------- | ------ |
+| shared_buffers               | 2GB    |
+| maintenance_work_mem         | 10GB   |
+| autovacuum_work_mem          | 2GB    |
+| work_mem                     | 50MB   |
+| effective_cache_size         | 24GB   |
+| synchronous_commit           | off    |
+| max_wal_size                 | 1GB    |
+| checkpoint_timeout           | 10min  |
+| checkpoint_completion_target | 0.9    |
+{: .desc}
+
+A higher number for `max_wal_size` means that PostgreSQL needs to run
+checkpoints less often but it does require the additional space on your disk.
+
+Autovacuum must not be switched off because it ensures that the tables are
+frequently analysed. If your machine has very little memory, you might consider
+setting `autovacuum_max_workers = 1` and reduce `autovacuum_work_mem` even
+further. This will reduce the amount of memory that autovacuum takes away from
+the import process.
+
+For the initial import, you should also set:
 
 ```
-shared_buffers = 2GB
-maintenance_work_mem = (10GB)
-autovacuum_work_mem = 2GB
-work_mem = (50MB)
-effective_cache_size = (24GB)
-synchronous_commit = off
-checkpoint_segments = 100 # only for postgresql <= 9.4
-max_wal_size = 1GB # postgresql > 9.4
-checkpoint_timeout = 10min
-checkpoint_completion_target = 0.9
+fsync = off
+full_page_writes = off
 ```
 
-See more in docs on https://nominatim.org/release-docs/latest/admin/Installation/
+Don't forget to reenable them after the initial import or you risk database
+corruption!
 
 For details see also the [Resource Consumption section in the Server
 Configuration chapter](https://www.postgresql.org/docs/current/runtime-config-resource.html){:.extlink}
-in the PostgreSQL documentation.
+in the PostgreSQL documentation. Some information is also on the PostgreSQL
+wiki: [Tuning Your PostgreSQL
+Server](https://wiki.postgresql.org/wiki/Tuning_Your_PostgreSQL_Server){:.extlink}.
 
