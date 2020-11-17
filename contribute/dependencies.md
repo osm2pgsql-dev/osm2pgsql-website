@@ -54,7 +54,7 @@ packages:
     - lua
     - cmake
     - gcc
-    - clang
+    - llvm
     - python
     - boost
 title: Dependencies
