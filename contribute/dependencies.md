@@ -39,12 +39,12 @@ repositories:
     - id: centos_8
       name: CentOS 8
       date: 2019-09-24
-      eol: 2024-05
+      eol: 2029-05-31
       gs: groupstart
     - id: centos_7
       name: CentOS 7
       date: 2014-07-07
-      eol: 2020-08-06
+      eol: 2024-06-30
     - id: homebrew
       name: Homebrew
       gs: groupstart
