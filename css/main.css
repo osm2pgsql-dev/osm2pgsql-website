@@ -748,8 +748,22 @@ table.desc th {
 table.desc td {
     padding: 4px 8px;
     vertical-align: top;
-    white-space: nowrap;
+}
+
+table.desc td:first-of-type {
     font-family: monospace;
+}
+
+@media screen and (min-width: 600px) {
+    table.desc td:first-of-type {
+        white-space: nowrap;
+    }
+}
+
+@media screen and (min-width: 800px) {
+    table.desc td {
+        min-width: 14em;
+    }
 }
 
 table.desc td code {
@@ -757,13 +771,7 @@ table.desc td code {
 }
 
 table.desc th:last-of-type {
-    white-space: normal;
     width: 100%;
-}
-
-table.desc td:last-of-type {
-    white-space: normal;
-    font-family: var(--osm2pgsql-font);
 }
 
 /* ---------------- manual: lib table ---------------- */
