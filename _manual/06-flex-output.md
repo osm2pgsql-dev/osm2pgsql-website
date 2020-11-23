@@ -28,11 +28,11 @@ The flex style file is a Lua script. You can use all the power of the [Lua
 language](https://www.lua.org/){:.extlink}. This description assumes that you
 are somewhat familiar with the Lua language, but it is pretty easy to pick up
 the basics and you can use the example config files in the
-[`flex-config`](https://github.com/openstreetmap/osm2pgsql/tree/master/flex-config)
+[`flex-config`](https://github.com/openstreetmap/osm2pgsql/tree/master/flex-config){:.extlink}
 directory which contain lots of comments to get you started.
 
-All configuration is done through the `osm2pgsql` object in Lua. It has the
-following fields and functions:
+All configuration is done through the `osm2pgsql` global object in Lua. It has
+the following fields and functions:
 
 | Field / Function  | Description |
 | ----------------- | --- |
@@ -51,43 +51,168 @@ Lua helper library described in [Appendix B](#lua-library-for-flex-output).
 
 #### Defining a Table
 
-You have to define one or more tables where your data should end up. This
-is done with the `osm2pgsql.define_table()` function or one of the slightly
-more convenient functions `osm2pgsql.define_(node|way|relation|area)_table()`.
+You have to define one or more database tables where your data should end up.
+(In create mode, osm2pgsql will create those tables for you in the database.)
+This is done with the `osm2pgsql.define_table()` function or, more commonly,
+with one of the slightly more convenient functions
+`osm2pgsql.define_(node|way|relation|area)_table()`:
 
 ```
-osm2pgsql.define_table(OPTIONS)
 osm2pgsql.define_(node|way|relation|area)_table(NAME, COLUMNS[, OPTIONS])
 ```
 
 Here `NAME` is the name of the table, `COLUMNS` is a list of Lua tables
 describing the columns as documented below. `OPTIONS` is a Lua table with
-options for the table as a whole. When using the `define_table()` command, the
-`NAME` and `COLUMNS` are specified as options `name` and `columns`,
-respectively.
+options for the table as a whole. An example might be more helpful:
+
+```lua
+local restaurants = osm2pgsql.define_node_table('restaurants', {
+    { column = 'name', type = 'text' },
+    { column = 'tags', type = 'hstore' },
+    { column = 'geom', type = 'point' }
+})
+```
+
+In this case we are creating a table that is intended to be filled with OSM
+nodes, the table called `restaurants` will be created in the database with four
+colums: A `name` column of type `text` (which will presumably later be filled
+with the name of the restaurant), a column called `tags` with type `hstore`
+(which will presumable be filled later with all tags of a node), a column
+called `geom` which will contain the Point geometry of the node and an Id
+column called `node_id`.
 
 Each table is either a *node table*, *way table*, *relation table*, or *area
 table*. This means that the data for that table comes primarily from a node,
 way, relation, or area, respectively. Osm2pgsql makes sure that the OSM object
 id will be stored in the table so that later updates to those OSM objects (or
 deletions) will be properly reflected in the tables. Area tables are special,
-they can contain data derived from ways or from relations. Way ids will be
-stored as is, relation ids will be stored as negative numbers.
+they can contain data derived from ways and from (multipolygon) relations.
 
-With the `osm2pgsql.define_table()` function you can also define tables that
-* don't have any ids, but those tables will never be updated by osm2pgsql
-* take *any OSM object*, in this case the type of object is stored in an
-  additional `char(1)` column.
-* are in a specific PostgresSQL tablespace (set option `data_tablespace`) or
-  that get their indexes created in a specific tablespace (set option
-  `index_tablespace`).
-* are in a specific schema (set option `schema`). Note that the schema has to
-  be created before you start osm2pgsql.
+Sometimes the `define_(node|way|relation|area)_table()` functions are a bit to
+restrictive, for instance if you want more control over the type and naming of
+the Id column(s). In this case you can use the function
+`osm2pgsql.define_table()`.
+
+Here are the available `OPTIONS` for the `osm2pgsql.define_table(OPTIONS)`
+function. You can use the same options on the
+`define_(node|way|relation|area)_table()` functions, except the `name` and
+`columns` options.
+
+| Table Option     | Description |
+| ---------------- | ----------- |
+| name             | The name of the table (without schema). |
+| ids              | A Lua table defining how this table should handle ids (see the [Id Handling](#id-handling) section for details). Note that you can define tables without Ids, but they can not be updated by osm2pgsql. |
+| columns          | An array of columns (see the [Defining Columns](#defining-columns) section for details). |
+| schema           | Set the [PostgreSQL schema](https://www.postgresql.org/docs/current/ddl-schemas.html){:. extlink} to be used for this table. The schema must exist in the database before you start osm2pgsql. By default no schema is set which usually means the tables will be created in the `public` shema. |
+| data_tablespace  | The [PostgreSQL tablespace](https://www.postgresql.org/docs/current/manage-ag-tablespaces.html){:.extlink} used for the data in this table. |
+| index_tablespace | The [PostgreSQL tablespace](https://www.postgresql.org/docs/current/manage-ag-tablespaces.html){:.extlink} used for all indexes of this table. |
+{: .desc}
+
+All the `osm2pgsql.define*table()` functions return a database table Lua
+object. You can call the following functions on it:
+
+| Function  | Description |
+| --------- | ----------- |
+| name()    | The name of the table as specified in the define function. |
+| schema()  | The schema of the table as specified in the define function. |
+| columns() | The columns of the table as specified in the define function. |
+| add_row() | Add a row to the database table. See below for details. |
+{: .desc}
+
+#### Id Handling
+
+Id columns allows osm2pgsql to track which database table entries have been
+generated by which objects. When objects change or are deleted, osm2pgsql uses
+the ids to update or remove all existing rows from the database with those ids.
 
 If you are using the `osm2pgsql.define_(node|way|relation|area)_table()`
 convenience functions, osm2pgsql will automatically create an id column named
-`(node|way|relation|area)_id`, respectively. If you want more control over
-the id column(s), use the `osm2pgsql.define_table()` function.
+`(node|way|relation|area)_id`, respectively.
+
+If you want more control over the id column(s), use the
+`osm2pgsql.define_table()` function. You can then use the `ids` option to
+define how the id column(s) should look like. To generate the same
+"restaurants" table described above, the `define_table()` call will look like
+this:
+
+```lua
+local restaurants = osm2pgsql.define_table({
+    name = 'restaurants',
+    ids = { type = 'node', id_column = 'node_id' },
+    columns = {
+        { column = 'name', type = 'text' },
+        { column = 'tags', type = 'hstore' },
+        { column = 'geom', type = 'point' }
+}})
+```
+
+If you don't have an `ids` field, the table is generated without Id. Tables
+without Id can not be updated, so you can fill them in create mode, but they
+will not work in append mode.
+
+The following values are allowed for the `type` of the `ids` field:
+
+| Type     | Description |
+| -------- | ----------- |
+| node     | A node Id will be stored 'as is' in the column named by `id_column`. |
+| way      | A way Id will be stored 'as is' in the column named by `id_column`. |
+| relation | A relation Id will be stored 'as is' in the column named by `id_column`. |
+| area     | A way Id will be stored 'as is' in the column named by `id_column`, for relations the Id will be stored as negative number. |
+| any      | Any type of object can be stored. See below. |
+{: .desc}
+
+The `any` type is for tables that can store any type of OSM object (nodes,
+ways, or relations). There are two ways the id can be stored:
+
+1. If you have a `type_column` setting in your `ids` field, it will store the
+   type of the object in an additional `char(1)` column as `N`, `W`, or `R`.
+2. If you don't have a `type_column`, the id of nodes stays the same (so they
+   are positive), way ids will be stored as negative numbers and relation ids
+   are stored as negative numbers and 1e17 is subtracted from them. This
+   results in distinct ranges for all ids so they can be kept apart.
+   (This is the same transformation that the
+   [Imposm](https://imposm.org/docs/imposm3/latest/){:.extlink} program uses.)
+
+For its own use, osm2pgsql does not need unique ids. Usually ids are unique in
+a given table, but there are several cases where this might not be the case:
+
+1. If you call the `add_row()` function several times on the same table from
+   within the same callback.
+2. If you are using the `split_at` option on the geometry transformation (see
+   below).
+3. *Version == 1.3.0*{: .version} If you don't set `multi = true` in the
+   area geometry transformation.
+
+If you need unique ids for some reason you can always add your own id column
+as `create_only` column with something like this:
+
+```lua
+...
+    { column = 'myid', type = 'SERIAL', not_null = true, create_only = true },
+...
+```
+
+This column will be created by osm2pgsql but otherwise ignored. The `SERIAL`
+type is [a special type recognized by PostgreSQL](
+https://www.postgresql.org/docs/current/datatype-numeric.html#DATATYPE-SERIAL){: .extlink}
+which will generate an autoincrementing id column. You might want to add an
+index to this column yourself after osm2pgsql has imported the data.
+
+#### Defining Columns
+
+In the table definitions the columns are specified as a list of Lua tables
+with the following keys:
+
+| Key         | Description |
+| ----------- | ----------- |
+| column      | The name of the PostgreSQL column (required). |
+| type        | The type of the column as described above (required). |
+| not_null    | Set to `true` to make this a `NOT NULL` column. (Optional, default `false`.) |
+| create_only | Set to `true` to add the column to the `CREATE TABLE` command, but do not try to fill this column when adding data. This can be useful for `SERIAL` columns or when you want to fill in the column later yourself. (Optional, default `false`.) |
+| projection  | On geometry columns only. Set to the EPSG id or name of the projection. (Optional, default web mercator, `3857`.) |
+{: .desc}
+
+#### Defining Geometry Columns
 
 Most tables will have a geometry column. (Currently only zero or one geometry
 columns are supported.) The types of the geometry column possible depend on
@@ -98,7 +223,7 @@ for instance.
 The supported geometry types are:
 
 | Geometry type   | Description |
-| --------------- | --- |
+| --------------- | ----------- |
 | point           | Point geometry, usually created from nodes. |
 | linestring      | Linestring geometry, usually created from ways. |
 | polygon         | Polygon geometry for area tables, created from ways or relations. |
@@ -121,38 +246,23 @@ will be calculated in web mercator, or you can set the `projection` parameter
 of the column to `4326` to calculate it with WGS84 coordinates. Other
 projections are currently not supported.
 
+#### Defining Other Columns
+
 In addition to id and geometry columns, each table can have any number of
 "normal" columns using any type supported by PostgreSQL. Some types are
 specially recognized by osm2pgsql: `text`, `boolean`, `int2` (`smallint`),
 `int4` (`int`, `integer`), `int8` (`bigint`), `real`, `hstore`, and
-`direction`. See the "Type conversion" section for details.
+`direction`. See the [Type Conversion](#type-conversions){:.extlink} section
+for details on how this type affects the conversion of OSM data to the
+database types.
 
 Instead of the above types you can use any SQL type you want. If you do that
 you have to supply the PostgreSQL string representation for that type when
-adding data to such columns (or Lua `nil` to set the column to `NULL`).
-
-In the table definitions the columns are specified as a list of Lua tables
-with the following keys:
-
-| Key         | Description |
-| ----------- | --- |
-| column      | The name of the PostgreSQL column (required). |
-| type        | The type of the column as described above (required). |
-| not_null    | Set to `true` to make this a `NOT NULL` column. (Optional, default `false`.) |
-| create_only | Set to `true` to add the column to the `CREATE TABLE` command, but do not try to fill this column when adding data. This can be useful for `SERIAL` columns or when you want to fill in the column later yourself. (Optional, default `false`.) |
-| projection  | On geometry columns only. Set to the EPSG id or name of the projection. (Optional, default web mercator, `3857`.) |
-{: .desc}
-
-All the `osm2pgsql.define*table()` functions return a database table object.
-You can call the following functions on it:
-
-| Function  | Description |
-| --------- | --- |
-| name()    | The name of the table as specified in the define function. |
-| schema()  | The schema of the table as specified in the define function. |
-| columns() | The columns of the table as specified in the define function. |
-| add_row() | Add a row to the database table. See below for details. |
-{: .desc}
+adding data to such columns (or Lua `nil` to set the column to `NULL`). This
+can be used, for instance, to create JSON(B) columns. You have to provide valid
+JSON from your Lua script in this case. See the example config
+[places.lua](https://github.com/openstreetmap/osm2pgsql/blob/master/flex-config/places.lua){:.
+extlink} for how this can be done.
 
 #### Processing Callbacks
 
@@ -246,13 +356,28 @@ Currently these geometry transformations are supported:
 Some of these transformations can have parameters:
 
 * The `line` transformation has an optional parameter `split_at`. If this
-  is set to anything other than 0, linestrings longer than this value will
-  be split up into parts no longer than this value.
-* The `area` transformation has an optional parameter `multi`. If this is
-  set to `false` (the default), a multipolygon geometry will be split up into
-  several polygons. If this is set to `true`, the multipolygon geometry is
-  kept as one. It depends on this parameter whether you need a polygon
-  or multipolygon geometry column.
+  is set to anything other than 0, long linestrings will be split up into
+  parts no longer than this value.
+* *Version == 1.3.0*{: .version} The `area` transformation has an optional
+  parameter `multi`. If this is set to `false` (the default), a multipolygon
+  geometry will be split up into several polygons. If this is set to `true`,
+  the multipolygon geometry is kept as one.
+* *Version >= 1.4.0*{: .version} The `area` transformation has an optional
+  parameter `split_at`. If this is not set or set to `nil` (the default),
+  (multi)polygon geometries will be kept as is, if this is set to `'multi'`
+  multipolygon geometries will be split into their polygon parts.
+
+Note that in general it is your responsibility to make sure the column type
+of a geometry column can take the geometries created by the transformation.
+A `point` geometry column will not be able to store the result of an `area`
+transformation.
+
+*Version >= 1.4.0*{: .version} If a transformation will result in a polygon
+geometry, but the column type of the geometry is `multipolygon`. The polygon
+will be "wrapped" automatically in a multipolygon to fit into the column.
+This can be useful when you want all your polygons and multipolygons to be
+of the same database type. Some programs handle columns of uniform geometry
+type better.
 
 If no geometry transformation is set, osm2pgsql will, in some cases, assume
 a default transformation. These are the defaults:
