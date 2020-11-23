@@ -11,9 +11,9 @@ title: Frequently Asked Questions (FAQ)
 
 We are trying hard to make newer versions of osm2pgsql backwards compatible
 with older versions. Usually, you just have to upgrade the osm2pgsql executable
-and you are done. But there are cases where you have to wipe your database
-and start from scratch. See the
-[release notes](https://github.com/openstreetmap/osm2pgsql/releases) and the
+and you are done. But there are cases where you have to wipe your database and
+start from scratch. See the [release
+notes](https://github.com/openstreetmap/osm2pgsql/releases){:.extlink} and the
 [Upgrading appendix in the manual](/doc/manual.html#upgrading) for details.
 
 </section>
@@ -94,5 +94,29 @@ parameter to change this behavior if you want coastlines in your database.
 
 See the [Coastline Processing section in the
 manual](/doc/manual.html#coastline-processing)
+
+</section>
+<section markdown="1">
+
+## Error Messages
+
+Here are some of the error messages osm2pgql will produce and what you do
+if you get them.
+
+### `bad_alloc` or `segmentation fault`
+
+Most likely this means that you ran out of memory. But it can also mean there
+is a bug in osm2pgsql. Check that you have enough memory, try with more. If the
+problem persists and you believe you have enough memory for what you are doing,
+[report it](https://github.com/openstreetmap/osm2pgsql/issues/new){:.extlink}.
+
+### `No tables defined in Lua config. Nothing to do!`
+
+You are using the flex output and the Lua config you have specified doesn't
+define any output tables. You need to [define at least one output
+table](/doc/manual.html#defining-a-table).
+
+You'll also get this error if you are using a pgsql Lua transform file with
+the flex output!
 
 </section>
