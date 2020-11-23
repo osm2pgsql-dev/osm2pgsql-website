@@ -67,6 +67,9 @@ This is most likely because you are running out of memory. Due to the way
 Linux system "overcommit" memory, osm2pgsql can not detect that it is running
 out of memory, so it can't tell you what's going on.
 
+Please read the [Notes on Memory Usage](/doc/manual.html#notes-on-memory-usage)
+in the manual to get some ideas how to handle this.
+
 ### Osm2pgsql created table columns I can't access.
 
 Osm2pgsql usually creates table columns in your database that are named after
@@ -109,6 +112,9 @@ Most likely this means that you ran out of memory. But it can also mean there
 is a bug in osm2pgsql. Check that you have enough memory, try with more. If the
 problem persists and you believe you have enough memory for what you are doing,
 [report it](https://github.com/openstreetmap/osm2pgsql/issues/new){:.extlink}.
+
+Please read the [Notes on Memory Usage](/doc/manual.html#notes-on-memory-usage)
+in the manual to get some ideas how to handle this.
 
 ### `No tables defined in Lua config. Nothing to do!`
 

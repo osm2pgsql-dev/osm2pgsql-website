@@ -74,8 +74,7 @@ Osm2pgsql will write information about what it is doing to the console (to
 STDERR). If you'd rather want this information in a file, use the output
 redirection in your shell (`osm2pgsql ... 2>osm2pgsql.log`).
 
-*Version >= 1.4.0*{: .version} Several command line options allow you to
-change what will be logged and how:
+Several command line options allow you to change what will be logged and how:
 
 {% include_relative options/logging.md %}
 

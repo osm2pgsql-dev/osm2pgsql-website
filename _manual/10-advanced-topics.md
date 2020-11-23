@@ -53,8 +53,18 @@ if you don't have enough RAM for PostgreSQL to do the parallel index building.
 PostgreSQL potentially needs the amount of memory set in the
 `maintenance_work_mem` config setting for each index it builds. With 7 or more
 indexes being built in parallel this can mean quite a lot of memory is needed.
-Use the `--disable-parallel-indexing` option to build all indexes one after
+Use the `--disable-parallel-indexing` option to build the indexes one after
 the other.
 
-{% include_relative options/advanced.md %}
+### Handling of Forward Dependencies
+
+Whenever a node changes, osm2pgsql will find all ways and relations that have
+this node as a member and reprocess them. Similarly, whenever a way changes,
+their parent relations are reprocessed. So osm2pgsql will automatically handle
+"forward dependencies" from nodes and ways to their parents. Almost always this
+is the behaviour you want.
+
+*Version >= 1.4.0*{: .version} This behaviour can be disabled with the command
+line option `--with-forward-dependencies=false`. It is used by Nominatim which
+uses the specialized Gazetteer output which doesn't need this behaviour.
 
