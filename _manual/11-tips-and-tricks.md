@@ -37,3 +37,9 @@ after each update. When osm2pgsql inserts new rows they will always have a
 `NULL` value in `center`, the `WHERE` condition makes sure that we only do
 this (possibly expensive) calculation once.
 
+### Accessing Environment Variables from Lua
+
+In Lua scripts you can access environment variables with `os.getenv("VAR")`.
+The Lua config scripts that osm2pgsql uses are normal Lua scripts, so you
+can do that there, too.
+

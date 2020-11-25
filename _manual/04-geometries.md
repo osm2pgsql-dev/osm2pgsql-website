@@ -166,6 +166,9 @@ If osm2pgsql was compiled with support for the [PROJ
 library](https://proj.org/){:.extlink}, it supports all projections supported
 by that library.
 
+*Version >= 1.4.0*{:.version} Call `osm2pgsql --version` to see whether your
+binary was compiled with PROJ and with which version.
+
 </td></tr></table>
 
 Note that mapping styles often depend on the projection used. Most mapping

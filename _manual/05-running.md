@@ -202,3 +202,21 @@ for command line options only used for specific outputs):
 
 {% include_relative options/output.md %}
 
+### Environment Variables
+
+Osm2pgsql itself doesn't interpret any environment variables, but several
+of the libraries it uses do.
+
+* The PostgreSQL database access library (`libpq`) [understands many environment
+  variables](https://www.postgresql.org/docs/current/libpq-envars.html){:.extlink}.
+* The libosmium library has some [internal
+  settings](https://osmcode.org/libosmium/manual.html#run-time-configuration){:.extlink}
+  you can change.
+* If osm2pgsql was [compiled with the PROJ library](#projections), you can use
+  [various environment
+  variables](https://proj.org/usage/environmentvars.html){:.extlink}
+  to control the behaviour of the library.
+
+You can access environment variables from Lua config scripts with
+`os.getenv("VAR")`.
+
