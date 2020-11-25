@@ -20,10 +20,10 @@ always use the latest released version, currently
 ## <img alt="" src="{% link img/linux.png %}"/>Installing on Linux
 
 There are [packages of
-osm2pgsql](https://repology.org/project/osm2pgsql){:.extlink} available for
-many different Linux distributions. Some of them are quite old, though, and
-have known bugs. If the current release is not available for your distribution,
-consider installing the current release from source.
+osm2pgsql](https://repology.org/project/osm2pgsql/versions){:.extlink}
+available for many different Linux distributions. Some of them are quite old,
+though, and have known bugs. If the current release is not available for your
+distribution, consider installing the current release from source.
 
 ### Installing on Debian/Ubuntu
 

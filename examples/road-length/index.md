@@ -13,7 +13,7 @@ by classification for a municipality shows the concepts.
 To start with, we'll download the data for the region as an [extract from
 Geofabrik](https://download.geofabrik.de/){:.extlink}. We could import all of
 that data, but that's going to take a while. It is better to filter out only
-what we need using [Osmium](https://osmcode.org/osmium-tool){:.extlink}. In
+what we need using [Osmium](https://osmcode.org/osmium-tool/){:.extlink}. In
 this case this are the highway geometries and the administrative boundaries.
 
 ```sh

@@ -144,7 +144,7 @@ information on coastline processing.
 ### Use of Hstore
 
 Hstore is a [PostgreSQL data
-type](http://www.postgresql.org/docs/current/static/hstore.html){:.extlink}
+type](https://www.postgresql.org/docs/current/static/hstore.html){:.extlink}
 that allows storing arbitrary key-value pairs in a single column. It needs to
 be installed on the database with `CREATE EXTENSION hstore;`
 
@@ -200,8 +200,8 @@ case.
 
 ### Lua Tag Transformations
 
-The pgsql output supports [Lua](https://lua.org/){:.extlink} scripts to rewrite
-tags before they enter the database. Use the command line option
+The pgsql output supports [Lua](https://www.lua.org/){:.extlink} scripts to
+rewrite tags before they enter the database. Use the command line option
 `--tag-transform-script=SCRIPT` to enable this.
 
 There is inevitably a performance hit with any extra processing. The Lua tag
