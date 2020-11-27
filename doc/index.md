@@ -35,6 +35,8 @@ title: Documentation
 The [osm2pgsql page](https://wiki.openstreetmap.org/wiki/Osm2pgsql){:.extlink}
 on the OSM wiki also contains some more information, some of it outdated.
 
+See a [list of releases]({% link releases/index.md %}).
+
 <section markdown="1">
 
 ## Related Documentation
