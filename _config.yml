@@ -18,8 +18,6 @@ description: >- # this means to ignore newlines until "baseurl:"
   osm2pgsql
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://osm2pgsql.org"
-osm2pgsql:
-    latest_version: 1.3.0
 github:
     repository_url: https://github.com/openstreetmap/osm2pgsql-website
 #

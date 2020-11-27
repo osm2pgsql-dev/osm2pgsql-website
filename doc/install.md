@@ -5,7 +5,7 @@ title: Installation
 
 Osm2pgsql works on Linux, Windows, macOS, and other systems. We recommend you
 always use the latest released version, currently
-{{ site.osm2pgsql.latest_version }}.
+{{ site.data.releases | map: "version" | first }}.
 
 <ul>
     <li><a href="#installing-on-linux">Installing on Linux</a></li>
