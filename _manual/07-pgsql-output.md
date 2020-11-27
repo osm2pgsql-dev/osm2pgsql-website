@@ -144,7 +144,7 @@ information on coastline processing.
 ### Use of Hstore
 
 Hstore is a [PostgreSQL data
-type](https://www.postgresql.org/docs/current/static/hstore.html){:.extlink}
+type](https://www.postgresql.org/docs/current/hstore.html){:.extlink}
 that allows storing arbitrary key-value pairs in a single column. It needs to
 be installed on the database with `CREATE EXTENSION hstore;`
 
