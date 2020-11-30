@@ -31,8 +31,8 @@ osm2pgsql OSMFILE
 
 In case the system doesn't have much main memory, you can add the `-s, --slim`
 and `--drop` options. In this case less main memory is used, instead more data
-is stored in the database. This makes the import much slower, though. See
-chapter XXX for details on these options.
+is stored in the database. This makes the import much slower, though. See the
+chapter [Middle](#middle) for details on these options.
 
 #### Import and Update
 
@@ -59,12 +59,18 @@ osm2pgsql -a -s OSMFILE
 osm2pgsql --append --slim OSMFILE
 ```
 
-This approach needs more disk space for your database, because all the
-information necessary for the updates must be stored somewhere.
+This approach needs more disk space for your database than the "Import Only"
+approach, because all the information necessary for the updates must be stored
+somewhere.
+
+Usually you will need to use at least the `-C, --cache` and `--flat-nodes`
+command line options when doing imports and updates. See the chapter
+[Middle](#middle) for details.
 
 #### Getting Help or Version
 
-To get help or the program version run with the following options:
+To get help or the program version call osm2pgsql with one of the following
+options:
 
 {% include_relative options/help-version.md %}
 
@@ -114,13 +120,26 @@ steps in more detail.
 
 ### The Input
 
-Depending on the operational mode your input file is either
+Depending on the operational mode your input files are either
 
-* an OSM data file (in *create* mode), or
-* an OSM change file (in *append* mode)
+* OSM data files (in *create* mode), or
+* OSM change files (in *append* mode)
 
 Usually osm2pgsql will autodetect the file format, but see the `-r,
 --input-reader` option below. Osm2pgsql can not work with OSM history files.
+
+OSM data files are almost always sorted, first nodes in order of their ids,
+then ways in order of their ids, then relations in order of their ids. The
+planet files, change files, and usual extracts all follow this convention.
+
+Osm2pgsql can only read OSM files ordered in this way. This allows some
+optimizations in the code which speed up the normal processing.
+
+Older versions of osm2pgsql will sometimes work or appear to work with
+unsorted data, but it is not recommended to rely on this, because the
+processed data might be corrupted. Versions from 1.3.0 warn when you are
+using unsorted data. From version 1.4.0 on, only sorted OSM files are allowed.
+{:.note}
 
 See the [Appendix C](#getting-an-preparing-osm-data) for more information on
 how to get and prepare OSM data for use with osm2pgsql.
@@ -133,6 +152,24 @@ what you expect it to do, especially at the boundaries of the bounding box. If
 you use it, choose a bounding box that is larger than your actual area of
 interest. A better option is to create an extract of the data *before* using
 osm2pgsql. See [Appendix C](#getting-an-preparing-osm-data) for options.
+
+#### Working with Multiple Input Files
+
+Usually you are using osm2pgsql with a single input file.
+
+Do not use osm2pgsql with more than one input file in versions before 1.4.0.
+It might work or it might not.
+{: .note}
+
+*Version >= 1.4.0*{:.version} Osm2pgsql can read multiple input files at once,
+merging the data from the input files ignoring any duplicate data. For this to
+work the input files must all have their data from the same point in time.
+You can use this to import two or more geographical extracts into the same
+database. If the extracts are from different points in time and contain
+different versions of the same object, this will fail!
+
+Do not use multiple change files as input in append mode, [merge and simpligy
+them first](#merging-osm-change-files).
 
 ### The Middle
 
