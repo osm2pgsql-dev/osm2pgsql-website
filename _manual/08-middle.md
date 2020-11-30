@@ -46,6 +46,9 @@ offers significant space savings and speed increases, particularly on
 mechanical drives. The file takes approximately 8 bytes * maximum node ID, or
 more than 50 GiB, regardless of the size of the extract.
 
+If you are using the `--drop` option, the flat node file will be deleted
+after import.
+
 ### Caching
 
 `--cache` specifies how much memory in MB to allocate for caching information.
