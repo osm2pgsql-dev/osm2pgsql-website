@@ -10,7 +10,7 @@ osm2pgsql - Openstreetmap data to PostgreSQL converter
 
 # SYNOPSIS
 
-**osm2pgsql** \[*OPTIONS*\] OSM-FILE
+**osm2pgsql** \[*OPTIONS*\] OSM-FILE...
 
 # DESCRIPTION
 
@@ -18,22 +18,26 @@ osm2pgsql - Openstreetmap data to PostgreSQL converter
 is an essential part of many rendering toolchains, the Nominatim geocoder and
 other applications processing OSM data.
 
-OSM planet snapshots can be downloaded from https://planet.openstreetmap.org/.
-Data extracts for various countries or other areas are also available, see
-https://wiki.openstreetmap.org/wiki/Planet.osm.
+**osm2pgsql** can run in either "create" mode (the default) or in "append" mode
+(option **-a, \--append**).
 
-When operating in "slim" mode (and on a database created in "slim" mode!),
-**osm2pgsql** can also process OSM change files (osc files), thereby bringing
-an existing database up to date.
+In "create" mode osm2pgsql will create the database tables required by the
+configuration and import the OSM file(s) specified on the command line into
+those tables. Note that you also have to use the **-s, \--slim** option if you
+want your database to be updateable.
 
-See the [manual](https://osm2pgsql.org/doc/manual.html) for more information.
+In "append" mode osm2pgsql will update the database tables with the data from
+OSM change files specified on the command line.
+
+This man page can only cover some of the basics and describe the command line
+options. See the [Osm2pgsql Manual](https://osm2pgsql.org/doc/manual.html) for
+more information.
 
 # OPTIONS
 
 This program follows the usual GNU command line syntax, with long options
-starting with two dashes (`--`).
-
-Mandatory arguments to long options are mandatory for short options too.
+starting with two dashes (`--`). Mandatory arguments to long options are
+mandatory for short options too.
 
 # MAIN OPTIONS
 
@@ -52,6 +56,26 @@ Mandatory arguments to long options are mandatory for short options too.
 
 -V, \--version
 :   Print osm2pgsql version.
+
+# LOGGING OPTIONS
+
+\--log-level=LEVEL
+:   Set log level ('debug', 'info' (default), 'warn', or 'error').
+
+\--log-progress=VALUE
+:   Enable (`true`) or disable (`false`) progress logging. The default is
+    `auto` which will enable progress logging on the console and disable it
+    if the output is redirected to a file.
+
+\--log-sql
+:   Enable logging of SQL commands for debugging.
+
+\--log-sql-data
+:   Enable logging of all data added to the database. This will write out
+    a huge amount of data! For debugging.
+
+-v, \--verbose
+:   Same as `--log-level=debug`.
 
 # DATABASE OPTIONS
 
@@ -88,8 +112,8 @@ Mandatory arguments to long options are mandatory for short options too.
 # MIDDLE OPTIONS
 
 -i, \--tablespace-index=TABLESPC
-:   Store all indexes in a separate PostgreSQL tablespace named by this parameter.
-    This allows one to e.g. store the indexes on faster storage like SSDs.
+:   Store all indexes in the PostgreSQL tablespace `TABLESPC`. This option
+    also affects the tables created by the pgsql output.
 
 \--tablespace-slim-data=TABLESPC
 :   Store the slim mode tables in the given tablespace.
@@ -157,11 +181,11 @@ Mandatory arguments to long options are mandatory for short options too.
     single large file. This mode is only recommended for full planet imports
     as it doesn't work well with small imports. The default is disabled.
 
---middle-schema=SCHEMA
+\--middle-schema=SCHEMA
 :   Use PostgreSQL schema SCHEMA for all tables, indexes, and functions in
     the middle (default is no schema, i.e. the `public` schema is used).
 
---middle-way-node-index-id-shift=SHIFT
+\--middle-way-node-index-id-shift=SHIFT
 :   Set ID shift for way node bucket index in middle. Experts only. See
     documentation for details.
 
@@ -185,21 +209,22 @@ Mandatory arguments to long options are mandatory for short options too.
 
 # PGSQL OUTPUT OPTIONS
 
--i, \--tablespace-index=TABLESPACENAME
-:   Store all indexes in a separate PostgreSQL tablespace named by this parameter.
-    This allows one to e.g. store the indexes on faster storage like SSDs.
+-i, \--tablespace-index=TABLESPC
+:   Store all indexes in the PostgreSQL tablespace `TABLESPC`. This option
+    also affects the middle tables.
 
-\--tablespace-main-data=TABLESPACENAME
-:   Store the data tables (non slim) in the given tablespace.
+\--tablespace-main-data=TABLESPC
+:   Store the data tables in the PostgreSQL tablespace `TABLESPC`.
 
-\--tablespace-main-index=TABLESPACENAME
-:   Store the indexes of the main tables (non slim) in the given tablespace.
+\--tablespace-main-index=TABLESPC
+:   Store the indexes in the PostgreSQL tablespace `TABLESPC`.
 
 \--latlong
-:   Store data in degrees of latitude & longitude.
+:   Store coordinates in degrees of latitude & longitude.
 
 -m, \--merc
-:   Store data in Spherical Mercator (Web Mercator, EPSG:3857) (the default).
+:   Store coordinates in Spherical Mercator (Web Mercator, EPSG:3857)
+    (the default).
 
 -E, \--proj=SRID
 :   Use projection EPSG:SRID.
@@ -209,26 +234,27 @@ Mandatory arguments to long options are mandatory for short options too.
     middle as well as the pgsql output table names.
 
 \--tag-transform-script=SCRIPT
-:   Specify a lua script to handle tag filtering and normalisation. The script
+:   Specify a Lua script to handle tag filtering and normalisation. The script
     contains callback functions for nodes, ways and relations, which each take
     a set of tags and returns a transformed, filtered set of tags which are
     then written to the database.
 
 -x, \--extra-attributes
-:   Include attributes for each object in the database.
-    This includes the username, userid, timestamp and version.
-    Note: this option also requires additional entries in your style file.
+:   Include attributes (user name, user id, changeset id, timestamp and version).
+    This also requires additional entries in your style file.
 
 -k, \--hstore
-:   Add tags without column to an additional hstore (key/value) column to database tables.
+:   Add tags without column to an additional hstore (key/value) column in
+    the database tables.
 
 -j, \--hstore-all
-:   Add all tags to an additional hstore (key/value) column in database tables.
+:   Add all tags to an additional hstore (key/value) column in the database
+    tables.
 
--z, \--hstore-column=KEY_PREFIX
-:   Add an additional hstore (key/value) column containing all tags
-    that start with the specified string, eg \--hstore-column "name:" will
-    produce an extra hstore column that contains all `name:xx` tags.
+-z, \--hstore-column=PREFIX
+:   Add an additional hstore (key/value) column named `PREFIX` containing all
+    tags that have a key starting with `PREFIX`, eg `\--hstore-column "name:"`
+    will produce an extra hstore column that contains all `name:xx` tags.
 
 \--hstore-match-only
 :   Only keep objects that have a value in at least one of the non-hstore
@@ -238,9 +264,10 @@ Mandatory arguments to long options are mandatory for short options too.
 :   Create indexes for all hstore columns after import.
 
 -G, \--multi-geometry
-:   Normally osm2pgsql splits multi-part geometries into separate database rows per part.
-    A single OSM id can therefore have several rows. With this option, osm2pgsql instead
-    generates multi-geometry features in the PostgreSQL tables.
+:   Normally osm2pgsql splits multi-part geometries into separate database rows
+    per part. A single OSM object can therefore use several rows in the output
+    tables. With this option, osm2pgsql instead generates multi-geometry
+    features in the PostgreSQL tables.
 
 -K, \--keep-coastlines
 :   Keep coastline data rather than filtering it out. By default objects
@@ -249,9 +276,10 @@ Mandatory arguments to long options are mandatory for short options too.
     will be used for the coastline data.
 
 \--reproject-area
-:   Compute area column using spherical mercator coordinates.
+:   Compute area column using spherical mercator coordinates even if a
+    different projection is used for the geometries.
 
---output-pgsql-schema=SCHEMA
+\--output-pgsql-schema=SCHEMA
 :   Use PostgreSQL schema SCHEMA for all tables, indexes, and functions in
     the pgsql and multi outputs (default is no schema, i.e. the `public` schema
     is used).
@@ -275,6 +303,10 @@ Mandatory arguments to long options are mandatory for short options too.
 
 \--number-processes=THREADS
 :   Specifies the number of parallel threads used for certain operations.
+
+\--with-forward-dependencies=BOOL
+:   Propagate changes from nodes to ways and node/way members to relations
+    (Default: `true`).
 
 # SEE ALSO
 
