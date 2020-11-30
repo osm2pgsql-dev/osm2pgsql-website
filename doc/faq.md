@@ -12,9 +12,8 @@ title: Frequently Asked Questions (FAQ)
 We are trying hard to make newer versions of osm2pgsql backwards compatible
 with older versions. Usually, you just have to upgrade the osm2pgsql executable
 and you are done. But there are cases where you have to wipe your database and
-start from scratch. See the [release
-notes](https://github.com/openstreetmap/osm2pgsql/releases){:.extlink} and the
-[Upgrading appendix in the manual](/doc/manual.html#upgrading) for details.
+start from scratch. See the [release notes]({% link releases/index.md %}) and
+the [Upgrading appendix in the manual](/doc/manual.html#upgrading) for details.
 
 </section>
 <section markdown="1">

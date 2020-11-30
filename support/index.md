@@ -11,12 +11,11 @@ often in their free time.
 If you are having trouble with osm2pgsql and need help, make sure to
 
 * first read the [FAQ]({% link doc/faq.md %})
-* update to the current release of osm2pgsql before asking questions. Many bugs
-  have already been fixed in newer versions.
+* update to the [current release]({% link releases/index.md %}) of osm2pgsql
+  before asking questions. Many bugs have already been fixed in newer versions.
 
-See the
-[release notes](https://github.com/openstreetmap/osm2pgsql/releases) and the
-[Upgrading appendix in the manual](/doc/manual.html#upgrading) for details.
+See the [release notes]({% link releases/index.md %}) and the [Upgrading
+appendix in the manual](/doc/manual.html#upgrading) for details.
 </div>
 
 <section markdown="1">

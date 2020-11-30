@@ -26,9 +26,10 @@ Some knowledge of the [Lua language](https://www.lua.org/){:.extlink} is also
 useful.
 
 This manual always documents the current version of osm2pgsql. If same
-information is only valid in certain versions, the section will have a note
-like this: *Version >= 1.4.0*{: .version}
+information is only valid in [certain versions]({% link releases/index.md %}),
+the section will have a note like this: *Version >= 1.4.0*{: .version}
 
-It is recommended that you always use the newest released version of osm2pgsql.
-Earlier versions sometimes contain bugs that have long since been fixed.
+It is recommended that you always use the newest [released version]({% link
+releases/index.md %}) of osm2pgsql. Earlier versions sometimes contain bugs
+that have long since been fixed.
 
