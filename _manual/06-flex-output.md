@@ -16,7 +16,8 @@ and how. It is configured through a Lua file which
 * defines the structure of the output tables and
 * defines functions to map the OSM data to the database data format
 
-Use the `-s, --style=FILE` option to specify the name of the Lua file.
+Use the `-s, --style=FILE` option to specify the name of the Lua file
+along with the `-O, --output=flex` option to specify the use of the flex output.
 
 Unlike the pgsql output, the flex output doesn't use command line options
 for configuration, but the Lua config file only.
