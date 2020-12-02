@@ -92,9 +92,8 @@ for a list of dependencies and build instructions.
 
 ### Using prebuild binaries
 
-You can [download prebuild
-binaries](https://lonvia.dev.openstreetmap.org/osm2pgsql-winbuild/releases/).
-Unpack the ZIP file and you can immediately use osm2pgsql.
+You can [download prebuild binaries](/download/windows/). Unpack the ZIP file
+and you can immediately use osm2pgsql.
 
 ### Compiling from source
 
