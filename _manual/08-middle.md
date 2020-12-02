@@ -66,13 +66,15 @@ is not enough RAM to fit most of the cache.
 *Version >= 1.4.0*{: .version} This is only available from osm2pgsql version
 1.4.0!
 
-The default is still to create the old index for now.
+The default is still to create the old index for now until we have some more
+experience with it.
 {: .note}
 
 Osm2pgsql can use an index for way node lookups in slim mode that needs a lot
 less disk space than earlier versions did. For a planet the savings can be
-about 200 GB! Lookup times are slightly slower, but this shouldn't be an issue
-for most people.
+about 200 GB! Because the index is so much smaller, imports are faster, too.
+Lookup times are slightly slower, but this shouldn't be an issue for most
+people.
 
 *If you are not using slim mode and/or not doing updates of your database, this
 does not apply to you.*
@@ -88,8 +90,8 @@ correctly any more.
 
 #### Update for Most Users
 
-This does not work yet. Currently the default is still to create the old type
-of index.
+In 1.4.0 this does not work yet. Currently the default is still to create the
+old type of index.
 {: .note}
 
 If your database was created with an older version of osm2pgsql you might want
@@ -159,7 +161,7 @@ the considerable slowdown.
 
 You can set the shift with the command line option
 `--middle-way-node-index-id-shift`. Values between about 3 and 6 might make
-sense.
+sense, from some tests it looks like 5 is a good value.
 
 To completely disable the bucket index and create an index compatible with
 earlier versions of osm2pgsql, use `--middle-way-node-index-id-shift=0`.
