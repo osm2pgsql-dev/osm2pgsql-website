@@ -110,6 +110,7 @@ var layer =
         declutter: true,
         source: new ol.source.VectorTile({
             attributions: ol.source.OSM.ATTRIBUTION,
+            attributionsCollapsible: false,
             format: new ol.format.MVT(),
             url: 'tiles/{z}/{x}/{y}.pbf',
         }),
