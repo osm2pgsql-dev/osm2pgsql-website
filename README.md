@@ -11,9 +11,10 @@ To run it locally, you need Ruby. Then check out the repository and install
 Jekyll:
 
 ```
-git checkout https://github.com/openstreetmap/osm2pgsql-website
+git clone https://github.com/openstreetmap/osm2pgsql-website
 cd osm2pgsql-website
 gem install bundler jekyll
+touch contact.md
 bundle exec jekyll serve
 ```
 
