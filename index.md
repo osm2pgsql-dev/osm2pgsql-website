@@ -18,9 +18,10 @@ title: Home
 <section markdown="1">
 ## About
 
-Osm2pgsql imports [OpenStreetMap](https://www.openstreetmap.org/) (OSM) data
-into a PostgreSQL/PostGIS database. It is an essential part of many rendering
-toolchains, the Nominatim geocoder and other applications processing OSM data.
+Osm2pgsql imports [OpenStreetMap](https://www.openstreetmap.org/){:.extlink}
+(OSM) data into a PostgreSQL/PostGIS database. It is an essential part of many
+rendering toolchains, the Nominatim geocoder and other applications processing
+OSM data.
 
 </section>
 
