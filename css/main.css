@@ -190,9 +190,8 @@ a#menu-code {
 
 @media screen and (max-width: 999px) {
     nav {
-        width: 400px;
-        height: 400px;
-        overflow: hidden;
+        width: 60px;
+        height: 40px;
         right: 0;
     }
 
@@ -200,7 +199,7 @@ a#menu-code {
         display: block;
         position: absolute;
         top: 9px;
-        right: 14px;
+        right: 23px;
         z-index: 1;
     }
 
@@ -236,9 +235,6 @@ a#menu-code {
         border-radius: 3px;
         z-index: 1;
         transform-origin: 4px 0;
-        transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0),
-                    background 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0),
-                    opacity 0.55s ease;
     }
 
     #menu-toggle span:first-child {
@@ -264,6 +260,7 @@ a#menu-code {
 
     #menu {
         position: absolute;
+        display: none;
         width: 200px;
         margin: -100px 0 0 50px;
         padding: 110px 20px 20px 20px;
@@ -272,7 +269,6 @@ a#menu-code {
         -webkit-font-smoothing: antialiased;
         transform: none;
         transform-origin: 0% 0%;
-        transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0);
     }
 
     #menu li {
@@ -281,6 +277,7 @@ a#menu-code {
     }
 
     #menu-toggle input:checked ~ ul {
+        display: block !important;
         transform: translate(-100%, 0);
     }
 
