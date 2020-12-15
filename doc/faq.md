@@ -47,6 +47,10 @@ many hours or even days. There are many reasons for this:
 * You have to tune your PostgreSQL config *before* using osm2pgsql. The
   default settings for PostgreSQL on most systems are totally wrong for a
   large database. Don't forget to restart the database after tuning.
+* The command line options chosen can have a large impact on performance.
+
+All that being said, on a reasonably modern machine with 64GB RAM and SSDs you
+should be able to import a planet file in something like half a day.
 
 ### An index is not being built and there is no error message.
 
@@ -96,6 +100,27 @@ parameter to change this behavior if you want coastlines in your database.
 
 See the [Coastline Processing section in the
 manual](/doc/manual.html#coastline-processing)
+
+### An OSM object is missing in my database
+
+There are many reasons why an OSM object might not end up in the database.
+First make sure it is actually in the input data. For ways and relations make
+sure the nodes or objects they reference are in the input data. (You can use
+[`osmium
+check-refs`](https://docs.osmcode.org/osmium/latest/osmium-check-refs.html){:.extlink} for
+this.)
+
+If the data is there it can still mean it is invalid in some way. Osm2pgsql has
+to build the geometry and if this fails, the object is silently ignored. This
+most often happens for [multipolygon
+relations](https://wiki.openstreetmap.org/wiki/Relation:multipolygon){:.extlink}
+but can happen for other data, too.
+
+There are several [quality assurance
+tools](https://wiki.openstreetmap.org/wiki/Quality_assurance){:.extlink} out
+there that can help you to diagnose issues like this. The [OSM Inspector
+"Areas" view](https://tools.geofabrik.de/osmi/?view=areas){:.extlink} helps
+specifically with finding multipolygon problems.
 
 </section>
 <section markdown="1">
