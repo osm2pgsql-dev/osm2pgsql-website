@@ -5,7 +5,7 @@ title: Road Map
 
 # Road Map for Osm2pgsql
 
-Current as of 2020-11-04.
+Current as of 2020-12-20.
 
 This document is a kind of road map for osm2pgsql development. It's not to be
 understood as a definite "this is what we'll do" document, but as a rough
@@ -66,11 +66,9 @@ Issues:
 
 * [159](https://github.com/openstreetmap/osm2pgsql/issues/159)
 * [775](https://github.com/openstreetmap/osm2pgsql/issues/775)
-* [922](https://github.com/openstreetmap/osm2pgsql/issues/922)
 * [965](https://github.com/openstreetmap/osm2pgsql/issues/965)
 * [1010](https://github.com/openstreetmap/osm2pgsql/issues/1010)
 * [1028](https://github.com/openstreetmap/osm2pgsql/issues/1028)
-* [1167](https://github.com/openstreetmap/osm2pgsql/issues/1167)
 
 ### Code Cleanup and Modernization
 
@@ -89,15 +87,9 @@ that particular piece of code is touched anyway.
 ### Documentation
 
 The documentation for osm2pgsql has recently moved to a new website at
-osm2pgsql.org. Lots of examples have been put on the website, too.
-There is still a lot of work to be done to complete the docs. The [the
-information from the wiki](https://wiki.openstreetmap.org/wiki/Osm2pgsql) needs
-to be integrated. Some docs are on
-[switch2osm.org](https://switch2osm.org/serving-tiles/manually-building-a-tile-server-20-04-lts/).
-
-Issues:
-
-* [1301](https://github.com/openstreetmap/osm2pgsql/issues/1301)
+osm2pgsql.org. Lots of examples have been put on the website, too. There is
+still work to be done to complete the docs. This can be done "on the side"
+whenever it makes sense.
 
 ### Configuration / Command Line
 
@@ -115,27 +107,19 @@ Issues:
 
 * [142](https://github.com/openstreetmap/osm2pgsql/issues/142)
 * [272](https://github.com/openstreetmap/osm2pgsql/issues/272)
-* [1079](https://github.com/openstreetmap/osm2pgsql/issues/1079)
 
 ### Progress Output and Logging
 
 While running osm2pgsql produces a lot of output telling the user what's going
-on. But the output is inconsistent, sometimes osm2pgsql goes for a long time
-without any output (especially when building indexes), sometimes less important
-information fills the screen drowning out more important information.
-
-We need to evaluate what the important information is and how osm2pgsql should
-look to the user. And then we need to implement this consistently throughout
-the whole program using something like debug/info/warning/error levels for
-messages.
+on. But the output is sometimes inconsistent, sometimes osm2pgsql goes for a
+long time without any output (especially when building indexes). With the
+better logging code in 1.4.0 the situation is now much improved, but there
+are still places where it can be done better.
 
 Issues:
 
-* [202](https://github.com/openstreetmap/osm2pgsql/issues/202)
 * [207](https://github.com/openstreetmap/osm2pgsql/issues/207)
 * [577](https://github.com/openstreetmap/osm2pgsql/issues/577)
-* [591](https://github.com/openstreetmap/osm2pgsql/issues/591)
-* [1246](https://github.com/openstreetmap/osm2pgsql/issues/1246)
 
 ### Object Store / Middle / Flat Node Store
 
@@ -167,6 +151,10 @@ mechanism in a unified way.
 A lot of the other topics mentioned below rely on a flexible and performant
 middle.
 
+As a first step in this we are cleaning up the code that's calling the middle,
+the middle API, and existing middle code. And we are trying out some new middle
+implementations.
+
 As a possible future step we might want to look into (optionally) removing the
 need for PostgreSQL for the updateable object store. Specialized file-based
 data storage could improve performance considerably and reduce disk comsumption
@@ -175,7 +163,6 @@ at the same time.
 Issues:
 
 * [22](https://github.com/openstreetmap/osm2pgsql/issues/22)
-* [39](https://github.com/openstreetmap/osm2pgsql/issues/39)
 * [193](https://github.com/openstreetmap/osm2pgsql/issues/193)
 * [247](https://github.com/openstreetmap/osm2pgsql/issues/247)
 * [377](https://github.com/openstreetmap/osm2pgsql/issues/377)
@@ -198,14 +185,13 @@ Once we get some feedback from users we can finalize the API, remove the
 Long term the flex output should replace all other outputs. Users should
 all be able to switch to the flex output without missing any features they
 had in any of the other outputs. Whether we'll actually remove the *pgsql*
-and *gazeteer* outputs is not decided yet, the *multi* output is already
-marked as deprecated and will be removed in a future version.
+and *gazetteer* outputs is not decided yet, the *multi* output is already
+marked as deprecated and will be removed in the next version.
 
 Some new features might only be available in the flex output.
 
 * [268](https://github.com/openstreetmap/osm2pgsql/issues/268)
 * [328](https://github.com/openstreetmap/osm2pgsql/issues/328)
-* [1079](https://github.com/openstreetmap/osm2pgsql/issues/1079)
 * [1086](https://github.com/openstreetmap/osm2pgsql/issues/1086)
 * [1130](https://github.com/openstreetmap/osm2pgsql/issues/1130)
 * [1164](https://github.com/openstreetmap/osm2pgsql/issues/1164)
@@ -266,7 +252,6 @@ aiding the style writers with testing and debugging their Lua config files.
 Issues:
 
 * [1130](https://github.com/openstreetmap/osm2pgsql/issues/1130)
-* [PR 1131](https://github.com/openstreetmap/osm2pgsql/pull/1131)
 
 ### PostgreSQL and PostGIS Features
 
@@ -282,7 +267,6 @@ longer than probably needed. There is some room for improvement there.
 Issues:
 
 * [37](https://github.com/openstreetmap/osm2pgsql/issues/37)
-* [768](https://github.com/openstreetmap/osm2pgsql/issues/768)
 * [796](https://github.com/openstreetmap/osm2pgsql/issues/796)
 * [1085](https://github.com/openstreetmap/osm2pgsql/issues/1085)
 
