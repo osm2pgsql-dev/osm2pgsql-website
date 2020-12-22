@@ -8,10 +8,10 @@ title: Home
     <h2><a href="{% link news/index.md %}">News</a></h2>
     <a id="news-rss" href="{% link news/feed.xml %}"><img src="{% link img/feed.svg %}" width="16" height="16" alt="Atom Feed"/></a>
 <table>
-{% for post in site.posts %}
+{%- for post in site.posts %}
     <tr><td>{{ post.date | date_to_string }}:</td>
         <td><a href="{{ post.url }}">{{ post.title }}</a></td></tr>
-{% endfor %}
+{%- endfor %}
 </table>
 </section>
 
@@ -92,4 +92,3 @@ following companies and organizations for their support:
 {% include sponsors.md %}
 
 </section>
-
