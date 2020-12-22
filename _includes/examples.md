@@ -11,7 +11,7 @@ These examples show some use cases of osm2pgsql and highlight some features.
 </a>
 
 <a class="example" href="{% link examples/vector-tiles/index.md %}">
-    <img alt="" src="{% link examples/vector-tiles/streets-of-brussels.png %}"/>
+    <img alt="" src="{% link examples/vector-tiles/streets-of-brussels-small.png %}"/>
     <h2>Vector Tiles</h2>
     <p>Osm2pgsql imports OSM data using a very flexible configuration making
     it easy to generate any kind of vector tiles.</p>
@@ -25,14 +25,14 @@ These examples show some use cases of osm2pgsql and highlight some features.
 </a>
 
 <a class="example" href="{% link examples/buildings/index.md %}">
-    <img alt="" src="{% link examples/buildings/brasilia2.png %}"/>
+    <img alt="" src="{% link examples/buildings/brasilia2-small.png %}"/>
     <h2>Building Map</h2>
     <p>Need only a few feature types? Import only what you need for a quick
     map.</p>
 </a>
 
 <a class="example" href="{% link examples/antarctica/index.md %}">
-    <img alt="" src="{% link examples/antarctica/antarctica1.png %}"/>
+    <img alt="" src="{% link examples/antarctica/antarctica1-small.png %}"/>
     <h2>Antarctica Map</h2>
     <p>Osm2pgsql can use many different projections to fit the area covered
     and your use case.</p>
