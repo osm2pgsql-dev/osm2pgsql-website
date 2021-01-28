@@ -86,15 +86,14 @@ creating the database for osm2pgsql with `createdb`.
 ### Tuning the PostgreSQL Server
 
 Usual installs of the PostgreSQL server come with a default configuration
-that isn't well tuned for large databases. You should change these
-settings in `postgresql.conf` and restart PostgreSQL before running osm2pgsql, otherwise your system
-will be much slower than necessary.
+that is not well tuned for large databases. You should change these
+settings in `postgresql.conf` and restart PostgreSQL before running osm2pgsql,
+otherwise your system will be much slower than necessary.
 
-The
-values in the second column are suggestions and good starting point for a
-typical setup, you might have to adjust them for your use case. The settings
-are geared towards a system with 64GB RAM and a fast SSD. The
-Default Value in the third column is the default for PostgreSQL 13.
+The following settings are geared towards a system with 64GB RAM and a fast SSD.
+The values in the second column are suggestions to provide a good
+starting point for a typical setup, you might have to adjust them for your use case.
+The value in the third column is the default set by PostgreSQL 13.
 
 | Config Option                | Proposed Value  | Pg 13 Default Value | Remark |
 | ---------------------------- | ------ | ------ | --- |
@@ -103,16 +102,18 @@ Default Value in the third column is the default for PostgreSQL 13.
 | maintenance_work_mem         | 10GB   | 64MB | Improves `CREATE INDEX` |
 | autovacuum_work_mem          | 2GB    | -1 | -1 uses `maintenance_work_mem` |
 | work_mem                     | 50MB   | 4MB | |
-| max_wal_size                 | 10GB    |1GB | PostgreSQL > 9.4 only.  For PostgreSQL <= 9.4 set checkpoint_segments = 100 or higher. |
-| checkpoint_timeout           | 60min  | 5min | Increasing this value increases time to restore from PITR |
-| checkpoint_completion_target | 0.9    | 0.5 | Spreads out checkpoint I/O reducing spikes of disk activity |
+| max_wal_size                 | 10GB    |1GB | PostgreSQL > 9.4 only.  For PostgreSQL <= 9.4 set `checkpoint_segments = 100` or higher. |
+| checkpoint_timeout           | 60min  | 5min | Increasing this value reduce time-based checkpoints and increases time to restore from PITR |
+| checkpoint_completion_target | 0.9    | 0.5 | Spreads out checkpoint I/O of more of the `checkpoint_timeout` time, reducing spikes of disk activity |
 | random_page_cost | 4 | 2 | Assuming fast SSDs |
+| wal_level					   | minimal | replica | Reduces WAL activity if replication is not required during data load.  Must also set `max_wal_senders=0`. |
+| max_wal_senders | 0 | 10 | See `wal_level` |
 {: .desc}
 
-A higher value for `max_wal_size` and `checkpoint_timeout` means that PostgreSQL needs to run
-checkpoints less often but it does require the additional space on your disk.
-In comparison to the size of the PBF and data in PostGIS this is typically a
-non-issue.
+Increasing values for `max_wal_size` and `checkpoint_timeout` means that PostgreSQL needs to run
+checkpoints less often but it can require additional space on your disk and increases time
+required for Point in Time Recovery (PITR) restores.  Monitor the Postgres logs for
+warnings indicating checkpoints are occuring too frequently: `HINT:  Consider increasing the configuration parameter "max_wal_size".`
 
 Autovacuum must not be switched off because it ensures that the tables are
 frequently analysed. If your machine has very little memory, you might consider
@@ -120,28 +121,29 @@ setting `autovacuum_max_workers = 1` and reduce `autovacuum_work_mem` even
 further. This will reduce the amount of memory that autovacuum takes away from
 the import process.
 
+For additional details see the [Resource Consumption section in the Server
+Configuration chapter](https://www.postgresql.org/docs/current/runtime-config-resource.html){:.extlink}
+and [Populating a Database in the Performance Tips chapter](
+https://www.postgresql.org/docs/current/populate.html){:.extlink}
+in the PostgreSQL documentation.
+
 ### Expert tuning
 
-The suggestions in this section are considered "Expert" options and
+The suggestions in this section are *potentially dangerous* and
 are not suitable for all environments.
-Some of these settings can cause crashes, data loss and/or corruption.  Corruption can lead to a "bricked" instance affecting all
-databases in the instance.
-
+These settings can cause crashes, data loss and/or corruption.  Corruption in a Postgres
+instance can lead to a "bricked" instance affecting all databases in the instance.
 
 | Config Option                | Proposed Value  | Pg 13 Default Value | Remark |
 | ---------------------------- | ------ | ------ | --- |
-| wal_level					   | minimal | replica | Reduces WAL activity if replication is not required during data load.  Must set `max_wal_senders=0` |
-| max_wal_senders | 0 | 10 | See `wal_level` |
 | work_mem                     | 200MB  | 4MB | Systems with multiple users and complex queries could exhaust available RAM. |
-| synchronous_commit           | off    | on | Warning: Risks data loss.  Reset after import. |
-| full_page_writes             | off    | on |  Warning: Risks data corruption.  Set back to on after import. |
-| fsync                        | off    | on |  Warning: Risks data corruption.  Set back to on after import. |
+| synchronous_commit           | off    | on | Warning: Risks data loss.  Set back to `on` after import. |
+| full_page_writes             | off    | on |  Warning: Risks data corruption.  Set back to `on` after import. |
+| fsync                        | off    | on |  Warning: Risks data corruption.  Set back to `on` after import. |
 {: .desc}
 
 
-For details see also the [Resource Consumption section in the Server
-Configuration chapter](https://www.postgresql.org/docs/current/runtime-config-resource.html){:.extlink}
-in the PostgreSQL documentation. Some information is also on the PostgreSQL
+Additional information is on the PostgreSQL
 wiki: [Tuning Your PostgreSQL
 Server](https://wiki.postgresql.org/wiki/Tuning_Your_PostgreSQL_Server){:.extlink}.
 The section titled `synchronous_commit` contains important information to the `synchronous_commit` and `fsync` settings.
