@@ -86,31 +86,33 @@ creating the database for osm2pgsql with `createdb`.
 ### Tuning the PostgreSQL Server
 
 Usual installs of the PostgreSQL server come with a default configuration
-that isn't well tuned for large databases. You **will** have to change those
-settings and restart PostgreSQL before running osm2pgsql, otherwise your system
-will be much slower than necessary.
+that is not well tuned for large databases. You should change these
+settings in `postgresql.conf` and restart PostgreSQL before running osm2pgsql,
+otherwise your system will be much slower than necessary.
 
-You should tune the following parameters in your `postgresql.conf` file. The
-values in the second column are suggestions and good starting point for a
-typical setup, you might have to adjust them for your use case. The settings
-are somewhat geared towards a system with 64GB RAM and a fast SSD.
+The following settings are geared towards a system with 64GB RAM and a fast SSD.
+The values in the second column are suggestions to provide a good
+starting point for a typical setup, you might have to adjust them for your use case.
+The value in the third column is the default set by PostgreSQL 13.
 
-| Config Option                | Proposed Value  | Remark |
-| ---------------------------- | ------ | --- |
-| shared_buffers               | 2GB    | |
-| maintenance_work_mem         | 10GB   | |
-| autovacuum_work_mem          | 2GB    | |
-| work_mem                     | 50MB   | |
-| effective_cache_size         | 24GB   | |
-| synchronous_commit           | off    | |
-| checkpoint_segments          | 100    | PostgreSQL <= 9.4 only |
-| max_wal_size                 | 1GB    | PostgreSQL > 9.4 only |
-| checkpoint_timeout           | 10min  | |
-| checkpoint_completion_target | 0.9    | |
+| Config Option                | Proposed Value  | Pg 13 Default Value | Remark |
+| ---------------------------- | ------ | ------ | --- |
+| shared_buffers               | 1GB    | 128MB | Lower than typical Postgres recommendations to give osm2pgsql priority to RAM. |
+| maintenance_work_mem         | 10GB   | 64MB | Improves `CREATE INDEX` |
+| autovacuum_work_mem          | 2GB    | -1 | -1 uses `maintenance_work_mem` |
+| work_mem                     | 50MB   | 4MB | |
+| max_wal_size                 | 10GB    |1GB | PostgreSQL > 9.4 only.  For PostgreSQL <= 9.4 set `checkpoint_segments = 100` or higher. |
+| checkpoint_timeout           | 60min  | 5min | Increasing this value reduce time-based checkpoints and increases time to restore from PITR |
+| checkpoint_completion_target | 0.9    | 0.5 | Spreads out checkpoint I/O of more of the `checkpoint_timeout` time, reducing spikes of disk activity |
+| random_page_cost | 4 | 2 | Assuming fast SSDs |
+| wal_level					   | minimal | replica | Reduces WAL activity if replication is not required during data load.  Must also set `max_wal_senders=0`. |
+| max_wal_senders | 0 | 10 | See `wal_level` |
 {: .desc}
 
-A higher number for `max_wal_size` means that PostgreSQL needs to run
-checkpoints less often but it does require the additional space on your disk.
+Increasing values for `max_wal_size` and `checkpoint_timeout` means that PostgreSQL needs to run
+checkpoints less often but it can require additional space on your disk and increases time
+required for Point in Time Recovery (PITR) restores.  Monitor the Postgres logs for
+warnings indicating checkpoints are occuring too frequently: `HINT:  Consider increasing the configuration parameter "max_wal_size".`
 
 Autovacuum must not be switched off because it ensures that the tables are
 frequently analysed. If your machine has very little memory, you might consider
@@ -118,19 +120,27 @@ setting `autovacuum_max_workers = 1` and reduce `autovacuum_work_mem` even
 further. This will reduce the amount of memory that autovacuum takes away from
 the import process.
 
-For the initial import, you should also set:
-
-```
-fsync = off
-full_page_writes = off
-```
-
-Don't forget to reenable them after the initial import or you risk database
-corruption!
-
-For details see also the [Resource Consumption section in the Server
+For additional details see the [Resource Consumption section in the Server
 Configuration chapter](https://www.postgresql.org/docs/current/runtime-config-resource.html){:.extlink}
-in the PostgreSQL documentation. Some information is also on the PostgreSQL
+and [Populating a Database in the Performance Tips chapter](
+https://www.postgresql.org/docs/current/populate.html){:.extlink}
+in the PostgreSQL documentation.
+
+### Expert tuning
+
+The suggestions in this section are *potentially dangerous* and
+are not suitable for all environments.
+These settings can cause crashes and/or corruption.  Corruption in a Postgres
+instance can lead to a "bricked" instance affecting all databases in the instance.
+
+| Config Option                | Proposed Value  | Pg 13 Default Value | Remark |
+| ---------------------------- | ------ | ------ | --- |
+| full_page_writes             | off    | on |  Warning: Risks data corruption.  Set back to `on` after import. |
+| fsync                        | off    | on |  Warning: Risks data corruption.  Set back to `on` after import. |
+{: .desc}
+
+
+Additional information is on the PostgreSQL
 wiki: [Tuning Your PostgreSQL
 Server](https://wiki.postgresql.org/wiki/Tuning_Your_PostgreSQL_Server){:.extlink}.
-
+The section titled `synchronous_commit` contains important information to the `synchronous_commit` and `fsync` settings.
