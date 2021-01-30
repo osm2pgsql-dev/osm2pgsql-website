@@ -97,8 +97,7 @@ The value in the third column is the default set by PostgreSQL 13.
 
 | Config Option                | Proposed Value  | Pg 13 Default Value | Remark |
 | ---------------------------- | ------ | ------ | --- |
-| shared_buffers               | 10GB    | 128MB | Leaves plenty of RAM for Pg work_mems and osm2pgsql cache |
-| effective_cache_size         | 24GB   | 4GB | |
+| shared_buffers               | 1GB    | 128MB | Lower than typical Postgres recommendations to give osm2pgsql priority to RAM. |
 | maintenance_work_mem         | 10GB   | 64MB | Improves `CREATE INDEX` |
 | autovacuum_work_mem          | 2GB    | -1 | -1 uses `maintenance_work_mem` |
 | work_mem                     | 50MB   | 4MB | |
@@ -131,13 +130,11 @@ in the PostgreSQL documentation.
 
 The suggestions in this section are *potentially dangerous* and
 are not suitable for all environments.
-These settings can cause crashes, data loss and/or corruption.  Corruption in a Postgres
+These settings can cause crashes and/or corruption.  Corruption in a Postgres
 instance can lead to a "bricked" instance affecting all databases in the instance.
 
 | Config Option                | Proposed Value  | Pg 13 Default Value | Remark |
 | ---------------------------- | ------ | ------ | --- |
-| work_mem                     | 200MB  | 4MB | Systems with multiple users and complex queries could exhaust available RAM. |
-| synchronous_commit           | off    | on | Warning: Risks data loss.  Set back to `on` after import. |
 | full_page_writes             | off    | on |  Warning: Risks data corruption.  Set back to `on` after import. |
 | fsync                        | off    | on |  Warning: Risks data corruption.  Set back to `on` after import. |
 {: .desc}
