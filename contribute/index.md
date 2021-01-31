@@ -40,6 +40,11 @@ the last long-term release of the major Linux distributions is supported.
 This [handy list of dependencies]({% link contribute/dependencies.md %})
 helps with that.
 
+We strive to support all versions of PostgreSQL and PostGIS that are
+
+* available in the Linux distributions we support, and
+* are supported upstream (i.e. from the PostgreSQL and PostGIS teams).
+
 </section>
 
 <section markdown="1">
