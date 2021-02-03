@@ -30,12 +30,19 @@ title: Documentation
     <p>The FAQ is a list of frequently asked questions and answers.</p>
 </a>
 
+<a class="box box2" href="{% link doc/community.md %}">
+    <h2><img src="{% link img/users.svg %}" alt=""/> Community Docs</h2>
+
+    <p>Blog posts, videos, and more on osm2pgsql from the community.</p>
+</a>
+
+<a class="box box2" href="{% link releases/index.md %}">
+    <h2><img src="{% link img/archive.svg %}" alt=""/> Releases</h2>
+
+    <p>All releases with release notes and download links.</p>
+</a>
+
 </div>
-
-The [osm2pgsql page](https://wiki.openstreetmap.org/wiki/Osm2pgsql){:.extlink}
-on the OSM wiki also contains some more information, some of it outdated.
-
-See a [list of releases]({% link releases/index.md %}).
 
 <section markdown="1">
 
