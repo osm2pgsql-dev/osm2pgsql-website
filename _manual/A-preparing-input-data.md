@@ -58,29 +58,51 @@ If you can't find a suitable extract, see below for creating your own.
 
 ### Updating an Existing Database
 
-There are two steps when updating an existing database.
+The OpenStreetMap database changes all the time. To get these changes into your
+database, you need to download the OSM change files, sometimes called *diffs*
+or *replication diffs*, which contain those changes. They are available from
+[planet.osm.org](https://planet.osm.org/replication/){:.extlink}. Depending on
+how often you want to update your database, you can get minutely, hourly, or
+daily change files.
 
-1. Download a change file ("diff") with recent changes of the OSM data
-2. Load changes into the database
+Some services offering OSM data extracts for download also offer change files
+suitable for updating those extracts.
+[Geofabrik](https://download.geofabrik.de/){:.extlink} has daily change
+files for all its updates. See the extract page for a link to the replication
+URL. (Note that change files go only about 3 months back. Older files are
+deleted.)
+[download.openstreetmap.fr](https://download.openstreetmap.fr/){:.extlink}
+has minutely change files for all its extracts.
 
-The second step is done with osm2pgsql in "append" mode, for the first step
-there are several options. We recommend the
+To keep an osm2pgsql database up to date you need to know the replication
+(base) URL, i.e. the URL of the directory containing a `state.txt` file.
+
+Versions >1.4.1 of osm2pgsql come with a script `scripts/osm2pgsql-replication`
+which is the easiest way to keep an osm2pgsql database up to date. You need
+[PyOsmium](https://osmcode.org/pyosmium/){:.extlink} installed for this to
+work. Run the script regularly (for instance from a cron job or through
+systemd) to automatically download recent changes and import them into your
+database. (But please make sure you don't call this script too often to keep
+the load on the server to a minimum. Checking every minute for a file that
+will only change once a day is not okay!) Call the script with option `--help`
+to get usage information.
+
+If this script is not available in your version of osm2pgsql or you want more
+control over the update process, there are other options. You need a program
+to download the change files and keep track of where you are in the replication
+process. Then you load the changes into the database using osm2pgsql's "append"
+mode.
+
+We recommend the
 [`pyosmium_get_changes.py`](https://docs.osmcode.org/pyosmium/latest/tools_get_changes.html){:.extlink}
 tool from the [PyOsmium](https://osmcode.org/pyosmium/){:.extlink} project.
 With it, downloading all changes since you ran the program the last time is
 just a single command.
 
-OSM change files, sometimes called replication diffs, are available from
-[planet.osm.org](https://planet.osm.org/replication/){:.extlink}.
-Depending on how often you want to update your database, you can get
-minutely, hourly, or daily change files.
-
-Some services offering OSM data extracts for download also offer change files
-suitable for updating those extracts.
-
 When you have changes for many months or years it might make more sense to drop
 your database completely and re-import from a more current OSM data file
 instead of updating the database from change files.
+{:.note}
 
 If you have imported an extract into an osm2pgsql database but there are no
 change files for the area of the extract, you can use still use the extracts
