@@ -105,8 +105,8 @@ instead of updating the database from change files.
 {:.note}
 
 If you have imported an extract into an osm2pgsql database but there are no
-change files for the area of the extract, you can use still use the extracts
-from planet.osm.org to update your database. But, because those extracts
+change files for the area of the extract, you can still use the replication
+diffs from planet.osm.org to update your database. But, because those extracts
 contain data for the whole planet, your database will keep accumulating more
 and more data outside the area of your extract that you don't really need.
 
