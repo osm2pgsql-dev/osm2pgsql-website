@@ -684,22 +684,22 @@ article.manual section.appendix h3::before {
     content: counter(appendix, upper-alpha) '.' counter(section) ' ';
 }
 
-article.manual h2 a,
-article.manual h3 a,
-article.manual h4 a {
+h2 a.heading-link,
+h3 a.heading-link,
+h4 a.heading-link {
     display: none;
 }
 
-article.manual h2 svg,
-article.manual h3 svg,
-article.manual h4 svg {
+h2 a.heading-link svg,
+h3 a.heading-link svg,
+h4 a.heading-link svg {
     width: 1.4ex;
     height: 1.4ex;
 }
 
-article.manual h2:hover a,
-article.manual h3:hover a,
-article.manual h4:hover a {
+h2:hover a.heading-link,
+h3:hover a.heading-link,
+h4:hover a.heading-link {
     display: inline;
     text-decoration: none;
 }

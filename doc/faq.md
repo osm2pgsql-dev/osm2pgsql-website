@@ -167,3 +167,5 @@ with other databases (or can't even do it because we don't have access to those
 databases), we can not guarantee that things will not break in the future.
 
 </section>
+
+{% include heading-links.html %}
