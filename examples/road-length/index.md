@@ -14,7 +14,7 @@ To start with, we'll download the data for the region as an [extract from
 Geofabrik](https://download.geofabrik.de/){:.extlink}. We could import all of
 that data, but that's going to take a while. It is better to filter out only
 what we need using [Osmium](https://osmcode.org/osmium-tool/){:.extlink}. In
-this case this are the highway geometries and the administrative boundaries.
+this case these are the highway geometries and the administrative boundaries.
 
 ```sh
 osmium tags-filter -v -o data.osm.pbf british-columbia-latest.osm.pbf w/highway r/boundary=administrative
@@ -58,7 +58,7 @@ The result is this:
 
 The negative sign tells us that the geometry is from a relation, and checking
 on [the OpenStreetMap
-site](https://www.openstreetmap.org/relation/1377803){:.extlink} confirms which
+site](https://www.openstreetmap.org/relation/1377803){:.extlink} confirms that
 it is.
 
 We want to find all the roads in the city and get the length of the portion in
