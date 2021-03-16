@@ -93,6 +93,10 @@ username) using a unix domain socket. Most usage only requires setting
 
 {% include_relative options/database.md %}
 
+You can also use libpq environment variables to set connection parameters. For
+a full list of available parameters, please consult the
+[PostgreSQL documentation](https://www.postgresql.org/docs/current/libpq-envars.html).
+
 *Version >= 1.4.0*{: .version} Instead of specifying a database name with the
 `-d, --database` option you can also specify a connection string in the form of
 a keyword/value connection string (something like `host=localhost port=5432
