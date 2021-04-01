@@ -95,19 +95,34 @@ SSD. The values in the second column are suggestions to provide a good starting
 point for a typical setup, you might have to adjust them for your use case. The
 value in the third column is the default set by PostgreSQL 13.
 
-| Config Option                | Proposed Value  | Pg 13 Default | Remark |
-| ---------------------------- | --------------- | ------------- | --- |
-| shared_buffers               | 1GB             | 128MB         | Lower than typical Postgres recommendations to give osm2pgsql priority to RAM. |
-| maintenance_work_mem         | 10GB            | 64MB          | Improves `CREATE INDEX` |
-| autovacuum_work_mem          | 2GB             | -1            | -1 uses `maintenance_work_mem` |
-| work_mem                     | 50MB            | 4MB           | |
-| max_wal_size                 | 10GB            | 1GB           | PostgreSQL > 9.4 only.  For PostgreSQL <= 9.4 set `checkpoint_segments = 100` or higher. |
-| checkpoint_timeout           | 60min           | 5min          | Increasing this value reduces time-based checkpoints and increases time to restore from PITR |
-| checkpoint_completion_target | 0.9             | 0.5           | Spreads out checkpoint I/O of more of the `checkpoint_timeout` time, reducing spikes of disk activity |
-| random_page_cost             | 4               | 2             | Assuming fast SSDs  |
-| wal_level                    | minimal         | replica       | Reduces WAL activity if replication is not required during data load.  Must also set `max_wal_senders=0`. |
-| max_wal_senders              | 0               | 10            | See `wal_level` |
+| Config Option                                                                                                                    | Proposed Value  | Pg 13 Default | Remark |
+| -------------------------------------------------------------------------------------------------------------------------------- | --------------- | ------------- | --- |
+| [shared_buffers](https://www.postgresql.org/docs/current/runtime-config-resource.html#GUC-SHARED-BUFFERS)                        | 1GB             | 128MB         | Lower than typical PostgreSQL recommendations to give osm2pgsql priority to RAM. |
+| [work_mem](https://www.postgresql.org/docs/current/runtime-config-resource.html#GUC-WORK-MEM)                                    | 50MB            | 4MB           | |
+| [maintenance_work_mem](https://www.postgresql.org/docs/current/runtime-config-resource.html#GUC-MAINTENANCE-WORK-MEM)            | 10GB            | 64MB          | Improves `CREATE INDEX` |
+| [autovacuum_work_mem](https://www.postgresql.org/docs/current/runtime-config-resource.html#GUC-AUTOVACUUM-WORK-MEM)              | 2GB             | -1            | -1 uses `maintenance_work_mem` |
+| [wal_level](https://www.postgresql.org/docs/current/runtime-config-wal.html#GUC-WAL-LEVEL)                                       | minimal         | replica       | Reduces WAL activity if replication is not required during data load.  Must also set `max_wal_senders=0`. |
+| [checkpoint_timeout](https://www.postgresql.org/docs/current/runtime-config-wal.html#GUC-CHECKPOINT-TIMEOUT)                     | 60min           | 5min          | Increasing this value reduces time-based checkpoints and increases time to restore from PITR |
+| [max_wal_size](https://www.postgresql.org/docs/current/runtime-config-wal.html#GUC-MAX-WAL-SIZE)                                 | 10GB            | 1GB           | PostgreSQL > 9.4 only. For PostgreSQL <= 9.4 set `checkpoint_segments = 100` or higher. |
+| [checkpoint_completion_target](https://www.postgresql.org/docs/current/runtime-config-wal.html#GUC-CHECKPOINT-COMPLETION-TARGET) | 0.9             | 0.5           | Spreads out checkpoint I/O of more of the `checkpoint_timeout` time, reducing spikes of disk activity |
+| [max_wal_senders](https://www.postgresql.org/docs/current/runtime-config-replication.html#GUC-MAX-WAL-SENDERS)                   | 0               | 10            | See `wal_level` |
+| [random_page_cost](https://www.postgresql.org/docs/current/runtime-config-query.html#GUC-RANDOM-PAGE-COST)                       | 1.0             | 2             | Assuming fast SSDs  |
 {: .desc}
+
+Here are the proposed settings for copy-and-paste into a config file:
+
+```
+shared_buffers = 1GB
+work_mem = 50MB
+maintenance_work_mem = 10GB
+autovacuum_work_mem = 2GB
+wal_level = minimal
+checkpoint_timeout = 60min
+max_wal_size = 10GB
+checkpoint_completion_target = 0.9
+max_wal_senders = 0
+random_page_cost = 1.0
+```
 
 Increasing values for `max_wal_size` and `checkpoint_timeout` means that
 PostgreSQL needs to run checkpoints less often but it can require additional
@@ -122,9 +137,8 @@ setting `autovacuum_max_workers = 1` and reduce `autovacuum_work_mem` even
 further. This will reduce the amount of memory that autovacuum takes away from
 the import process.
 
-For additional details see the [Resource Consumption section in the Server
-Configuration
-chapter](https://www.postgresql.org/docs/current/runtime-config-resource.html){:.extlink}
+For additional details see the [Server Configuration
+chapter](https://www.postgresql.org/docs/current/runtime-config.html){:.extlink}
 and [Populating a Database in the Performance Tips chapter](
 https://www.postgresql.org/docs/current/populate.html){:.extlink} in the
 PostgreSQL documentation.
