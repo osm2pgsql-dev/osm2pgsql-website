@@ -33,7 +33,10 @@ wiki.
 
 ## Tutorials
 
+* Webinar [OpenStreetMap to PostGIS: Easier and
+  Better!](https://postgresconf.org/conferences/2021_Postgres_Conference_Webinars/program/proposals/openstreetmap-to-postgis-easier-and-better)
+  by Ryan Lambert (March 2021).
 * A video webinar in 6 parts: [Intro to PostGIS and
   OpenStreetMap](https://www.youtube.com/watch?v=l98YREUSJs4&list=PLHWVtzzXLMjJGYfjAjguS-Bm79KowWEI_){:.extlink}
-  by Ryan Lambert.
+  by Ryan Lambert (January 2020).
 
