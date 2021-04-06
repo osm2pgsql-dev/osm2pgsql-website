@@ -172,7 +172,7 @@ You can use this to import two or more geographical extracts into the same
 database. If the extracts are from different points in time and contain
 different versions of the same object, this will fail!
 
-Do not use multiple change files as input in append mode, [merge and simpligy
+Do not use multiple change files as input in append mode, [merge and simplify
 them first](#merging-osm-change-files).
 
 ### The Middle
