@@ -68,3 +68,29 @@ is the behaviour you want.
 line option `--with-forward-dependencies=false`. It is used by Nominatim which
 uses the specialized Gazetteer output which doesn't need this behaviour.
 
+### Using Database While Updating
+
+To improve performance osm2pgsql uses several parallel threads to import or
+update the OSM data. This means that that there is no transaction around all
+the updates. If you are querying the database while osm2pgsql is running, you
+might be able to see some updates but not others. While an import is running
+you should not query the data. For updates it depends a bit on your use case.
+
+In most cases this is not a huge problem, because OSM objects are mostly
+independent of one another. If you are
+
+* writing OSM objects into multiple tables,
+* using two-stage processing in the Flex output, or
+* doing complex queries joining several tables
+
+you might see some inconsistent data, although this is still rather unlikely.
+If you are concerned by this, you should stop any other use of the database
+while osm2pgsql is running. This is something that needs to be done outside
+osm2pgsql, because osm2pgsql doesn't know what else is running and whether and
+how it might interact with osm2pgsql.
+
+Note that even if you are seeing inconsistent data at some point, the moment
+osm2pgsql is finished, the data will be consistent again. If you are running a
+tile server and using the expire functionality, you will, at that point,
+re-render all tiles that might be affected making your tiles consistent again.
+
