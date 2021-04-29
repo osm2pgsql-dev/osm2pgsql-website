@@ -119,7 +119,6 @@ are still places where it can be done better.
 Issues:
 
 * [207](https://github.com/openstreetmap/osm2pgsql/issues/207)
-* [577](https://github.com/openstreetmap/osm2pgsql/issues/577)
 
 ### Object Store / Middle / Flat Node Store
 
@@ -164,8 +163,6 @@ Issues:
 
 * [22](https://github.com/openstreetmap/osm2pgsql/issues/22)
 * [193](https://github.com/openstreetmap/osm2pgsql/issues/193)
-* [247](https://github.com/openstreetmap/osm2pgsql/issues/247)
-* [377](https://github.com/openstreetmap/osm2pgsql/issues/377)
 * [692](https://github.com/openstreetmap/osm2pgsql/issues/692)
 * [1086](https://github.com/openstreetmap/osm2pgsql/issues/1086)
 * [1170](https://github.com/openstreetmap/osm2pgsql/issues/1170)
@@ -223,8 +220,6 @@ Issues:
 * [1076](https://github.com/openstreetmap/osm2pgsql/issues/1076)
 * [1164](https://github.com/openstreetmap/osm2pgsql/issues/1164)
 * [1248](https://github.com/openstreetmap/osm2pgsql/issues/1248)
-* [PR 1059](https://github.com/openstreetmap/osm2pgsql/pull/1059)
-* [PR 1241](https://github.com/openstreetmap/osm2pgsql/pull/1241)
 
 ### Tile Expiry
 
