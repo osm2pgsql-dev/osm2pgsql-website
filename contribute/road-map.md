@@ -5,7 +5,7 @@ title: Road Map
 
 # Road Map for Osm2pgsql
 
-Current as of 2020-12-20.
+Current as of 2021-04-30.
 
 This document is a kind of road map for osm2pgsql development. It's not to be
 understood as a definite "this is what we'll do" document, but as a rough
@@ -64,7 +64,6 @@ There is always the ongoing maintainance.
 
 Issues:
 
-* [159](https://github.com/openstreetmap/osm2pgsql/issues/159)
 * [775](https://github.com/openstreetmap/osm2pgsql/issues/775)
 * [965](https://github.com/openstreetmap/osm2pgsql/issues/965)
 * [1010](https://github.com/openstreetmap/osm2pgsql/issues/1010)
@@ -182,7 +181,7 @@ Once we get some feedback from users we can finalize the API, remove the
 Long term the flex output should replace all other outputs. Users should
 all be able to switch to the flex output without missing any features they
 had in any of the other outputs. Whether we'll actually remove the *pgsql*
-and *gazetteer* outputs is not decided yet, the *multi* output is already
+and *gazetteer* outputs is not decided yet. The *multi* output was already
 marked as deprecated and will be removed in the next version.
 
 Some new features might only be available in the flex output.
