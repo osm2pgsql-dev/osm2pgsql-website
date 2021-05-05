@@ -293,18 +293,14 @@ projections are currently not supported.
 In addition to id and geometry columns, each table can have any number of
 "normal" columns using any type supported by PostgreSQL. Some types are
 specially recognized by osm2pgsql: `text`, `boolean`, `int2` (`smallint`),
-`int4` (`int`, `integer`), `int8` (`bigint`), `real`, `hstore`, and
-`direction`. See the [Type Conversion](#type-conversions){:.extlink} section
-for details on how this type affects the conversion of OSM data to the
+`int4` (`int`, `integer`), `int8` (`bigint`), `real`, `direction`, `hstore`,
+`json` and `jsonb`. See the [Type Conversion](#type-conversions){:.extlink}
+section for details on how this type affects the conversion of OSM data to the
 database types.
 
 Instead of the above types you can use any SQL type you want. If you do that
 you have to supply the PostgreSQL string representation for that type when
-adding data to such columns (or Lua `nil` to set the column to `NULL`). This
-can be used, for instance, to create JSON(B) columns. You have to provide valid
-JSON from your Lua script in this case. See the example config
-[places.lua](https://github.com/openstreetmap/osm2pgsql/blob/master/flex-config/places.lua){:.
-extlink} for how this can be done.
+adding data to such columns (or Lua `nil` to set the column to `NULL`).
 
 ### Processing Callbacks
 
@@ -500,6 +496,11 @@ any extra time you are using. Keep in mind that:
 
 ### Type Conversions
 
+Conversion to `json` and `jsonb` columns is only available from osm2pgsql
+1.5.0 onwards. In versions before that you have to provide valid JSON from
+your Lua script to those columns yourself.
+{: .note}
+
 The `add_row()` command will try its best to convert Lua values into
 corresponding PostgreSQL values. But not all conversions make sense. Here
 are the detailed rules:
@@ -510,8 +511,7 @@ are the detailed rules:
 3. If the result of a conversion is `NULL` and the column is defined as `NOT
    NULL`, an error is thrown.
 4. The Lua type `table` is converted to the PostgreSQL type `hstore` if and
-   only if all keys and values in the table are string values. A Lua `table`
-   can not be converted to any other PostgreSQL type.
+   only if all keys and values in the table are string values.
 5. For `boolean` columns: The number `0` is converted to `false`, all other
    numbers are `true`. Strings are converted as follows: `"yes"`, `"true"`,
    `"1"` are `true`; `"no"`, `"false"`, `"0"` are `false`, all others are
@@ -528,8 +528,14 @@ are the detailed rules:
    positive numbers in `1`, all negative numbers in `-1`. Strings `"yes"` and
    `"1"` will result in `1`, `"no"` and `"0"` in `0`, `"-1"` in `-1`. All
    other strings will result in `NULL`.
-9. For text columns and any other not specially recognized column types,
-   booleans result in an error and numbers are converted to strings.
+9. For `json` and `jsonb` columns string, number, and boolean values are
+   converted to their JSON equivalent as you would expect. An empty table
+   is converted to an (empty) JSON object, tables that only have consecutive
+   integer keys starting from 1 are converted into JSON arrays. All other
+   tables are converted into JSON objects. Mixed key types are not allowed.
+   Osm2pgsql will detect loops in tables and return an error.
+10. For text columns and any other not specially recognized column types,
+    booleans result in an error and numbers are converted to strings.
 
 If you want any other conversions, you have to do them yourself in your Lua
 code. Osm2pgsql provides some helper functions for other conversions, see
