@@ -61,9 +61,9 @@ Any Projection
 : Import geometries in Lon/Lat (WGS84), Web Mercator (most popular format for
   map tiles), or any other projection.
 
-Support for hstore and JSON
+Support for json, jsonb and hstore columns
 
-: Use hstore and JSON(B) PostgreSQL data types to store the complete
+: Use `json`, `jsonb`, and `hstore` PostgreSQL data types to store the complete
   set of tags of an OSM object in a single database column.
 
 Resource friendly
