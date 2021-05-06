@@ -107,6 +107,8 @@ value in the third column is the default set by PostgreSQL 13.
 | [checkpoint_completion_target](https://www.postgresql.org/docs/current/runtime-config-wal.html#GUC-CHECKPOINT-COMPLETION-TARGET) | 0.9             | 0.5           | Spreads out checkpoint I/O of more of the `checkpoint_timeout` time, reducing spikes of disk activity |
 | [max_wal_senders](https://www.postgresql.org/docs/current/runtime-config-replication.html#GUC-MAX-WAL-SENDERS)                   | 0               | 10            | See `wal_level` |
 | [random_page_cost](https://www.postgresql.org/docs/current/runtime-config-query.html#GUC-RANDOM-PAGE-COST)                       | 1.0             | 2             | Assuming fast SSDs  |
+| [jit](https://www.postgresql.org/docs/current/runtime-config-query.html#GUC-JIT)                                                 | off             | on            | for typical map rendering/Nominatim this introduces unnecessary overhead and can cause memory leaks |
+| [max_parallel_workers_per_gather](https://www.postgresql.org/docs/13/runtime-config-resource.html#GUC-MAX-PARALLEL-WORKERS-PER-GATHER) | 0         | 2             | for typical map rendering/Nominatim this introduces unnecessary overhead |
 {: .desc}
 
 Here are the proposed settings for copy-and-paste into a config file:
