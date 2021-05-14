@@ -12,11 +12,15 @@ repositories:
       name: Debian Oldstable (Stretch)
       date: 2017-06-17
       eol: 2022
+    - id: ubuntu_21_04
+      name: Ubuntu 21.4 (Hirsute)
+      date: 2021-04-22
+      eol: 2022-01
+      gs: groupstart
     - id: ubuntu_20_04
       name: Ubuntu 20.4 (Focal)
       date: 2020-04-23
       eol: 2025-04
-      gs: groupstart
     - id: ubuntu_18_04
       name: Ubuntu 18.4 (Bionic)
       date: 2018-04-26
@@ -92,7 +96,6 @@ decide what versions need to be supported.
 </tbody>
 </table>
 
-* C++11 should be fully supported from GCC 4.8.1, Clang 3.4.
 * C++14 should be fully supported from GCC 5, Clang 3.4.
 * C++17 should be fully supported from GCC 7, Clang 6.
 

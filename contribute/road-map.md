@@ -35,12 +35,12 @@ promise anything.
 
 Only 64 bit systems are supported.
 
-Osm2pgsql currently needs a C++11 compiler, switching to newer C++ versions
+Osm2pgsql currently needs a C++14 compiler, switching to newer C++ versions
 will be considered based on availability in the Linux distributions we want to
 support.
 
 Osm2pgsql must always support all officially supported versions of PostgreSQL
-(currently 9.5 and above) and maybe more. Some optional features might only be
+(currently 9.6 and above) and maybe more. Some optional features might only be
 supported in newer PostgreSQL versions.
 
 Osm2pgsql wants to be as resource-friendly as possible. It must always be
@@ -72,9 +72,9 @@ Issues:
 ### Code Cleanup and Modernization
 
 Osm2pgsql started as a C program, later it was converted to C++03, then to
-C++11. There is still old, often overly complex code in there that could do
-with some cleanup. And there are still lots of places where code linting tools
-such as clang-tidy report potential problems.
+C++11 and C++14. There is still old, often overly complex code in there that
+could do with some cleanup. And there are still lots of places where code
+linting tools such as clang-tidy report potential problems.
 
 The goal is to have clean and modern code that's easy to understand and change.
 This is especially important to make it easier for non-core developers to

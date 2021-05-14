@@ -33,6 +33,7 @@ distribution, consider installing the current release from source.
 ![Ubuntu 18.04 package](https://repology.org/badge/version-for-repo/ubuntu_18_04/osm2pgsql.svg)
 ![Ubuntu 20.04 package](https://repology.org/badge/version-for-repo/ubuntu_20_04/osm2pgsql.svg)
 ![Ubuntu 20.10 package](https://repology.org/badge/version-for-repo/ubuntu_20_10/osm2pgsql.svg)
+![Ubuntu 21.04 package](https://repology.org/badge/version-for-repo/ubuntu_21_04/osm2pgsql.svg)
 
 For Ubuntu installation is usually as simple as
 
@@ -123,9 +124,8 @@ and you can immediately use osm2pgsql.
 
 ### Compiling from source
 
-For native Windows compilation you need a C++11-compatible compiler. Visual
-Studio 2017 & 2015 are known to work. Follow the usual steps for compiling
-CMake projects.
+For native Windows compilation you need a C++14-compatible compiler. Follow the
+usual steps for compiling CMake projects.
 
 </section>
 <section markdown="1">

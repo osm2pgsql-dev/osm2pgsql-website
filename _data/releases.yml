@@ -1,8 +1,8 @@
-- version: 1.4.1
-  date: 2021-02-03
-  manpage: true
 - version: 1.4.2
   date: 2021-04-07
+  manpage: true
+- version: 1.4.1
+  date: 2021-02-03
   manpage: true
 - version: 1.4.0
   date: 2020-12-07
