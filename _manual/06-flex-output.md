@@ -496,11 +496,6 @@ any extra time you are using. Keep in mind that:
 
 ### Type Conversions
 
-Conversion to `json` and `jsonb` columns is only available from osm2pgsql
-1.5.0 onwards. In versions before that you have to provide valid JSON from
-your Lua script to those columns yourself.
-{: .note}
-
 The `add_row()` command will try its best to convert Lua values into
 corresponding PostgreSQL values. But not all conversions make sense. Here
 are the detailed rules:
@@ -528,15 +523,22 @@ are the detailed rules:
    positive numbers in `1`, all negative numbers in `-1`. Strings `"yes"` and
    `"1"` will result in `1`, `"no"` and `"0"` in `0`, `"-1"` in `-1`. All
    other strings will result in `NULL`.
-9. For `json` and `jsonb` columns string, number, and boolean values are
-   converted to their JSON equivalent as you would expect. An empty table
-   is converted to an (empty) JSON object, tables that only have consecutive
-   integer keys starting from 1 are converted into JSON arrays. All other
-   tables are converted into JSON objects. Mixed key types are not allowed.
-   Osm2pgsql will detect loops in tables and return an error.
+9. *Version >= 1.5.0*{: .version} For `json` and `jsonb` columns string,
+   number, and boolean values are converted to their JSON equivalent as you
+   would expect. An empty table is converted to an (empty) JSON object, tables
+   that only have consecutive integer keys starting from 1 are converted into
+   JSON arrays. All other tables are converted into JSON objects. Mixed key
+   types are not allowed. Osm2pgsql will detect loops in tables and return an
+   error.
 10. For text columns and any other not specially recognized column types,
     booleans result in an error and numbers are converted to strings.
 
 If you want any other conversions, you have to do them yourself in your Lua
 code. Osm2pgsql provides some helper functions for other conversions, see
 the Lua helper library ([Appendix B](#lua-library-for-flex-output)).
+
+Conversion to `json` and `jsonb` columns is only available from osm2pgsql
+1.5.0 onwards. In versions before that you have to provide valid JSON from
+your Lua script to those columns yourself.
+{: .note}
+
