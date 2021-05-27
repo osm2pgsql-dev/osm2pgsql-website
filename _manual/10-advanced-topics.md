@@ -94,3 +94,19 @@ osm2pgsql is finished, the data will be consistent again. If you are running a
 tile server and using the expire functionality, you will, at that point,
 re-render all tiles that might be affected making your tiles consistent again.
 
+### Clustering by Geometry
+
+Typical use cases for a database created by osm2pgsql require querying the
+database by geometry. To speed up this kind of query osm2pgsql will by default
+cluster the data in the output tables by geometry which means that features
+which are in reality near to each other will also be near to each other on
+the disk and access will be faster.
+
+This clustering is achieved by ordering and copying each whole table after
+the import. This will take some time and it means you will temporarily need
+twice the disk space.
+
+When you are using the [flex output](#the-flex-output), you can disable
+clustering by setting the `cluster` table option to `no` (see the
+[Advanced Table Definition](#advanced-table-definition) section).
+
