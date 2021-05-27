@@ -186,8 +186,6 @@ marked as deprecated and will be removed in the next version.
 
 Some new features might only be available in the flex output.
 
-* [268](https://github.com/openstreetmap/osm2pgsql/issues/268)
-* [328](https://github.com/openstreetmap/osm2pgsql/issues/328)
 * [1086](https://github.com/openstreetmap/osm2pgsql/issues/1086)
 * [1130](https://github.com/openstreetmap/osm2pgsql/issues/1130)
 * [1164](https://github.com/openstreetmap/osm2pgsql/issues/1164)
@@ -216,7 +214,6 @@ Issues:
 * [423](https://github.com/openstreetmap/osm2pgsql/issues/423)
 * [799](https://github.com/openstreetmap/osm2pgsql/issues/799)
 * [1046](https://github.com/openstreetmap/osm2pgsql/issues/1046)
-* [1076](https://github.com/openstreetmap/osm2pgsql/issues/1076)
 * [1164](https://github.com/openstreetmap/osm2pgsql/issues/1164)
 * [1248](https://github.com/openstreetmap/osm2pgsql/issues/1248)
 
@@ -253,7 +250,7 @@ Since osm2pgsql was first developed the capabilities of PostgreSQL and PostGIS
 have grown tremendously and we haven't always kept up to be able to take
 advantage of new features like JSON(B) columns or GENERATED columns or new
 index types. In some cases our understanding of what the database is doing
-as improved and changes could introduce performance gains.
+has improved and changes could introduce performance gains.
 
 Currently osm2pgsql opens a lot more database connections and keeps them open
 longer than probably needed. There is some room for improvement there.

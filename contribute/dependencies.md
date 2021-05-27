@@ -96,6 +96,11 @@ decide what versions need to be supported.
 </tbody>
 </table>
 
-* C++14 should be fully supported from GCC 5, Clang 3.4.
-* C++17 should be fully supported from GCC 7, Clang 6.
+* C++14 should be fully supported from GCC 5, Clang 3.4. It is the default from GCC 6.1 to GCC 10 and since Clang 6.
+* C++17 should be fully supported from GCC 7, Clang 5. It is the default from GCC 11.
+
+See also:
+
+* [C++ Standards Support in GCC](https://gcc.gnu.org/projects/cxx-status.html)
+* [C++ Support in Clang](https://clang.llvm.org/cxx_status.html)
 
