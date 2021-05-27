@@ -229,8 +229,9 @@ The *gazetteer* Output
 
 The *multi* Output
 
-: The *multi* output is deprecated, it will be removed in a future version of
-  osm2pgsql. If you are using it, switch to the flex output as soon as possible.
+: *Version < 1.5.0*{: .version} The *multi* output is deprecated.
+
+:  *Version >= 1.5.0*{: .version} The *multi* output was removed.
 
 The *null* Output
 
