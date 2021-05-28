@@ -16,8 +16,9 @@ and how. It is configured through a Lua file which
 * defines the structure of the output tables and
 * defines functions to map the OSM data to the database data format
 
-Use the `-s, --style=FILE` option to specify the name of the Lua file
-along with the `-O, --output=flex` option to specify the use of the flex output.
+Use the `-s, --style=FILE` option to specify the name of the Lua file along
+with the `-O flex` or `--output=flex` option to specify the use of the flex
+output.
 
 Unlike the pgsql output, the flex output doesn't use command line options
 for configuration, but the Lua config file only.
@@ -71,7 +72,7 @@ options for the table as a whole. An example might be more helpful:
 ```lua
 local restaurants = osm2pgsql.define_node_table('restaurants', {
     { column = 'name', type = 'text' },
-    { column = 'tags', type = 'hstore' },
+    { column = 'tags', type = 'jsonb' },
     { column = 'geom', type = 'point' }
 })
 ```
@@ -79,7 +80,7 @@ local restaurants = osm2pgsql.define_node_table('restaurants', {
 In this case we are creating a table that is intended to be filled with OSM
 nodes, the table called `restaurants` will be created in the database with four
 colums: A `name` column of type `text` (which will presumably later be filled
-with the name of the restaurant), a column called `tags` with type `hstore`
+with the name of the restaurant), a column called `tags` with type `jsonb`
 (which will presumable be filled later with all tags of a node), a column
 called `geom` which will contain the Point geometry of the node and an Id
 column called `node_id`.
@@ -147,7 +148,7 @@ local restaurants = osm2pgsql.define_table({
     ids = { type = 'node', id_column = 'node_id' },
     columns = {
         { column = 'name', type = 'text' },
-        { column = 'tags', type = 'hstore' },
+        { column = 'tags', type = 'jsonb' },
         { column = 'geom', type = 'point' }
 }})
 ```
@@ -228,7 +229,7 @@ like this:
 
 ```lua
 ...
-{ column = 'id', type = 'serial', create_only = true },
+{ column = 'id', sql_type = 'serial', create_only = true },
 ...
 ```
 
@@ -249,11 +250,65 @@ with the following keys:
 | Key         | Description |
 | ----------- | ----------- |
 | column      | The name of the PostgreSQL column (required). |
-| type        | The type of the column as described above (required). |
+| type        | The type of the column (Optional, default `'text'`). |
+| sql_type    | *Version >= 1.5.0*{: .version} The SQL type of the column (Optional, default depends on `type`, see next table). In versions before 1.5.0 the `type` field was used for this also. |
 | not_null    | Set to `true` to make this a `NOT NULL` column. (Optional, default `false`.) |
 | create_only | Set to `true` to add the column to the `CREATE TABLE` command, but do not try to fill this column when adding data. This can be useful for `SERIAL` columns or when you want to fill in the column later yourself. (Optional, default `false`.) |
 | projection  | On geometry columns only. Set to the EPSG id or name of the projection. (Optional, default web mercator, `3857`.) |
 {: .desc}
+
+The `type` field describes the type of the column from the point of view of
+osm2pgsql, the `sql_type` describes the type of the column from the point of
+view of the PostgreSQL database. Usually they are either the same or the
+SQL type is derived directly from the `type` according to the following table.
+But it is possible to set them individually for special cases.
+
+*Version < 1.5.0*{: .version} The `sql_type` field did not exist in earlier
+versions. Use the `type` field instead. If you are upgrading from a version <
+1.5.0 to 1.5.0 or above, it is usually enough to set the `sql_type` to the same
+value that the `type` field had before for every `type` field where you get an
+error message from osm2pgsql.
+{: .note}
+
+| `type`             | Default for `sql_type` | Notes       |
+| ------------------ | ---------------------- | ----------- |
+| text               | `text`                 | *(default)* |
+| bool, boolean      | `boolean` | |
+| int2, smallint     | `int2`    | |
+| int4, int, integer | `int4`    | |
+| int8, bigint       | `int8`    | |
+| real               | `real`    | |
+| hstore             | `hstore`  | PostgreSQL extension `hstore` must be loaded |
+| json               | `json`    | |
+| jsonb              | `jsonb`   | |
+| direction          | `int2`    | |
+| geometry           | `geometry(GEOMETRY, *SRID*)`        | (\*) |
+| point              | `geometry(POINT, *SRID*)`           | (\*) |
+| linestring         | `geometry(LINESTRING, *SRID*)`      | (\*) |
+| polygon            | `geometry(POLYGON, *SRID*)`         | (\*) |
+| multipoint         | `geometry(MULTIPOINT, *SRID*)`      | (\*) |
+| multilinestring    | `geometry(MULTILINESTRING, *SRID*)` | (\*) |
+| multipolygon       | `geometry(MULTIPOLYGON, *SRID*)`    | (\*) |
+| area               | `real `   | |
+{: .desc}
+
+The `SRID` for the geometry SQL types comes from the `projection` parameter.
+{: .table-note}
+
+For special cases you usually want to keep the `type` field unset and only
+set the `sql_type` field. So if you want to have an array of integer column,
+for instance, set only the `sql_type` to `int[]`. The `type` field will default
+to `text` which means you have to create the text representation of your array
+in the form that PostgreSQL expects it.
+
+For details on how the data is converted depending on the type, see the section
+on [Type Conversions](#type-conversions).
+
+The content of the `sql_type` field is not checked by osm2pgsql, it is passed
+on to PostgreSQL as is. Do not set this to anything else but a valid PostgreSQL
+type.
+{: .note}
+
 
 #### Defining Geometry Columns
 
@@ -335,7 +390,7 @@ The parameter table (`object`) has the following fields and functions:
 | changeset     | Changeset containing this version of the OSM object. (\*) |
 | uid           | User id of the user that created or last changed this OSM object. (\*) |
 | user          | User name of the user that created or last changed this OSM object. (\*) |
-| grab_tag(KEY) | Return the tag value of the specified key and remove the tag from the list of tags. (Example: `local name = object:grab_tag('name')`) This is often used when you want to store some tags in special columns and the rest of the tags in an hstore column. |
+| grab_tag(KEY) | Return the tag value of the specified key and remove the tag from the list of tags. (Example: `local name = object:grab_tag('name')`) This is often used when you want to store some tags in special columns and the rest of the tags in an jsonb or hstore column. |
 | get_bbox()    | Get the bounding box of the current node or way. This function returns four result values: the lot/lat values for the bottom left corner of the bounding box, followed by the lon/lat values of the top right corner. Both lon/lat values are identical in case of nodes. Example: `lon, lat, dummy, dummy = object.get_bbox()` (This function doesn't work for relations currently.) |
 | is_closed     | Ways only: A boolean telling you whether the way geometry is closed, i.e. the first and last node are the same. |
 | nodes         | Ways only: An array with the way node ids. |
@@ -354,7 +409,7 @@ function on that table:
 ```lua
 -- definition of the table:
 table_pois = osm2pgsql.define_node_table('pois', {
-    { column = 'tags', type = 'hstore' },
+    { column = 'tags', type = 'jsonb' },
     { column = 'name', type = 'text' },
     { column = 'geom', type = 'point' },
 })

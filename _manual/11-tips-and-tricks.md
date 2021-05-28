@@ -21,7 +21,7 @@ do anything special here, just create the column with this type as is.
 polygons_table = osm2pgsql.define_area_table('polygons', {
     { column = 'tags', type = 'hstore' },
     { column = 'geom', type = 'geometry' },
-    { column = 'center', type = 'GEOMETRY(Point, 3857)', create_only = true },
+    { column = 'center', sql_type = 'GEOMETRY(Point, 3857)', create_only = true },
     { column = 'area', type = 'area' },
 })
 ```
