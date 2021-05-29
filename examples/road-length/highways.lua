@@ -7,7 +7,7 @@ tables.highways = osm2pgsql.define_way_table('highways', {
 })
 
 tables.boundaries = osm2pgsql.define_area_table('boundaries', {
-    { column = 'tags', type = 'hstore' },
+    { column = 'tags', type = 'jsonb' },
     { column = 'geom', type = 'geometry', projection = 4326 },
 })
 

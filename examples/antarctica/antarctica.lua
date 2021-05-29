@@ -2,7 +2,7 @@
 local tables = {}
 
 tables.places = osm2pgsql.define_node_table('places', {
-    { column = 'tags', type = 'hstore' },
+    { column = 'tags', type = 'jsonb' },
     { column = 'place', type = 'text' },
     { column = 'name', type = 'text' },
     { column = 'geom', type = 'point', projection = 3031 },

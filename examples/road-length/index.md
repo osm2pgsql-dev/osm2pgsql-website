@@ -20,8 +20,8 @@ this case these are the highway geometries and the administrative boundaries.
 osmium tags-filter -v -o data.osm.pbf british-columbia-latest.osm.pbf w/highway r/boundary=administrative
 ```
 
-The result we can now import with osm2pgsql into a database called `gis` that
-have to create beforehand:
+We can now import the result with osm2pgsql into a database called `gis` that
+we created beforehand:
 
 ```sh
 osm2pgsql -d gis -O flex -S highways.lua data.osm.pbf

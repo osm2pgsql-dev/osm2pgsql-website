@@ -4,7 +4,7 @@ local streets = osm2pgsql.define_way_table('streets', {
     { column = 'name',    type = 'text' },
     { column = 'name_fr', type = 'text' },
     { column = 'name_nl', type = 'text' },
-    { column = 'tags',    type = 'hstore' },
+    { column = 'tags',    type = 'jsonb' },
     { column = 'geom',    type = 'linestring' },
 })
 
