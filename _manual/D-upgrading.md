@@ -11,6 +11,27 @@ the default `planet_osm` prefix.
 It is frequently better to reimport as this will also recluster the tables and
 remove table or index bloat.
 
+#### Upgrade to 1.5.0: Changes to Flex and Multi Outputs
+
+The multi output has been removed. You should switch to the flex output.
+
+The following changes to the flex output configuration might be necessary
+when switching from versions <1.5.0 to >=1.5.0:
+
+* When defining a database table in your Lua config file, each column
+  definition has a `type` field. From version 1.5.0 on, the `type` field can
+  only contain the types known to osm2pgsql. If you want to use generic SQL
+  types, use the `sql_type` field instead. In most cases simply changing
+  all occurances of `type` to `sql_type` for which you get an error when
+  running osm2pgsql should be enough. See the [Defining
+  Columns](#defining-columns) section of the Flex Output chapter for details.
+* The flex output now has internal support for the `json` and `jsonb` data
+  types. Lua data will be automatically converted to JSON. If you used a Lua
+  JSON library to convert the data before, you need to simply remove the
+  conversion code in your Lua file.
+
+No re-import of the data is necessary.
+
 #### Upgrade to 0.93: Unprojected Slim Coordinates
 
 The method of storing coordinates in the middle (slim) tables has changed.
