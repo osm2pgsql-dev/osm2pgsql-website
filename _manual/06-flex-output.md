@@ -3,11 +3,8 @@ chapter: 6
 title: The Flex Output
 ---
 
-*Version >= 1.3.0*{: .version} The *flex* output appeared first in version
-1.3.0 of osm2pgsql.
-
-The Flex output is experimental. Everything in here is subject to change.
-{: .note}
+*Version 1.3.0 to 1.4.2*{: .version} The *flex* output appeared first in version
+1.3.0 of osm2pgsql. It was marked as experimental until version 1.4.2
 
 The *flex* output, as the name suggests, allows for a flexible configuration
 that tells osm2pgsql what OSM data to store in your database and exactly where

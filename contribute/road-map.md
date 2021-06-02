@@ -168,21 +168,16 @@ Issues:
 
 ### Future of the Outputs
 
-The flex output is currently marked as "experimental" because it is still
-rather new and we have only limited operational experience with it. We are not
-aware of any major problems with it, but there are some more or less obvious
-gaps in what it can do (`get_bbox` missing for relations, tables with multiple
-geometry columns, two-stage processing of nodes and relations, more Lua helper
-functions to help style writers, ...).
-
-Once we get some feedback from users we can finalize the API, remove the
-"experimental", and recommend to users that they switch to it.
+There are some more or less obvious gaps in what the flex output can do
+(`get_bbox` missing for relations, tables with multiple geometry columns,
+two-stage processing of nodes and relations, more Lua helper functions to help
+style writers, ...). This need some work.
 
 Long term the flex output should replace all other outputs. Users should
 all be able to switch to the flex output without missing any features they
 had in any of the other outputs. Whether we'll actually remove the *pgsql*
 and *gazetteer* outputs is not decided yet. The *multi* output was already
-marked as deprecated and will be removed in the next version.
+removed in version 1.5.0.
 
 Some new features might only be available in the flex output.
 
