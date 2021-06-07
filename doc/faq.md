@@ -64,7 +64,7 @@ You should upgrade osm2pgsql to a current version.
 ### Why is osm2pgsql crashing without reporting any useful error message?
 
 This is most likely because you are running out of memory. Due to the way
-Linux system "overcommit" memory, osm2pgsql can not detect that it is running
+Linux systems "overcommit" memory, osm2pgsql can not detect that it is running
 out of memory, so it can't tell you what's going on.
 
 Please read the [Notes on Memory Usage](/doc/manual.html#notes-on-memory-usage)
@@ -74,9 +74,9 @@ in the manual to get some ideas how to handle this.
 
 Osm2pgsql usually creates table columns in your database that are named after
 the OSM tag used, for instance, the `name` tag might end up in a column called
-`name`. Sometimes this leads to problems when the tags contains unusual
-characters, for instance the tag `addr:city` contains the colon character.
-Another problem are reserved names in the PostgreSQL database, for instance
+`name`. This can result in problems when the tag contains unusual characters,
+for instance the tag `addr:city` contains the colon character. Another problem
+are tags using a reserved name in the PostgreSQL database, for instance
 `natural`.
 
 These names are allowed in PostgreSQL, but they need to be quoted with double
@@ -115,7 +115,7 @@ but can happen for other data, too.
 
 There are several [quality assurance
 tools](https://wiki.openstreetmap.org/wiki/Quality_assurance){:.extlink} out
-there that can help you to diagnose issues like this. The [OSM Inspector
+there that can help you with diagnosing issues like this. The [OSM Inspector
 "Areas" view](https://tools.geofabrik.de/osmi/?view=areas){:.extlink} helps
 specifically with finding multipolygon problems.
 
