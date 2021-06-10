@@ -143,6 +143,15 @@ You can use the [`osmium
 merge`](https://docs.osmcode.org/osmium/latest/osmium-merge.html){:.extlink}
 command for this.
 
+*Version >= 1.4.0*{:.version} This pre-merging is not necessary for newer
+osm2pgsql version which can read multiple input files at once.
+
+Note that in any case for this to work the input files must all have their data
+from the same point in time. You can use this to import two or more
+geographical extracts into the same database. If the extracts are from
+different points in time and contain different versions of the same object,
+this will fail!
+
 #### Merging OSM Change Files
 
 To speed up processing when you have many OSM change files, you can merge
@@ -150,6 +159,8 @@ several change files into larger files and then process the larger files with
 osm2pgsql. The [`osmium
 merge-changes`](https://docs.osmcode.org/osmium/latest/osmium-merge-changes.html){:.extlink}
 command will do this for you. Make sure to use the option `-s, --simplify`.
+(That command also works with a single change file, if you just want to
+simplify one file.)
 
 Usually you should not merge change files for more than a day or so when doing
 this, otherwise the amount of changes osm2pgsql has to process in one go
