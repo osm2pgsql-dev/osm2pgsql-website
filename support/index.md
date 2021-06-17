@@ -33,6 +33,13 @@ Before asking your question, have a look at existing [questions about
 osm2pgsql](https://help.openstreetmap.org/tags/osm2pgsql/){:.extlink} on that
 site, maybe yours has already been answered. Note that some answers are
 outdated.
+
+When asking for help, always describe what you are trying to achieve *in the
+end*. Often a proposed or chosen solution is not the right approach, the
+result is that you and other people spend time discussion a solution that
+doesn't really fit the problem. This is known as the
+[XY problem](https://xyproblem.info/){:.extlink}.
+
 </section>
 
 <section markdown="1">
@@ -58,11 +65,16 @@ output. If you have several unrelated problems, open separate issues for each.
 </section>
 
 <section markdown="1">
-## Discuss Bugs, Features and Ideas
+## Discuss Features and Ideas
 
-You can ask questions or discuss bugs, features and ideas on the [OSM developer
-mailing list](https://lists.openstreetmap.org/listinfo/dev){:.extlink} or the
-[#osm-dev IRC channel](https://wiki.openstreetmap.org/wiki/IRC){:.extlink}.
+You can ask questions or discuss features and ideas
+
+* using the
+  [discussion](https://github.com/openstreetmap/osm2pgsql/discussions){:.extlink}
+  feature on GitHub.
+* on the [OSM developer mailing
+  list](https://lists.openstreetmap.org/listinfo/dev){:.extlink} or
+* the [#osm-dev IRC channel](https://wiki.openstreetmap.org/wiki/IRC){:.extlink}.
 </section>
 
 <section markdown="1">
