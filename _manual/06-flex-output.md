@@ -34,6 +34,7 @@ the following fields and functions:
 | Field / Function  | Description |
 | ----------------- | --- |
 | version           | The version of osm2pgsql as a string. |
+| config_dir        | *Version >=1.5.1*{: .version} The directory where your Lua config file is. Useful when you want to include more files from Lua. |
 | mode              | Either `"create"` or `"append"` depending on the command line options (`-c, --create` or `-a, --append`). |
 | stage             | Either `1` or `2` (1st/2nd stage processing of the data). See below. |
 | define_node_table(NAME, COLUMNS[, OPTIONS])     | Define a node table. |
