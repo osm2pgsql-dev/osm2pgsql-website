@@ -240,6 +240,9 @@ data using osm2pgsql, use `CREATE UNIQUE INDEX` to create one. You can also use
 TABLE`](https://www.postgresql.org/docs/current/sql-altertable.html){:.extlink}
 to make the column an "official" primary key column.
 
+Since PostgreSQL 10 you can use the `GENERATED ... AS IDENTITY` clause instead
+of the `SERIAL` type which does something very similar.
+
 ### Defining Columns
 
 In the table definitions the columns are specified as a list of Lua tables
