@@ -241,7 +241,8 @@ TABLE`](https://www.postgresql.org/docs/current/sql-altertable.html){:.extlink}
 to make the column an "official" primary key column.
 
 Since PostgreSQL 10 you can use the `GENERATED ... AS IDENTITY` clause instead
-of the `SERIAL` type which does something very similar.
+of the `SERIAL` type which does something very similar, although using anything
+but a proper PostgreSQL type here is not officially supported.
 
 ### Defining Columns
 
