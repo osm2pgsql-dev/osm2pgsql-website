@@ -126,10 +126,10 @@ drives, for instance, can speed up processing a lot. There are three command
 line options that the pgsql output interprets: To set the tablespace for output
 tables and indexes, use the `--tablespace-main-data=TABLESPC` and
 `--tablespace-main-index=TABLESPC` options, respectively. You can also use the
-`-i, --tablespace-index=TABLESPC` option which will set the tablespace for the
-pgsql output as well as for the middle! Note that it is your job to create the
-tablespaces before calling osm2pgsql and making sure the disk behind it is
-large enough.
+`-i, --tablespace-index=TABLESPC` option which will set the index tablespace
+for the pgsql output as well as for the middle! Note that it is your job to
+create the tablespaces before calling osm2pgsql and making sure the disk
+behind it is large enough.
 
 ### Coastline Processing
 
