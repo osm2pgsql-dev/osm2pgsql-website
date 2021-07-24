@@ -7,12 +7,17 @@ title: Advanced Topics
 
 Importing on OSM file into the database is very demanding in terms of RAM
 usage. Osm2pgsql and PostgreSQL are running in parallel at this point and both
-need memory.
+need memory. You also need enough memory for general file system cache managed
+by the operating system, otherwise all IO will become too slow.
 
 PostgreSQL blocks at least the part of RAM that has been configured with the
 `shared_buffers` parameter during PostgreSQL tuning and needs some memory on
 top of that. (See [Tuning the PostgreSQL
-Server](#tuning-the-postgresql-server)).
+Server](#tuning-the-postgresql-server)). Note that the [PostgreSQL
+manual](https://www.postgresql.org/docs/current/runtime-config-resource.html){:.extlink}
+recommends setting `shared_buffers` to 25% of the memory in your system, **but
+this is for a dedicated database server**. When you are running osm2pgsql on
+the same host as the database, this is usally way too much.
 
 Osm2pgsql needs at least 2GB of RAM for its internal data structures,
 potentially more when it has to process very large relations. In addition it
@@ -28,6 +33,24 @@ the OSM pbf file you are importing. (Note that the `--cache` setting is in
 MByte). Make sure you leave enough RAM for PostgreSQL and osm2pgsql as
 mentioned above. If the system starts swapping or you are getting out-of-memory
 errors, reduce the cache size or consider using a flatnode file.
+
+When you are running out of memory you'll sometimes get a `bad_alloc` error
+message. But more often osm2pgsql will simply crash without any useful message.
+This is, unfortunately, something we can not do much about. The operating
+system is not telling us that there is no memory available, it simply ends
+the program. This is due to something called "overcommit": The operating
+system will allow the program to allocate more memory than there is actually
+available because it is unlikely that all programs will actually need this
+memory and at the same time. Unfortunately when programs do, there isn't
+anything that can be done except crash the program. Memory intensive programs
+like osm2pgsql tend to run into these problems and it is difficult to predict
+what will happen with any given set of options and input files. It might run
+fine one day and crash on another when the input is only slightly different.
+
+Note also that memory usage numbers reported by osm2pgsql itself or tools such
+as `ps` and `top` are often confusing and difficult to interpret. If it looks
+like you are running out of memory, try a smaller extract, or, if you can, use
+more memory, before reporting a problem.
 
 ### Parallel Processing
 
