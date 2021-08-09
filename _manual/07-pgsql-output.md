@@ -150,7 +150,7 @@ be installed on the database with `CREATE EXTENSION hstore;`
 
 Hstore is used to give more flexibility in using additional tags without
 reimporting the database, at the cost of
-[less speed and more space.](http://www.paulnorman.ca/blog/2014/03/osm2pgsql-and-hstore/){:.extlink}
+[less speed and more space.](https://www.paulnorman.ca/blog/2014/03/osm2pgsql-and-hstore/){:.extlink}
 
 By default, the pgsql output will not generate hstore columns. The following
 options are used to add hstore columns of one type or another:

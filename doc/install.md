@@ -93,7 +93,7 @@ zypper install osm2pgsql
 Build the
 [osm2pgsql-git](https://aur.archlinux.org/packages/osm2pgsql-git/){:.extlink}
 package from the
-[AUR](https://wiki.archlinux.org/index.php/Arch_User_Repository){:.extlink}.
+[AUR](https://wiki.archlinux.org/title/Arch_User_Repository){:.extlink}.
 (Download the tarball and compile/install with `makepkg`, or use an AUR helper
 such as `yaourt`.)
 
