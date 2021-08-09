@@ -77,7 +77,7 @@ has minutely change files for all its extracts.
 To keep an osm2pgsql database up to date you need to know the replication
 (base) URL, i.e. the URL of the directory containing a `state.txt` file.
 
-Versions >1.4.1 of osm2pgsql come with a script `scripts/osm2pgsql-replication`
+*Versions >1.4.1*{:.version} Osm2pgsql comes with a script `scripts/osm2pgsql-replication`
 which is the easiest way to keep an osm2pgsql database up to date. You need
 [PyOsmium](https://osmcode.org/pyosmium/){:.extlink} installed for this to
 work. Run the script regularly (for instance from a cron job or through
@@ -109,6 +109,15 @@ change files for the area of the extract, you can still use the replication
 diffs from planet.osm.org to update your database. But, because those extracts
 contain data for the whole planet, your database will keep accumulating more
 and more data outside the area of your extract that you don't really need.
+
+Be aware that you usually can not use OSM change files directly with osm2pgsql.
+The replication diffs contain *all* changes, including, occasionally, duplicate
+changes to the same object, if it was changed more than once in the period
+covered by the change file. You need to "simplify" the change files before
+use, for instance with the `osmium merge-changes --simplify` command. If you
+use `osm2pgsql-replication` or `pyosmium_get_changes.py` this will be taken
+care of automatically.
+{:.note}
 
 ### Preparing OSM Data for Use by Osm2pgsql
 

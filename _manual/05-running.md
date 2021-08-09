@@ -59,6 +59,14 @@ osm2pgsql -a -s OSMFILE
 osm2pgsql --append --slim OSMFILE
 ```
 
+The OSMFILE in this case will usually be an OSM change file (with suffix
+`.osc` or `.osc.gz`).
+
+You can not use replication diffs downloaded from planet.osm.org directly
+with osm2pgsql, see [Updating an Existing Database](#updating-an-existing-database)
+for details.
+{:.note}
+
 This approach needs more disk space for your database than the "Import Only"
 approach, because all the information necessary for the updates must be stored
 somewhere.
@@ -193,7 +201,10 @@ Osm2pgsql imports OSM data into a PostgreSQL database. *How* it does this
 is governed by the *output* (sometimes called a *backend*). Several outputs
 for different use cases are available:
 
-The *flex* Output *Version >= 1.3.0*{: .version}
+The *flex* Output
+
+: *Available as experimental from version >= 1.3.0, stable from
+  version >= 1.5.0*{: .version}
 
 : This is the most modern and most flexible output
   option. If you are starting a new project, use this output. Many future

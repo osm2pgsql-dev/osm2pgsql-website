@@ -119,6 +119,16 @@ there that can help you with diagnosing issues like this. The [OSM Inspector
 "Areas" view](https://tools.geofabrik.de/osmi/?view=areas){:.extlink} helps
 specifically with finding multipolygon problems.
 
+### Why do I get a duplicate ID error?
+
+On current osm2pgsql the error looks something like this: `ERROR: Input data is
+not ordered: node id 12815112 appears more than once.` Older versions have
+different error messages.
+
+This usually happens when reading an `.osc.gz` change file from planet.osm.org.
+You need to simplify the change file first. See [the
+manual](/doc/manual.html#updating-an-existing-database) for more information.
+
 </section>
 <section markdown="1">
 
