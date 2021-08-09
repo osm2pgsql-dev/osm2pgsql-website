@@ -19,7 +19,7 @@ Released on {{ release.date }}
 ### Downloads
 
 * [Source code (tar.gz)](/download/osm2pgsql-{{ release.version }}.tar.gz)
-* [Source code (zip)](https://github.com/openstreetmap/osm2pgsql/archive/{{ release.version }}.zip)
+* [Source code (zip)](https://codeload.github.com/openstreetmap/osm2pgsql/zip/{{ release.version }})
 * [Windows binary (64bit)](/download/windows/osm2pgsql-{{ release.version }}-x64.zip)
 
 </section>
