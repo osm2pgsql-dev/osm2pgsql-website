@@ -2,16 +2,16 @@
 repositories:
     - id: debian_testing
       name: Debian Testing
-      date: (2021)
+      date: (2023)
       gs: groupstart
     - id: debian_stable
-      name: Debian Stable (Buster)
+      name: Debian Stable (Bullseye)
+      date: 2021-08-14
+      eol: 2026
+    - id: debian_oldstable
+      name: Debian Oldstable (Buster)
       date: 2019-07-06
       eol: 2024
-    - id: debian_oldstable
-      name: Debian Oldstable (Stretch)
-      date: 2017-06-17
-      eol: 2022
     - id: ubuntu_21_04
       name: Ubuntu 21.4 (Hirsute)
       date: 2021-04-22
