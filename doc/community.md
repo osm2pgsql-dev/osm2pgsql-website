@@ -25,7 +25,8 @@ wiki.
 
 * From SotM 2021: "News from osm2pgsql" by Jochen Topf.
   [Slides](https://media.jochentopf.com/media/2021-07-10-talk-sotm2021-osm2pgsql-en-slides.pdf){:.extlink},
-  [Download Video](https://media.jochentopf.com/media/2021-07-10-talk-sotm2021-osm2pgsql-en-video.mp4){:.extlink} (July 2021).
+  [Download Video](https://media.jochentopf.com/media/2021-07-10-talk-sotm2021-osm2pgsql-en-video.mp4){:.extlink},
+  [Video on Youtube](https://www.youtube.com/watch?v=20n4thI7YiI){:.extlink} (July 2021).
 * From FOSSGIS 2021: "Neues von osm2pgsql" by Jochen Topf (in German).
   [Slides](https://media.jochentopf.com/media/2021-06-09-talk-fossgis2021-osm2pgsql-de-slides.pdf){:.extlink},
   [Download Video](https://media.jochentopf.com/media/2021-06-09-talk-fossgis2021-osm2pgsql-de-video.mp4){:.extlink},
