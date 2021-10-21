@@ -9,7 +9,7 @@ This chapter is incomplete.
 When osm2pgsql is processing OSM changes, it can create a list of tiles that
 will be affected by those changes. This list can later be used to delete any
 changed tiles you might have cached. Osm2pgsql only creates this list. How
-to actually expire the tiles it outside the scope of osm2pgsql. Expire only
+to actually expire the tiles is outside the scope of osm2pgsql. Expire only
 makes sense in *append* mode.
 
 {% include_relative options/expire.md %}
