@@ -13,7 +13,7 @@ and how. It is configured through a Lua file which
 * defines the structure of the output tables and
 * defines functions to map the OSM data to the database data format
 
-Use the `-s, --style=FILE` option to specify the name of the Lua file along
+Use the `-S, --style=FILE` option to specify the name of the Lua file along
 with the `-O flex` or `--output=flex` option to specify the use of the flex
 output.
 
