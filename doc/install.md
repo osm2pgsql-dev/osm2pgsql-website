@@ -43,8 +43,10 @@ apt install osm2pgsql
 
 ### Installing on Debian
 
-![Debian Stable package](https://repology.org/badge/version-for-repo/debian_stable/osm2pgsql.svg)
-![Debian Stable Backports package](https://repology.org/badge/version-for-repo/debian_stable_backports/osm2pgsql.svg)
+![Debian 10 (Buster) package](https://repology.org/badge/version-for-repo/debian_10/osm2pgsql.svg)
+![Debian 10 (Buster) Backports package](https://repology.org/badge/version-for-repo/debian_10_backports/osm2pgsql.svg)
+![Debian 11 (Bullseye) package](https://repology.org/badge/version-for-repo/debian_11/osm2pgsql.svg)
+![Debian 11 (Bullseye) Backports package](https://repology.org/badge/version-for-repo/debian_11_backports/osm2pgsql.svg)
 ![Debian Testing package](https://repology.org/badge/version-for-repo/debian_testing/osm2pgsql.svg)
 
 For Debian installation is usually as simple as
@@ -60,6 +62,7 @@ really good at keeping these up-to-date.
 ### Installing on Fedora
 
 ![Fedora 33 package](https://repology.org/badge/version-for-repo/fedora_33/osm2pgsql.svg)
+![Fedora 34 package](https://repology.org/badge/version-for-repo/fedora_34/osm2pgsql.svg)
 ![Fedora Rawhide package](https://repology.org/badge/version-for-repo/fedora_rawhide/osm2pgsql.svg)
 
 Fedora has packages of osm2pgsql available. Install with
