@@ -77,7 +77,7 @@ has minutely change files for all its extracts.
 To keep an osm2pgsql database up to date you need to know the replication
 (base) URL, i.e. the URL of the directory containing a `state.txt` file.
 
-*Versions >1.4.1*{:.version} Osm2pgsql comes with a script `scripts/osm2pgsql-replication`
+*Versions >=1.4.2*{:.version} Osm2pgsql comes with a script `scripts/osm2pgsql-replication`
 which is the easiest way to keep an osm2pgsql database up to date. You need
 [PyOsmium](https://osmcode.org/pyosmium/){:.extlink} installed for this to
 work. Run the script regularly (for instance from a cron job or through
@@ -85,7 +85,7 @@ systemd) to automatically download recent changes and import them into your
 database. (But please make sure you don't call this script too often to keep
 the load on the server to a minimum. Checking every minute for a file that
 will only change once a day is not okay!) Call the script with option `--help`
-to get usage information.
+to get usage information or read the man page for details.
 
 If this script is not available in your version of osm2pgsql or you want more
 control over the update process, there are other options. You need a program
