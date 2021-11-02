@@ -4,12 +4,12 @@ repositories:
       name: Debian Testing
       date: (2023)
       gs: groupstart
-    - id: debian_stable
-      name: Debian Stable (Bullseye)
+    - id: debian_11
+      name: Debian 11 Bullseye
       date: 2021-08-14
       eol: 2026
-    - id: debian_oldstable
-      name: Debian Oldstable (Buster)
+    - id: debian_10
+      name: Debian 10 Buster
       date: 2019-07-06
       eol: 2024
     - id: ubuntu_21_04
@@ -33,13 +33,12 @@ repositories:
       name: Fedora Rawhide
       date: (April 2021)
       gs: groupstart
+    - id: fedora_34
+      name: Fedora 34
+      date: 2021-04-27
     - id: fedora_33
       name: Fedora 33
       date: 2020-10-07
-    - id: fedora_32
-      name: Fedora 32
-      date: 2020-04-28
-      eol: 2021-05-18
     - id: centos_8
       name: CentOS 8
       date: 2019-09-24
