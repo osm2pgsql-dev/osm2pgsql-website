@@ -34,7 +34,7 @@ repositories:
       date: (April 2021)
       gs: groupstart
     - id: fedora_35
-      name: Fedora 34
+      name: Fedora 35
       date: 2021-11-02
     - id: fedora_34
       name: Fedora 34
