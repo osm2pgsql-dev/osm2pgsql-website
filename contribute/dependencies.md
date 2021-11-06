@@ -1,6 +1,6 @@
 ---
 repositories:
-    - id: debian_testing
+    - id: debian_12
       name: Debian Testing
       date: (2023)
       gs: groupstart
@@ -33,6 +33,9 @@ repositories:
       name: Fedora Rawhide
       date: (April 2021)
       gs: groupstart
+    - id: fedora_35
+      name: Fedora 34
+      date: 2021-11-02
     - id: fedora_34
       name: Fedora 34
       date: 2021-04-27
