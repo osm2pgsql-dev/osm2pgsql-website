@@ -28,7 +28,7 @@ available for many different Linux distributions. Some of them are quite old,
 though, and have known bugs. If the current release is not available for your
 distribution, consider installing the current release from source.
 
-### Installing on Ubuntu
+### <img alt="" src="{% link img/ubuntu.png %}"/>Installing on Ubuntu
 
 ![Ubuntu 18.04 package](https://repology.org/badge/version-for-repo/ubuntu_18_04/osm2pgsql.svg)
 ![Ubuntu 20.04 package](https://repology.org/badge/version-for-repo/ubuntu_20_04/osm2pgsql.svg)
@@ -41,13 +41,13 @@ For Ubuntu installation is usually as simple as
 apt install osm2pgsql
 ```
 
-### Installing on Debian
+### <img alt="" src="{% link img/debian.svg %}"/>Installing on Debian
 
 ![Debian 10 (Buster) package](https://repology.org/badge/version-for-repo/debian_10/osm2pgsql.svg)
 ![Debian 10 (Buster) Backports package](https://repology.org/badge/version-for-repo/debian_10_backports/osm2pgsql.svg)
 ![Debian 11 (Bullseye) package](https://repology.org/badge/version-for-repo/debian_11/osm2pgsql.svg)
 ![Debian 11 (Bullseye) Backports package](https://repology.org/badge/version-for-repo/debian_11_backports/osm2pgsql.svg)
-![Debian Testing package](https://repology.org/badge/version-for-repo/debian_testing/osm2pgsql.svg)
+![Debian Testing package](https://repology.org/badge/version-for-repo/debian_12/osm2pgsql.svg)
 
 For Debian installation is usually as simple as
 
@@ -59,10 +59,11 @@ If you are using Debian Stable, we recommend using the packages from
 [backports](https://backports.debian.org/){:.extlink}. Debian maintainers are
 really good at keeping these up-to-date.
 
-### Installing on Fedora
+### <img alt="" src="{% link img/fedora.svg %}"/>Installing on Fedora
 
 ![Fedora 33 package](https://repology.org/badge/version-for-repo/fedora_33/osm2pgsql.svg)
 ![Fedora 34 package](https://repology.org/badge/version-for-repo/fedora_34/osm2pgsql.svg)
+![Fedora 35 package](https://repology.org/badge/version-for-repo/fedora_35/osm2pgsql.svg)
 ![Fedora Rawhide package](https://repology.org/badge/version-for-repo/fedora_rawhide/osm2pgsql.svg)
 
 Fedora has packages of osm2pgsql available. Install with
@@ -71,9 +72,7 @@ Fedora has packages of osm2pgsql available. Install with
 dnf install osm2pgsql
 ```
 
-### Installing on openSUSE
-
-
+### <img alt="" src="{% link img/opensuse.svg %}"/>Installing on openSUSE
 
 First add the "Geo" package repository (adapt URL to the openSUSE version you
 use):
@@ -89,7 +88,7 @@ Then install osm2pgsql:
 zypper install osm2pgsql
 ```
 
-### Installing on Arch Linux
+### <img alt="" src="{% link img/arch.svg %}"/>Installing on Arch Linux
 
 ![AUR package](https://repology.org/badge/version-for-repo/aur/osm2pgsql.svg)
 

@@ -315,7 +315,7 @@ h1 {
     line-height: 120%;
 }
 
-h2 img {
+h2 img, h3 img {
     position: relative;
     top: 2px;
     width: 1em;
@@ -881,6 +881,10 @@ img.fullwidth {
     border: 1px solid #e0e0e0;
     padding: 1px;
     clear: both;
+}
+
+img[src^="https://repology.org/"] {
+    filter: grayscale(1);
 }
 
 {%- include highlight.css -%}
