@@ -77,15 +77,121 @@ has minutely change files for all its extracts.
 To keep an osm2pgsql database up to date you need to know the replication
 (base) URL, i.e. the URL of the directory containing a `state.txt` file.
 
+#### Keeping the database up-to-date with osm2pgsql-replication
+
 *Versions >=1.4.2*{:.version} Osm2pgsql comes with a script `scripts/osm2pgsql-replication`
 which is the easiest way to keep an osm2pgsql database up to date. You need
 [PyOsmium](https://osmcode.org/pyosmium/){:.extlink} installed for this to
-work. Run the script regularly (for instance from a cron job or through
-systemd) to automatically download recent changes and import them into your
-database. (But please make sure you don't call this script too often to keep
-the load on the server to a minimum. Checking every minute for a file that
-will only change once a day is not okay!) Call the script with option `--help`
-to get usage information or read the man page for details.
+work.
+
+##### Initialising the update process
+
+Before you can download updates, osm2pgsql-replication needs to find the
+starting point from which to apply the updates. There are two ways to do
+that. When you have used an extract from Geofabrik or openstreetmap.fr, then
+these files contain all necessary information to get the replication proces
+started. Simply point the initalisation to your extract:
+
+    osm2pgsql-replication init --osm-file your-extract.pbf
+
+If you have imported the whole planet or you don't have the original import
+file anymore, then the necessary information can be deduced by looking at the
+newest data in the database and asking the OSM API when the data was created.
+A working internet connection is necessary for that to work. Simply run
+the initialisation without any parameters:
+
+    osm2pgsql-replication init
+
+By default minutely updates from the OSM main servers will be used. If you
+want to use a different replication service, use the `--server` parameter.
+
+No matter which method you use, osm2pgsql-replication creates a table
+`{prefix}_replication_status` where it saves the URL fo the replication service
+and the status of the updates.
+
+It is safe to repeat initialisation at any time. For example, when you want
+to change the replication service, simply run the init command again with a
+different `--server` parameter.
+
+##### Fetching updates
+
+Fetching updates is as simple as running:
+
+    osm2pgsql-replication update -d <dbname> -- <parameters to osm2pgsql>
+
+This fetches data from the replication service, saves it in a temporary file
+and calls osm2pgsql with the given parameters to apply the changes. Note that
+osm2pgsql-replication makes sure to only fetch a limited amount of data at the
+time to make sure that it does not use up too much RAM. If more data is
+available it will repeat the download and call of osm2pgsql until the database
+is up to date. You can change the amount of data downloaded at once with
+`--max-diff-size`, the default is 500MB.
+
+Sometimes you need to run additional commands after osm2pgsql has updated the
+database, for example, when you use the expiry function. You can use the
+option `--post-processing` to give osm2pgsql-replication a script it is
+supposed to run after each call to osm2pgsql. Note that if the script fails,
+then the entire update process is considered a failure and aborted.
+
+##### Putting it all together with systemd
+
+osm2pgsql-replication works well as a systemd service that keeps your database
+up to date automatically. There are many ways to set up systemd. This section
+gives you a working example to get you started.
+
+First set up a service that runs the updates. Add the following file as
+`/etc/systemd/system/osm2pgsql-update.service`:
+
+```
+[Unit]
+Description=Keep osm2pgsql database up-to-date
+
+[Service]
+WorkingDirectory=/tmp
+ExecStart=osm2pgsql-replication update -d <dbname> -- <parameters to osm2pgsql>
+StandardOutput=append:/var/log/osm2pgsql-updates.log
+User=<database user>
+Type=simple
+Restart=on-failure
+RestartSec=5min
+```
+
+Make sure to adapt the database name, osm2pgsql parameters and the user that the
+script should be run as. The `Restart` parameters make sure that updates will be
+tried again, when something goes wrong like there is a temporary network error.
+
+Now add a timer script that starts the service regularly. Add the following
+file as `/etc/systemd/system/osm2pgsql-update.timer`:
+
+```
+[Unit]
+Description=Trigger a osm2pgsql database update
+
+[Timer]
+OnBootSec=10
+OnUnitActiveSec=1h
+
+[Install]
+WantedBy=timers.target
+```
+
+This timer is good to bring your database up to date once per hour. If you
+use minutely updates, you can lower the value for `OnUnitActiveSec` to get the
+changes even more often. If you use a daily
+replication service like Geofabrik, set OnUnitActiveSec to at least 1 hour!
+If you prefer to run your updates only once every night, use
+`OnCalendar=*-*-* 02:00` instead. This will update your server every night at
+2am. See the man pages of `systemd.timer` for more information.
+
+Now reload systemd so it scans the new scripts and enable the timer:
+
+```
+sudo systemctl daemon-reload
+sudo systemctl enable osm2pgsql-update.timer
+sudo systemctl start osm2pgsql-update.timer
+```
+
+#### Other methods for updating
 
 If this script is not available in your version of osm2pgsql or you want more
 control over the update process, there are other options. You need a program
