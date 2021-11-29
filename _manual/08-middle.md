@@ -7,8 +7,8 @@ This chapter is incomplete.
 {:.wip}
 
 The middle keeps track of all OSM objects read by osm2pgsql and the
-relationships between those objects. It knows, for instance, which ways are
-used by which nodes, or which members a relation has. It also keeps track of
+relationships between those objects. It knows, for instance, which nodes are
+used by which ways, or which members a relation has. It also keeps track of
 all node locations. This information is necessary to build way geometries from
 way nodes and relation geometries from members and it is necessary when
 updating data, because OSM change files only contain changed objects themselves
