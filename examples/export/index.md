@@ -13,7 +13,7 @@ format](https://gdal.org/drivers/vector/index.html){:.extlink} there is.
 For this use case we can run osm2pgsql with the flex output and the
 [generic.lua](https://github.com/openstreetmap/osm2pgsql/blob/master/flex-config/generic.lua)
 configuration. This imports most of the OSM data into the database using
-convenient `hstore` columns for the tags:
+convenient `jsonb` columns for the tags:
 
 ```sh
 osm2pgsql -d osm -O flex -S flex-config/generic.lua OSMDATA.osm.pbf
