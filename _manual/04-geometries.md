@@ -41,12 +41,11 @@ to handle one large geometry. But, depending on what you are doing with the
 data, in can also lead to problems. [This
 blogpost](https://www.paulnorman.ca/blog/2014/03/osm2pgsql-multipolygons/){:.extlink}
 has some deeper discussion of this issue. See the flex and pgsql output
-chapters for details how to configure this.
-
-It will also mean that your id columns are not unique, because there are now
-multiple rows created from the same OSM object. See the [Primary Keys and
-Unique IDs](#primary-keys-and-unique-ids) section for an option how to work
-around this.
+chapters for details how to configure this. It will also mean that your id
+columns are not unique, because there are now multiple rows created from the
+same OSM object. See the [Primary Keys and Unique
+IDs](#primary-keys-and-unique-ids) section for an option how to work around
+this.
 
 ### Geometry Validity
 
@@ -123,10 +122,34 @@ If you are using the old "C transform" of the pgsql output, the geometry
 types for relations of type `multipolygon`, `boundary`, and `route` are
 hardcoded. If you are using the "Lua transform" you can configure them.
 
+Note that osm2pgsql will ignore the roles (`inner` and `outer`) on multipolygon
+and boundary relations when assembling multipolygons, because the roles are so
+often wrong or missing.
+
+### Handling of Incomplete OSM Data
+
+Sometimes you will feed incomplete OSM data to osm2pgsql. Most often this will
+happen when you use [geographical extracts](#geographical-extracts), either
+data you downloaded from somewhere or [created yourself](
+#creating-geographical-extracts). Incomplete data, in this case, means that
+some member nodes of ways or members of relations are missing. Often this can
+not be avoided when creating an extract, you just have to put that cut somewhere.
+
+When osm2pgsql encounters incomplete OSM data it will still try to do its
+best to use it. Ways missing some nodes will be shortened to the available
+part. Multipolygons might be missing some parts. In most cases this will
+work well (if your extract has been created with a sufficiently large buffer),
+but sometimes this will lead to wrong results. In the worst case, if a
+complete outer ring of a multipolygon is missing, the multipolygon will
+appear "inverted", with outer and inner rings switching their roles.
+
+Unfortunately there isn't much that osm2pgsql (or anybody) can do to improve
+this, this is just the nature of OSM data.
+
 ### Projections
 
 Osm2pgsql can create geometries in many projections. If you are using the
-pgsql output, the projection can be chosen with command line options, when
+pgsql output, the projection can be chosen with command line options. When
 using the flex output, the projections are specified in the Lua style file.
 The default is always "Web Mercator".
 

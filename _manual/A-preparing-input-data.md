@@ -54,6 +54,10 @@ The [extracts from Geofabrik](https://download.geofabrik.de/){:.extlink} are
 very popular. They are updated daily and also offer daily change files suitable
 for updating an osm2pgsql database.
 
+Always choose an extract slightly larger than the area you are interested in,
+otherwise you might have problems with the data at the boundary (also see
+[Handling of Incomplete OSM Data](#handling-of-incomplete-osm-data)).
+
 If you can't find a suitable extract, see below for creating your own.
 
 ### Updating an Existing Database
@@ -246,6 +250,14 @@ extracts with the [`osmium
 extract`](https://docs.osmcode.org/osmium/latest/osmium-extract.html){:.extlink}
 command. It can create extracts of OSM data from a bounding box or from a
 boundary.
+
+There are different "cutting strategies" used by `osmium extract` leading to
+different results. Read the man page and understand the implications of those
+strategies before deciding which one to use.
+
+Always cut an extract slightly larger than the area you are interested in,
+otherwise you might have problems with the data at the boundary (also see
+[Handling of Incomplete OSM Data](#handling-of-incomplete-osm-data)).
 
 #### Merging OSM Data Files
 
