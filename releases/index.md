@@ -13,7 +13,7 @@ Released on {{ release.date }}
 
 * [Release notes](https://github.com/openstreetmap/osm2pgsql/releases/tag/{{ release.version }})
 {% if release.manpage -%}
-* [Man page](/doc/man/version-{{ release.version | slugify }})
+* [Man page](/doc/man/version-{{ release.version | slugify }}.html)
 {%- endif %}
 
 ### Downloads
