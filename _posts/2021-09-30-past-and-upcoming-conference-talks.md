@@ -15,5 +15,5 @@ at the [Online/South Africa Postgres
 Conference](https://postgresconf.org/conferences/SouthAfrica2021).
 
 More links to talks about osm2pgsql are on our [community documentation
-page](/doc/community).
+page](https://osm2pgsql.org/doc/community.html).
 
