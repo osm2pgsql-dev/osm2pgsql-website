@@ -153,7 +153,7 @@ processed data might be corrupted. Versions from 1.3.0 warn when you are
 using unsorted data. From version 1.4.0 on, only sorted OSM files are allowed.
 {:.note}
 
-See the [Appendix C](#getting-an-preparing-osm-data) for more information on
+See the [Appendix A](#getting-and-preparing-osm-data) for more information on
 how to get and prepare OSM data for use with osm2pgsql.
 
 {% include_relative options/input.md %}
@@ -163,7 +163,7 @@ limiting the amount of data loaded into the database and it will not always do
 what you expect it to do, especially at the boundaries of the bounding box. If
 you use it, choose a bounding box that is larger than your actual area of
 interest. A better option is to create an extract of the data *before* using
-osm2pgsql. See [Appendix C](#getting-an-preparing-osm-data) for options.
+osm2pgsql. See [Appendix A](#getting-and-preparing-osm-data) for options.
 
 #### Working with Multiple Input Files
 
