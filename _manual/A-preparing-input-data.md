@@ -84,9 +84,10 @@ To keep an osm2pgsql database up to date you need to know the replication
 #### Keeping the database up-to-date with osm2pgsql-replication
 
 *Versions >=1.4.2*{:.version} Osm2pgsql comes with a script `scripts/osm2pgsql-replication`
-which is the easiest way to keep an osm2pgsql database up to date. You need
-[PyOsmium](https://osmcode.org/pyosmium/){:.extlink} installed for this to
-work.
+which is the easiest way to keep an osm2pgsql database up to date. The script
+requires [PyOsmium](https://osmcode.org/pyosmium/){:.extlink} and
+[Psycopg](https://www.psycopg.org/){:.extlink} (psycopg2 and psycopg3 both will work)
+to be installed.
 
 ##### Initialising the update process
 
