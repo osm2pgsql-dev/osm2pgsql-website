@@ -41,7 +41,7 @@ to handle one large geometry. But, depending on what you are doing with the
 data, in can also lead to problems. [This
 blogpost](https://www.paulnorman.ca/blog/2014/03/osm2pgsql-multipolygons/){:.extlink}
 has some deeper discussion of this issue. See the flex and pgsql output
-chapters for details how to configure this. It will also mean that your id
+chapters for details on how to configure this. It will also mean that your id
 columns are not unique, because there are now multiple rows created from the
 same OSM object. See the [Primary Keys and Unique
 IDs](#primary-keys-and-unique-ids) section for an option how to work around
