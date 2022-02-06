@@ -92,7 +92,7 @@ they can contain data derived from ways and from (multipolygon) relations.
 
 #### Advanced Table Definition
 
-Sometimes the `define_(node|way|relation|area)_table()` functions are a bit to
+Sometimes the `define_(node|way|relation|area)_table()` functions are a bit too
 restrictive, for instance if you want more control over the type and naming of
 the Id column(s). In this case you can use the function
 `osm2pgsql.define_table()`.
