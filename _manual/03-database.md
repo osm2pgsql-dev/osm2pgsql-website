@@ -144,7 +144,7 @@ https://www.postgresql.org/docs/current/populate.html){:.extlink} in the
 PostgreSQL documentation.
 
 
-### Expert tuning
+### Expert Tuning
 
 The suggestions in this section are *potentially dangerous* and are not
 suitable for all environments. These settings can cause crashes and/or
@@ -161,3 +161,25 @@ Additional information is on the PostgreSQL wiki: [Tuning Your PostgreSQL
 Server](https://wiki.postgresql.org/wiki/Tuning_Your_PostgreSQL_Server){:.extlink}.
 The section titled `synchronous_commit` contains important information to the
 `synchronous_commit` and `fsync` settings.
+
+
+### Number of Connections
+
+Osm2pgsql will open multiple connections to the database to speed up the
+import. The number of connections will depend on the number of tables that
+are configured and the number of threads used. This can easily exceed the
+`max_connections` limit defined in the [PostgreSQL
+config](https://www.postgresql.org/docs/current/runtime-config-connection.html).
+
+(Currently there are about `3 + number of tables` connections used on import
+and `3 + (1 + number of threads) * number of tables` connections used on
+update. But this might change from version to version of osm2pgsql.)
+
+If you are hit by this, your options are to
+
+* increase the `max_connections` settings in your database configuration,
+* reduce the number of threads with the `--number-processes=THREADS` command
+  line option of osm2pgsql, or
+* use [pgBouncer](https://www.pgbouncer.org/) to reduce the number of
+  connections your server sees.
+
