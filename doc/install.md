@@ -118,9 +118,9 @@ for a list of dependencies and build instructions.
 
 ## <img alt="" src="{% link img/windows.png %}"/>Installing on Windows
 
-### Using prebuild binaries
+### Using prebuilt binaries
 
-You can [download prebuild binaries](/download/windows/). Unpack the ZIP file
+You can [download prebuilt binaries](/download/windows/). Unpack the ZIP file
 and you can immediately use osm2pgsql.
 
 ### Compiling from source
