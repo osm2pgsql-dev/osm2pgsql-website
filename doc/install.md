@@ -32,8 +32,7 @@ distribution, consider installing the current release from source.
 
 ![Ubuntu 18.04 package](https://repology.org/badge/version-for-repo/ubuntu_18_04/osm2pgsql.svg)
 ![Ubuntu 20.04 package](https://repology.org/badge/version-for-repo/ubuntu_20_04/osm2pgsql.svg)
-![Ubuntu 21.04 package](https://repology.org/badge/version-for-repo/ubuntu_21_04/osm2pgsql.svg)
-![Ubuntu 21.10 package](https://repology.org/badge/version-for-repo/ubuntu_21_10/osm2pgsql.svg)
+![Ubuntu 22.04 package](https://repology.org/badge/version-for-repo/ubuntu_22_04/osm2pgsql.svg)
 
 For Ubuntu installation is usually as simple as
 
