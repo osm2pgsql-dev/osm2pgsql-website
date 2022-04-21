@@ -12,10 +12,10 @@ repositories:
       name: Debian 10 Buster
       date: 2019-07-06
       eol: 2024
-    - id: ubuntu_21_04
-      name: Ubuntu 21.4 (Hirsute)
-      date: 2021-04-22
-      eol: 2022-01
+    - id: ubuntu_22_04
+      name: Ubuntu 22.4 (Jammy)
+      date: 2022-04-21
+      eol: 2027-04
       gs: groupstart
     - id: ubuntu_20_04
       name: Ubuntu 20.4 (Focal)
