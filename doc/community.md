@@ -15,7 +15,7 @@ wiki.
 
 ## Blogs
 
-* Jochen Topf writes occasionally about osm2pgsql in [his
+* The developer Jochen Topf writes occasionally about osm2pgsql in [his
   blog](https://blog.jochentopf.com/tags-osm2pgsql.html){:.extlink}.
 * Ryan Lambert of RustProof Labs has a
   [blog](https://blog.rustprooflabs.com/category/openstreetmap){:.extlink} with lots of osm2pgsql
