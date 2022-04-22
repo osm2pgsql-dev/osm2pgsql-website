@@ -20,14 +20,12 @@ the maintainers about where we are and in what areas we see need for work.
 ## Tests and Continuous Integration
 
 [![Github Actions Build Status](https://github.com/openstreetmap/osm2pgsql/workflows/CI/badge.svg?branch=master)](https://github.com/openstreetmap/osm2pgsql/actions)
-[![Appveyor Build Status](https://ci.appveyor.com/api/projects/status/7abwls7hfmb83axj/branch/master?svg=true)](https://ci.appveyor.com/project/openstreetmap/osm2pgsql/branch/master)
 
 We have a growing suite of tests, new features and bug fixes should always
 have test coverage.
 
 The `master` branch and all pull requests are checked automatically using
-Github Actions (Linux and macOS builds) and Appveyor (Windows builds). (And
-yes, this should be unified, but nobody had the time to do that yet.)
+Github Actions (on Linux, macOS and Windows).
 
 </section>
 
