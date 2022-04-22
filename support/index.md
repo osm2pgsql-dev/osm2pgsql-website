@@ -81,11 +81,13 @@ You can ask questions or discuss features and ideas
 ## Commercial Support
 
 Commercial support for osm2pgsql is available from several companies and
-freelancers. You can contact the osm2pgsql developers [Sarah
-Hoffmann](https://github.com/lonvia){:.extlink} or [Jochen
-Topf](https://www.jochentopf.com/){:.extlink} or have a look at [our
-sponsors]({% link sponsors/index.md %}) who also offer some osm2pgsql-related
-services.
+freelancers. You can contact the osm2pgsql developers directly:
+
+* Sarah Hoffmann (<a href="mailto:sarah@lonvia.de">sarah@lonvia.de</a>)
+* [Jochen Topf](https://www.jochentopf.com/){:.extlink} (<a href="mailto:jochen@topf.org">jochen@topf.org</a>)
+
+or have a look at [our sponsors]({% link sponsors/index.md %}) who also offer
+some osm2pgsql-related services.
 
 </section>
 
