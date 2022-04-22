@@ -125,7 +125,7 @@ and you can immediately use osm2pgsql.
 
 ### Compiling from source
 
-For native Windows compilation you need a C++14-compatible compiler. Follow the
+For native Windows compilation you need a C++17-compatible compiler. Follow the
 usual steps for compiling CMake projects.
 
 </section>
