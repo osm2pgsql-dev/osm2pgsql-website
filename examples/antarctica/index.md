@@ -28,7 +28,7 @@ for download:
 
 OpenStreetMap contains data about coastlines, ice shelf boundaries as well as
 research stations and other details in Antarctica. We use this here for a rough
-outline of the continent and some red dots were stations and other important
+outline of the continent and some red dots where stations and other important
 features are. (See [the OSM
 wiki](https://wiki.openstreetmap.org/wiki/Antarctica/Tagging){:.extlink} for
 more information about special tags for Antarctica.)
