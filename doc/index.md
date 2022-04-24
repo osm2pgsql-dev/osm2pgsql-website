@@ -19,9 +19,10 @@ title: Documentation
 </a>
 
 <a class="box box2" href="{% link doc/man/index.md %}">
-    <h2><img src="{% link img/document.svg %}" alt=""/> Man Page</h2>
+    <h2><img src="{% link img/document.svg %}" alt=""/> Man Pages</h2>
 
-    <p>The man page has a short overview about running the osm2pgsql command.</p>
+    <p>The man pages have short overviews about running the <tt>osm2pgsql</tt>
+    and <tt>osm2pgsql-replication</tt> commands.</p>
 </a>
 
 <a class="box box2" href="{% link doc/faq.md %}">
