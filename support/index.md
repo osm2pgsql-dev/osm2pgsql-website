@@ -26,12 +26,15 @@ appendix in the manual](/doc/manual.html#upgrading) for details.
 {:.flright}
 
 If you need help with osm2pgsql,
-[help.osm.org](https://help.openstreetmap.org/){:.extlink} should be your first
-destination.
+[help.osm.org](https://help.openstreetmap.org/){:.extlink} and
+[community.osm.org](https://community.openstreetmap.org/){:.extlink}
+should be your first destinations.
 
-Before asking your question, have a look at existing [questions about
-osm2pgsql](https://help.openstreetmap.org/tags/osm2pgsql/){:.extlink} on that
-site, maybe yours has already been answered. Note that some answers are
+Before asking your question, have a look at existing questions about
+osm2pgsql
+(on [help.osm.org](https://help.openstreetmap.org/tags/osm2pgsql/){:.extlink} /
+[community.osm.org](https://community.openstreetmap.org/tag/osm2pgsql){:.extlink}),
+maybe your question has already been answered. Note that some answers might be
 outdated.
 
 When asking for help, always describe what you are trying to achieve *in the
