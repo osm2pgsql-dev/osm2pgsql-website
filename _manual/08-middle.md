@@ -84,7 +84,7 @@ to the new index. It will keep using the old index. So you do not have to do
 anything when upgrading osm2pgsql.
 
 If you want to use the new index, there are two ways of doing this: The "safe"
-way for most users and the "doit-it-yourself" way for expert users. Note that
+way for most users and the "do-it-yourself" way for expert users. Note that
 once you switched to the new index, older versions of osm2pgsql will not work
 correctly any more.
 
