@@ -346,20 +346,6 @@ will be calculated in web mercator, or you can set the `projection` parameter
 of the column to `4326` to calculate it with WGS84 coordinates. Other
 projections are currently not supported.
 
-#### Defining Other Columns
-
-In addition to id and geometry columns, each table can have any number of
-"normal" columns using any type supported by PostgreSQL. Some types are
-specially recognized by osm2pgsql: `text`, `boolean`, `int2` (`smallint`),
-`int4` (`int`, `integer`), `int8` (`bigint`), `real`, `direction`, `hstore`,
-`json` and `jsonb`. See the [Type Conversion](#type-conversions){:.extlink}
-section for details on how this type affects the conversion of OSM data to the
-database types.
-
-Instead of the above types you can use any SQL type you want. If you do that
-you have to supply the PostgreSQL string representation for that type when
-adding data to such columns (or Lua `nil` to set the column to `NULL`).
-
 ### Processing Callbacks
 
 You are expected to define one or more of the following functions:
