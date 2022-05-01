@@ -177,9 +177,15 @@ update. But this might change from version to version of osm2pgsql.)
 
 If you are hit by this, your options are to
 
-* increase the `max_connections` settings in your database configuration,
+* increase the `max_connections` settings in your database configuration, or
 * reduce the number of threads with the `--number-processes=THREADS` command
-  line option of osm2pgsql, or
-* use [pgBouncer](https://www.pgbouncer.org/) to reduce the number of
-  connections your server sees.
+  line option of osm2pgsql.
+
+Using a connection pool, such as pgBouncer, is not an option to reduce the number
+of osm2pgsql connections. This is due to osm2pgsql opening and holding `idle` connections
+for the duration of the processing. This behavior prevents pgBouncer's `session` based
+pooling from providing any benefit in reducing the number of connections seen by PostgreSQL.
+The use of prepared statements in osm2pgsql prevents other pooling methods (e.g. `transaction`)
+from functioning.
+
 
