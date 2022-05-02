@@ -177,9 +177,7 @@ update. But this might change from version to version of osm2pgsql.)
 
 If you are hit by this, your options are to
 
-* increase the `max_connections` settings in your database configuration,
+* increase the `max_connections` settings in your database configuration, or
 * reduce the number of threads with the `--number-processes=THREADS` command
   line option of osm2pgsql, or
-* use [pgBouncer](https://www.pgbouncer.org/) to reduce the number of
-  connections your server sees.
 
