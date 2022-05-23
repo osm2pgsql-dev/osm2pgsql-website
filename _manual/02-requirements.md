@@ -11,8 +11,8 @@ Osm2pgsql works on
 <img class="inline" alt="" src="{% link img/apple.png %}"/> macOS.
 
 Osm2pgsql is developed on Linux and most of the developers don't have
-experience with running it on anything but Linux, so it will probably works
-best there. This documentation is also somewhat geared towards Linux users.
+experience with running it on anything but Linux, so it probably functions
+best on that platform. This documentation is also somewhat geared towards Linux users.
 That being said, we strive to make the software work on Windows and macOS as
 well. Please report any problems you might have.
 
