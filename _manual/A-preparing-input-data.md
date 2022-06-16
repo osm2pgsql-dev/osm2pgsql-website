@@ -97,7 +97,7 @@ that. When you have used an extract from Geofabrik or openstreetmap.fr, then
 these files contain all necessary information to get the replication proces
 started. Simply point the initalisation to your extract:
 
-    osm2pgsql-replication init --osm-file your-extract.pbf
+    osm2pgsql-replication init -d <dbname> --osm-file your-extract.pbf
 
 If you have imported the whole planet or you don't have the original import
 file anymore, then the necessary information can be deduced by looking at the
@@ -105,7 +105,7 @@ newest data in the database and asking the OSM API when the data was created.
 A working internet connection is necessary for that to work. Simply run
 the initialisation without any parameters:
 
-    osm2pgsql-replication init
+    osm2pgsql-replication init -d <dbname>
 
 By default minutely updates from the OSM main servers will be used. If you
 want to use a different replication service, use the `--server` parameter.
