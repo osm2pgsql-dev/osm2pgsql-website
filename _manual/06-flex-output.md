@@ -372,6 +372,7 @@ The parameter table (`object`) has the following fields and functions:
 | Field / Function | Description |
 | ------------- | ---|
 | id            | The id of the node, way, or relation. |
+| type          | *Version > 1.6.0*{: .version} The object type as string (`node`, `way`, or `relation`). |
 | tags          | A table with all the tags of the object. |
 | version       | Version of the OSM object. (\*) |
 | timestamp     | Timestamp of the OSM object, time in seconds since the epoch (midnight 1970-01-01). (\*) |
