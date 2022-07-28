@@ -72,5 +72,12 @@ because it gives you a much more flexible configuration. If available osm2pgsql
 can also be compiled using the Lua JIT (just in time) compiler.
 
 Osm2pgsql can also be compiled without Lua support. In that case the *pgsql*
-and *gazetteer* outputs are the only available.
+and *gazetteer* outputs are the only ones available.
+
+Security Note: Lua scripts can do basically anything on your computer that the
+user running osm2pgsql is allowed to do, such as reading and writing files,
+opening network connections etc. This makes the Lua config files really
+versatile and allows lots of great functionality. But you should never use a
+Lua configuration file from an unknown source without checking it.
+{:note}
 
