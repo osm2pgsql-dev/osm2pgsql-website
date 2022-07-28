@@ -86,3 +86,13 @@ end
 You can have one memory reporter for nodes, ways, and relations together or
 have separate ones.
 
+### Checking Lua Scripts
+
+If you have the Lua compiler (luac) installed (it comes with the installation
+of the Lua interpreter), you can use it to syntax check your Lua scripts
+independently of osm2pgsql. Just run `luac -p SCRIPT.lua`.
+
+A script that fails this check will not work with osm2pgsql. But it is only a
+syntax check, it doesn't run your script, so the script can still fail when
+used in osm2pgsql. But it helps getting rid of the simple errors quickly.
+
