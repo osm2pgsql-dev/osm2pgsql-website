@@ -11,6 +11,14 @@ the default `planet_osm` prefix.
 It is frequently better to reimport as this will also recluster the tables and
 remove table or index bloat.
 
+#### Upgrade to 1.7.0: Changes to Index
+
+From version 1.7.0 the [bucket index](#bucket-index-for-slim-mode) for the slim
+mode is enabled by default. It can considerably reduce the size of the index on
+disk. This will only affect new osm2pgsql imports, existing imports will keep
+working with the old index type. See the [chapter on the bucket
+index](#bucket-index-for-slim-mode) for details and upgrade options.
+
 #### Upgrade to 1.5.0: Changes to Flex and Multi Outputs
 
 The multi output has been removed. You should switch to the flex output.
