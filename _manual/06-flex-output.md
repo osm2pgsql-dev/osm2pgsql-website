@@ -31,12 +31,12 @@ directory which contain lots of comments to get you started.
 All configuration is done through the `osm2pgsql` global object in Lua. It has
 the following fields and functions:
 
-| Field / Function  | Description |
-| ----------------- | --- |
-| version           | The version of osm2pgsql as a string. |
-| config_dir        | *Version >=1.5.1*{: .version} The directory where your Lua config file is. Useful when you want to include more files from Lua. |
-| mode              | Either `"create"` or `"append"` depending on the command line options (`-c, --create` or `-a, --append`). |
-| stage             | Either `1` or `2` (1st/2nd stage processing of the data). See below. |
+| Field / Function                                | Description |
+| ----------------------------------------------- | ----------- |
+| version                                         | The version of osm2pgsql as a string. |
+| config_dir                                      | *Version >=1.5.1*{: .version} The directory where your Lua config file is. Useful when you want to include more files from Lua. |
+| mode                                            | Either `"create"` or `"append"` depending on the command line options (`-c, --create` or `-a, --append`). |
+| stage                                           | Either `1` or `2` (1st/2nd stage processing of the data). See below. |
 | define_node_table(NAME, COLUMNS[, OPTIONS])     | Define a node table. |
 | define_way_table(NAME, COLUMNS[, OPTIONS])      | Define a way table. |
 | define_relation_table(NAME, COLUMNS[, OPTIONS]) | Define a relation table. |
@@ -275,23 +275,24 @@ error message from osm2pgsql.
 | `type`             | Default for `sql_type` | Notes       |
 | ------------------ | ---------------------- | ----------- |
 | text               | `text`                 | *(default)* |
-| bool, boolean      | `boolean` | |
-| int2, smallint     | `int2`    | |
-| int4, int, integer | `int4`    | |
-| int8, bigint       | `int8`    | |
-| real               | `real`    | |
-| hstore             | `hstore`  | PostgreSQL extension `hstore` must be loaded |
-| json               | `json`    | |
-| jsonb              | `jsonb`   | |
-| direction          | `int2`    | |
-| geometry           | `geometry(GEOMETRY, *SRID*)`        | (\*) |
-| point              | `geometry(POINT, *SRID*)`           | (\*) |
-| linestring         | `geometry(LINESTRING, *SRID*)`      | (\*) |
-| polygon            | `geometry(POLYGON, *SRID*)`         | (\*) |
-| multipoint         | `geometry(MULTIPOINT, *SRID*)`      | (\*) |
-| multilinestring    | `geometry(MULTILINESTRING, *SRID*)` | (\*) |
-| multipolygon       | `geometry(MULTIPOLYGON, *SRID*)`    | (\*) |
-| area               | `real `   | |
+| bool, boolean      | `boolean`              | |
+| int2, smallint     | `int2`                 | |
+| int4, int, integer | `int4`                 | |
+| int8, bigint       | `int8`                 | |
+| real               | `real`                 | |
+| hstore             | `hstore`               | PostgreSQL extension `hstore` must be loaded |
+| json               | `json`                 | |
+| jsonb              | `jsonb`                | |
+| direction          | `int2`                 | |
+| geometry           | `geometry(GEOMETRY, *SRID*)`           | (\*) |
+| point              | `geometry(POINT, *SRID*)`              | (\*) |
+| linestring         | `geometry(LINESTRING, *SRID*)`         | (\*) |
+| polygon            | `geometry(POLYGON, *SRID*)`            | (\*) |
+| multipoint         | `geometry(MULTIPOINT, *SRID*)`         | (\*) |
+| multilinestring    | `geometry(MULTILINESTRING, *SRID*)`    | (\*) |
+| multipolygon       | `geometry(MULTIPOLYGON, *SRID*)`       | (\*) |
+| geometrycollection | `geometry(GEOMETRYCOLLECTION, *SRID*)` | (\*) *Only available in version >= 1.7.0*{: .version} |
+| area               | `real `                | |
 {: .desc}
 
 The `SRID` for the geometry SQL types comes from the `projection` parameter.
@@ -314,23 +315,29 @@ type.
 
 #### Defining Geometry Columns
 
-Most tables will have a geometry column. (Currently only zero or one geometry
-columns are supported.) The types of the geometry column possible depend on
-the type of the input data. For node tables you are pretty much restricted
-to point geometries, but there is a variety of options for relation tables
-for instance.
+Most tables will have a geometry column. The types of the geometry column
+possible depend on the type of the input data. For node tables you are pretty
+much restricted to point geometries, but there is a variety of options for
+relation tables for instance.
+
+*Version < 1.7.0*{: .version} Only zero or one geometry columns are supported.
+
+*Version >= 1.7.0*{: .version} You can have any number of geometry columns if
+you are using the `insert()` command on a table (and not `add_row()`, see
+below).
 
 The supported geometry types are:
 
-| Geometry type   | Description |
-| --------------- | ----------- |
-| point           | Point geometry, usually created from nodes. |
-| linestring      | Linestring geometry, usually created from ways. |
-| polygon         | Polygon geometry for area tables, created from ways or relations. |
-| multipoint      | Currently not used. |
-| multilinestring | Created from (possibly split up) ways or relations. |
-| multipolygon    | For area tables, created from ways or relations. |
-| geometry        | Any kind of geometry. Also used for area tables that should hold both polygon and multipolygon geometries. |
+| Geometry type      | Description |
+| ------------------ | ----------- |
+| point              | Point geometry, usually created from nodes. |
+| linestring         | Linestring geometry, usually created from ways. |
+| polygon            | Polygon geometry for area tables, created from ways or relations. |
+| multipoint         | Currently not used. |
+| multilinestring    | Created from (possibly split up) ways or relations. |
+| multipolygon       | For area tables, created from ways or relations. |
+| geometrycollection | Geometry collection, created from relations. *Only available in version >= 1.7.0*{: .version} |
+| geometry           | Any kind of geometry. Also used for area tables that should hold both polygon and multipolygon geometries. |
 {: .desc}
 
 By default geometry columns will be created in web mercator (EPSG 3857). To
@@ -346,14 +353,20 @@ will be calculated in web mercator, or you can set the `projection` parameter
 of the column to `4326` to calculate it with WGS84 coordinates. Other
 projections are currently not supported.
 
+*Version >= 1.7.0*{:.version} If you are using the `insert()` command on a
+table (and not `add_row()`, see below) you can use the `area()` function on any
+geometry in any projection to calculate the area. What you get back is a real
+number that you can put into any normal `real` column. The special case of the
+`area` column type is not needed any more.
+
 ### Processing Callbacks
 
 You are expected to define one or more of the following functions:
 
-| Callback function                  | Description |
-| ---------------------------------- | --- |
-| osm2pgsql.process_node(object)     | Called for each new or changed node. |
-| osm2pgsql.process_way(object)      | Called for each new or changed way. |
+| Callback function                  | Description                              |
+| ---------------------------------- | ---------------------------------------- |
+| osm2pgsql.process_node(object)     | Called for each new or changed node.     |
+| osm2pgsql.process_way(object)      | Called for each new or changed way.      |
 | osm2pgsql.process_relation(object) | Called for each new or changed relation. |
 {: .desc}
 
@@ -370,30 +383,48 @@ for which the functions are called.
 The parameter table (`object`) has the following fields and functions:
 
 | Field / Function | Description |
-| ------------- | ---|
-| id            | The id of the node, way, or relation. |
-| type          | *Version > 1.6.0*{: .version} The object type as string (`node`, `way`, or `relation`). |
-| tags          | A table with all the tags of the object. |
-| version       | Version of the OSM object. (\*) |
-| timestamp     | Timestamp of the OSM object, time in seconds since the epoch (midnight 1970-01-01). (\*) |
-| changeset     | Changeset containing this version of the OSM object. (\*) |
-| uid           | User id of the user that created or last changed this OSM object. (\*) |
-| user          | User name of the user that created or last changed this OSM object. (\*) |
-| grab_tag(KEY) | Return the tag value of the specified key and remove the tag from the list of tags. (Example: `local name = object:grab_tag('name')`) This is often used when you want to store some tags in special columns and the rest of the tags in an jsonb or hstore column. |
-| get_bbox()    | Get the bounding box of the current node or way. This function returns four result values: the lon/lat values for the bottom left corner of the bounding box, followed by the lon/lat values of the top right corner. Both lon/lat values are identical in case of nodes. Example: `lon, lat, dummy, dummy = object.get_bbox()` (This function doesn't work for relations currently.) |
-| is_closed     | Ways only: A boolean telling you whether the way geometry is closed, i.e. the first and last node are the same. |
-| nodes         | Ways only: An array with the way node ids. |
-| members       | Relations only: An array with member tables. Each member table has the fields `type` (values `n`, `w`, or `r`), `ref` (member id) and `role`. |
+| ---------------- | ----------- |
+| id               | The id of the node, way, or relation. |
+| type             | *Version >= 1.7.0*{: .version} The object type as string (`node`, `way`, or `relation`). |
+| tags             | A table with all the tags of the object. |
+| version          | Version of the OSM object. (\*) |
+| timestamp        | Timestamp of the OSM object, time in seconds since the epoch (midnight 1970-01-01). (\*) |
+| changeset        | Changeset containing this version of the OSM object. (\*) |
+| uid              | User id of the user that created or last changed this OSM object. (\*) |
+| user             | User name of the user that created or last changed this OSM object. (\*) |
+| grab_tag(KEY)    | Return the tag value of the specified key and remove the tag from the list of tags. (Example: `local name = object:grab_tag('name')`) This is often used when you want to store some tags in special columns and the rest of the tags in an jsonb or hstore column. |
+| get_bbox()       | Get the bounding box of the current node or way. This function returns four result values: the lon/lat values for the bottom left corner of the bounding box, followed by the lon/lat values of the top right corner. Both lon/lat values are identical in case of nodes. Example: `lon, lat, dummy, dummy = object.get_bbox()` (This function doesn't work for relations currently.) |
+| is_closed        | Ways only: A boolean telling you whether the way geometry is closed, i.e. the first and last node are the same. |
+| nodes            | Ways only: An array with the way node ids. |
+| members          | Relations only: An array with member tables. Each member table has the fields `type` (values `n`, `w`, or `r`), `ref` (member id) and `role`. |
+| as_point()              | Create point geometry from OSM node object. |
+| as_linestring()         | Create linestring geometry from OSM way object. |
+| as_polygon()            | Create polygon geometry from OSM way object. |
+| as_multilinestring()    | Create (multi)linestring geometry from OSM way/relation object. |
+| as_multipolygon()       | Create (multi)polygon geometry from OSM way/relation object. |
+| as_geometrycollection() | Create geometry collection from OSM relation object. |
 {: .desc}
 
 These are only available if the `-x|--extra-attributes` option is used and the
 OSM input file actually contains those fields.
 {: .table-note}
 
+The `as_*` functions will return a NULL geometry (check with `is_null()`) if
+the geometry can not be created for some reason, for instance a polygon can
+only be created from closed ways.
+
+The `as_linestring()` and `as_polygon()` functions can only be used on ways.
+The `as_multilinestring()` and `as_multipolygon()` functions, on the other
+hand, can be used for ways and for relations. The latter will either return
+a linestring/polygon or a multilinestring/multipolygon, depending on whether
+the result is a single geometry or a multi-geometry.
+
 You can do anything in those processing functions to decide what to do with
 this data. If you are not interested in that OSM object, simply return from the
 function. If you want to add the OSM object to some table call the `add_row()`
-function on that table:
+(*Version >= 1.7.0*{: .version} or `insert()`) function on that table.
+
+### The `add_row` function
 
 ```lua
 -- definition of the table:
@@ -421,12 +452,14 @@ fill into all the database columns. Any column not mentioned will be set to
 The geometry column is somewhat special. You have to define a *geometry
 transformation* that will be used to transform the OSM object data into
 a geometry that fits into the geometry column. See the next section for
-details.
+details. If you want more flexible geometry processing you need to use [the
+`insert()` function](#the-insert-function) available in
+*version >= 1.70*{:.version}.
 
 Note that you can't set the object id, this will be handled for you behind the
 scenes.
 
-### Geometry Transformations
+### Geometry Transformations for the `add_row()` Function
 
 Currently these geometry transformations are supported:
 
@@ -469,6 +502,62 @@ a default transformation. These are the defaults:
 * For way tables, a `linestring` column gets the complete way geometry, a
   `polygon` column gets the way geometry as area (if the way is closed and
   the area is valid).
+
+### The `insert()` Function
+
+This function is only available in *Version >= 1.7.0*{: .version}. Use
+`add_row()` in earlier versions.
+
+```lua
+-- definition of the table:
+table_pois = osm2pgsql.define_node_table('pois', {
+    { column = 'tags', type = 'jsonb' },
+    { column = 'name', type = 'text' },
+    { column = 'geom', type = 'point' },
+})
+...
+function osm2pgsql.process_node(object)
+...
+    table_pois:insert({
+        tags = object.tags,
+        name = object.tags.name,
+        geom = object:as_point()
+    })
+...
+end
+```
+
+The `insert()` function takes a single table parameter, that describes what to
+fill into all the database columns. Any column not mentioned will be set to
+`NULL`. It returns `true` if the insert was successfull.
+
+Note that you can't set the object id, this will be handled for you behind the
+scenes.
+
+### Handling of NULL in `insert()` Function
+
+Any column not set, or set to `nil` (which is the same thing in Lua), or set to
+the null geometry, will be set to `NULL` in the database. If the column is
+defined with `not_null = true` in the table definition, the row will not be
+inserted. Usually that is just what you want, bad data is silently ignored that
+way.
+
+If you want to check whether the insert acually happened, you can look at the
+return values of the `insert()` command. The `insert()` function actually
+returns up to four values:
+
+```lua
+local inserted, message, column, object = table:insert(...)
+```
+
+| Value    | Description                                               |
+|--------- | --------------------------------------------------------- |
+| inserted | `true` if the row was inserted, `false` otherwise         |
+| message  | A message telling you the reason why the insertion failed |
+| column   | The name of the column that triggered the failure         |
+| object   | The OSM object we are currently processing. Useful for, say, logging the id |
+
+The last three are only set if the first is `false`.
 
 ### Stages
 
@@ -541,15 +630,17 @@ any extra time you are using. Keep in mind that:
 
 ### Type Conversions
 
-The `add_row()` command will try its best to convert Lua values into
-corresponding PostgreSQL values. But not all conversions make sense. Here
-are the detailed rules:
+The `add_row()` and `insert()` functions will try its best to convert Lua
+values into corresponding PostgreSQL values. But not all conversions make
+sense. Here are the detailed rules:
 
 1. Lua values of type `function`, `userdata`, or `thread` will always result in
    an error.
 2. The Lua type `nil` is always converted to `NULL`.
 3. If the result of a conversion is `NULL` and the column is defined as `NOT
-   NULL`, an error is thrown.
+   NULL`, an error is thrown from the `add_row()` function. See
+   [above](#handling-of-null-in-insert-function) for `NULL` handling in
+   `insert()`.
 4. The Lua type `table` is converted to the PostgreSQL type `hstore` if and
    only if all keys and values in the table are string values.
 5. For `boolean` columns: The number `0` is converted to `false`, all other
@@ -577,6 +668,12 @@ are the detailed rules:
    error.
 10. For text columns and any other not specially recognized column types,
     booleans result in an error and numbers are converted to strings.
+11. *Version >= 1.7.0*{: .version} For `insert()` only: Geometry objects are
+    converted to their PostGIS counterparts. Null geometries are converted to
+    database `NULL`. Geometries in WGS84 will automatically be transformed into
+    the target column SRS if needed. Non-multi geometries will automatically be
+    transformed into multi-geometries if the target column has a multi-geometry
+    type.
 
 If you want any other conversions, you have to do them yourself in your Lua
 code. Osm2pgsql provides some helper functions for other conversions, see
@@ -586,4 +683,72 @@ Conversion to `json` and `jsonb` columns is only available from osm2pgsql
 1.5.0 onwards. In versions before that you have to provide valid JSON from
 your Lua script to those columns yourself.
 {: .note}
+
+### Geometry Objects in Lua
+
+*Version >= 1.7.0*{:.version}
+
+Lua geometry objects are created by calls such as `object:as_point()` or
+`object:as_polygon()` inside processing functions. It is not possible to
+create geometry objects from scratch, you always need an OSM object.
+
+You can write geometry objects directly into geometry columns in the database
+using the table `insert()` function. (You can not do that using the `add_row()`
+function, it has a different geometry handling, see above.) But you can also
+transform geometries in multiple ways.
+
+Geometry objects have the following functions. They are modelled after the
+PostGIS functions with equivalent names.
+
+| Function                         | Description |
+| -------------------------------- | ----------- |
+| `area()`                         | Returns the area of the geometry. For any geometry type but (MULTI)POLYGON this is always `0.0`. The area is calculated using the SRS of the polygon. |
+| `centroid()`                     | Return the centroid (center) of a (MULTI)POLYGON. |
+| `geometries()`                   | Returns an iterator for iterating over member geometries of a multi-geometry. See below for detail. |
+| `geometry_n()`                   | Returns the nth geometry (1-based) of a multi-geometry. |
+| `geometry_type()`                | Returns the type of geometry as a string: `NULL`, `POINT`, `LINESTRING`, `POLYGON`, `MULTIPOINT`, `MULTILINESTRING`, `MULTIPOLYGON`, or `GEOMETRYCOLLECTION`.
+| `is_null()`                      | Returns `true` if the geometry is a NULL geometry, `false` otherwise. |
+| `line_merge()`                   | Merge lines in a (MULTI)LINESTRING as much as possible into longer lines. |
+| `num_geometries()`               | Returns the number of geometries in a multi-geometry. Always 0 for NULL geometries and always 1 for non-multi geometries. |
+| `segmentize(max_segment_length)` | Segmentize a (MULTI)LINESTRING, so that no segment is longer than `max_segment_length`. Result is a (MULTI)LINESTRING. |
+| `simplify(tolerance)`            | Simplify (MULTI)LINESTRING geometries with the Douglas-Peucker algorithm. |
+| `srid()`                         | Return SRID of the geometry. |
+| `transform(target_srid)`         | Transform the geometry to the target SRS. |
+{:.desc}
+
+The Lua length operator (`#`) returns the number of geometries in the geometry
+object, it is synonymous to calling `num_geometries()`.
+
+Converting a geometry to a string (`tostring(geom)`) returns the geometry type
+(as with the `geometry_type()` function).
+
+All geometry functions that return geometries will return a NULL geometry on
+error. All geometry functions handle NULL geometry on input in some way. So you
+can always chain geometry functions and if there is any problem on the way, the
+result will be a NULL geometry. Here is an example:
+
+```lua
+local area = object:as_polygon():transform(3857):area()
+-- area will be 0.0 if not a polygon or transformation failed
+```
+
+To iterate of the members of a multi-geometry use the `geometries()` function:
+
+```lua
+local geom = object:as_multipolygon()
+for g in geom:geometries() do
+    landuse.insert({
+        geom = g,
+        ...
+    })
+end
+```
+
+In Lua you can not get at the actual contents of the geometries, i.e. the
+coordinates and such. This is intentional. Writing functions in Lua that do
+something with the coordinates will be much slower than writing those functions
+in C++, so Lua scripts should concern themselves only with the high-level
+control flow, not the details of the geometry. If you think you need some
+function to access the internals of a geometry, [start a discussion on
+Github](https://github.com/openstreetmap/osm2pgsql/discussions).
 

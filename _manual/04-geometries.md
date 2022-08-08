@@ -15,14 +15,15 @@ Features](https://en.wikipedia.org/wiki/Simple_Features){:.extlink} defined by
 the OpenGIS Consortium (OGC). Osm2pgsql creates geometries of these types
 from OSM data.
 
-| Geometry type   | Created from OSM data                           |
-| --------------- | ----------------------------------------------- |
-| Point           | Created from nodes.                             |
-| LineString      | Created from ways.                              |
-| Polygon         | Created from closed ways or some relations.     |
-| MultiPoint      | Never created.                                  |
-| MultiLineString | Created from (split up) ways or some relations. |
-| MultiPolygon    | Created from closed ways or some relations.     |
+| Geometry type      | Created from OSM data                                 |
+| ------------------ | ----------------------------------------------------- |
+| Point              | Created from nodes.                                   |
+| LineString         | Created from ways.                                    |
+| Polygon            | Created from closed ways or some relations.           |
+| MultiPoint         | Never created.                                        |
+| MultiLineString    | Created from (split up) ways or some relations.       |
+| MultiPolygon       | Created from closed ways or some relations.           |
+| GeometryCollection | *Version >= 1.7.0*{:.version} Created from relations. |
 {: .desc}
 
 ### Single vs. Multi Geometries
@@ -46,6 +47,12 @@ columns are not unique, because there are now multiple rows created from the
 same OSM object. See the [Primary Keys and Unique
 IDs](#primary-keys-and-unique-ids) section for an option how to work around
 this.
+
+*Version >= 1.7.0*{:.version} When using the flex output, you can decide
+yourself what geometries to create using the `as_point()`, `as_linestring()`,
+`as_polygon()`, `as_multilinestring()`, `as_multipolygon()`, and
+`as_geometrycollection()` functions. See the [Flex Output
+chapter](#the-flex-output) for details.
 
 ### Geometry Validity
 
@@ -100,6 +107,11 @@ split LineStrings if the `split_at` transformation parameter is used, see the
 output chapter for details. See also the [Single vs. Multi
 Geometries](#single-vs-multi-geometries) section above.
 
+*Version >= 1.7.0*{:.version} When using the flex output, you can decide
+yourself what geometries to create from a way using the `as_linestring()`, or
+`as_polygon()` functions. See the [Flex Output chapter](#the-flex-output) for
+details.
+
 ### Processing of Relations
 
 Relations come in many variations and they can be used for all sorts of
@@ -117,6 +129,12 @@ The osm2pgsql flex output can create a (Multi)Polygon or (Multi)LineString
 geometry from any relation, other geometries are currently not supported. See
 the [Geometry transformations](#geometry-transformations) section in the flex
 output chapter for details.
+
+*Version >= 1.7.0*{:.version} When using the flex output, you can decide
+yourself what geometries to create from a way using the `as_multilinestring()`,
+or `as_multipolygon()` functions. Also supported now is the
+`as_geometrycollection()` function which creates GeometryCollection from all
+member nodes and ways of a relation (relation members are ignored).
 
 If you are using the old "C transform" of the pgsql output, the geometry
 types for relations of type `multipolygon`, `boundary`, and `route` are
@@ -152,6 +170,14 @@ Osm2pgsql can create geometries in many projections. If you are using the
 pgsql output, the projection can be chosen with command line options. When
 using the flex output, the projections are specified in the Lua style file.
 The default is always "Web Mercator".
+
+*Version >= 1.7.0*{:.version} When using the flex output, osm2pgsql will
+usually magically transform any geometry you are writing into a database table
+into the projection you defined your tables with. But you can use the
+`transform()` function on the geometry to force a certain transformation. This
+is useful, for instance, if you want to calculate the area of a polygon in a
+specific projection. See the [Flex Output chapter](#the-flex-output) for
+details.
 
 <table class="proj"><tr><td>
 <img alt="" src="{% link img/plate-carree.jpg %}" title="Equirectangular projection. Image source: Wikipedia (https://en.wikipedia.org/wiki/File:Equirectangular_projection_SW.jpg)"/>
