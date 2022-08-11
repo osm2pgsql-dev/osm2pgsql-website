@@ -125,6 +125,9 @@ cluster the data in the output tables by geometry which means that features
 which are in reality near to each other will also be near to each other on
 the disk and access will be faster.
 
+*Version >=1.7.0*{:.version} If a table has multiple geometry columns,
+clustering will always be by the first geometry column.
+
 This clustering is achieved by ordering and copying each whole table after
 the import. This will take some time and it means you will temporarily need
 twice the disk space.
