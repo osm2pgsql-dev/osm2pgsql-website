@@ -326,6 +326,10 @@ relation tables for instance.
 you are using the `insert()` command on a table (and not `add_row()`, see
 below).
 
+An index will only be built automatically for the first (or only) geometry
+column you define. The table will be [clustered](#clustering-by-geometry) by
+the first (or only) geometry column (unless disabled).
+
 The supported geometry types are:
 
 | Geometry type      | Description |
