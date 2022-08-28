@@ -129,6 +129,14 @@ This usually happens when reading an `.osc.gz` change file from planet.osm.org.
 You need to simplify the change file first. See [the
 manual](/doc/manual.html#updating-an-existing-database) for more information.
 
+### Can osm2pgsql resume after a failed import?
+
+Sometimes an osm2pgsql import fails, because of a bug in osm2pgsql or because
+you don't have enough memory or because the computer crashes for unrelated
+reasons. Because the import can take many hours it would be great if osm2pgsql
+could resume the half-done import. Unfortunately this is currently not
+possible.
+
 </section>
 <section markdown="1">
 
