@@ -230,6 +230,12 @@ use `osm2pgsql-replication` or `pyosmium_get_changes.py` this will be taken
 care of automatically.
 {:.note}
 
+#### Rerunning a failed update
+
+If you run osm2pgsql with `--append` and the update fails for some reason,
+for instance when your server crashes in the middle of it, you can just re-run
+the update again and everything should come out fine.
+
 ### Preparing OSM Data for Use by Osm2pgsql
 
 Before some OSM data file can be given to osm2pgsql it is sometimes necessary
