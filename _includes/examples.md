@@ -44,6 +44,12 @@ These examples show some use cases of osm2pgsql and highlight some features.
     the power of the PostGIS database extension.</p>
 </a>
 
+<a class="example" href="{% link examples/poi-db/index.md %}">
+    <img alt="" src="{% link examples/poi-db/pois-berlin-small.png %}"/>
+    <h2>Creating a POI map</h2>
+    <p>Use osm2pgsql to create a points-of-interest map.</p>
+</a>
+
 <a class="example" href="{% link examples/export/index.md %}">
     <img alt="" src="{% link examples/export/export.svg %}"/>
     <h2>Exporting OSM Data</h2>
