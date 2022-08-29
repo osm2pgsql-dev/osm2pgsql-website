@@ -19,7 +19,7 @@ wiki](https://wiki.openstreetmap.org/wiki/Standard_tile_layer){:.extlink}. Many
 other maps use a similar setup.
 
 To learn more about how to set up a raster tile server see
-[switch2osm](https://switch2osm.org/serving-tiles/).
+[switch2osm](https://switch2osm.org/serving-tiles/){:.extlink}.
 
 <div id="map" class="map"></div>
 <script>
