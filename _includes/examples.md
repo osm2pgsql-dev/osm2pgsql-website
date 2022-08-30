@@ -50,6 +50,12 @@ These examples show some use cases of osm2pgsql and highlight some features.
     <p>Use osm2pgsql to create a points-of-interest map.</p>
 </a>
 
+<a class="example" href="{% link examples/3dbuildings/index.md %}">
+    <img alt="" src="{% link examples/3dbuildings/3dbuildings-small.png %}"/>
+    <h2>3d Buildings</h2>
+    <p>Use height information on OSM buildings to create a simple 3d map.</p>
+</a>
+
 <a class="example" href="{% link examples/export/index.md %}">
     <img alt="" src="{% link examples/export/export.svg %}"/>
     <h2>Exporting OSM Data</h2>
