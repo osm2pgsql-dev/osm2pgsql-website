@@ -384,6 +384,11 @@ delete all data in your database tables that were derived from deleted objects.
 Modifications are handled as deletions followed by creation of a "new" object,
 for which the functions are called.
 
+You can do anything in those processing functions to decide what to do with
+this data. If you are not interested in that OSM object, simply return from the
+function. If you want to add the OSM object to some table call the `add_row()`
+(*Version >= 1.7.0*{: .version} or `insert()`) function on that table.
+
 The parameter table (`object`) has the following fields and functions:
 
 | Field / Function | Description |
@@ -422,11 +427,6 @@ The `as_multilinestring()` and `as_multipolygon()` functions, on the other
 hand, can be used for ways and for relations. The latter will either return
 a linestring/polygon or a multilinestring/multipolygon, depending on whether
 the result is a single geometry or a multi-geometry.
-
-You can do anything in those processing functions to decide what to do with
-this data. If you are not interested in that OSM object, simply return from the
-function. If you want to add the OSM object to some table call the `add_row()`
-(*Version >= 1.7.0*{: .version} or `insert()`) function on that table.
 
 ### The `add_row` function
 
