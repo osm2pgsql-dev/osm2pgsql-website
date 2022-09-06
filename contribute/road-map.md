@@ -5,7 +5,7 @@ title: Road Map
 
 # Road Map for Osm2pgsql
 
-Current as of 2021-04-30.
+Current as of 2022-09-06.
 
 This document is a kind of road map for osm2pgsql development. It's not to be
 understood as a definite "this is what we'll do" document, but as a rough
@@ -35,7 +35,7 @@ promise anything.
 
 Only 64 bit systems are supported.
 
-Osm2pgsql currently needs a C++14 compiler, switching to newer C++ versions
+Osm2pgsql currently needs a C++17 compiler, switching to newer C++ versions
 will be considered based on availability in the Linux distributions we want to
 support.
 
@@ -57,6 +57,8 @@ problems will be tackled (or even whether they will be tackled at all).
 
 Note that many of the following topics overlap. Some topics have related issues
 which are listed below, but not all open concerns appear in Github issues.
+Some major "big picture" issues are highlighted at the top of the [Github
+issues page](https://github.com/openstreetmap/osm2pgsql/issues).
 
 ### Ongoing Maintainance
 
@@ -64,17 +66,18 @@ There is always the ongoing maintainance.
 
 Issues:
 
-* [775](https://github.com/openstreetmap/osm2pgsql/issues/775)
-* [965](https://github.com/openstreetmap/osm2pgsql/issues/965)
 * [1010](https://github.com/openstreetmap/osm2pgsql/issues/1010)
-* [1028](https://github.com/openstreetmap/osm2pgsql/issues/1028)
+* [1539](https://github.com/openstreetmap/osm2pgsql/issues/1539)
+* [1704](https://github.com/openstreetmap/osm2pgsql/issues/1704)
+* [1729](https://github.com/openstreetmap/osm2pgsql/issues/1729)
 
 ### Code Cleanup and Modernization
 
 Osm2pgsql started as a C program, later it was converted to C++03, then to
-C++11 and C++14. There is still old, often overly complex code in there that
-could do with some cleanup. And there are still lots of places where code
-linting tools such as clang-tidy report potential problems.
+C++11, C++14, and C++17. Most of the code has been cleaned up over the years,
+but there is still some old code in there that could do with some cleanup. And
+there are still some places where code linting tools such as clang-tidy report
+potential problems.
 
 The goal is to have clean and modern code that's easy to understand and change.
 This is especially important to make it easier for non-core developers to
@@ -85,10 +88,11 @@ that particular piece of code is touched anyway.
 
 ### Documentation
 
-The documentation for osm2pgsql has recently moved to a new website at
+In 2020 the documentation for osm2pgsql has moved to a new website at
 osm2pgsql.org. Lots of examples have been put on the website, too. There is
 still work to be done to complete the docs. This can be done "on the side"
-whenever it makes sense.
+whenever it makes sense. It would also be nice to amend the documentation
+with some tutorials and how-to type documents.
 
 ### Configuration / Command Line
 
@@ -105,7 +109,6 @@ file names, etc.)
 Issues:
 
 * [142](https://github.com/openstreetmap/osm2pgsql/issues/142)
-* [272](https://github.com/openstreetmap/osm2pgsql/issues/272)
 
 ### Progress Output and Logging
 
@@ -149,8 +152,8 @@ mechanism in a unified way.
 A lot of the other topics mentioned below rely on a flexible and performant
 middle.
 
-As a first step in this we are cleaning up the code that's calling the middle,
-the middle API, and existing middle code. And we are trying out some new middle
+As a first step we have cleaned up the code that's calling the middle, the
+middle API, and existing middle code. And we are trying out some new middle
 implementations.
 
 As a possible future step we might want to look into (optionally) removing the
@@ -165,25 +168,26 @@ Issues:
 * [692](https://github.com/openstreetmap/osm2pgsql/issues/692)
 * [1086](https://github.com/openstreetmap/osm2pgsql/issues/1086)
 * [1170](https://github.com/openstreetmap/osm2pgsql/issues/1170)
+* [1323](https://github.com/openstreetmap/osm2pgsql/issues/1323)
+* [1466](https://github.com/openstreetmap/osm2pgsql/issues/1466)
+* [1501](https://github.com/openstreetmap/osm2pgsql/issues/1501)
+* [1502](https://github.com/openstreetmap/osm2pgsql/issues/1502)
 
 ### Future of the Outputs
 
-There are some more or less obvious gaps in what the flex output can do
-(`get_bbox` missing for relations, tables with multiple geometry columns,
-two-stage processing of nodes and relations, more Lua helper functions to help
-style writers, ...). This need some work.
-
-Long term the flex output should replace all other outputs. Users should
-all be able to switch to the flex output without missing any features they
-had in any of the other outputs. Whether we'll actually remove the *pgsql*
-and *gazetteer* outputs is not decided yet. The *multi* output was already
-removed in version 1.5.0.
+The flex output has taken some great strides in the last years and has been
+used in production environments for a long time. Some originally missing
+features have been added and it is mostly ready to replace the other outputs.
+Users should all be able to switch to the flex output without missing any
+features they had in any of the other outputs. Long term we want to remove the
+*pgsql* and *gazetteer* outputs, but there is no timeline yet. The *multi*
+output was already removed in version 1.5.0.
 
 Some new features might only be available in the flex output.
 
 * [1086](https://github.com/openstreetmap/osm2pgsql/issues/1086)
 * [1130](https://github.com/openstreetmap/osm2pgsql/issues/1130)
-* [1164](https://github.com/openstreetmap/osm2pgsql/issues/1164)
+* [1311](https://github.com/openstreetmap/osm2pgsql/issues/1311)
 
 ### Processing Flexibility and Performance
 
@@ -195,7 +199,12 @@ separately, possibly with other index types etc.
 
 We need some way of making this more configurable without breaking backwards
 compatibility and without making the common use case too complicated. How to
-best do this is currently unclear.
+best do this is currently unclear. The direction we have been going in with
+the Lua configuration points towards a possible solution: Move more of the
+decisions about *what* needs to be done into Lua, keeping the *how* in C++.
+Then most users can use higher level Lua functions that hide some of the
+complexity, but power users can still access lower-level functionality to
+solve their specific needs.
 
 Another issue which probably fits in here are performance aspects of the
 processing steps and possible performance improvements to be gained here
@@ -211,29 +220,36 @@ Issues:
 * [1046](https://github.com/openstreetmap/osm2pgsql/issues/1046)
 * [1164](https://github.com/openstreetmap/osm2pgsql/issues/1164)
 * [1248](https://github.com/openstreetmap/osm2pgsql/issues/1248)
+* [1357](https://github.com/openstreetmap/osm2pgsql/issues/1357)
+* [1565](https://github.com/openstreetmap/osm2pgsql/issues/1565)
+* [1680](https://github.com/openstreetmap/osm2pgsql/issues/1680)
+* [1691](https://github.com/openstreetmap/osm2pgsql/issues/1691)
+* [1751](https://github.com/openstreetmap/osm2pgsql/issues/1751)
 
 ### Tile Expiry
 
 Osm2pgsql can generate a list of tiles that need to be expired due to updates
 to the database. It is memory intensive and the performance could probably
-improved.
+be improved.
 
 This needs a deep look into what users actually need (the OSMF tile servers
 don't even use this but have a different way of calculating expired tiles)
 and how we can best support it. We should also think about whether we can do
-expiry calculations based on output tables, not data input.
+expiry calculations based on output tables, not data input. This ties in
+with the generalization work mentioned below, because -- in a way -- expire
+lists are also just generalizations of geometries.
 
 Issues:
 
-* [38](https://github.com/openstreetmap/osm2pgsql/issues/38)
-* [461](https://github.com/openstreetmap/osm2pgsql/issues/461)
 * [709](https://github.com/openstreetmap/osm2pgsql/issues/709)
 * [776](https://github.com/openstreetmap/osm2pgsql/issues/776)
+* [1662](https://github.com/openstreetmap/osm2pgsql/issues/1662)
 
 ### Debugging and Testing Support for Style Writers
 
 The flex output introduces a lot of flexibility and we should find ways of
 aiding the style writers with testing and debugging their Lua config files.
+The new BDD testing framework used points into an interesting direction here.
 
 Issues:
 
@@ -264,21 +280,24 @@ destination signs should be supported explicitly.
 
 Ideally there should also be better mechanisms to work with *any* relation
 type but it is unclear what this could look like beyond writing them to the
-database as a GeometryCollection.
+database as a GeometryCollection which is possible in version 1.7.0.
+
+This is an area where we need more input from users to see what their needs
+are.
 
 ### Advanced Geometry Options and Generalization
 
-One area where osm2pgsql is sorely lacking in functionality is advanced
-geometry handling. Basically all it does is creating point geometries from
-nodes and linestring or polygon geometries from ways and relations. For more
-advanced maps we need more options for geometric generalizations (such as
-line simplifications or collapsing polygons into their centroid).
+One area where osm2pgsql is lacking in functionality is advanced geometry
+handling. Historically all it did was creating point geometries from nodes and
+linestring or polygon geometries from ways and relations. With version 1.7.0
+this has improved a lot, but there is still some way to go.
 
-Medium term we can find better ways of giving users access to PostGIS
-capabilities. Long term we can also think about doing more geometry processing
-in osm2pgsql itself.
+For more advanced maps we need more options for geometric generalizations (such
+as line simplifications or merging of polygons). This is explored in the
+[generalization project]({% link generalization/index.md %}).
 
 Issues:
 
 * [984](https://github.com/openstreetmap/osm2pgsql/issues/984)
+* [1663](https://github.com/openstreetmap/osm2pgsql/issues/1663)
 
