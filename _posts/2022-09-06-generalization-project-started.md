@@ -9,8 +9,8 @@ overview maps in smaller map scales and for smaller zoom levels. We can't
 see the forest for all the trees.
 
 To solve this a cartographer uses a bunch of techniques, collectively called
-*generalization*: You leave out some details, bunch up several smaller things
-into one bigger one, or smooth lines that seems overly wiggely when viewed
+*generalization*: You leave out some details, merge several smaller things
+into a bigger one, or smooth lines that seem overly wiggely when viewed
 from afar. There are many more of these techniques.
 
 When generating maps automatically based on osm2pgsql we usually use SQL
