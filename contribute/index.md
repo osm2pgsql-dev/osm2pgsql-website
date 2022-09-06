@@ -16,6 +16,8 @@ development. It’s not to be understood as a definite “this is what we’ll d
 document, but as a rough and incomplete overview of the shared understanding of
 the maintainers about where we are and in what areas we see need for work.
 
+See also the [generalization project]({% link generalization/index.md %}).
+
 <section markdown="1">
 ## Tests and Continuous Integration
 
