@@ -736,7 +736,7 @@ local area = object:as_polygon():transform(3857):area()
 -- area will be 0.0 if not a polygon or transformation failed
 ```
 
-To iterate of the members of a multi-geometry use the `geometries()` function:
+To iterate over the members of a multi-geometry use the `geometries()` function:
 
 ```lua
 local geom = object:as_multipolygon()
