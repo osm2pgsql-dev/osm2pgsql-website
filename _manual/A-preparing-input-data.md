@@ -111,7 +111,7 @@ By default minutely updates from the OSM main servers will be used. If you
 want to use a different replication service, use the `--server` parameter.
 
 No matter which method you use, osm2pgsql-replication creates a table
-`{prefix}_replication_status` where it saves the URL fo the replication service
+`{prefix}_replication_status` where it saves the URL for the replication service
 and the status of the updates.
 
 It is safe to repeat initialisation at any time. For example, when you want
