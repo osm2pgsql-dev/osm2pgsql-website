@@ -2,3 +2,4 @@ _site
 .sass-cache
 contact.md
 download
+Gemfile.lock
