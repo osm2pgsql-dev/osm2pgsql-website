@@ -94,10 +94,18 @@ to be installed.
 Before you can download updates, osm2pgsql-replication needs to find the
 starting point from which to apply the updates. There are two ways to do
 that. When you have used an extract from Geofabrik or openstreetmap.fr, then
-these files contain all necessary information to get the replication proces
-started. Simply point the initalisation to your extract:
+these files contain all necessary information to get the replication process
+started. Simply point the initialisation to your extract:
 
     osm2pgsql-replication init -d <dbname> --osm-file your-extract.pbf
+
+The `-d` parameter tells the replication script which database to connect
+to. The script also supports all other parameters mentioned in the section
+[database connection](#database-connection) including
+[libpq environment variables](https://www.postgresql.org/docs/current/libpq-envars.html).
+The only exception is the '-W' parameter for interactive password prompts.
+When you need to supply a password, always use a
+[pgpass file](https://www.postgresql.org/docs/current/libpq-pgpass.html).
 
 If you have imported the whole planet or you don't have the original import
 file anymore, then the necessary information can be deduced by looking at the
