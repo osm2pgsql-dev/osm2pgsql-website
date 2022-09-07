@@ -22,7 +22,13 @@ for configuration, but the Lua config file only.
 {: .note}
 
 The flex style file is a Lua script. You can use all the power of the [Lua
-language](https://www.lua.org/){:.extlink}. This description assumes that you
+language](https://www.lua.org/){:.extlink}. It gives you a lot of freedom to
+write complex preprocessing scripts that might even to use external libraries
+to extend the capabilities of osm2pgsql. But it also means that the scripts
+may mess with any part of your system when written badly. Only run Lua
+scripts from trusted sources!
+
+This description assumes that you
 are somewhat familiar with the Lua language, but it is pretty easy to pick up
 the basics and you can use the example config files in the
 [`flex-config`](https://github.com/openstreetmap/osm2pgsql/tree/master/flex-config){:.extlink}

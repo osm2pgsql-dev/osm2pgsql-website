@@ -276,7 +276,8 @@ the repository as an example, which (nearly) replicates the built-in
 transformations and can be used as a template for one's own scripts.
 
 Test your Lua script with small excerpts before applying it to a whole country
-or even the planet.
+or even the planet. Be aware that the Lua tagtransform allows to run
+arbitrary code on your system. Only run scripts from trusted sources!
 
 ### Pgsql Output Command Line Options
 
