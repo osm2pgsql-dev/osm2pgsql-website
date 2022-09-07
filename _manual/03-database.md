@@ -46,6 +46,12 @@ status and doesn't need to create databases or roles. You should create a
 database user for the specific use by osm2pgsql which should not have any
 special PostgreSQL privileges.
 
+This manual assumes that you have 'peer' authentication configured when using
+a local database. That means a local user may connect to the database with its
+own username without needing to type a password. This authentication method
+is the default on Debian/Ubuntu-based distributions. Never configure 'trust'
+authentication where all local users can connect as any user to the database.
+
 Any osm2pgsql setup will need a database to work on. You should create this as
 PostgreSQL superuser and change ownership (with `--owner` option on the
 `createdb` command or an `OWNER=` clause on the `CREATE DATABASE` SQL command)
