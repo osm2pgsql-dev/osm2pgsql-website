@@ -6,7 +6,9 @@ title: Contribute
 
 Osm2pgsql is an Open Source project. Your contributions are welcome. You can
 find the source code and issue tracker on
-[Github](https://github.com/openstreetmap/osm2pgsql){:.extlink}.
+[Github](https://github.com/openstreetmap/osm2pgsql){:.extlink}. For some
+starting points see the
+[contribute page](https://github.com/openstreetmap/osm2pgsql/contribute).
 
 Please see [CONTRIBUTING.md](https://github.com/openstreetmap/osm2pgsql/blob/master/CONTRIBUTING.md)
 for some information about how to contribute.
