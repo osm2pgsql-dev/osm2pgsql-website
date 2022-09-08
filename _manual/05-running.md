@@ -108,8 +108,8 @@ a full list of available parameters, please consult the
 When you need a password for your database connection and want to run osm2pgsql
 inside scripts, then use a [pgpass file](https://www.postgresql.org/docs/current/libpq-pgpass.html)
 with appropriate permissions to store the password. All other methods of giving
-the password to osm2pgsql are inherently unsecure. You can either put a
-.pgpass file in the user's home directory or supply its location through the
+the password to osm2pgsql are inherently insecure. You can either put a
+`.pgpass` file in the user's home directory or supply its location through the
 PGPASSFILE environment variable.
 
 *Version >= 1.4.0*{: .version} Instead of specifying a database name with the

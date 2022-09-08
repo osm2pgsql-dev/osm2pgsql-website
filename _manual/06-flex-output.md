@@ -23,7 +23,7 @@ for configuration, but the Lua config file only.
 
 The flex style file is a Lua script. You can use all the power of the [Lua
 language](https://www.lua.org/){:.extlink}. It gives you a lot of freedom to
-write complex preprocessing scripts that might even to use external libraries
+write complex preprocessing scripts that might even use external libraries
 to extend the capabilities of osm2pgsql. But it also means that the scripts
 may mess with any part of your system when written badly. Only run Lua
 scripts from trusted sources!
