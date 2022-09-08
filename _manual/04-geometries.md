@@ -39,7 +39,7 @@ In some cases osm2pgsql will split up Multi\* geometries into simple geometries
 and add each one in its own database row. This can make rendering faster,
 because the renderer can deal with several smaller geometries instead of having
 to handle one large geometry. But, depending on what you are doing with the
-data, in can also lead to problems. [This
+data, it can also lead to problems. [This
 blogpost](https://www.paulnorman.ca/blog/2014/03/osm2pgsql-multipolygons/){:.extlink}
 has some deeper discussion of this issue. See the flex and pgsql output
 chapters for details on how to configure this. It will also mean that your id
