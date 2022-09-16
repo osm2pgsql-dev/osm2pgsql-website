@@ -721,7 +721,7 @@ PostGIS functions with equivalent names.
 | `line_merge()`                   | Merge lines in a (MULTI)LINESTRING as much as possible into longer lines. |
 | `num_geometries()`               | Returns the number of geometries in a multi-geometry. Always 0 for NULL geometries and always 1 for non-multi geometries. |
 | `segmentize(max_segment_length)` | Segmentize a (MULTI)LINESTRING, so that no segment is longer than `max_segment_length`. Result is a (MULTI)LINESTRING. |
-| `simplify(tolerance)`            | Simplify (MULTI)LINESTRING geometries with the Douglas-Peucker algorithm. |
+| `simplify(tolerance)`            | Simplify LINESTRING geometries with the Douglas-Peucker algorithm. (Currently no implemented for anything but linestrings.) |
 | `srid()`                         | Return SRID of the geometry. |
 | `transform(target_srid)`         | Transform the geometry to the target SRS. |
 {:.desc}
