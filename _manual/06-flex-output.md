@@ -128,6 +128,7 @@ object. You can call the following functions on it:
 | schema()  | The schema of the table as specified in the define function. |
 | columns() | The columns of the table as specified in the define function. |
 | add_row() | Add a row to the database table. See below for details. |
+| insert()  | *Version >= 1.7.0*{: .version} Add a row to the database table. See below for details. |
 {: .desc}
 
 ### Id Handling
