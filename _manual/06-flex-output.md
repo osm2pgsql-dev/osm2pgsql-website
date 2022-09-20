@@ -427,13 +427,21 @@ OSM input file actually contains those fields.
 
 The `as_*` functions will return a NULL geometry (check with `is_null()`) if
 the geometry can not be created for some reason, for instance a polygon can
-only be created from closed ways.
+only be created from closed ways. This can also happen if your input data is
+incomplete, for instance when missing nodes referenced from a way.
 
 The `as_linestring()` and `as_polygon()` functions can only be used on ways.
 The `as_multilinestring()` and `as_multipolygon()` functions, on the other
 hand, can be used for ways and for relations. The latter will either return
 a linestring/polygon or a multilinestring/multipolygon, depending on whether
 the result is a single geometry or a multi-geometry.
+
+If you need all geometries of a relation, you can use
+`as_geometrycollection()`. It will contain all geometries which can be
+generated from node and way members of the relation. Members of type "relation"
+are ignored. Node members will result in a point geometry, way members will
+usually be created as linestring geometry, but can result in a point geometry
+if the way only contains one (distinct) point.
 
 ### The `add_row` function
 
