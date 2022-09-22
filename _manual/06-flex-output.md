@@ -428,7 +428,7 @@ OSM input file actually contains those fields.
 The `as_*` functions will return a NULL geometry (check with `is_null()`) if
 the geometry can not be created for some reason, for instance a polygon can
 only be created from closed ways. This can also happen if your input data is
-incomplete, for instance when missing nodes referenced from a way.
+incomplete, for instance when nodes referenced from a way are missing.
 
 The `as_linestring()` and `as_polygon()` functions can only be used on ways.
 The `as_multilinestring()` and `as_multipolygon()` functions, on the other
@@ -438,10 +438,13 @@ the result is a single geometry or a multi-geometry.
 
 If you need all geometries of a relation, you can use
 `as_geometrycollection()`. It will contain all geometries which can be
-generated from node and way members of the relation. Members of type "relation"
-are ignored. Node members will result in a point geometry, way members will
-usually be created as linestring geometry, but can result in a point geometry
-if the way only contains one (distinct) point.
+generated from node and way members of the relation in order of those members.
+Members of type "relation" are ignored. Node members will result in a point
+geometry, way members will result in a linestring geometry. Geometries that
+can't be built are missing. (You can detect this by counting the number of
+geometries with `num_geometries()` and comparing that to the number of
+members of type node and relation.) If no valid geometry can be created, so
+if the geometry collection would be empty, a null geometry is returned instead.
 
 ### The `add_row` function
 
