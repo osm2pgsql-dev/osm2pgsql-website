@@ -37,6 +37,47 @@ after each update. When osm2pgsql inserts new rows they will always have a
 `NULL` value in `center`, the `WHERE` condition makes sure that we only do
 this (possibly expensive) calculation once.
 
+### Creating GENERATED Columns
+
+From version 12 on PostgreSQL supports [GENERATED
+columns](https://www.postgresql.org/docs/current/ddl-generated-columns.html){:.extlink}.
+You can use these from osm2pgsql with a trick, by adding some "magic" wording
+to the `sql_type` in a column definition.
+
+We don't promise that this trick will work forever. Putting anything into
+the `sql_type` but a PostgreSQL type is strictly experimental.
+{: .note}
+
+It is probably best explained with an example. With this config you create a
+polygon table with an additional column `center` that is automatically filled
+with the centroid of the polygon added:
+
+```lua
+local polygons = osm2pgsql.define_area_table('polygons', {
+    { column = 'tags', type = 'jsonb' },
+    { column = 'geom', type = 'polygon', not_null = true },
+    { column = 'center', create_only = true, sql_type = 'geometry(point, 3857) GENERATED ALWAYS AS (ST_Centroid(geom)) STORED' },
+})
+
+function osm2pgsql.process_way(object)
+    if object.is_closed then
+        polygons:insert({
+            tags = object.tags,
+            geom = object:as_polygon()
+        })
+    end
+end
+```
+
+You could do this specific case simpler and faster by using the `centroid()`
+function in Lua. But PostGIS has a lot more interesting functions that you can
+use this way. Be sure to read the [PostgreSQL
+documentation](https://www.postgresql.org/docs/current/ddl-generated-columns.html){:.extlink}
+about the syntax and functionality of the GENERATED columns.
+
+Make sure you have the `create_only = true` option set on the column, otherwise
+this will not work.
+
 ### Accessing Environment Variables from Lua
 
 In Lua scripts you can access environment variables with `os.getenv("VAR")`.
