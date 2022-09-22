@@ -578,6 +578,7 @@ local inserted, message, column, object = table:insert(...)
 | message  | A message telling you the reason why the insertion failed |
 | column   | The name of the column that triggered the failure         |
 | object   | The OSM object we are currently processing. Useful for, say, logging the id |
+{:.desc}
 
 The last three are only set if the first is `false`.
 
