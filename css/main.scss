@@ -415,10 +415,11 @@ img.inline {
         float: right;
         width: 26em;
         min-height: 100px;
-        background-color: #ffffff;
+        background-color: lighten($osm2pgsql-color-news, 56);
         border: 1px solid $osm2pgsql-color-news;
         border-radius: 2px;
         padding: 10px;
+        margin-top: 10px;
         margin-left: 10px;
         z-index: 1;
     }
@@ -428,14 +429,11 @@ img.inline {
     }
 
     #newsbox h2 {
-        position: relative;
-        top: calc(-0.8em - 4px);
+        margin-top: 10px;
         width: 3.6em;
         margin: 0 auto;
-        padding: 0;
-        border: none;
+        padding: 0 0 4px 0;
         text-align: center;
-        background-color: #ffffff;
     }
 
     #newsbox h2 a {
