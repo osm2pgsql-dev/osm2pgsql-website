@@ -727,7 +727,7 @@ PostGIS functions with equivalent names.
 | -------------------------------- | ----------- |
 | `area()`                         | Returns the area of the geometry. For any geometry type but (MULTI)POLYGON this is always `0.0`. The area is calculated using the SRS of the geometry, the result is in map units. |
 | `length()`                       | *Version >= 1.7.1*{:.version} Returns the length of the geometry. For any geometry type but (MULTI)LINESTRING this is always `0.0`. The length is calculated using the SRS of the geometry, the result is in map units. |
-| `centroid()`                     | Return the centroid (center) of a (MULTI)POLYGON. |
+| `centroid()`                     | Return the centroid (center of mass) of a geometry. (Implemented for all geometry types in *Version >= 1.7.1*{:.version}.) |
 | `geometries()`                   | Returns an iterator for iterating over member geometries of a multi-geometry. See below for detail. |
 | `geometry_n()`                   | Returns the nth geometry (1-based) of a multi-geometry. |
 | `geometry_type()`                | Returns the type of geometry as a string: `NULL`, `POINT`, `LINESTRING`, `POLYGON`, `MULTIPOINT`, `MULTILINESTRING`, `MULTIPOLYGON`, or `GEOMETRYCOLLECTION`.
