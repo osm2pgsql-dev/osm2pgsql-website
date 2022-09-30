@@ -17,7 +17,7 @@ Server](#tuning-the-postgresql-server)). Note that the [PostgreSQL
 manual](https://www.postgresql.org/docs/current/runtime-config-resource.html){:.extlink}
 recommends setting `shared_buffers` to 25% of the memory in your system, **but
 this is for a dedicated database server**. When you are running osm2pgsql on
-the same host as the database, this is usally way too much.
+the same host as the database, this is usually way too much.
 
 Osm2pgsql needs at least 2GB of RAM for its internal data structures,
 potentially more when it has to process very large relations. In addition it

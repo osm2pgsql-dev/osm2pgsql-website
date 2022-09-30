@@ -16,12 +16,12 @@ in what areas we see need for work. It is incomplete.
 
 First and foremost osm2pgsql must be a stable and reliable platform for its
 many users who use it every day to maintain current maps. Backwards
-compatibility is important and must be kept whereever possible. This makes
+compatibility is important and must be kept wherever possible. This makes
 developing new features more difficult, but it gives the users a way forward,
 using new features as they are needed without the need for a break-the-world
 update.
 
-This also means that often ongoing maintainance, bugfixing, attending to
+This also means that often ongoing maintenance, bugfixing, attending to
 issues, making sure everything keeps working with old and new library and
 operating system versions etc. is more important than new features.
 
@@ -130,7 +130,7 @@ keep an object store of all OSM objects it has seen and their relationship with
 each other. This is often called "middle" in osm2pgsql-speak. It comes in two
 "flavours" depending on whether it supports updates or not.
 
-The updateable middle uses the PostgreSQL database. Due to its current
+The updatable middle uses the PostgreSQL database. Due to its current
 structure and API only some information is available, for instance it isn't
 possible to find node members of relations. Storing of OSM object attributes
 (such as user id and timestamps) as pseudo-tags should be cleaned up to fix
@@ -157,8 +157,8 @@ middle API, and existing middle code. And we are trying out some new middle
 implementations.
 
 As a possible future step we might want to look into (optionally) removing the
-need for PostgreSQL for the updateable object store. Specialized file-based
-data storage could improve performance considerably and reduce disk comsumption
+need for PostgreSQL for the updatable object store. Specialized file-based
+data storage could improve performance considerably and reduce disk consumption
 at the same time.
 
 Issues:
