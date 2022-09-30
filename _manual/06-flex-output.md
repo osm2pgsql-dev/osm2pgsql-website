@@ -416,6 +416,7 @@ The parameter table (`object`) has the following fields and functions:
 | as_point()              | Create point geometry from OSM node object. |
 | as_linestring()         | Create linestring geometry from OSM way object. |
 | as_polygon()            | Create polygon geometry from OSM way object. |
+| as_multipoint()         | *Version >= 1.7.1*{: .version} Create (multi)point geometry from OSM node/relation object. |
 | as_multilinestring()    | Create (multi)linestring geometry from OSM way/relation object. |
 | as_multipolygon()       | Create (multi)polygon geometry from OSM way/relation object. |
 | as_geometrycollection() | Create geometry collection from OSM relation object. |
@@ -431,6 +432,11 @@ only be created from closed ways. This can also happen if your input data is
 incomplete, for instance when nodes referenced from a way are missing.
 
 The `as_linestring()` and `as_polygon()` functions can only be used on ways.
+
+*Version >= 1.7.1*{: .version} The `as_multipoint()` function can be used on
+nodes and relations. For nodes it will always return a point geometry, for
+relations a point or multipoint geometry with all available node members.
+
 The `as_multilinestring()` and `as_multipolygon()` functions, on the other
 hand, can be used for ways and for relations. The latter will either return
 a linestring/polygon or a multilinestring/multipolygon, depending on whether
@@ -735,7 +741,7 @@ PostGIS functions with equivalent names.
 | `line_merge()`                   | Merge lines in a (MULTI)LINESTRING as much as possible into longer lines. |
 | `num_geometries()`               | Returns the number of geometries in a multi-geometry. Always 0 for NULL geometries and always 1 for non-multi geometries. |
 | `segmentize(max_segment_length)` | Segmentize a (MULTI)LINESTRING, so that no segment is longer than `max_segment_length`. Result is a (MULTI)LINESTRING. |
-| `simplify(tolerance)`            | Simplify LINESTRING geometries with the Douglas-Peucker algorithm. (Currently no implemented for anything but linestrings.) |
+| `simplify(tolerance)`            | Simplify (MULTI)LINESTRING geometries with the Douglas-Peucker algorithm. (Currently not implemented for other geometry types. For multilinestrings only available in *Version >= 1.7.1*{: .version}) |
 | `srid()`                         | Return SRID of the geometry. |
 | `transform(target_srid)`         | Transform the geometry to the target SRS. |
 {:.desc}
