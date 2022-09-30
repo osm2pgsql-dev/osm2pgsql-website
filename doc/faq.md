@@ -37,14 +37,21 @@ many hours or even days. There are many reasons for this:
 
 * There is a lot of data. A full planet will create a database with hundreds
   of GBytes, this just needs time.
-* Your hardware may be underpowered. You should use a fast SSD and have plenty
+* Your hardware may be underpowered. You should use fast SSDs and have plenty
   of RAM, for a planet import 64 GB RAM are pretty much the minimum.
 * You have to tune your PostgreSQL config *before* using osm2pgsql. The
   default settings for PostgreSQL on most systems are totally wrong for a
   large database. Don't forget to restart the database after tuning.
   See the [manual](/doc/manual.html#tuning-the-postgresql-server) for
   details.
-* The command line options chosen can have a large impact on performance.
+* Compile osm2pgsql with the Lua JIT library for about 10 to 15 % speedup.
+* If you don't need your database to be updateable and you have enough
+  RAM, use non-slim mode. Always use a flat node file in slim mode.
+* In some cases it makes sense to filter data before importing, see
+  [the manual](/doc/manual.html#preparing-osm-data-for-use-by-osm2pgsql).
+* Make sure you are running the [newest released version]({% link
+  releases/index.md %}) of osm2pgsql, there have been quite some performance
+  improvements in the latest versions.
 
 All that being said, on a reasonably modern machine with 64GB RAM and SSDs you
 should be able to import a planet file in something like half a day.
