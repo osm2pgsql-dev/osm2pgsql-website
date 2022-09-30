@@ -83,7 +83,7 @@ local restaurants = osm2pgsql.define_node_table('restaurants', {
 
 In this case we are creating a table that is intended to be filled with OSM
 nodes, the table called `restaurants` will be created in the database with four
-colums: A `name` column of type `text` (which will presumably later be filled
+columns: A `name` column of type `text` (which will presumably later be filled
 with the name of the restaurant), a column called `tags` with type `jsonb`
 (which will presumable be filled later with all tags of a node), a column
 called `geom` which will contain the Point geometry of the node and an Id
@@ -113,7 +113,7 @@ function. You can use the same options on the
 | name             | The name of the table (without schema). |
 | ids              | A Lua table defining how this table should handle ids (see the [Id Handling](#id-handling) section for details). Note that you can define tables without Ids, but they can not be updated by osm2pgsql. |
 | columns          | An array of columns (see the [Defining Columns](#defining-columns) section for details). |
-| schema           | Set the [PostgreSQL schema](https://www.postgresql.org/docs/current/ddl-schemas.html){:. extlink} to be used for this table. The schema must exist in the database before you start osm2pgsql. By default no schema is set which usually means the tables will be created in the `public` shema. |
+| schema           | Set the [PostgreSQL schema](https://www.postgresql.org/docs/current/ddl-schemas.html){:. extlink} to be used for this table. The schema must exist in the database before you start osm2pgsql. By default no schema is set which usually means the tables will be created in the `public` schema. |
 | data_tablespace  | The [PostgreSQL tablespace](https://www.postgresql.org/docs/current/manage-ag-tablespaces.html){:.extlink} used for the data in this table. |
 | index_tablespace | The [PostgreSQL tablespace](https://www.postgresql.org/docs/current/manage-ag-tablespaces.html){:.extlink} used for all indexes of this table. |
 | cluster          | *Version >= 1.5.0*{: .version} Set clustering strategy. Use `"auto"` (default) to enable clustering by geometry, osm2pgsql will choose the best method. Use `"no"` to disable clustering. |
@@ -557,7 +557,7 @@ end
 
 The `insert()` function takes a single table parameter, that describes what to
 fill into all the database columns. Any column not mentioned will be set to
-`NULL`. It returns `true` if the insert was successfull.
+`NULL`. It returns `true` if the insert was successful.
 
 Note that you can't set the object id, this will be handled for you behind the
 scenes.
@@ -570,7 +570,7 @@ defined with `not_null = true` in the table definition, the row will not be
 inserted. Usually that is just what you want, bad data is silently ignored that
 way.
 
-If you want to check whether the insert acually happened, you can look at the
+If you want to check whether the insert actually happened, you can look at the
 return values of the `insert()` command. The `insert()` function actually
 returns up to four values:
 

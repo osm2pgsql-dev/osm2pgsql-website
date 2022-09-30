@@ -22,7 +22,7 @@ demo this simplified setup should suffice.
 
 To get some nice sample data, lets look at New York. You can use the [Protomaps
 download service](https://protomaps.com/downloads/osm) to get the extract. Zoom
-to New York and draw a polygon around the tip of Manhatten, add the name
+to New York and draw a polygon around the tip of Manhattan, add the name
 "newyork" and click on "Create Extract". In a few seconds you'll get a download
 button to download a file `newyork.osm.pbf`.
 

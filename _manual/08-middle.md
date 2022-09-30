@@ -28,7 +28,7 @@ The middle stores its data in the database in the following tables. The
 {:.desc}
 
 The names and structure of these tables, colloquially referred to as "slim
-tables", are an **internal implemention detail** of osm2pgsql. While they do
+tables", are an **internal implementation detail** of osm2pgsql. While they do
 not usually change between releases of osm2pgsql, be advised that if you rely
 on the content or layout of these tables in your application, it is your
 responsibility to check whether your assumptions are still true in a newer

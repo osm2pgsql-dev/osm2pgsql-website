@@ -78,7 +78,7 @@ Node geometries are always converted into Point geometries.
 ### Processing of Ways
 
 Depending on the tags, OSM ways model either a LineString or a Polygon, or
-both! A way tagged with `highway=primary` is usally a linear feature, a way
+both! A way tagged with `highway=primary` is usually a linear feature, a way
 tagged `landuse=farmland` is usually a polygon feature. If a way with polygon
 type tags is not closed, the geometry is invalid, this is an error and the
 object is ignored. For some tags, like `man_made=pier` non-closed ways are
@@ -94,7 +94,7 @@ There is no definite list which tags indicate a linear or polygon feature.
 Osm2pgsql lets the user decide. It depends on your chosen output (see next
 chapter) how to configure this. The example config files have lists that should
 cover most of the commonly used tags, but you might have to extend the lists if
-you are using more unusal tags.
+you are using more unusual tags.
 
 Osm2pgsql can split up long LineStrings created from ways into smaller
 segments. This can make rendering of tiles faster, because smaller geometries

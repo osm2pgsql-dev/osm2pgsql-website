@@ -134,7 +134,7 @@ Increasing values for `max_wal_size` and `checkpoint_timeout` means that
 PostgreSQL needs to run checkpoints less often but it can require additional
 space on your disk and increases time required for Point in Time Recovery
 (PITR) restores.  Monitor the Postgres logs for warnings indicating checkpoints
-are occuring too frequently: `HINT:  Consider increasing the configuration
+are occurring too frequently: `HINT:  Consider increasing the configuration
 parameter "max_wal_size".`
 
 Autovacuum must not be switched off because it ensures that the tables are
