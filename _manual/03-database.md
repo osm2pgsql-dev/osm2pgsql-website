@@ -78,6 +78,17 @@ output, respectively, to tell osm2pgsql to load data into specific schemas. You
 have to create those schemas and give them the correct rights before running
 osm2pgsql.
 
+Before PostgreSQL 15 all database users could add objects (such as tables and
+indexes) to the *public* schema by default. Since PostgreSQL 15, users are by
+default not allowed to do that any more. You either have to grant the database
+user you are using for osm2pgsql rights on the *public* schema (not
+recommended, only do that if you trust all users on your system), or you have
+to configure osm2pgsql to use a different schema as described above. See the
+[PostgreSQL
+manual](https://www.postgresql.org/docs/current/ddl-schemas.html#DDL-SCHEMAS-PRIV){:.extlink}
+for the details.
+{:.note}
+
 ### Encoding
 
 OpenStreetMap data is from all around the world, it always uses UTF-8 encoding.
@@ -87,7 +98,6 @@ encoding, too.
 On any modern system the default encoding for new databases should be UTF-8,
 but to make sure, you can use the `-E UTF8` or `--encoding=UTF8` options when
 creating the database for osm2pgsql with `createdb`.
-
 
 ### Tuning the PostgreSQL Server
 
@@ -175,7 +185,7 @@ Osm2pgsql will open multiple connections to the database to speed up the
 import. The number of connections will depend on the number of tables that
 are configured and the number of threads used. This can easily exceed the
 `max_connections` limit defined in the [PostgreSQL
-config](https://www.postgresql.org/docs/current/runtime-config-connection.html).
+config](https://www.postgresql.org/docs/current/runtime-config-connection.html){:.extlink}.
 
 (Currently there are about `3 + number of tables` connections used on import
 and `3 + (1 + number of threads) * number of tables` connections used on
@@ -186,4 +196,17 @@ If you are hit by this, your options are to
 * increase the `max_connections` settings in your database configuration, or
 * reduce the number of threads with the `--number-processes=THREADS` command
   line option of osm2pgsql, or
+
+### Using a Template Database
+
+Databases are actually created in PostgreSQL by copying a *template database*.
+If you don't specify a database to copy from, the `template1` database is used.
+PostgreSQL allows you to change `template1` or to create additional template
+databases. If you create a lot of databases for use with osm2pgsql, you can do
+initializations like `CREATE EXTENSTION postgis;` once in a template database
+and they will be available in any database you create from them.
+
+See the [PostgreSQL
+manual](https://www.postgresql.org/docs/current/manage-ag-templatedbs.html){:.extlink}
+for details.
 
