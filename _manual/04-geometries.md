@@ -5,7 +5,7 @@ title: Geometry Processing
 
 An important part of what osm2pgsql does is creating geometries from OSM
 data. In OSM only nodes have a location, ways get their geometry from member
-nodes and relations get their geometry from member ways and nodes. Osm2pgsql
+nodes and relations get their geometry from member nodes and ways. Osm2pgsql
 assembles all the data from the related objects into valid geometries.
 
 ### Geometry Types
@@ -50,26 +50,38 @@ this.
 
 *Version >= 1.7.0*{:.version} When using the flex output, you can decide
 yourself what geometries to create using the `as_point()`, `as_linestring()`,
-`as_polygon()`, `as_multilinestring()`, `as_multipolygon()`, and
-`as_geometrycollection()` functions. See the [Flex Output
+`as_polygon()`, `as_multipoint()`, `as_multilinestring()`, `as_multipolygon()`,
+and `as_geometrycollection()` functions. See the [Flex Output
 chapter](#the-flex-output) for details.
 
 ### Geometry Validity
 
 Point geometries are always valid (as long as the coordinates are inside the
-correct range). LineString geometries are also always valid, lines might cross
-themselves, but that is okay. This is more complex for Polygon and MultiPolygon
-geometries: There are multiple ways how such a geometry can be invalid. For
-instance, if the boundary of a polygon is drawn in a figure eight, the result
-will not be a valid polygon. The database will happily store such invalid
-polygons, but this can lead to problems later, when you try to draw them or do
-calculations (such as the area) based on the invalid geometry. That's why
-osm2pgsql never loads invalid geometries into your database. Instead the object
-is simply ignored without any message.
+correct range). LineString geometries are valid if they have at least two
+distinct points. Osm2pgsql will collapse consecutive indentical points in a
+linestring into a single point. Note that a line crossing itself is still valid
+and not a problem.
+
+Validity is more complex for Polygon and MultiPolygon geometries: There are
+multiple ways how such a geometry can be invalid. For instance, if the boundary
+of a polygon is drawn in a figure eight, the result will not be a valid
+polygon. The database will happily store such invalid polygons, but this can
+lead to problems later, when you try to draw them or do calculations (such as
+the area) based on the invalid geometry.
 
 You can use the [Areas view of the OpenStreetMap
 inspector](https://tools.geofabrik.de/osmi/?view=areas){:.extlink} to help
 diagnose problems with multipolygons.
+
+Osm2pgsql makes sure that there are no invalid geometries in the database,
+either by not importing them in the first place or by using an `ST_IsValid()`
+check after import. You'll either get `NULL` in your geometry columns instead
+or the row is not inserted at all (depending on config).
+
+The `transform()` function in Lua config files projects a geometry into a
+different SRS. In special cases this can make the geometry invalid, for
+instance when two distinct points are projected onto the same point.
+{:.note}
 
 ### Processing of Nodes
 
@@ -131,18 +143,18 @@ the [Geometry transformations](#geometry-transformations) section in the flex
 output chapter for details.
 
 *Version >= 1.7.0*{:.version} When using the flex output, you can decide
-yourself what geometries to create from a way using the `as_multilinestring()`,
-or `as_multipolygon()` functions. Also supported now is the
-`as_geometrycollection()` function which creates GeometryCollection from all
-member nodes and ways of a relation (relation members are ignored).
+yourself what geometries to create from a way using the `as_multipoint()`,
+`as_multilinestring()`, or `as_multipolygon()` functions. Also supported now is
+the `as_geometrycollection()` function which creates GeometryCollection from
+all member nodes and ways of a relation (relation members are ignored).
 
 If you are using the old "C transform" of the pgsql output, the geometry
 types for relations of type `multipolygon`, `boundary`, and `route` are
 hardcoded. If you are using the "Lua transform" you can configure them.
 
 Note that osm2pgsql will ignore the roles (`inner` and `outer`) on multipolygon
-and boundary relations when assembling multipolygons, because the roles are so
-often wrong or missing.
+and boundary relations when assembling multipolygons, because the roles are
+sometimes wrong or missing.
 
 ### Handling of Incomplete OSM Data
 
