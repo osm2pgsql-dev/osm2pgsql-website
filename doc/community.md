@@ -41,6 +41,8 @@ wiki.
 
 ## Tutorials
 
+* Book [Mastering PostGIS and OpenStreetMap](https://postgis-osm.com/) by Ryan
+  Lambert (released October 2022).
 * Webinar [OpenStreetMap to PostGIS: Easier and
   Better!](https://postgresconf.org/conferences/2021_Postgres_Conference_Webinars/program/proposals/openstreetmap-to-postgis-easier-and-better)
   by Ryan Lambert (March 2021).
