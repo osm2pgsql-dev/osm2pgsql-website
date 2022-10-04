@@ -54,7 +54,9 @@ many hours or even days. There are many reasons for this:
   improvements in the latest versions.
 
 All that being said, on a reasonably modern machine with 64GB RAM and SSDs you
-should be able to import a planet file in something like half a day.
+should be able to import a planet file in something like half a day. For some
+data about how long imports usually take, see [Appendix E in the
+manual](/doc/manual.html#sizing).
 
 ### Why is an index not being built and there is no error message?
 
