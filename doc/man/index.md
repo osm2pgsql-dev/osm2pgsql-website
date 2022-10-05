@@ -24,6 +24,7 @@ Create man pages with: groff -mandoc -Thtml docs/osm2pgsql-replication.1
 {% endcomment %}
 
 <ul>
+<li><a href="{% link doc/man/osm2pgsql-replication-1.7.1.md %}">Version 1.7.1</a></li>
 <li><a href="{% link doc/man/osm2pgsql-replication-1.6.0.md %}">Version 1.6.0</a></li>
 </ul>
 
