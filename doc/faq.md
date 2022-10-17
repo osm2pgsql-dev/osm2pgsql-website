@@ -149,7 +149,7 @@ possible.
 
 ## Error Messages
 
-Here are some of the error messages osm2pgql will produce and what you do
+Here are some of the error messages osm2pgsql will produce and what you do
 if you get them.
 
 ### `bad_alloc` or `segmentation fault`

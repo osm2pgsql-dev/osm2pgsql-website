@@ -4,7 +4,7 @@ title: Community Documentation
 
 # Community Documentation
 
-There are some osm2psql developers and users who have written up howtos or
+There are some osm2pgsql developers and users who have written up howtos or
 blog posts, gave talks, filmed tutorials etc. Not all of that is up to date
 with current version of the software and recommended usage, but there is a lot
 to learn there.
