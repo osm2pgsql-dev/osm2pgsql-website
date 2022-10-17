@@ -409,7 +409,7 @@ The parameter table (`object`) has the following fields and functions:
 | uid              | User id of the user that created or last changed this OSM object. (\*) |
 | user             | User name of the user that created or last changed this OSM object. (\*) |
 | grab_tag(KEY)    | Return the tag value of the specified key and remove the tag from the list of tags. (Example: `local name = object:grab_tag('name')`) This is often used when you want to store some tags in special columns and the rest of the tags in an jsonb or hstore column. |
-| get_bbox()       | Get the bounding box of the current node or way. This function returns four result values: the lon/lat values for the bottom left corner of the bounding box, followed by the lon/lat values of the top right corner. Both lon/lat values are identical in case of nodes. Example: `lon, lat, dummy, dummy = object.get_bbox()` (This function doesn't work for relations currently.) |
+| get_bbox()       | Get the bounding box of the current node or way. This function returns four result values: the lon/lat values for the bottom left corner of the bounding box, followed by the lon/lat values of the top right corner. Both lon/lat values are identical in case of nodes. Example: `lon, lat, dummy, dummy = object.get_bbox()` (*Version >= 1.7.0{: .version} Now also available for relations) |
 | is_closed        | Ways only: A boolean telling you whether the way geometry is closed, i.e. the first and last node are the same. |
 | nodes            | Ways only: An array with the way node ids. |
 | members          | Relations only: An array with member tables. Each member table has the fields `type` (values `n`, `w`, or `r`), `ref` (member id) and `role`. |
