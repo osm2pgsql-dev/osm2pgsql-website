@@ -61,7 +61,7 @@ doesn't need database creation privileges.
 Typical osm2pgsql setups need the `postgis` and `hstore` extensions to be
 enabled in the database. To install these you need superuser privileges in the
 database. Enable them (with `CREATE EXTENSION`) as PostgreSQL superuser on the
-database that osm2pgql is using before you run osm2pgsql.
+database that osm2pgsql is using before you run osm2pgsql.
 
 Of course osm2pgsql needs to be able to create tables and write to the
 database. Usually it can do this as owner of the database created for it.
