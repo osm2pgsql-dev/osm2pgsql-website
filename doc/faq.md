@@ -47,6 +47,9 @@ many hours or even days. There are many reasons for this:
 * Compile osm2pgsql with the Lua JIT library for about 10 to 15 % speedup.
 * If you don't need your database to be updateable and you have enough
   RAM, use non-slim mode. Always use a flat node file in slim mode.
+* If you have the choice, use input data in the PBF format, in some cases this
+  can half the time needed for reading the input! Overall this can save up to
+  10% of the run-time of osm2pgsql.
 * In some cases it makes sense to filter data before importing, see
   [the manual](/doc/manual.html#preparing-osm-data-for-use-by-osm2pgsql).
 * Make sure you are running the [newest released version]({% link
