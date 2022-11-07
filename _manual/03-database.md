@@ -79,11 +79,11 @@ have to create those schemas and give them the correct rights before running
 osm2pgsql.
 
 Before PostgreSQL 15 all database users could add objects (such as tables and
-indexes) to the *public* schema by default. Since PostgreSQL 15, users are by
-default not allowed to do that any more. You either have to grant the database
-user you are using for osm2pgsql rights on the *public* schema (not
-recommended, only do that if you trust all users on your system), or you have
-to configure osm2pgsql to use a different schema as described above. See the
+indexes) to the *public* schema by default. Since PostgreSQL 15, by default,
+only the owner of the database is allowed to do this. If osm2pgsql is using a
+database user that's not the owner of the database, you have to grant this user
+`CREATE` rights on the *public* schema of the database, or you have to
+configure osm2pgsql to use a different schema as described above. See the
 [PostgreSQL
 manual](https://www.postgresql.org/docs/current/ddl-schemas.html#DDL-SCHEMAS-PRIV){:.extlink}
 for the details.
