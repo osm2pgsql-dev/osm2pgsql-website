@@ -21,6 +21,11 @@ generalization to osm2pgsql. This will include adding some generalization
 support directly to osm2pgsql but also using the capabilities of the PostgreSQL
 database and especially the PostGIS extension in a more easy to use fashion.
 
+Here are the posts from Jochen's blog describing the progress of the project:
+
+* [Generalization of OSM data](https://blog.jochentopf.com/2022-11-03-generalization-of-osm-data.html)
+* [Selection of generalization problems](https://blog.jochentopf.com/2022-11-07-selection-of-generalization-problems.html)
+
 <div id="sponsorlist">
 
 <div>
