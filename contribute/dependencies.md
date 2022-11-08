@@ -12,36 +12,42 @@ repositories:
       name: Debian 10 Buster
       date: 2019-07-06
       eol: 2024
+    - id: ubuntu_22_10
+      name: Ubuntu 22.10 (Kinetic)
+      date: 2022-10-20
+      eol: 2023-07
+      gs: groupstart
     - id: ubuntu_22_04
-      name: Ubuntu 22.4 (Jammy)
+      name: Ubuntu 22.04 (Jammy)
       date: 2022-04-21
       eol: 2027-04
-      gs: groupstart
     - id: ubuntu_20_04
-      name: Ubuntu 20.4 (Focal)
+      name: Ubuntu 20.04 (Focal)
       date: 2020-04-23
       eol: 2025-04
     - id: ubuntu_18_04
-      name: Ubuntu 18.4 (Bionic)
+      name: Ubuntu 18.04 (Bionic)
       date: 2018-04-26
       eol: 2023-04
     - id: ubuntu_16_04
-      name: Ubuntu 16.4 (Xenial)
+      name: Ubuntu 16.04 (Xenial)
       date: 2016-04-21
       eol: 2021-04
     - id: fedora_rawhide
       name: Fedora Rawhide
-      date: (April 2021)
       gs: groupstart
+    - id: fedora_36
+      name: Fedora 36
+      date: 2022-05-10
+      eol: 2023-05-16
     - id: fedora_35
       name: Fedora 35
       date: 2021-11-02
+      eol: 2022-12-13
     - id: fedora_34
       name: Fedora 34
       date: 2021-04-27
-    - id: fedora_33
-      name: Fedora 33
-      date: 2020-10-07
+      eol: 2022-06-07
     - id: centos_8
       name: CentOS 8
       date: 2019-09-24
@@ -55,6 +61,7 @@ repositories:
       name: Homebrew
       gs: groupstart
 packages:
+    - osm2pgsql
     - postgresql
     - postgis
     - lua
@@ -63,6 +70,7 @@ packages:
     - llvm
     - python
     - boost
+    - geos
 title: Dependencies
 ---
 
