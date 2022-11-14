@@ -20,6 +20,8 @@ wiki.
 * Ryan Lambert of RustProof Labs has a
   [blog](https://blog.rustprooflabs.com/category/openstreetmap){:.extlink} with lots of osm2pgsql
   content.
+* Jakob Miksch has a [blog](https://jakobmiksch.eu/blog/){:.extlink} with some
+  posts related to osm2pgsql.
 
 ## Talks
 
