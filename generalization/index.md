@@ -26,6 +26,7 @@ Here are the posts from Jochen's blog describing the progress of the project:
 * [Generalization of OSM data](https://blog.jochentopf.com/2022-11-03-generalization-of-osm-data.html)
 * [Selection of generalization problems](https://blog.jochentopf.com/2022-11-07-selection-of-generalization-problems.html)
 * [Finding representative points for polygons](https://blog.jochentopf.com/2022-11-10-finding-representative-points-for-polygons.html)
+* [Processing architecture for generalization in osm2pgsql](https://blog.jochentopf.com/2022-11-15-processing-architecture-for-generalization-in-osm2pgsql.html)
 
 <div id="sponsorlist">
 
