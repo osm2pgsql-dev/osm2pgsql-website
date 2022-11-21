@@ -29,6 +29,10 @@ Here are the posts from Jochen's blog describing the progress of the project:
 * [Processing architecture for generalization in osm2pgsql](https://blog.jochentopf.com/2022-11-15-processing-architecture-for-generalization-in-osm2pgsql.html)
 * [Generalizing polygons](https://blog.jochentopf.com/2022-11-21-generalizing-polygons.html)
 
+And here are some related pull requests:
+* [PR 1822 (Pole of Inaccessibility)](https://github.com/openstreetmap/osm2pgsql/pull/1822)
+* [PR 1830 (Polygon Generalization)](https://github.com/openstreetmap/osm2pgsql/pull/1830)
+
 <div id="sponsorlist">
 
 <div>
