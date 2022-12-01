@@ -117,6 +117,7 @@ function. You can use the same options on the
 | data_tablespace  | The [PostgreSQL tablespace](https://www.postgresql.org/docs/current/manage-ag-tablespaces.html){:.extlink} used for the data in this table. |
 | index_tablespace | The [PostgreSQL tablespace](https://www.postgresql.org/docs/current/manage-ag-tablespaces.html){:.extlink} used for all indexes of this table. |
 | cluster          | *Version >= 1.5.0*{: .version} Set clustering strategy. Use `"auto"` (default) to enable clustering by geometry, osm2pgsql will choose the best method. Use `"no"` to disable clustering. |
+| indexes          | *Version >= 1.8.0*{: .version} Define indexes to be created on this table. If not set, the default is to create a GIST index on the first (or only) geometry column. |
 {: .desc}
 
 All the `osm2pgsql.define*table()` functions return a database table Lua
@@ -369,6 +370,44 @@ table (and not `add_row()`, see below) you can use the `area()` function on any
 geometry in any projection to calculate the area. What you get back is a real
 number that you can put into any normal `real` column. The special case of the
 `area` column type is not needed any more.
+
+### Defining Indexes
+
+Osm2pgsql will always create indexes on the id column(s) of all tables if the
+database is updateable (i.e. in slim mode), because it needs those indexes to
+update the database. You can not control those indexes with the settings
+described in this section.
+{: .note}
+
+*Version >= 1.8.0*{:.version} Indexes can only be defined in version 1.8.0 and
+above, before that there was always a GIST index created on the first (or only)
+geometry column of any table.
+
+To define indexes, set the `indexes` field of the table definition to an array
+of Lua tables. If the array is empty, no indexes are created for this table
+(except possibly an index on the id column(s)). If there is no `indexes` field
+(or if it is set to `nil`) a GIST index will be created on the first (or only)
+geometry column of this table. This is the same behavior as before version
+1.8.0.
+
+The following fields can be set in an index definition. You have to set at
+least the `method` and either `column` or `expression`.
+
+| Key        | Description |
+| ---------- | ----------- |
+| column     | The name of the column the index should be created on. Can also be an array of names. Required, unless `expression` is set. |
+| expression | A valid SQL expression used for [indexes on expressions](https://www.postgresql.org/docs/current/indexes-expressional.html){:.extlink}. Can not be used together with `column`. |
+| include    | A column name or list of column names to include in the index as non-key columns. (Only available from PostgreSQL 11.) |
+| method     | The index method ('btree', 'gist', ...). See the [PostgreSQL docs](https://www.postgresql.org/docs/current/indexes-types.html){:.extlink} for available types (required). |
+| tablespace | The tablespace where the index should be created. Default is the tablespace set with `index_tablespace` in the table definition. |
+| unique     | Set this to `true` or `false` (default). |
+| where      | A condition for a [partial index](https://www.postgresql.org/docs/current/indexes-partial.html){:.extlink}. This has to be set to a text that makes valid SQL if added after a `WHERE` in the `CREATE INDEX` command. |
+{: .desc}
+
+If you need an index that can not be expressed with these definitions, you have
+to create it yourself using [the SQL `CREATE INDEX`
+command](https://www.postgresql.org/docs/current/sql-createindex.html){:.extlink}
+after osm2pgsql has finished its job.
 
 ### Processing Callbacks
 
