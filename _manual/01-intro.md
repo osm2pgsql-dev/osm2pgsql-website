@@ -5,8 +5,8 @@ title: Introduction
 
 Osm2pgsql is used to import OSM data into a PostgreSQL/PostGIS database for
 rendering into maps and many other uses. Usually it is only part of a
-toolchain, for instance other software is needed that do that actual rendering
-(i.e. turning the data into a map), deliver the maps to the user etc.
+toolchain, for instance other software is needed for the actual rendering
+(i.e. turning the data into a map) or delivery of the maps to the user etc.
 
 Osm2pgsql is a fairly complex piece of software and it interacts with the
 database system and other pieces of the toolchain in complex ways. It will take
