@@ -690,11 +690,12 @@ sense. Here are the detailed rules:
    other strings will result in `NULL`.
 9. *Version >= 1.5.0*{: .version} For `json` and `jsonb` columns string,
    number, and boolean values are converted to their JSON equivalent as you
-   would expect. An empty table is converted to an (empty) JSON object, tables
-   that only have consecutive integer keys starting from 1 are converted into
-   JSON arrays. All other tables are converted into JSON objects. Mixed key
-   types are not allowed. Osm2pgsql will detect loops in tables and return an
-   error.
+   would expect. (The special floating point numbers `NaN` and `Inf` can not be
+   represented in JSON and are converted to `null`). An empty table is converted
+   to an (empty) JSON object, tables that only have consecutive integer keys
+   starting from 1 are converted into JSON arrays. All other tables are converted
+   into JSON objects. Mixed key types are not allowed. Osm2pgsql will detect loops
+   in tables and return an error.
 10. For text columns and any other not specially recognized column types,
     booleans result in an error and numbers are converted to strings.
 11. *Version >= 1.7.0*{: .version} For `insert()` only: Geometry objects are
