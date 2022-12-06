@@ -22,6 +22,8 @@ wiki.
   content.
 * Jakob Miksch has a [blog](https://jakobmiksch.eu/blog/){:.extlink} with some
   posts related to osm2pgsql.
+* _(French)_ A complete step-by-step guide to setup a PostgreSQL/PostGIS database and using osmp2pgsql to load OSM data by Julien Moura on [Geotribu](http://geotribu.fr/articles/2022/2022-06-28_import-donnees-osm-postgresql-osm2pgsql-osmium/){:.extlink}. On the same website, others blog posts can be found about osm2pgsql using [this search](http://geotribu.fr/?q=osm2pgsql*){:.extlink}.
+
 
 ## Talks
 
