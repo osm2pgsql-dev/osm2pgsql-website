@@ -27,6 +27,10 @@ wiki.
 
 ## Talks
 
+* From PostGIS Day 2022: "Route the Interesting Things (Not Just Roads!) with OpenStreetMap" by Ryan Lambert
+  [Video on Youtube](https://youtu.be/uydAoMaReos){:.extlink} (Dec 2022).
+* From PostGIS Day 2022: "Speedrunning the Open Street Map osm2pgsql Loader" by Greg Smith
+  [Video on Youtube](https://www.youtube.com/watch?v=BCMnu7xay2Y){:.extlink} (Dec 2022).
 * From SotM 2021: "News from osm2pgsql" by Jochen Topf.
   [Slides](https://media.jochentopf.com/media/2021-07-10-talk-sotm2021-osm2pgsql-en-slides.pdf){:.extlink},
   [Download Video](https://media.jochentopf.com/media/2021-07-10-talk-sotm2021-osm2pgsql-en-video.mp4){:.extlink},
@@ -45,10 +49,10 @@ wiki.
 
 ## Tutorials
 
-* Book [Mastering PostGIS and OpenStreetMap](https://postgis-osm.com/) by Ryan
+* Book [Mastering PostGIS and OpenStreetMap](https://postgis-osm.com/){:.extlink} by Ryan
   Lambert (released October 2022).
 * Webinar [OpenStreetMap to PostGIS: Easier and
-  Better!](https://postgresconf.org/conferences/2021_Postgres_Conference_Webinars/program/proposals/openstreetmap-to-postgis-easier-and-better)
+  Better!](https://postgresconf.org/conferences/2021_Postgres_Conference_Webinars/program/proposals/openstreetmap-to-postgis-easier-and-better){:.extlink}
   by Ryan Lambert (March 2021).
 * A video webinar in 6 parts: [Intro to PostGIS and
   OpenStreetMap](https://www.youtube.com/watch?v=l98YREUSJs4&list=PLHWVtzzXLMjJGYfjAjguS-Bm79KowWEI_){:.extlink}
