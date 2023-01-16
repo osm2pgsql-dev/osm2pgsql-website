@@ -71,6 +71,10 @@ packages:
     - python
     - boost
     - geos
+    - catch
+    - fmt
+    - libosmium
+    - protozero
 title: Dependencies
 ---
 
