@@ -605,6 +605,13 @@ table.software-versions th {
     border: 1px solid #e0e0e0;
 }
 
+.experimental {
+    background-color: #f0f0ff;
+    border: 1px solid #a0a0ff;
+    padding: 0 2px;
+    border-radius: 2px;
+}
+
 .table-note {
     margin-top: 4px;
     text-align: right;
