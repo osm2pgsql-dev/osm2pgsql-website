@@ -245,11 +245,13 @@ The *gazetteer* Output
   [Nominatim](https://nominatim.org/){:.extlink} only. There is no information
   in this manual about its use, see the Nominatim documentation for details.
 
+: *Version >= 1.8.0*{: .version} The *gazetteer* output is deprecated.
+
 The *multi* Output
 
 : *Version < 1.5.0*{: .version} The *multi* output is deprecated.
 
-:  *Version >= 1.5.0*{: .version} The *multi* output was removed.
+: *Version >= 1.5.0*{: .version} The *multi* output was removed.
 
 The *null* Output
 
