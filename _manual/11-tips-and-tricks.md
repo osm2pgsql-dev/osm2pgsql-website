@@ -88,7 +88,7 @@ can do that there, too.
 
 Lua scripts can use quite a lot of memory if you are not careful. This is
 usually only a problem when using [two-stage processing](#stages). To monitor
-how much memory is currently used, can use this function:
+how much memory is currently used, use this function:
 
 ```lua
 function create_memory_reporter(filename, frequency)
