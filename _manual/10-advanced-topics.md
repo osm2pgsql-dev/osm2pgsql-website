@@ -5,7 +5,7 @@ title: Advanced Topics
 
 ### Notes on Memory Usage
 
-Importing on OSM file into the database is very demanding in terms of RAM
+Importing an OSM file into the database is very demanding in terms of RAM
 usage. Osm2pgsql and PostgreSQL are running in parallel at this point and both
 need memory. You also need enough memory for general file system cache managed
 by the operating system, otherwise all IO will become too slow.
@@ -94,7 +94,7 @@ uses the specialized Gazetteer output which doesn't need this behaviour.
 ### Using Database While Updating
 
 To improve performance osm2pgsql uses several parallel threads to import or
-update the OSM data. This means that that there is no transaction around all
+update the OSM data. This means that there is no transaction around all
 the updates. If you are querying the database while osm2pgsql is running, you
 might be able to see some updates but not others. While an import is running
 you should not query the data. For updates it depends a bit on your use case.
