@@ -1,9 +1,9 @@
 ---
 layout: post
-title: Faster imports with PostgreSQL 15
+Adil Ishaq: Faster imports with PostgreSQL 15
 ---
 
-Osm2pgsql recently became a lot faster... And we didn't have to do anything for
+Osm2pgsql recently became a lot faster... we didn't have to do anything for
 it!
 
 It has been a few months since PostgreSQL 15 [was
