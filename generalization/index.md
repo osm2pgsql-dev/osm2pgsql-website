@@ -31,9 +31,10 @@ Here are the posts from Jochen's blog describing the progress of the project:
 * [PostgreSQL raster experiments](https://blog.jochentopf.com/2022-12-14-postgresql-raster-experiments.html)
 * [Selecting settlements to display](https://blog.jochentopf.com/2022-12-19-selecting-settlements-to-display.html)
 * [Deriving built-up areas](https://blog.jochentopf.com/2022-12-23-deriving-built-up-areas.html)
+* [Generalizing river networks](https://blog.jochentopf.com/2023-01-30-generalizing-river-networks.html)
 
 And here are some related pull requests:
-* [PR 1822 (Pole of Inaccessibility)](https://github.com/openstreetmap/osm2pgsql/pull/1822)
+* [PR 1822 (Pole of Inaccessibility)](https://github.com/openstreetmap/osm2pgsql/pull/1822) (already merged)
 * [PR 1830 (Polygon Generalization)](https://github.com/openstreetmap/osm2pgsql/pull/1830)
 
 <div id="sponsorlist">
