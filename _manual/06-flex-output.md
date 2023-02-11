@@ -186,6 +186,13 @@ ways, or relations). There are two ways the id can be stored:
    (This is the same transformation that the
    [Imposm](https://imposm.org/docs/imposm3/latest/){:.extlink} program uses.)
 
+Osm2pgsql will only create these Id indexes if an updatable database is
+created, i.e. if osm2pgsql is run with `--slim` (but not `--drop`). *Version >=
+1.8.0*{: .version} You can set the optional field `create_index` in the `ids`
+setting to `'always'` to force osm2pgsql to always create this index, even in
+non-updatable databases (the default is `'auto'`, only create the index if
+needed for updating).
+
 #### Unique Ids
 
 It is often desirable to have a unique PRIMARY KEY on database tables. Many
