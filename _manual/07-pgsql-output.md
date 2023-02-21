@@ -9,10 +9,10 @@ used although it is somewhat limited in how the data can be represented in
 the database.
 
 If you are starting a new project with osm2pgsql, we recommend you use the
-[flex output](#the-flex-output) instead. The pgsql output will not receive all
-the new features that the flex output has or will get in the future. There are
-a lot of old configs and styles out there that need the pgsql output, though.
-So it will not go away anytime soon.
+[flex output](#the-flex-output) instead. The pgsql output does not receive all
+the new features that the flex output has or will get in the future. The pgsql
+output will be removed at some point, so you should think about migrating your
+existing projects.
 {: .note}
 
 ### Database Layout
