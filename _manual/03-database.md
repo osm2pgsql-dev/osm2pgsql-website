@@ -92,7 +92,7 @@ for the details.
 ### Encoding
 
 OpenStreetMap data is from all around the world, it always uses UTF-8 encoding.
-osm2pgsql will write the data as is into the database, so it has to be in UTF-8
+Osm2pgsql will write the data as is into the database, so it has to be in UTF-8
 encoding, too.
 
 On any modern system the default encoding for new databases should be UTF-8,
@@ -109,10 +109,10 @@ your system will be much slower than necessary.
 The following settings are geared towards a system with 64GB RAM and a fast
 SSD. The values in the second column are suggestions to provide a good starting
 point for a typical setup, you might have to adjust them for your use case. The
-value in the third column is the default set by PostgreSQL 13.
+value in the third column is the default set by PostgreSQL 15.
 
-| Config Option                                                                                                                    | Proposed Value  | Pg 13 Default | Remark |
-| -------------------------------------------------------------------------------------------------------------------------------- | --------------- | ------------- | --- |
+| Config Option                                                                                                                    | Proposed Value  | Pg 15 Default | Remark |
+| -------------------------------------------------------------------------------------------------------------------------------- | --------------- | ------------- | ------ |
 | [shared_buffers](https://www.postgresql.org/docs/current/runtime-config-resource.html#GUC-SHARED-BUFFERS)                        | 1GB             | 128MB         | Lower than typical PostgreSQL recommendations to give osm2pgsql priority to RAM. |
 | [work_mem](https://www.postgresql.org/docs/current/runtime-config-resource.html#GUC-WORK-MEM)                                    | 50MB            | 4MB           | |
 | [maintenance_work_mem](https://www.postgresql.org/docs/current/runtime-config-resource.html#GUC-MAINTENANCE-WORK-MEM)            | 10GB            | 64MB          | Improves `CREATE INDEX` |
@@ -120,9 +120,9 @@ value in the third column is the default set by PostgreSQL 13.
 | [wal_level](https://www.postgresql.org/docs/current/runtime-config-wal.html#GUC-WAL-LEVEL)                                       | minimal         | replica       | Reduces WAL activity if replication is not required during data load.  Must also set `max_wal_senders=0`. |
 | [checkpoint_timeout](https://www.postgresql.org/docs/current/runtime-config-wal.html#GUC-CHECKPOINT-TIMEOUT)                     | 60min           | 5min          | Increasing this value reduces time-based checkpoints and increases time to restore from PITR |
 | [max_wal_size](https://www.postgresql.org/docs/current/runtime-config-wal.html#GUC-MAX-WAL-SIZE)                                 | 10GB            | 1GB           | PostgreSQL > 9.4 only. For PostgreSQL <= 9.4 set `checkpoint_segments = 100` or higher. |
-| [checkpoint_completion_target](https://www.postgresql.org/docs/current/runtime-config-wal.html#GUC-CHECKPOINT-COMPLETION-TARGET) | 0.9             | 0.5           | Spreads out checkpoint I/O of more of the `checkpoint_timeout` time, reducing spikes of disk activity |
+| [checkpoint_completion_target](https://www.postgresql.org/docs/current/runtime-config-wal.html#GUC-CHECKPOINT-COMPLETION-TARGET) | 0.9             | 0.9           | Spreads out checkpoint I/O of more of the `checkpoint_timeout` time, reducing spikes of disk activity |
 | [max_wal_senders](https://www.postgresql.org/docs/current/runtime-config-replication.html#GUC-MAX-WAL-SENDERS)                   | 0               | 10            | See `wal_level` |
-| [random_page_cost](https://www.postgresql.org/docs/current/runtime-config-query.html#GUC-RANDOM-PAGE-COST)                       | 1.0             | 2             | Assuming fast SSDs  |
+| [random_page_cost](https://www.postgresql.org/docs/current/runtime-config-query.html#GUC-RANDOM-PAGE-COST)                       | 1.0             | 4.0           | Assuming fast SSDs  |
 {: .desc}
 
 Here are the proposed settings for copy-and-paste into a config file:
@@ -143,9 +143,9 @@ random_page_cost = 1.0
 Increasing values for `max_wal_size` and `checkpoint_timeout` means that
 PostgreSQL needs to run checkpoints less often but it can require additional
 space on your disk and increases time required for Point in Time Recovery
-(PITR) restores.  Monitor the Postgres logs for warnings indicating checkpoints
-are occurring too frequently: `HINT:  Consider increasing the configuration
-parameter "max_wal_size".`
+(PITR) restores.  Monitor the PostgreSQL logs for warnings indicating
+checkpoints are occurring too frequently: `HINT:  Consider increasing the
+configuration parameter "max_wal_size".`
 
 Autovacuum must not be switched off because it ensures that the tables are
 frequently analysed. If your machine has very little memory, you might consider
@@ -164,11 +164,11 @@ PostgreSQL documentation.
 
 The suggestions in this section are *potentially dangerous* and are not
 suitable for all environments. These settings can cause crashes and/or
-corruption.  Corruption in a Postgres instance can lead to a "bricked" instance
-affecting all databases in the instance.
+corruption.  Corruption in a PostgreSQL instance can lead to a "bricked"
+instance affecting all databases in the instance.
 
-| Config Option                | Proposed Value  | Pg 13 Default | Remark |
-| ---------------------------- | --------------- | ------------- | --- |
+| Config Option                | Proposed Value  | Pg 15 Default | Remark |
+| ---------------------------- | --------------- | ------------- | ------ |
 | full_page_writes             | off             | on            |  Warning: Risks data corruption.  Set back to `on` after import. |
 | fsync                        | off             | on            |  Warning: Risks data corruption.  Set back to `on` after import. |
 {: .desc}
@@ -195,7 +195,7 @@ If you are hit by this, your options are to
 
 * increase the `max_connections` settings in your database configuration, or
 * reduce the number of threads with the `--number-processes=THREADS` command
-  line option of osm2pgsql, or
+  line option of osm2pgsql.
 
 ### Using a Template Database
 

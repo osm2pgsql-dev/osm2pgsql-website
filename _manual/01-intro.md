@@ -31,7 +31,7 @@ the section will have a note like this: *Version >= 1.4.0*{: .version}
 
 Sections labelled *Experimental*{:.experimental} describe new features which
 might change at any point without notice. We encourage you to experiment with
-them and report how they work for you, but don't rely on then for production
+them and report how they work for you, but don't rely on them for production
 use.
 
 It is recommended that you always use the newest [released version]({% link

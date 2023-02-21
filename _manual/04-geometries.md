@@ -12,15 +12,15 @@ assembles all the data from the related objects into valid geometries.
 
 The geometry types supported by PostGIS are from the [Simple
 Features](https://en.wikipedia.org/wiki/Simple_Features){:.extlink} defined by
-the OpenGIS Consortium (OGC). Osm2pgsql creates geometries of these types
-from OSM data.
+the OpenGIS Consortium (OGC). Osm2pgsql creates geometries of the following
+types from OSM data:
 
 | Geometry type      | Created from OSM data                                 |
 | ------------------ | ----------------------------------------------------- |
 | Point              | Created from nodes.                                   |
 | LineString         | Created from ways.                                    |
 | Polygon            | Created from closed ways or some relations.           |
-| MultiPoint         | Never created.                                        |
+| MultiPoint         | Created from nodes or some relations.                 |
 | MultiLineString    | Created from (split up) ways or some relations.       |
 | MultiPolygon       | Created from closed ways or some relations.           |
 | GeometryCollection | *Version >= 1.7.0*{:.version} Created from relations. |
@@ -66,8 +66,8 @@ Validity is more complex for Polygon and MultiPolygon geometries: There are
 multiple ways how such a geometry can be invalid. For instance, if the boundary
 of a polygon is drawn in a figure eight, the result will not be a valid
 polygon. The database will happily store such invalid polygons, but this can
-lead to problems later, when you try to draw them or do calculations (such as
-the area) based on the invalid geometry.
+lead to problems later, when you try to draw them or do calculations based on
+the invalid geometry (such as calculating the area).
 
 You can use the [Areas view of the OpenStreetMap
 inspector](https://tools.geofabrik.de/osmi/?view=areas){:.extlink} to help
@@ -104,9 +104,9 @@ feature.
 
 There is no definite list which tags indicate a linear or polygon feature.
 Osm2pgsql lets the user decide. It depends on your chosen output (see next
-chapter) how to configure this. The example config files have lists that should
-cover most of the commonly used tags, but you might have to extend the lists if
-you are using more unusual tags.
+chapter) how to configure this. Some of the example config files have lists
+that should cover most of the commonly used tags, but you might have to extend
+the lists if you are using more unusual tags.
 
 Osm2pgsql can split up long LineStrings created from ways into smaller
 segments. This can make rendering of tiles faster, because smaller geometries
@@ -137,20 +137,17 @@ geometry it should have:
 | type=route        | (Multi)LineString         |
 {: .desc}
 
-The osm2pgsql flex output can create a (Multi)Polygon or (Multi)LineString
-geometry from any relation, other geometries are currently not supported. See
-the [Geometry transformations](#geometry-transformations) section in the flex
-output chapter for details.
+*Version >= 1.7.0*{:.version} When using the [flex output](#the-flex-output),
+you can decide yourself what geometries to create from a way using the
+`as_multipoint()`, `as_multilinestring()`, or `as_multipolygon()` functions.
+Also supported now is the `as_geometrycollection()` function which creates
+GeometryCollection from all member nodes and ways of a relation (relation
+members are ignored).
 
-*Version >= 1.7.0*{:.version} When using the flex output, you can decide
-yourself what geometries to create from a way using the `as_multipoint()`,
-`as_multilinestring()`, or `as_multipolygon()` functions. Also supported now is
-the `as_geometrycollection()` function which creates GeometryCollection from
-all member nodes and ways of a relation (relation members are ignored).
-
-If you are using the old "C transform" of the pgsql output, the geometry
-types for relations of type `multipolygon`, `boundary`, and `route` are
-hardcoded. If you are using the "Lua transform" you can configure them.
+If you are using the old "C transform" of the pgsql output, the geometry types
+for relations of type `multipolygon`, `boundary`, and `route` are hardcoded. If
+you are using the "Lua transform" of the pgsql output you can configure
+them somewhat.
 
 Note that osm2pgsql will ignore the roles (`inner` and `outer`) on multipolygon
 and boundary relations when assembling multipolygons, because the roles are
@@ -236,5 +233,5 @@ Note that mapping styles often depend on the projection used. Most mapping
 style configurations will enable or disable certain rendering styles depending
 on the map scale or zoom level. But a meaningful scale will depend on the
 projection. Most styles you encounter are probably made for Web Mercator
-and will need changes to get nice maps in other projections.
+and will need to be changed if you want to use them for other projections.
 

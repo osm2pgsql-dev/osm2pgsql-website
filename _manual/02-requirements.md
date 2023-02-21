@@ -47,9 +47,9 @@ system with the [PostGIS](https://postgis.net/){:.extlink} extension installed.
 
 Osm2pgsql aims to support all PostgreSQL and PostGIS versions that are
 currently supported by their respective maintainers. Currently PostgreSQL
-versions 9.6 and above and PostGIS versions 2.2 and above are supported.
+versions 9.6 and above and PostGIS versions 2.5 and above are supported.
 (Earlier versions might work but are not tested any more.) PostgreSQL version
-11 or above and PostGIS version 2.4 or above is recommended.
+11 or above is recommended.
 
 In some cases older versions of osm2pgsql have problems with newer database
 software versions. You should always run the newest released osm2pgsql version
@@ -69,10 +69,12 @@ Some parts of osm2pgsql require the use of the
 [Lua](https://www.lua.org/){:.extlink} scripting language. It is highly
 recommended that you use a version of osm2pgsql with Lua support enabled,
 because it gives you a much more flexible configuration. If available osm2pgsql
-can also be compiled using the Lua JIT (just in time) compiler.
+can also be compiled using the Lua JIT (just in time) compiler. Use of Lua JIT
+is recommended, especially for larger systems, because it will speed up
+processing.
 
-Osm2pgsql can also be compiled without Lua support. In that case the *pgsql*
-and *gazetteer* outputs are the only ones available.
+Osm2pgsql can also be compiled without Lua support. In that case you can not
+use the modern *flex* output.
 
 Security Note: Lua scripts can do basically anything on your computer that the
 user running osm2pgsql is allowed to do, such as reading and writing files,
