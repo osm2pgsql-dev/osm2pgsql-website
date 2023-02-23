@@ -75,6 +75,7 @@ packages:
     - fmt
     - libosmium
     - protozero
+    - pyosmium
 title: Dependencies
 ---
 
