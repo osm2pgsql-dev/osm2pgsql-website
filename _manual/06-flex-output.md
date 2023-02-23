@@ -272,6 +272,7 @@ with the following keys:
 | not_null    | Set to `true` to make this a `NOT NULL` column. (Optional, default `false`.) |
 | create_only | Set to `true` to add the column to the `CREATE TABLE` command, but do not try to fill this column when adding data. This can be useful for `SERIAL` columns or when you want to fill in the column later yourself. (Optional, default `false`.) |
 | projection  | On geometry columns only. Set to the EPSG id or name of the projection. (Optional, default web mercator, `3857`.) |
+| expire      | On geometry columns only. Set expire output. See [Defining and Using Expire Outputs](#defining-and-using-expire-outputs) (Optional.) |
 {: .desc}
 
 The `type` field describes the type of the column from the point of view of
@@ -378,6 +379,10 @@ geometry in any projection to calculate the area. What you get back is a real
 number that you can put into any normal `real` column. The special case of the
 `area` column type is not needed any more.
 
+Geometry columns can have expire configurations attached to them. See the
+section on [Defining and Using Expire
+Outputs](#defining-and-using-expire-outputs) for details.
+
 ### Defining Indexes
 
 Osm2pgsql will always create indexes on the id column(s) of all tables if the
@@ -415,6 +420,53 @@ If you need an index that can not be expressed with these definitions, you have
 to create it yourself using [the SQL `CREATE INDEX`
 command](https://www.postgresql.org/docs/current/sql-createindex.html){:.extlink}
 after osm2pgsql has finished its job.
+
+### Defining and Using Expire Outputs
+
+*Version >= 1.9.0*{:.version} Expire outputs can only be defined this way in
+version 1.9.0 and above. Before that only a single expire output could be
+configured through command line parameters. See the [Expire chapter](#expire)
+for some general information about expiry.
+
+When osm2pgsql is working in 'append' mode, i.e. when it is updating an
+existing database from OSM change files, it can figure out which changes will
+potentially affect which Web Mercator tiles, so that you can re-render those
+tiles later.
+
+The list of tile coordinates can be written to a file and/or to a database
+table. Use the `osm2pgsql.define_expire_output()` Lua function to define an
+expire output. The function has a single paramater, a Lua table with the
+following fields:
+
+| Field    | Description |
+| -------- | ----------- |
+| maxzoom  | The maximum zoom level for which tile coordinates are written out. Required. |
+| minzoom  | The minimum zoom level for which tile coordinates are written out. Optional. Default is the same as maxzoom. |
+| filename | The filename of the output file. Optional. |
+| schema   | The database schema for the output table. Optional. |
+| table    | The database table for the output. Optional. |
+{: .desc}
+
+You have to supply the `filename` and/or the `table` (possibly with `schema`).
+You can provide either or both. The database table will be created for you if
+it isn't available already.
+
+Defined expire outputs can then be used in table definitions. Geometry columns
+using Web Mercator projection (EPSG 3857) can have an `expire` field which
+specifies which expire outputs should be triggered by changes affecting this
+geometry.
+
+| Field           | Description |
+| --------------- | ----------- |
+| output          | The expire output defined with `define_expire_output()`. |
+| mode            | How polygons are converted to tiles. Can be `full-area` (default), `boundary-only`, or `hybrid`. |
+| full_area_limit | In `hybrid` mode, set the maximum area size for which a full-area expiry is done. Above this `boundary-only` is used. |
+| buffer          | The size of the buffer around geometries to be expired as a fraction of the tile size. |
+{: .desc}
+
+For an example showing how the expire output works, see the
+[`flex-config/expire.lua`](https://github.com/openstreetmap/osm2pgsql/tree/master/flex-config/expire.lua){:.extlink}
+example config file.
 
 ### Processing Callbacks
 

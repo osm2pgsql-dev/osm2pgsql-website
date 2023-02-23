@@ -3,20 +3,58 @@ chapter: 9
 title: Expire
 ---
 
-When osm2pgsql is processing OSM changes, it can create a list of (web
-mercator) tiles that are affected by those changes. This list can later be used
+When osm2pgsql is processing OSM changes, it can create a list of (Web
+Mercator) tiles that are affected by those changes. This list can later be used
 to delete or re-render any changed tiles you might have cached. Osm2pgsql only
 creates this list. How to actually expire the tiles is outside the scope of
 osm2pgsql. Expire only makes sense in *append* mode.
 
-Tile expiry will probably only work when creating web mercator (EPSG:3857)
+Tile expiry will probably only work when creating Web Mercator (EPSG:3857)
 geometries. When using other output projections osm2pgsql can still generate
-expire files, but it is unclear how useful they are.
+expire files, but it is unclear how useful they are. The *flex* output will
+only allow you to enable expire on Web Mercator geometry columns.
 {:.note}
 
-Tile expiry is only enabled if the `-e, --expire-tiles` option is set to
-anything but `0`. Use this option to set the zoom level(s) which should be
-used for tile expiry. Details are below.
+There are two ways to configure tile expiry. The old way (and the only way if
+you are using the *pgsql* output) is to use the `-e, --expire-tiles`, `-o,
+--expire-output`, and `--expire-bbox-size` command line options. This allows
+only a single expire output to be defined (and it has to go to a file).
+
+*Version >= 1.9.0*{:.version} The new way, which is only available with the
+*flex* output, allows you to define any number of expire outputs (and they can
+go to files or to database tables).
+
+### Expire Outputs
+
+Each expire output has a minimum and maximum zoom level. For each geometry that
+needs to be expired, the coordinates of the affected tiles are determined and
+stored. When osm2pgsql is finished with its run, it writes the tile coordinates
+for all zoom levels between minimum and maximum zoom level to the output.
+
+Memory requirements for osm2pgsql rise with the maximum zoom level used and the
+number of changes processed. This is usually no problem for zoom level 12 or 14
+tiles, but might be an issue if you expire on zoom level 18 and have lots of
+changes to process.
+{:.note}
+
+The output can be written to a file or a table:
+
+#### Expire File
+
+The generated expire file is a text file that contains one tile coordinate per
+line in the format `ZOOM/X/Y`. Tiles appear only once in the file even if
+multiple geometry changes are affecting the same tile.
+
+The file is written to in append mode, i.e. new tiles are added to the end of
+the file. You have to clear the file after processing the tiles.
+
+#### Expire Table
+
+*Version >= 1.9.0*{:.version} The expire table has three columns `zoom`, `x`,
+and `y`. A primary key constraints on those three columns makes sure that
+there is no duplicate data.
+
+You have to delete entries from this file after expiry is run.
 
 ### Details of the Expire Calculations
 
@@ -37,37 +75,31 @@ Which tiles are marked to be expired depends on the geometry type generated:
   expired.
 * For line geometries (linestring or multilinestring) all tiles intersected
   by the line are marked as expired.
-* For (multi)polygons all tiles in the bounding box are marked as expired.
-  If the (multi)polygon is too large, only the boundary of the (multi)polygon
-  is expired as described for line geometries above. "too large" in this
-  case means with a bounding box of greater width or height (in meters) than
-  what's set with the `--expire-bbox-size` option (default is 20000).
+* For (multi)polygons there are several expire modes: In `full-area` mode
+  all tiles in the bounding box of the polygon are marked as expired. In
+  `boundary-only` mode only the lines along the boundary of the polygon are
+  expired. In `hybrid` mode either can happen depending on the area of the
+  polygon. Polygons with an area larger than `full_area_limit` are expired
+  as if `bundary-only` is set, smaller areas in `full-area` mode. When using
+  the *flex* output, you can set the `mode` and `full_area_limit` as needed
+  for each geometry column. For the *pgsql* output the expire output always
+  works in `hybrid` mode, use the `--expire-bbox-size` option to set the
+  `full_area_limit` (default is 20000).
 
 In each case neighboring tiles might also be marked as expired if the feature
 is within a buffer of the tile boundary. This is so that larger icons, thick
 lines, labels etc. which are rendered just at a tile boundary which "overflow"
-into the next tile are handled correctly. Currently that buffer is set at 10%
-of the tile size, it is not possible to change it.
+into the next tile are handled correctly. By default that buffer is set at 10%
+of the tile size, in the *flex* output it is possible to change it using the
+`buffer` setting.
 
-### The Expire File
+### Command Line Options
 
-The list of tiles to be expired is written to a file. The name is specified
-with the `-o, --expire-output=FILENAME` option, it defaults to `dirty_tiles`
-in the current directory.
+These are the command line options to configure expiry. Use them with the
+*pgsql* or *flex* output.
 
-The generated expire file is a text file that contains one tile descriptor per
-line in the format `ZOOM/X/Y`. Tiles appear only once in the file even if
-multiple geometry changes are affecting the same tile.
-
-If you set the `-e, --expire-tiles` option to a single zoom level, for instance
-`--expire-tiles=12` then all tiles in the expire tile have that zoom level. If
-you set the option to a range of zoom levels, for instance `-e 10-14`, the file
-contains the tiles in all those zoom levels.
-
-Memory requirements for osm2pgsql rise with the maximum zoom level used and the
-number of changes processed. This is usually no problem for zoom level 12 or 14
-tiles, but might be an issue if you expire on zoom level 18 and have lots of
-changes to process.
-{:.note}
+*Version >= 1.9.0*{:.version} When using the *flex* output it is recommended
+you switch to the new way of defining the expire output explained in [Defining
+and Using Expire Outputs](#defining-and-using-expire-outputs).
 
 {% include_relative options/expire.md %}
