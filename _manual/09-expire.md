@@ -93,7 +93,7 @@ into the next tile are handled correctly. By default that buffer is set at 10%
 of the tile size, in the *flex* output it is possible to change it using the
 `buffer` setting.
 
-### Command Line Options
+### Expire Command Line Options
 
 These are the command line options to configure expiry. Use them with the
 *pgsql* or *flex* output.
