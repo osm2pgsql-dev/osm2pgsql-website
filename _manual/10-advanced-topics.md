@@ -91,6 +91,11 @@ is the behaviour you want.
 line option `--with-forward-dependencies=false`. It is used by Nominatim which
 uses the specialized Gazetteer output which doesn't need this behaviour.
 
+*Version >= 1.8.0*{: .version} The command line option
+`--with-forward-dependencies` is deprecated and will be removed soon. Nominatim
+has been changed in the mean time to not need this any more and nobody else
+needs it either.
+
 ### Using Database While Updating
 
 To improve performance osm2pgsql uses several parallel threads to import or
