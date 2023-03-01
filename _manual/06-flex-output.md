@@ -465,7 +465,7 @@ geometry.
 {: .desc}
 
 For an example showing how the expire output works, see the
-[`flex-config/expire.lua`](https://github.com/openstreetmap/osm2pgsql/tree/master/flex-config/expire.lua){:.extlink}
+[`flex-config/expire.lua`](https://github.com/openstreetmap/osm2pgsql/blob/master/flex-config/expire.lua){:.extlink}
 example config file.
 
 ### Processing Callbacks
