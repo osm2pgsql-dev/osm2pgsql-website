@@ -150,7 +150,7 @@ brew install osm2pgsql
 ![FreeBSD port](https://repology.org/badge/version-for-repo/freebsd/osm2pgsql.svg)
 
 Osm2pgsql is available in [FreeBSD
-Ports](https://www.freebsd.org/cgi/ports.cgi?query=osm2pgsql){:.extlink}.
+Ports](https://ports.freebsd.org/cgi/ports.cgi?query=osm2pgsql){:.extlink}.
 Install with:
 
 ```sh
