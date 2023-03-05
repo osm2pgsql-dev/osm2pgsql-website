@@ -29,7 +29,7 @@ wiki.
 ## Talks
 
 * From PostGIS Day 2022: "Route the Interesting Things (Not Just Roads!) with OpenStreetMap" by Ryan Lambert
-  [Video on Youtube](https://youtu.be/uydAoMaReos){:.extlink} (Dec 2022).
+  [Video on Youtube](https://www.youtube.com/watch?v=uydAoMaReos){:.extlink} (Dec 2022).
 * From PostGIS Day 2022: "Speedrunning the Open Street Map osm2pgsql Loader" by Greg Smith
   [Video on Youtube](https://www.youtube.com/watch?v=BCMnu7xay2Y){:.extlink} (Dec 2022).
 * From SotM 2021: "News from osm2pgsql" by Jochen Topf.
