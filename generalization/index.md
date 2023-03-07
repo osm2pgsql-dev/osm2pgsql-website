@@ -12,13 +12,13 @@ good-looking, easy to interpret, and fast rendering small scale maps.
 
 Currently osm2pgsql has almost no built-in support for generalization, usually
 it is done using lots of SQL magic after the initial import of the data with
-osm2pgsql. From September 2022 to February 2023 we are running a
+osm2pgsql. From September 2022 to February 2023 we ran a
 [project](https://prototypefund.de/project/generalisierung-von-openstreetmap-daten-mit-osm2pgsql/){:.extlink}
 funded by the [Prototype Fund](https://prototypefund.de/){:.extlink} and the
 [German Federal Ministry of Education and
 Research](https://www.bmbf.de/){:.extlink} to add more support for
-generalization to osm2pgsql. This will include adding some generalization
-support directly to osm2pgsql but also using the capabilities of the PostgreSQL
+generalization to osm2pgsql. This included adding some generalization support
+directly to osm2pgsql but also using the capabilities of the PostgreSQL
 database and especially the PostGIS extension in a more easy to use fashion.
 
 Here are the posts from Jochen's blog describing the progress of the project:
@@ -34,9 +34,16 @@ Here are the posts from Jochen's blog describing the progress of the project:
 * [Generalizing river networks](https://blog.jochentopf.com/2023-01-30-generalizing-river-networks.html)
 * [Tile expiry and generalization](https://blog.jochentopf.com/2023-02-25-tile-expiry-and-generalization.html)
 
-And here are some related pull requests:
-* [PR 1822 (Pole of Inaccessibility)](https://github.com/openstreetmap/osm2pgsql/pull/1822) (already merged)
-* [PR 1830 (Polygon Generalization)](https://github.com/openstreetmap/osm2pgsql/pull/1830)
+And here are the most imporant related pull requests:
+* [PR 1822 (Pole of Inaccessibility)](https://github.com/openstreetmap/osm2pgsql/pull/1822)
+* [PR 1942 (Add support for data generalization)](https://github.com/openstreetmap/osm2pgsql/pull/1942)
+
+In addition a lot of code has been added in many small PRs to add and extend
+some (basic) functionality needed for this project.
+
+The code is now merged into osm2pgsql master branch but still marked as
+experimental. See the [preliminary
+documentation](/doc/manual.html#generalization) for all the details.
 
 <div id="sponsorlist">
 
