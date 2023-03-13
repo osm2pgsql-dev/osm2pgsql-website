@@ -33,8 +33,9 @@ Here are the posts from Jochen's blog describing the progress of the project:
 * [Deriving built-up areas](https://blog.jochentopf.com/2022-12-23-deriving-built-up-areas.html)
 * [Generalizing river networks](https://blog.jochentopf.com/2023-01-30-generalizing-river-networks.html)
 * [Tile expiry and generalization](https://blog.jochentopf.com/2023-02-25-tile-expiry-and-generalization.html)
+* [Generalization project wrapup](https://blog.jochentopf.com/2023-03-13-generalization-project-wrapup.html)
 
-And here are the most imporant related pull requests:
+And here are the most important related pull requests (already merged):
 * [PR 1822 (Pole of Inaccessibility)](https://github.com/openstreetmap/osm2pgsql/pull/1822)
 * [PR 1942 (Add support for data generalization)](https://github.com/openstreetmap/osm2pgsql/pull/1942)
 
