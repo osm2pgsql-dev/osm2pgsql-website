@@ -23,21 +23,21 @@ database and especially the PostGIS extension in a more easy to use fashion.
 
 Here are the posts from Jochen's blog describing the progress of the project:
 
-* [Generalization of OSM data](https://blog.jochentopf.com/2022-11-03-generalization-of-osm-data.html)
-* [Selection of generalization problems](https://blog.jochentopf.com/2022-11-07-selection-of-generalization-problems.html)
-* [Finding representative points for polygons](https://blog.jochentopf.com/2022-11-10-finding-representative-points-for-polygons.html)
-* [Processing architecture for generalization in osm2pgsql](https://blog.jochentopf.com/2022-11-15-processing-architecture-for-generalization-in-osm2pgsql.html)
-* [Generalizing polygons](https://blog.jochentopf.com/2022-11-21-generalizing-polygons.html)
-* [PostgreSQL raster experiments](https://blog.jochentopf.com/2022-12-14-postgresql-raster-experiments.html)
-* [Selecting settlements to display](https://blog.jochentopf.com/2022-12-19-selecting-settlements-to-display.html)
-* [Deriving built-up areas](https://blog.jochentopf.com/2022-12-23-deriving-built-up-areas.html)
-* [Generalizing river networks](https://blog.jochentopf.com/2023-01-30-generalizing-river-networks.html)
-* [Tile expiry and generalization](https://blog.jochentopf.com/2023-02-25-tile-expiry-and-generalization.html)
-* [Generalization project wrapup](https://blog.jochentopf.com/2023-03-13-generalization-project-wrapup.html)
+* [Generalization of OSM data](https://blog.jochentopf.com/2022-11-03-generalization-of-osm-data.html){:.extlink}
+* [Selection of generalization problems](https://blog.jochentopf.com/2022-11-07-selection-of-generalization-problems.html){:.extlink}
+* [Finding representative points for polygons](https://blog.jochentopf.com/2022-11-10-finding-representative-points-for-polygons.html){:.extlink}
+* [Processing architecture for generalization in osm2pgsql](https://blog.jochentopf.com/2022-11-15-processing-architecture-for-generalization-in-osm2pgsql.html){:.extlink}
+* [Generalizing polygons](https://blog.jochentopf.com/2022-11-21-generalizing-polygons.html){:.extlink}
+* [PostgreSQL raster experiments](https://blog.jochentopf.com/2022-12-14-postgresql-raster-experiments.html){:.extlink}
+* [Selecting settlements to display](https://blog.jochentopf.com/2022-12-19-selecting-settlements-to-display.html){:.extlink}
+* [Deriving built-up areas](https://blog.jochentopf.com/2022-12-23-deriving-built-up-areas.html){:.extlink}
+* [Generalizing river networks](https://blog.jochentopf.com/2023-01-30-generalizing-river-networks.html){:.extlink}
+* [Tile expiry and generalization](https://blog.jochentopf.com/2023-02-25-tile-expiry-and-generalization.html){:.extlink}
+* [Generalization project wrapup](https://blog.jochentopf.com/2023-03-13-generalization-project-wrapup.html){:.extlink}
 
 And here are the most important related pull requests (already merged):
-* [PR 1822 (Pole of Inaccessibility)](https://github.com/openstreetmap/osm2pgsql/pull/1822)
-* [PR 1942 (Add support for data generalization)](https://github.com/openstreetmap/osm2pgsql/pull/1942)
+* [PR 1822 (Pole of Inaccessibility)](https://github.com/openstreetmap/osm2pgsql/pull/1822){:.extlink}
+* [PR 1942 (Add support for data generalization)](https://github.com/openstreetmap/osm2pgsql/pull/1942){:.extlink}
 
 In addition a lot of code has been added in many small PRs to add and extend
 some (basic) functionality needed for this project.
@@ -45,6 +45,10 @@ some (basic) functionality needed for this project.
 The code is now merged into osm2pgsql master branch but still marked as
 experimental. See the [preliminary
 documentation](/doc/manual.html#generalization) for all the details.
+
+Jochen gave a talk (in German) about this project at FOSSGIS 2023:
+[slides](https://media.jochentopf.com/media/2023-03-16-talk-fossgis2023-generalisierung-von-osm-daten-de-slides.pdf){:.extlink},
+[video download](https://media.jochentopf.com/media/2023-03-16-talk-fossgis2023-generalisierung-von-osm-daten-de-video.mp4){:.extlink}
 
 <div id="sponsorlist">
 
