@@ -154,7 +154,26 @@ parameters):
 
 The `src_table` and `dest_table` have always to be the same.
 
-You must have an index on the id column, otherwise this will be very slow!
+You must have an index on the id column, otherwise this will be very slow! Set
+`create_index = 'always'` in your source table configuration.
+
+You must have the following columns in your table. This is currently not
+configurable:
+
+| Column    | Type | Description |
+| --------- | ---- | ----------- |
+| discr_iso | real | Discrete isolation value |
+| irank     | int  | Importance rank |
+| dirank    | int  | Discrete isolation rank |
+{:.desc}
+
+Use these column definitions in your config file to add them:
+
+```
+{ column = 'discr_iso', type = 'real', create_only = true },
+{ column = 'irank', type = 'int', create_only = true },
+{ column = 'dirank', type = 'int', create_only = true },
+```
 
 See [this blog
 post](https://blog.jochentopf.com/2022-12-19-selecting-settlements-to-display.html){:.extlink}
