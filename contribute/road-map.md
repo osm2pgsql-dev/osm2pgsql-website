@@ -5,7 +5,7 @@ title: Road Map
 
 # Road Map for Osm2pgsql
 
-Current as of 2022-09-06.
+Current as of 2023-05-25.
 
 This document is a kind of road map for osm2pgsql development. It's not to be
 understood as a definite "this is what we'll do" document, but as a rough
@@ -68,8 +68,6 @@ Issues:
 
 * [1010](https://github.com/openstreetmap/osm2pgsql/issues/1010)
 * [1539](https://github.com/openstreetmap/osm2pgsql/issues/1539)
-* [1704](https://github.com/openstreetmap/osm2pgsql/issues/1704)
-* [1729](https://github.com/openstreetmap/osm2pgsql/issues/1729)
 
 ### Code Cleanup and Modernization
 
@@ -163,7 +161,6 @@ at the same time.
 
 Issues:
 
-* [22](https://github.com/openstreetmap/osm2pgsql/issues/22)
 * [193](https://github.com/openstreetmap/osm2pgsql/issues/193)
 * [692](https://github.com/openstreetmap/osm2pgsql/issues/692)
 * [1086](https://github.com/openstreetmap/osm2pgsql/issues/1086)
@@ -177,25 +174,26 @@ Issues:
 
 The flex output has taken some great strides in the last years and has been
 used in production environments for a long time. Some originally missing
-features have been added and it is mostly ready to replace the other outputs.
-Users should all be able to switch to the flex output without missing any
-features they had in any of the other outputs. Long term we want to remove the
-*pgsql* and *gazetteer* outputs, but there is no timeline yet. The *multi*
-output was already removed in version 1.5.0.
+features have been added and it is ready to replace the other outputs. Users
+should all be able to switch to the flex output without missing any features
+they had in any of the other outputs. The *multi* output was already removed in
+version 1.5.0. The *gazetteer* output is already marked as deprecated and will
+be removed soon. Long term we want to also remove the *pgsql* outputs, but
+there is no timeline yet.
 
-Some new features might only be available in the flex output.
+Many new features are only be available in the flex output.
 
 * [1086](https://github.com/openstreetmap/osm2pgsql/issues/1086)
 * [1130](https://github.com/openstreetmap/osm2pgsql/issues/1130)
-* [1311](https://github.com/openstreetmap/osm2pgsql/issues/1311)
+* [1311](https://github.com/openstreetmap/osm2pgsql/issues/1870)
 
 ### Processing Flexibility and Performance
 
 osm2pgsql processes data in several steps: Database tables are created, then
 data is imported, then clustered, then indexes created. Some of those steps are
 already configurable, but there is a lot of hardcoded logic in here. Users have
-repeatedly asked for more flexibility, for instance doing index creation
-separately, possibly with other index types etc.
+repeatedly asked for more flexibility, for instance for index creation, which
+is now much more flexible.
 
 We need some way of making this more configurable without breaking backwards
 compatibility and without making the common use case too complicated. How to
@@ -212,18 +210,14 @@ for instance by caching.
 
 Issues:
 
-* [27](https://github.com/openstreetmap/osm2pgsql/issues/27)
 * [189](https://github.com/openstreetmap/osm2pgsql/issues/189)
 * [193](https://github.com/openstreetmap/osm2pgsql/issues/193)
 * [423](https://github.com/openstreetmap/osm2pgsql/issues/423)
 * [799](https://github.com/openstreetmap/osm2pgsql/issues/799)
 * [1046](https://github.com/openstreetmap/osm2pgsql/issues/1046)
-* [1164](https://github.com/openstreetmap/osm2pgsql/issues/1164)
 * [1248](https://github.com/openstreetmap/osm2pgsql/issues/1248)
-* [1357](https://github.com/openstreetmap/osm2pgsql/issues/1357)
 * [1565](https://github.com/openstreetmap/osm2pgsql/issues/1565)
 * [1680](https://github.com/openstreetmap/osm2pgsql/issues/1680)
-* [1691](https://github.com/openstreetmap/osm2pgsql/issues/1691)
 * [1751](https://github.com/openstreetmap/osm2pgsql/issues/1751)
 
 ### Tile Expiry
@@ -269,7 +263,6 @@ longer than probably needed. There is some room for improvement there.
 Issues:
 
 * [37](https://github.com/openstreetmap/osm2pgsql/issues/37)
-* [796](https://github.com/openstreetmap/osm2pgsql/issues/796)
 * [1085](https://github.com/openstreetmap/osm2pgsql/issues/1085)
 
 ### Better Relation Support
@@ -298,6 +291,5 @@ as line simplifications or merging of polygons). This is explored in the
 
 Issues:
 
-* [984](https://github.com/openstreetmap/osm2pgsql/issues/984)
 * [1663](https://github.com/openstreetmap/osm2pgsql/issues/1663)
 
