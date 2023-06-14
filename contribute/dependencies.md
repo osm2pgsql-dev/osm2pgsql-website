@@ -1,9 +1,12 @@
 ---
 repositories:
-    - id: debian_12
+    - id: debian_13
       name: Debian Testing
-      date: (2023)
+      date: (2025)
       gs: groupstart
+    - id: debian_12
+      name: Debian 12 Bookworm
+      date: 2023-06-10
     - id: debian_11
       name: Debian 11 Bullseye
       date: 2021-08-14
@@ -33,10 +36,6 @@ repositories:
       name: Ubuntu 18.04 (Bionic)
       date: 2018-04-26
       eol: 2023-04
-    - id: ubuntu_16_04
-      name: Ubuntu 16.04 (Xenial)
-      date: 2016-04-21
-      eol: 2021-04
     - id: fedora_rawhide
       name: Fedora Rawhide
       gs: groupstart
