@@ -14,6 +14,57 @@ way nodes and relation geometries from members and it is necessary when
 updating data, because OSM change files only contain changed objects themselves
 and not all the related objects needed for creating an object's geometry.
 
+### The Properties Table
+
+*Version >= 1.9.0*{: .version} Osm2pgsql stores some *properties* into a
+database table. This table is always called `osm2pgsql_properties`. It will
+be created in the schema set with the `--middle-schema` option, or the `public`
+schema by default.
+
+The properties table tracks some settings derived from the command line options
+and from the input file(s). It allows osm2pgsql to make sure that updates are
+run with compatible options. Versions before 1.9.0 do not create this table
+and so they don't offer the checks specified below.
+
+The `osm2pgsql_properties` table contains two columns: The `property` column
+contains the name of a property and the `value` column its value. Properties
+are always stored as strings, for boolean properties the strings `true` and
+`false` are used.
+
+The following properties are currently defined:
+
+| Property         | Type   | Description |
+| ---------------- | ------ | ----------- |
+| `attributes`     | bool   | Import with OSM attributes (i.e. osm2pgsql was run with `-x` or `--extra-attributes`)? |
+| `flat_node_file` | string | Absolute filename of the flat node file (specified with `--flat-nodes`). See below for some details. |
+| `prefix`         | string | Table name prefix set with `-p` or `--prefix`. |
+| `updatable`      | bool   | Is this database updatable (imported with `--slim` and without `--drop`)? |
+| `version`        | string | Version number of the osm2pgsql application that did the import. |
+{: .desc}
+
+When updating an existing database that has an `osm2pgsql_properties` table,
+osm2pgsql will check that the command line options used are compatible and will
+complain if they are not. Options that are not set on the command line will
+automatically be set if needed. So for instance if you import a database
+without `-x` but then use `-x` on updates, osm2pgsql will fail with an error
+message. If you use `-x` both on import and on update everything is fine. And
+if you use `-x` on import but not on update, osm2pgsql will detect that you
+used that option on import and also use it on update.
+
+The name of the flat node file specified on the command line is converted to
+an absolute file name and stored in the `flat_node_file` property. That means
+that osm2pgsql will find that flat node file again even if you start it from
+a different current working directory. If you need to move the flat node file
+somewhere else, you can do that. The next time you run osm2pgsql, add the
+`--flat-nodes` option again with the new file name and osm2pgsql will use the
+new name and update the properties table accordingly.
+
+The contents of the `osm2pgsql_properties` table are internal to osm2pgsql and
+you should never change them. Theres is one exception: You can add your own
+properties for anything you need, but make sure to start the property names
+with an underscore (`_`). this way the property names will never clash with any
+names that osm2pgsql might introduce in the future.
+
 ### Database Structure
 
 The middle stores its data in the database in the following tables. The
