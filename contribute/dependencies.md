@@ -80,6 +80,7 @@ packages:
     - libosmium
     - protozero
     - pyosmium
+    - nlohmann-json
 title: Dependencies
 ---
 
