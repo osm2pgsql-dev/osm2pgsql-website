@@ -33,13 +33,18 @@ are always stored as strings, for boolean properties the strings `true` and
 
 The following properties are currently defined:
 
-| Property         | Type   | Description |
-| ---------------- | ------ | ----------- |
-| `attributes`     | bool   | Import with OSM attributes (i.e. osm2pgsql was run with `-x` or `--extra-attributes`)? |
-| `flat_node_file` | string | Absolute filename of the flat node file (specified with `--flat-nodes`). See below for some details. |
-| `prefix`         | string | Table name prefix set with `-p` or `--prefix`. |
-| `updatable`      | bool   | Is this database updatable (imported with `--slim` and without `--drop`)? |
-| `version`        | string | Version number of the osm2pgsql application that did the import. |
+| Property                      | Type   | Description |
+| ----------------------------- | ------ | ----------- |
+| `attributes`                  | bool   | Import with OSM attributes (i.e. osm2pgsql was run with `-x` or `--extra-attributes`)? |
+| `current_timestamp`           | string | Largest timestamp of any object in any of the input file(s) in ISO format (`YYYY-mm-ddTHH:MM:SSZ`). Updated with each data update. |
+| `flat_node_file`              | string | Absolute filename of the flat node file (specified with `--flat-nodes`). See below for some details. |
+| `import_timestamp`            | string | Largest timestamp of any object in the in the input file(s) in ISO format (`YYYY-mm-ddTHH:MM:SSZ`). Only set for initial import. |
+| `prefix`                      | string | Table name prefix set with `-p` or `--prefix`. |
+| `replication_base_url`        | string | For replication (see below). |
+| `replication_sequence_number` | string | For replication (see below). |
+| `replication_timestamp`       | string | For replication (see below). |
+| `updatable`                   | bool   | Is this database updatable (imported with `--slim` and without `--drop`)? |
+| `version`                     | string | Version number of the osm2pgsql application that did the import. |
 {: .desc}
 
 When updating an existing database that has an `osm2pgsql_properties` table,
@@ -58,6 +63,16 @@ a different current working directory. If you need to move the flat node file
 somewhere else, you can do that. The next time you run osm2pgsql, add the
 `--flat-nodes` option again with the new file name and osm2pgsql will use the
 new name and update the properties table accordingly.
+
+The `current_timestamp` and `import_timestamp` properties are not set if the
+input file(s) don't contain timestamps on the OSM objects. (Timestamps in
+OSM files are optional, but most OSM files have them.)
+
+The `replication_*` properties reflect the setting of the respective header
+fields in the input file on import and are used by
+[osm2pgsql-replication](#updating-an-existing-database) to automatically update
+the database. That program will also update those fields. If you import
+multiple files, these properties will not be set.
 
 The contents of the `osm2pgsql_properties` table are internal to osm2pgsql and
 you should never change them. Theres is one exception: You can add your own
