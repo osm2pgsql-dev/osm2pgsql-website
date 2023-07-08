@@ -109,8 +109,13 @@ of this topic.
 file is used as a database of node locations. This should only be used on full
 planet imports or very large extracts (e.g. Europe) but in those situations
 offers significant space savings and speed increases, particularly on
-mechanical drives. The file takes approximately 8 bytes * maximum node ID, or
-more than 80 GiB, regardless of the size of the extract.
+mechanical drives.
+
+The file will need approximately `8 bytes * maximum node ID`, regardless of the
+size of the extract. With current OSM data (in 2023) that's more than 80 GiB.
+As a good rule of thumb you can look at the current PBF planet file [on
+planet.osm.org](https://planet.openstreetmap.org/), the flat node file will
+probably be somewhat larger than that.
 
 If you are using the `--drop` option, the flat node file will be deleted
 after import.
