@@ -109,8 +109,9 @@ of this topic.
 file is used as a database of node locations. This should only be used on full
 planet imports or very large extracts (e.g. Europe) but in those situations
 offers significant space savings and speed increases, particularly on
-mechanical drives. The file takes approximately 8 bytes * maximum node ID, or
-more than 80 GiB, regardless of the size of the extract.
+mechanical drives. 
+
+The file size of the flat nodes file created by osm2pgsql will be approximately 8 bytes * maximum node ID present in the extract, regardless of the size of the original extract. In most cases this is about equivalent or slightly larger than the current size of the [PBF Planet extract](https://planet.openstreetmap.org/).
 
 If you are using the `--drop` option, the flat node file will be deleted
 after import.
