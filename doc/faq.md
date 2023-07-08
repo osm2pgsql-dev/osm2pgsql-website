@@ -38,7 +38,8 @@ many hours or even days. There are many reasons for this:
 * There is a lot of data. A full planet will create a database with hundreds
   of GBytes, this just needs time.
 * Your hardware may be underpowered. You should use fast SSDs and have plenty
-  of RAM, for a planet import 64 GB RAM are pretty much the minimum.
+  of RAM, for a planet import 64 GB RAM are pretty much the minimum, 128 GB
+  are better.
 * You have to tune your PostgreSQL config *before* using osm2pgsql. The
   default settings for PostgreSQL on most systems are totally wrong for a
   large database. Don't forget to restart the database after tuning.
@@ -46,7 +47,8 @@ many hours or even days. There are many reasons for this:
   details.
 * Compile osm2pgsql with the Lua JIT library for about 10 to 15 % speedup.
 * If you don't need your database to be updateable and you have enough
-  RAM, use non-slim mode. Always use a flat node file in slim mode.
+  RAM, use non-slim mode. Use a flat node file in slim mode unless you only
+  import a small extract of the OSM data.
 * If you have the choice, use input data in the PBF format, in some cases this
   can half the time needed for reading the input! Overall this can save up to
   10% of the run-time of osm2pgsql.
@@ -56,9 +58,9 @@ many hours or even days. There are many reasons for this:
   releases/index.md %}) of osm2pgsql, there have been quite some performance
   improvements in the latest versions.
 
-All that being said, on a reasonably modern machine with 64GB RAM and SSDs you
-should be able to import a planet file in something like half a day. For some
-data about how long imports usually take, see [Appendix E in the
+All that being said, on a reasonably modern machine with 128 GB RAM and SSDs
+you should be able to import a planet file in something like half a day. For
+some data about how long imports usually take, see [Appendix E in the
 manual](/doc/manual.html#sizing).
 
 ### Why is an index not being built and there is no error message?
