@@ -88,20 +88,100 @@ The middle stores its data in the database in the following tables. The
 
 | Table        | Description   |
 | ------------ | ------------- |
-| PREFIX_nodes | OSM nodes (not used if the flat node store is used |
+| PREFIX_nodes | OSM nodes     |
 | PREFIX_ways  | OSM ways      |
 | PREFIX_rels  | OSM relations |
+| PREFIX_users | OSM users     |
 {:.desc}
 
-The names and structure of these tables, colloquially referred to as "slim
-tables", are an **internal implementation detail** of osm2pgsql. While they do
-not usually change between releases of osm2pgsql, be advised that if you rely
-on the content or layout of these tables in your application, it is your
-responsibility to check whether your assumptions are still true in a newer
-version of osm2pgsql before updating. See [this
-issue](https://github.com/openstreetmap/osm2pgsql/issues/230) for a discussion
-of this topic.
-{:.note}
+Note that if a flat node file is used (see below) the `PREFIX_nodes` table
+might be missing or empty, because nodes are stored in the flat node file
+instead. The users table is only used in the new database format and when the
+`-x, --extra-attributes` command line option is used (see below).
+
+Historically the names and structure of these tables, colloquially referred to
+as "slim tables", are an internal implementation detail of osm2pgsql that users
+should not rely on. We are currently in the process of moving from the `legacy`
+table format to the `new` format which is designed to be easier to use also for
+users.
+
+*Version < 1.9.0*{: .version} Only the `legacy` format is available.
+
+*Version == 1.9.0*{: .version} The `legacy` format is the default. The `new`
+format is experimental. To set the format use the
+`--middle-database-format=FORMAT` command line option on import (in "create
+mode"). For updates (in "append mode") the database format will be
+autodetected.
+
+The details of the legacy format are not documented, you should not rely on
+that format. In the new format the tables have the following structure (all
+columns are `NOT NULL`):
+
+| Column       | Type   | Description |
+| ------------ | ------ | ----------- |
+| id           | int8   | Unique OSM id of this object. Primary key. |
+| lat          | int4   | (Nodes only) Latitude * 10<sup>7</sup>. |
+| lon          | int4   | (Nodes only) Longitude * 10<sup>7</sup>. |
+| nodes        | int8[] | (Ways only) Array of node ids. |
+| members      | jsonb  | (Relations only) Contains all relation members, for the format see below. |
+| tags         | jsonb  | Tags of this OSM object in the obvious key/value format. |
+{:.desc}
+
+#### The members column
+
+The members column contains a JSON array of JSON objects. For each member the
+JSON object contains the following fields:
+
+| Field | Type    | Description |
+| ----- | ------- | ----------- |
+| type  | Char    | Single character `N`, `W`, or `R` for the OSM object type node, way, or relation. |
+| ref   | Integer | The OSM id of the member. |
+| role  | Text    | The role of the member. |
+{:.desc}
+
+#### Extra attributes
+
+The following extra columns are stored when osm2pgsql was run with the `-x,
+--extra-attributes` command line option (all columns can be `NULL` if the
+respective fields were not set in the input data):
+
+| Column       | Type                     | Description |
+| ------------ | ------------------------ | ----------- |
+| created      | timestamp with time zone | Timestamp when this version of the object was created. |
+| version      | int4                     | Version number of this object. |
+| changeset_id | int4                     | Id of the changeset that contains this object version. |
+| user_id      | int4                     | User id of the user who created this object version. |
+{:.desc}
+
+#### Users table
+
+In addition the `PREFIX_users` table is created with the following structure:
+
+| Column | Type | Description |
+| ------ | ---- | ----------- |
+| id     | int4 | Unique user id. Primary key. |
+| name   | text | User name (`NOT NULL`). |
+{:.desc}
+
+#### Indexes
+
+PostgreSQL will automatically create indexes for primary keys on all tables. In
+addition there are indexes on the `nodes` and `member` columns of the `ways`
+and `relations` table, respectively.
+
+TODO: Describe indexes and how to use them here.
+
+#### Reserved Names and Compatibility
+
+For compatibility with older and future versions of osm2pgsql you should never
+create tables, indexes, functions or any other objects in the database with
+names that start with `osm2pgsql_` or with the `PREFIX` you have configured
+(`planet_osm_` by default). This way your objects will not clash with any
+objects that osm2pgsql creates.
+
+Always read the release notes before upgrading in case osm2pgsql changes the
+format or functionality of any tables, indexes, functions or other objects in
+the database that you might be using.
 
 ### Flat Node Store
 
