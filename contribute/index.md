@@ -6,9 +6,7 @@ title: Contribute
 
 Osm2pgsql is an Open Source project. Your contributions are welcome. You can
 find the source code and issue tracker on
-[Github](https://github.com/openstreetmap/osm2pgsql){:.extlink}. For some
-starting points see the
-[contribute page](https://github.com/openstreetmap/osm2pgsql/contribute).
+[Github](https://github.com/openstreetmap/osm2pgsql){:.extlink}.
 
 Please see [CONTRIBUTING.md](https://github.com/openstreetmap/osm2pgsql/blob/master/CONTRIBUTING.md)
 for some information about how to contribute.
@@ -48,6 +46,17 @@ We strive to support all versions of PostgreSQL and PostGIS that are
 * are supported upstream (i.e. from the PostgreSQL and PostGIS teams).
 
 </section>
+
+<section markdown="1">
+## Distributions
+</section>
+
+Osm2pgsql is available in several distributions:
+* [Debian](https://tracker.debian.org/pkg/osm2pgsql)
+* [Fedora](https://packages.fedoraproject.org/pkgs/osm2pgsql/osm2pgsql/)
+* [Homebrew](https://formulae.brew.sh/formula/osm2pgsql)
+
+[Installation instructions]({% link doc/install.md %}).
 
 <section markdown="1">
 ## License

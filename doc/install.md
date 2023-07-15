@@ -30,7 +30,6 @@ distribution, consider installing the current release from source.
 
 ### <img alt="" src="{% link img/ubuntu.png %}"/>Installing on Ubuntu
 
-![Ubuntu 18.04 package](https://repology.org/badge/version-for-repo/ubuntu_18_04/osm2pgsql.svg)
 ![Ubuntu 20.04 package](https://repology.org/badge/version-for-repo/ubuntu_20_04/osm2pgsql.svg)
 ![Ubuntu 22.04 package](https://repology.org/badge/version-for-repo/ubuntu_22_04/osm2pgsql.svg)
 
@@ -42,11 +41,10 @@ apt install osm2pgsql
 
 ### <img alt="" src="{% link img/debian.svg %}"/>Installing on Debian
 
-![Debian 10 (Buster) package](https://repology.org/badge/version-for-repo/debian_10/osm2pgsql.svg)
-![Debian 10 (Buster) Backports package](https://repology.org/badge/version-for-repo/debian_10_backports/osm2pgsql.svg)
 ![Debian 11 (Bullseye) package](https://repology.org/badge/version-for-repo/debian_11/osm2pgsql.svg)
 ![Debian 11 (Bullseye) Backports package](https://repology.org/badge/version-for-repo/debian_11_backports/osm2pgsql.svg)
-![Debian Testing package](https://repology.org/badge/version-for-repo/debian_12/osm2pgsql.svg)
+![Debian 12 (Bookworm) package](https://repology.org/badge/version-for-repo/debian_12/osm2pgsql.svg)
+![Debian Testing package](https://repology.org/badge/version-for-repo/debian_13/osm2pgsql.svg)
 
 For Debian installation is usually as simple as
 
@@ -60,9 +58,8 @@ really good at keeping these up-to-date.
 
 ### <img alt="" src="{% link img/fedora.svg %}"/>Installing on Fedora
 
-![Fedora 33 package](https://repology.org/badge/version-for-repo/fedora_33/osm2pgsql.svg)
-![Fedora 34 package](https://repology.org/badge/version-for-repo/fedora_34/osm2pgsql.svg)
-![Fedora 35 package](https://repology.org/badge/version-for-repo/fedora_35/osm2pgsql.svg)
+![Fedora 37 package](https://repology.org/badge/version-for-repo/fedora_37/osm2pgsql.svg)
+![Fedora 38 package](https://repology.org/badge/version-for-repo/fedora_38/osm2pgsql.svg)
 ![Fedora Rawhide package](https://repology.org/badge/version-for-repo/fedora_rawhide/osm2pgsql.svg)
 
 Fedora has packages of osm2pgsql available. Install with
