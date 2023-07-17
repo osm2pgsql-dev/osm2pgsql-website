@@ -73,6 +73,7 @@ packages:
     - llvm
     - python
     - boost
+    - proj
     - geos
     - catch
     - fmt
