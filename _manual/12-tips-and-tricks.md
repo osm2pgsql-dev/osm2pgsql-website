@@ -137,3 +137,8 @@ A script that fails this check will not work with osm2pgsql. But it is only a
 syntax check, it doesn't run your script, so the script can still fail when
 used in osm2pgsql. But it helps getting rid of the simple errors quickly.
 
+There is also the [luacheck](https://github.com/mpeterv/luacheck) linter
+program which does a lot more checks. Install with `luarocks install luacheck`,
+on Debian/Ubuntu you can use the `lua-checks` package. Then run `luacheck
+SCRIPT.lua`.
+
