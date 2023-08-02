@@ -738,6 +738,11 @@ information into account, updates might not work correctly.
 In addition you have to store whatever information you need about the relation
 in your `process_relation()` function in a global variable.
 
+Make sure you use `select_relation_members()` *only for deciding which ways to
+reprocess*, do not store information about the relations from that function,
+it will not work with updates. Use the `process_relation()` function instead.
+{: .note}
+
 After all relations are processed, osm2pgsql will reprocess all marked ways by
 calling the `process_way()` function for them again. This time around you have
 the information from the relation in the global variable and can use it.
