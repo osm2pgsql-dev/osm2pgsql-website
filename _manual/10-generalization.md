@@ -201,6 +201,7 @@ parameters):
 | expire_list     | text | |
 | img_path        | text | Used to dump PNGs of the "before" and "after" images to a file for debugging. |
 | img_table       | text | Used to dump "before" and "after" raster images to the database for debugging. The table will be created if it doesn't exist already. |
+| where           | text | Optional WHERE clause to add to the SQL query getting the input data from the database. Must be empty or a valid SQL snippet. |
 {:.desc}
 
 Actual image extent used will be `image_extent + 2 * margin`. Margin is rounded to nearest multiple of 64.
