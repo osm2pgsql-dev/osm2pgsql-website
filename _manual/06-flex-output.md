@@ -830,18 +830,19 @@ PostGIS functions with equivalent names.
 
 | Function                         | Description |
 | -------------------------------- | ----------- |
-| `area()`                         | Returns the area of the geometry. For any geometry type but (MULTI)POLYGON this is always `0.0`. The area is calculated using the SRS of the geometry, the result is in map units. |
-| `length()`                       | *Version >= 1.7.1*{:.version} Returns the length of the geometry. For any geometry type but (MULTI)LINESTRING this is always `0.0`. The length is calculated using the SRS of the geometry, the result is in map units. |
+| `area()`                         | Returns the area of the geometry calculated on the projected coordinates. The area is calculated using the SRS of the geometry, the result is in map units. For any geometry type but (MULTI)POLYGON the result is always `0.0`. (See also `spherical_area()`.) |
 | `centroid()`                     | Return the centroid (center of mass) of a geometry. (Implemented for all geometry types in *Version >= 1.7.1*{:.version}.) |
 | `geometries()`                   | Returns an iterator for iterating over member geometries of a multi-geometry. See below for detail. |
 | `geometry_n()`                   | Returns the nth geometry (1-based) of a multi-geometry. |
 | `geometry_type()`                | Returns the type of geometry as a string: `NULL`, `POINT`, `LINESTRING`, `POLYGON`, `MULTIPOINT`, `MULTILINESTRING`, `MULTIPOLYGON`, or `GEOMETRYCOLLECTION`.
 | `is_null()`                      | Returns `true` if the geometry is a NULL geometry, `false` otherwise. |
+| `length()`                       | *Version >= 1.7.1*{:.version} Returns the length of the geometry. For any geometry type but (MULTI)LINESTRING this is always `0.0`. The length is calculated using the SRS of the geometry, the result is in map units. |
 | `line_merge()`                   | Merge lines in a (MULTI)LINESTRING as much as possible into longer lines. |
 | `num_geometries()`               | Returns the number of geometries in a multi-geometry. Always 0 for NULL geometries and always 1 for non-multi geometries. |
 | `pole_of_inaccessibility(opts)`  | *Version >= 1.8.0*{:.version} *Experimental*{:.experimental} Calculate "pole of inaccessibility" of a polygon, a point farthest away from the polygon boundary, sometimes called the center of the maximum inscribed circle. Note that for performance reasons this is an approximation. It is intended as a reasonably good labelling point. One optional parameter *opts*, which must be a Lua table with options. The only option currently defined is `stretch`. If this is set to a value larger than 1 an ellipse instead of a circle is inscribed. This might be useful for labels which usually use more space horizontally. Use a value between 0 and 1 for a vertical ellipse. |
 | `segmentize(max_segment_length)` | Segmentize a (MULTI)LINESTRING, so that no segment is longer than `max_segment_length`. Result is a (MULTI)LINESTRING. |
 | `simplify(tolerance)`            | Simplify (MULTI)LINESTRING geometries with the Douglas-Peucker algorithm. (Currently not implemented for other geometry types. For multilinestrings only available in *Version >= 1.7.1*{: .version}) |
+| `spherical_area()`               | *Version >= 1.9.0*{:.version} Returns the area of the geometry calculated on the spheroid. The geometry must be in WGS 84 (4326). For any geometry type but (MULTI)POLYGON the result is always `0.0`. The result is in m². (See also `area()`.) |
 | `srid()`                         | Return SRID of the geometry. |
 | `transform(target_srid)`         | Transform the geometry to the target SRS. |
 {:.desc}
