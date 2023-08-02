@@ -172,6 +172,7 @@ The following values are allowed for the `type` of the `ids` field:
 | relation | A relation Id will be stored 'as is' in the column named by `id_column`. |
 | area     | A way Id will be stored 'as is' in the column named by `id_column`, for relations the Id will be stored as negative number. |
 | any      | Any type of object can be stored. See below. |
+| tile     | *Version >= 1.9.0*{: .version} Special case for generalized data stored with tile x and y coordinates. See below. |
 {: .desc}
 
 The `any` type is for tables that can store any type of OSM object (nodes,
@@ -192,6 +193,15 @@ created, i.e. if osm2pgsql is run with `--slim` (but not `--drop`). *Version >=
 setting to `'always'` to force osm2pgsql to always create this index, even in
 non-updatable databases (the default is `'auto'`, only create the index if
 needed for updating).
+
+*Version >= 1.9.0*{: .version} Generalized data (see
+[Generalization](#generalization) chapter) is sometimes stored in tables
+indexed by x, y tile coordinates. For such tables use the `tile` value for the
+`ids` field. Two columns called `x` and `y` with SQL type `int` will be created
+(it is not possible to change those column names or the type). In "create"
+mode, if the database is updatable or when the `create_index` option is set to
+`always`, an index will automatically be generated on those columns *after*
+the generalization step is run with `osm2pgsql-gen`.
 
 #### Unique Ids
 

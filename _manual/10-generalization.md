@@ -47,8 +47,9 @@ table in osm2pgsql. Currently there are some restrictions on the tables:
 * The input and output tables must use the same schema.
 * The geometry column used must have the same name as the geometry column
   in the table used as input for a generalizer.
-* Output tables for tile-based generalizers must have integer columns named
-  `x` and `y` and you probably want a (single) index on both columns.
+* Output tables for tile-based generalizers must have `ids` set to `tile`,
+  which automatically ceates `x` and `y` columns for the tile coordinates.
+  An index will also be created on those columns after generalization.
 
 To add generalization to your config, add a callback function
 `osm2pgsql.process_gen()` and run generalizers in there:
