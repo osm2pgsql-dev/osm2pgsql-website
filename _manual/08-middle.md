@@ -127,7 +127,13 @@ columns are `NOT NULL`):
 | tags         | jsonb  | Tags of this OSM object in the obvious key/value format. |
 {:.desc}
 
-#### The members column
+You can create a PostGIS geometry from the `lat` and `lon` columns like this:
+
+```{sql}
+SELECT id, ST_SetSRID(ST_MakePoint(lat / 10000000.0, lon / 10000000.0), 4326) AS geom FROM planet_osm_nodes;
+```
+
+#### The `members` Column
 
 The members column contains a JSON array of JSON objects. For each member the
 JSON object contains the following fields:
@@ -139,9 +145,20 @@ JSON object contains the following fields:
 | role  | Text    | The role of the member. |
 {:.desc}
 
-#### Extra attributes
+A function `planet_osm_member_ids(members int8[], type char(1))` is provided.
+(The prefix is the same as the tables, here `planet_osm`.) The function returns
+all ids in `members` of type `type` ('N', 'W', or 'R') as an array of int8. To
+get the ids of all way members of relation 17, for instance, you can use it like
+this:
 
-The following extra columns are stored when osm2pgsql was run with the `-x,
+```{sql}
+SELECT planet_osm_member_ids(members, 'W') AS way_ids
+    FROM planet_osm_rels WHERE id = 17;
+```
+
+#### Extra Attributes
+
+The following extra columns are stored when osm2pgsql is run with the `-x,
 --extra-attributes` command line option (all columns can be `NULL` if the
 respective fields were not set in the input data):
 
@@ -153,23 +170,53 @@ respective fields were not set in the input data):
 | user_id      | int4                     | User id of the user who created this object version. |
 {:.desc}
 
-#### Users table
-
 In addition the `PREFIX_users` table is created with the following structure:
 
-| Column | Type | Description |
-| ------ | ---- | ----------- |
+| Column | Type | Description                  |
+| ------ | ---- | ---------------------------- |
 | id     | int4 | Unique user id. Primary key. |
-| name   | text | User name (`NOT NULL`). |
+| name   | text | User name (`NOT NULL`).      |
 {:.desc}
 
 #### Indexes
 
-PostgreSQL will automatically create indexes for primary keys on all tables. In
-addition there are indexes on the `nodes` and `member` columns of the `ways`
-and `relations` table, respectively.
+PostgreSQL will automatically create BTREE indexes for primary keys on all
+middle tables. In addition there are the following indexes:
 
-TODO: Describe indexes and how to use them here.
+An GIN index on the `nodes` column of the `ways` table allows you to find all
+ways referencing a give node. If you are using a bucket index (which is the
+default, see [below](#bucket-index-for-slim-mode)) you need to access this
+index with a query like this (which finds all ways referencing node 123):
+
+```{sql}
+SELECT * FROM planet_osm_ways
+    WHERE nodes && ARRAY[123::int8]
+    AND planet_osm_index_bucket(nodes) && planet_osm_index_bucket(ARRAY[123::int8]);
+```
+
+Note the extra condition using the `planet_osm_index_bucket()` function which
+makes sure the index can be used. The function will have the same prefix as
+your tables (by default `planet_osm`).
+
+Without the bucket index, use a query like this:
+
+```{sql}
+SELECT * FROM planet_osm_ways WHERE nodes && ARRAY[123::int8];
+```
+
+To find the relations referencing specific nodes or ways use the
+`planet_osm_member_ids()` function described [above](#the-members-column).
+There are indexes for members of type node and way (but not members of type
+relation) provided which use this function. Use a query like this:
+
+```{sql}
+SELECT * FROM planet_osm_rels
+    WHERE planet_osm_member_ids(members, 'W'::char(1)) && ARRAY[456::int8];
+```
+
+Make sure to use the right casts (`::char(1)` for the type, `::int8` for the
+ids), without them PostgreSQL sometimes is not able to match the queries to
+the right functions and indexes.
 
 #### Reserved Names and Compatibility
 
