@@ -109,7 +109,7 @@ end up in the tags hstore column regardless of the style file.
 ### Schemas and Tablespaces
 
 Usually all tables, indexes and functions that the pgsql output creates are
-in the default public schema and use the default tablespace.
+in the default schema and use the default tablespace.
 
 *Version >= 1.4.0*{: .version} You can use the command line option
 `--output-pgsql-schema=SCHEMA` to tell osm2pgsql that it should use the
@@ -118,6 +118,12 @@ have to create the schema before running osm2pgsql and make sure the database
 user was granted the rights to create tables, indexes, and functions in this
 schema. Read more about schemas in the [PostgreSQL
 documentation](https://www.postgresql.org/docs/current/ddl-schemas.html){:.extlink}.
+
+*Version < 1.9.0:*{:.version} By default no schema is set which usually means
+the tables will be created in the `public` schema but it depends on your
+PostgreSQL search path which schema is used.
+
+*Version >= 1.9.0:*{:.version} By default the `public` schema is used.
 
 Sometimes you want to create special [PostgreSQL
 tablespaces](https://www.postgresql.org/docs/current/manage-ag-tablespaces.html){:.extlink}

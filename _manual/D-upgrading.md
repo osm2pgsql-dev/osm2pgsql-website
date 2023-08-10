@@ -11,6 +11,22 @@ the default `planet_osm` prefix.
 It is frequently better to reimport as this will also recluster the tables and
 remove table or index bloat.
 
+#### Upgrade to 1.9.0: Changes to Schema Handling
+
+By default osm2pgsql used to create all tables, indexes, etc. without schema.
+Usually this meant that they are installed in the `public` schema, but the
+schema used depends on the [PostgreSQL search
+path](https://www.postgresql.org/docs/current/ddl-schemas.html#DDL-SCHEMAS-PATH).
+This was error prone and could lead to a situation where osm2pgsql couldn't
+find the tables it created itself.
+
+From 1.9.0 onwards all tables, indexes, etc. will be created in the `public`
+schema if nothing else is set with the `--middle-schema`,
+`--output-pgsql-schema`, or in the flex configuration file.
+
+If you have not set the schema to something specifically but want your data
+to be in a different schema you have to set that in the future.
+
 #### Upgrade to 1.7.0: Changes to Index
 
 From version 1.7.0 the [bucket index](#bucket-index-for-slim-mode) for the slim
