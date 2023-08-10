@@ -142,3 +142,26 @@ program which does a lot more checks. Install with `luarocks install luacheck`,
 on Debian/Ubuntu you can use the `lua-checks` package. Then run `luacheck
 SCRIPT.lua`.
 
+### Lua Script Performance
+
+A complex Lua flex configuration might mean that osm2pgsql spends quite some
+time running your Lua code. Optimizing that code will be important.
+
+You can somewhat increase processing speed by using the LuaJIT compiler, but
+you have to compile osm2pgsql yourself, because pre-built osm2pgsql binaries
+usually don't use it.
+
+Here are some tips:
+* Always use local variables which are cheap. It also makes your code more
+  robust.
+* Don't do work more than once. Store intermediate results in local variables
+  instead of recomputing it. For instance if you need the geometry of an OSM
+  object several times, get it once and store it (`local geom =
+  object.as_polygon(); local center = geom:centroid()`).
+
+See [Lua Performance Tips](https://www.lua.org/gems/sample.pdf){:.extlink} from
+the author of Lua for some in-depth tips on how to improve your Lua code. [This
+stackoverflow
+question](https://stackoverflow.com/questions/154672/what-can-i-do-to-increase-the-performance-of-a-lua-program)
+also has some great information.
+
