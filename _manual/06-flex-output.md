@@ -113,7 +113,7 @@ function. You can use the same options on the
 | name             | The name of the table (without schema). |
 | ids              | A Lua table defining how this table should handle ids (see the [Id Handling](#id-handling) section for details). Note that you can define tables without Ids, but they can not be updated by osm2pgsql. |
 | columns          | An array of columns (see the [Defining Columns](#defining-columns) section for details). |
-| schema           | Set the [PostgreSQL schema](https://www.postgresql.org/docs/current/ddl-schemas.html){:. extlink} to be used for this table. The schema must exist in the database before you start osm2pgsql. *Version < 1.9.0:*{:.version} By default no schema is set which usually means the tables will be created in the `public` schema. *Version >= 1.9.0:*{:.version} By default the `public` schema is used. |
+| schema           | Set the [PostgreSQL schema](https://www.postgresql.org/docs/current/ddl-schemas.html){:. extlink} to be used for this table. The schema must exist in the database and be writable by the database user. *Version < 1.9.0:*{:.version} By default no schema is set which usually means the tables will be created in the `public` schema. *Version >= 1.9.0:*{:.version} By default the schema set with `--schema` is used, or `public` if that is not set. |
 | data_tablespace  | The [PostgreSQL tablespace](https://www.postgresql.org/docs/current/manage-ag-tablespaces.html){:.extlink} used for the data in this table. |
 | index_tablespace | The [PostgreSQL tablespace](https://www.postgresql.org/docs/current/manage-ag-tablespaces.html){:.extlink} used for all indexes of this table. |
 | cluster          | *Version >= 1.5.0*{: .version} Set clustering strategy. Use `"auto"` (default) to enable clustering by geometry, osm2pgsql will choose the best method. Use `"no"` to disable clustering. |
@@ -453,7 +453,7 @@ following fields:
 | maxzoom  | The maximum zoom level for which tile coordinates are written out. Required. |
 | minzoom  | The minimum zoom level for which tile coordinates are written out. Optional. Default is the same as maxzoom. |
 | filename | The filename of the output file. Optional. |
-| schema   | The database schema for the output table. Optional. *Version < 1.9.0:*{:.version} By default no schema is set which usually means the tables will be created in the `public` schema. *Version >= 1.9.0:*{:.version} By default the `public` schema is used. |
+| schema   | The database schema for the output table. The schema must exist in the database and be writable by the database user. Optional. By default the schema set with `--schema` is used, or `public` if that is not set. |
 | table    | The database table for the output. Optional. |
 {: .desc}
 

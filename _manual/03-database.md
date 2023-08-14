@@ -72,8 +72,8 @@ user, distinct from the database user osm2pgsql is using and only give that
 user `SELECT` rights (with the `GRANT` command).
 
 *Version >= 1.4.0*{: .version} If you are using a security scheme based on
-database schemas in your database you can use the `--middle-schema` and
-`--output-pgsql-schema` options and the `schema` table option in the flex
+database schemas in your database you can use the `--schema`, `--middle-schema`
+and `--output-pgsql-schema` options and the `schema` table option in the flex
 output, respectively, to tell osm2pgsql to load data into specific schemas. You
 have to create those schemas and give them the correct rights before running
 osm2pgsql.
