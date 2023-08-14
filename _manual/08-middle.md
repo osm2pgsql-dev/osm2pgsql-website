@@ -39,10 +39,12 @@ The following properties are currently defined:
 | `current_timestamp`           | string | Largest timestamp of any object in any of the input file(s) in ISO format (`YYYY-mm-ddTHH:MM:SSZ`). Updated with each data update. |
 | `flat_node_file`              | string | Absolute filename of the flat node file (specified with `--flat-nodes`). See below for some details. |
 | `import_timestamp`            | string | Largest timestamp of any object in the in the input file(s) in ISO format (`YYYY-mm-ddTHH:MM:SSZ`). Only set for initial import. |
+| `output`                      | string | The output as set with the `-O` or `--output` option. |
 | `prefix`                      | string | Table name prefix set with `-p` or `--prefix`. |
 | `replication_base_url`        | string | For replication (see below). |
 | `replication_sequence_number` | string | For replication (see below). |
 | `replication_timestamp`       | string | For replication (see below). |
+| `style`                       | string | The style file as set with the `-S` or `--style` option. See below for some details. |
 | `updatable`                   | bool   | Is this database updatable (imported with `--slim` and without `--drop`)? |
 | `version`                     | string | Version number of the osm2pgsql application that did the import. |
 {: .desc}
@@ -56,13 +58,14 @@ message. If you use `-x` both on import and on update everything is fine. And
 if you use `-x` on import but not on update, osm2pgsql will detect that you
 used that option on import and also use it on update.
 
-The name of the flat node file specified on the command line is converted to
-an absolute file name and stored in the `flat_node_file` property. That means
-that osm2pgsql will find that flat node file again even if you start it from
-a different current working directory. If you need to move the flat node file
-somewhere else, you can do that. The next time you run osm2pgsql, add the
-`--flat-nodes` option again with the new file name and osm2pgsql will use the
-new name and update the properties table accordingly.
+The name of the flat node and style files specified on the command line are
+converted to absolute file names and stored in the `flat_node_file` and `style`
+property, respectively. That means that osm2pgsql will find the files again
+even if you start it from a different current working directory. If you need to
+move the flat node or style file somewhere else, you can do that. The next time
+you run osm2pgsql, add the `--flat-nodes` or `-S, --style` option again with
+the new file name and osm2pgsql will use the new name and update the properties
+table accordingly.
 
 The `current_timestamp` and `import_timestamp` properties are not set if the
 input file(s) don't contain timestamps on the OSM objects. (Timestamps in
