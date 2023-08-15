@@ -5,7 +5,7 @@ title: Road Map
 
 # Road Map for Osm2pgsql
 
-Current as of 2023-05-25.
+Current as of 2023-08-15.
 
 This document is a kind of road map for osm2pgsql development. It's not to be
 understood as a definite "this is what we'll do" document, but as a rough
@@ -40,13 +40,13 @@ will be considered based on availability in the Linux distributions we want to
 support.
 
 Osm2pgsql must always support all officially supported versions of PostgreSQL
-(currently 9.6 and above) and maybe more. Some optional features might only be
+(currently 11 and above) and maybe more. Some optional features might only be
 supported in newer PostgreSQL versions.
 
 Osm2pgsql wants to be as resource-friendly as possible. It must always be
 possible to use it with small data extracts on a hobbyists laptop. Processing
 the full planet file and running minutely updates must be possible on a
-reasonably modern machine (64GB RAM, SSD).
+reasonably modern machine (128GB RAM, SSD).
 
 ## Where we Want to Go
 
@@ -62,12 +62,9 @@ issues page](https://github.com/openstreetmap/osm2pgsql/issues).
 
 ### Ongoing Maintainance
 
-There is always the ongoing maintainance.
-
-Issues:
-
-* [1010](https://github.com/openstreetmap/osm2pgsql/issues/1010)
-* [1539](https://github.com/openstreetmap/osm2pgsql/issues/1539)
+There is always the ongoing maintainance. Making sure everything runs with
+old and new versions of the libraries we use and on old and new versions of
+operating systems.
 
 ### Code Cleanup and Modernization
 
@@ -83,6 +80,9 @@ contribute.
 
 This cleanup work is mostly something that can be done "on the side" whenever
 that particular piece of code is touched anyway.
+
+The main places left which need updating in this regard are the command line
+parsing and expire code.
 
 ### Documentation
 
@@ -107,6 +107,7 @@ file names, etc.)
 Issues:
 
 * [142](https://github.com/openstreetmap/osm2pgsql/issues/142)
+* [1680](https://github.com/openstreetmap/osm2pgsql/issues/1680)
 
 ### Progress Output and Logging
 
@@ -130,18 +131,15 @@ each other. This is often called "middle" in osm2pgsql-speak. It comes in two
 
 The updatable middle uses the PostgreSQL database. Due to its current
 structure and API only some information is available, for instance it isn't
-possible to find node members of relations. Storing of OSM object attributes
-(such as user id and timestamps) as pseudo-tags should be cleaned up to fix
-corner-case problems. We can probably get some performance gains here by using
-modern PostgreSQL features like JSONB columns.
+possible to find node members of relations.
 
-Upgrading the data structure of the middle is especially difficult because of
-the need to keep existing setups running without the need for a complete
-reimport.
+In 1.9.0 we released a major update to the database middle. It currently
+is still marked as experimental, but will over time replace the old middle
+database structure.
 
-We also needs some caching mechanism so that expensive database operations can
-be avoided as much as possible if the same information is asked for multiple
-times.
+In the future we might need some caching mechanism so that expensive database
+operations can be avoided as much as possible if the same information is asked
+for multiple times.
 
 The flat node store is also part of this topic. We need to re-think the
 structure of the middle, the integration of the flat node store and caching
@@ -149,10 +147,6 @@ mechanism in a unified way.
 
 A lot of the other topics mentioned below rely on a flexible and performant
 middle.
-
-As a first step we have cleaned up the code that's calling the middle, the
-middle API, and existing middle code. And we are trying out some new middle
-implementations.
 
 As a possible future step we might want to look into (optionally) removing the
 need for PostgreSQL for the updatable object store. Specialized file-based
@@ -162,9 +156,7 @@ at the same time.
 Issues:
 
 * [193](https://github.com/openstreetmap/osm2pgsql/issues/193)
-* [692](https://github.com/openstreetmap/osm2pgsql/issues/692)
 * [1086](https://github.com/openstreetmap/osm2pgsql/issues/1086)
-* [1170](https://github.com/openstreetmap/osm2pgsql/issues/1170)
 * [1323](https://github.com/openstreetmap/osm2pgsql/issues/1323)
 * [1466](https://github.com/openstreetmap/osm2pgsql/issues/1466)
 * [1501](https://github.com/openstreetmap/osm2pgsql/issues/1501)
@@ -178,14 +170,14 @@ features have been added and it is ready to replace the other outputs. Users
 should all be able to switch to the flex output without missing any features
 they had in any of the other outputs. The *multi* output was already removed in
 version 1.5.0. The *gazetteer* output is already marked as deprecated and will
-be removed soon. Long term we want to also remove the *pgsql* outputs, but
+be removed soon. Long term we want to also remove the *pgsql* output, but
 there is no timeline yet.
 
 Many new features are only be available in the flex output.
 
 * [1086](https://github.com/openstreetmap/osm2pgsql/issues/1086)
 * [1130](https://github.com/openstreetmap/osm2pgsql/issues/1130)
-* [1311](https://github.com/openstreetmap/osm2pgsql/issues/1870)
+* [1870](https://github.com/openstreetmap/osm2pgsql/issues/1870)
 
 ### Processing Flexibility and Performance
 
@@ -212,7 +204,6 @@ Issues:
 
 * [189](https://github.com/openstreetmap/osm2pgsql/issues/189)
 * [193](https://github.com/openstreetmap/osm2pgsql/issues/193)
-* [423](https://github.com/openstreetmap/osm2pgsql/issues/423)
 * [799](https://github.com/openstreetmap/osm2pgsql/issues/799)
 * [1046](https://github.com/openstreetmap/osm2pgsql/issues/1046)
 * [1248](https://github.com/openstreetmap/osm2pgsql/issues/1248)
@@ -283,13 +274,14 @@ are.
 One area where osm2pgsql is lacking in functionality is advanced geometry
 handling. Historically all it did was creating point geometries from nodes and
 linestring or polygon geometries from ways and relations. With version 1.7.0
-this has improved a lot, but there is still some way to go.
+and especially version 1.9.0 with explicit generalization support this has
+improved a lot, but there is still some way to go.
 
-For more advanced maps we need more options for geometric generalizations (such
-as line simplifications or merging of polygons). This is explored in the
-[generalization project]({% link generalization/index.md %}).
+This is explored in the [generalization project]({% link
+generalization/index.md %}).
 
 Issues:
 
 * [1663](https://github.com/openstreetmap/osm2pgsql/issues/1663)
+* [1764](https://github.com/openstreetmap/osm2pgsql/issues/1764)
 
