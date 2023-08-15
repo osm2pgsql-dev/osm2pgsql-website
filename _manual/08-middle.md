@@ -252,15 +252,22 @@ after import.
 
 ### Caching
 
-`--cache` specifies how much memory in MB to allocate for caching information.
-In `--slim` mode, this is just node positions while in non-slim mode it has to
-store information about ways and relations too. The rule of thumb in slim mode
-is as follows: use the size of the PBF file you are trying to import or about
-75% of RAM, whatever is smaller. Make sure there is enough RAM left for
-PostgreSQL. It needs at least the amount of `shared_buffers` given in its
-configuration. You may also set `--cache` to 0 to disable node caching
-completely. This makes only sense when a flat node file is given and there
-is not enough RAM to fit most of the cache.
+In slim-mode, i.e. when using the database middle, you can use the `--cache`
+option to specify how much memory (in MBytes) to allocate for caching data.
+Generally more cache means your import will be faster, but the memory will
+also be needed for other parts of osm2pgsql and as a database cache.
+
+To decide how much cache to allocate, the rule of thumb is as follows: use the
+size of the PBF file you are trying to import or about 75% of RAM, whatever is
+smaller. Make sure there is enough RAM left for PostgreSQL. It needs at least
+the amount of `shared_buffers` given in its configuration.
+
+You may also set `--cache` to 0 to disable caching completely to save memory.
+If you use a flat node store you should probably disable the cache, it will
+usually not help in that situation.
+
+In non-slim mode, i.e. when using the RAM middle, the `--cache` setting is
+ignored. All data is stored in RAM and uses however much memory it needs.
 
 ### Bucket Index for Slim Mode
 
