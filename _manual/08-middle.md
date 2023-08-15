@@ -3,9 +3,6 @@ chapter: 8
 title: Middle
 ---
 
-This chapter is incomplete.
-{:.wip}
-
 The middle keeps track of all OSM objects read by osm2pgsql and the
 relationships between those objects. It knows, for instance, which nodes are
 used by which ways, or which members a relation has. It also keeps track of
