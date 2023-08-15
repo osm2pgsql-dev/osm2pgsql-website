@@ -353,6 +353,30 @@ pre {
     border-radius: 2px;
 }
 
+.change-bef {
+    position: relative;
+    left: -2px;
+    border-left: 2px solid red;
+    background-color: lighten(red, 40%);
+}
+
+.change-aft {
+    position: relative;
+    left: -2px;
+    border-left: 2px solid green;
+    background-color: lighten(green, 70%);
+}
+
+.char-bef {
+    font-weight: bold;
+    color: red;
+}
+
+.char-aft {
+    font-weight: bold;
+    color: green;
+}
+
 .note {
     border: 1px solid #ffa0a0;
     border-radius: 2px;

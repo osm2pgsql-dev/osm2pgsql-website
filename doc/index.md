@@ -18,6 +18,13 @@ title: Documentation
     <p>The manual contains all the details about running osm2pgsql.</p>
 </a>
 
+<a class="box box2" href="{% link doc/tutorials/index.md %}">
+    <h2><img src="{% link img/document.svg %}" alt=""/> Tutorials</h2>
+
+    <p>Tutorials help new and advanced users with specific tasks around
+    <tt>osm2pgsql</tt>.</p>
+</a>
+
 <a class="box box2" href="{% link doc/man/index.md %}">
     <h2><img src="{% link img/document.svg %}" alt=""/> Man Pages</h2>
 
