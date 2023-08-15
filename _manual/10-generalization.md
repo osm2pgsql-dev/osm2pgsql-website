@@ -262,18 +262,19 @@ parameters):
 
 Here are the most important command line options:
 
-| Command line option    | Description |
-| ---------------------- | ----------- |
-| -a, \--append          | Run in append (update) mode. Same option as with osm2pgsql. |
-| -c, \--create          | Run in create (import) mode. Same option as with osm2pgsql. (This is the default.) |
-| -j, \--jobs=JOBS       | Maximum number of threads to use. (Default: no threads.) |
-| -l, \--log-level=LEVEL | Set log level (`debug`, `info` (default), `warn`, or `error`). |
-| \--log-sql             | Log all SQL commands send to the database. |
+| Command line option     | Description |
+| ----------------------- | ----------- |
+| -a, \--append           | Run in append (update) mode. Same option as with osm2pgsql. |
+| -c, \--create           | Run in create (import) mode. Same option as with osm2pgsql. (This is the default.) |
+| -j, \--jobs=JOBS        | Maximum number of threads to use. (Default: no threads.) |
+| -l, \--log-level=LEVEL  | Set log level (`debug`, `info` (default), `warn`, or `error`). |
+| \--log-sql              | Log all SQL commands send to the database. |
+| \--middle-schema=SCHEMA | Use PostgreSQL schema SCHEMA for all tables, indexes, and functions in the middle. The schema must exist in the database and be writable by the database user. By default the schema set with `--schema` is used, or `public` if that is not set. Set this to the same value as used on the `osm2pgsql` command line. |
 {:.desc}
 
 Some strategies can run many jobs in parallel, speeding up processing a lot.
 Use the `-j, --jobs` option to set the maximum number of threads. If nothing
-else is running in parallel, try setting this to the number of avaiable CPU
+else is running in parallel, try setting this to the number of available CPU
 cores.
 
 To specify which database to work on `osm2pgsql-gen` uses the same command line
