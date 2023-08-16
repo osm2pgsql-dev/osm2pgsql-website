@@ -1,6 +1,5 @@
 ---
-version: Development version
-title: Development version
+version: 1.9.0
 ---
 {::options header_offset="1"/}
 
