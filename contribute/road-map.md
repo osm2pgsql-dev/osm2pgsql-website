@@ -173,7 +173,7 @@ version 1.5.0. The *gazetteer* output is already marked as deprecated and will
 be removed soon. Long term we want to also remove the *pgsql* output, but
 there is no timeline yet.
 
-Many new features are only be available in the flex output.
+Most new features are only be available in the flex output.
 
 * [1086](https://github.com/openstreetmap/osm2pgsql/issues/1086)
 * [1130](https://github.com/openstreetmap/osm2pgsql/issues/1130)
@@ -284,4 +284,12 @@ Issues:
 
 * [1663](https://github.com/openstreetmap/osm2pgsql/issues/1663)
 * [1764](https://github.com/openstreetmap/osm2pgsql/issues/1764)
+
+## Release Management
+
+We do releases "whenever the time is right", lately this has been about
+twice per year. Plus smaller bug fix releases in between.
+
+Sometime in 2024 we plan to release a 2.0.0 that will remove some deprecated
+features.
 
