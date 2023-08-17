@@ -239,7 +239,7 @@ offers significant space savings and speed increases, particularly on
 mechanical drives.
 
 The file will need approximately `8 bytes * maximum node ID`, regardless of the
-size of the extract. With current OSM data (in 2023) that's more than 80 GiB.
+size of the extract. With current OSM data (in 2023) that's more than 80 GB.
 As a good rule of thumb you can look at the current PBF planet file [on
 planet.osm.org](https://planet.openstreetmap.org/), the flat node file will
 probably be somewhat larger than that.
@@ -249,10 +249,10 @@ after import.
 
 ### Caching
 
-In slim-mode, i.e. when using the database middle, you can use the `--cache`
-option to specify how much memory (in MBytes) to allocate for caching data.
-Generally more cache means your import will be faster, but the memory will
-also be needed for other parts of osm2pgsql and as a database cache.
+In slim-mode, i.e. when using the database middle, you can use the `-C,
+--cache` option to specify how much memory (in MBytes) to allocate for caching
+data. Generally more cache means your import will be faster. But keep in mind
+that other parts of osm2pgsql and the database will also need memory.
 
 To decide how much cache to allocate, the rule of thumb is as follows: use the
 size of the PBF file you are trying to import or about 75% of RAM, whatever is
@@ -260,8 +260,8 @@ smaller. Make sure there is enough RAM left for PostgreSQL. It needs at least
 the amount of `shared_buffers` given in its configuration.
 
 You may also set `--cache` to 0 to disable caching completely to save memory.
-If you use a flat node store you should probably disable the cache, it will
-usually not help in that situation.
+If you use a flat node store you should disable the cache, it will usually not
+help in that situation.
 
 In non-slim mode, i.e. when using the RAM middle, the `--cache` setting is
 ignored. All data is stored in RAM and uses however much memory it needs.
