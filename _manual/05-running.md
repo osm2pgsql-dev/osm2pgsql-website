@@ -9,7 +9,7 @@ Osm2pgsql can work in one of two ways: *Import only* or *Import and Update*.
 
 If you are new to osm2pgsql we recommend you try the *import only* approach
 first and use a small extract of the OSM data.
-{: .note}
+{:.tip}
 
 #### Import Only
 

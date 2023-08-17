@@ -453,11 +453,22 @@ pre {
     background-color: #f0f0ff;
 }
 
+.tip {
+    border: 1px solid #eebc20;
+    border-radius: 2px;
+    background-image: url('/img/tip.png');
+    background-repeat: no-repeat;
+    background-position: 8px 8px;
+    background-size: 20px 20px;
+    background-color: #fff0e0;
+}
+
 div.note {
     padding: 0 10px 0 40px;
 }
 
 p.note,
+p.tip,
 p.wip {
     padding: 10px 10px 10px 40px;
 }
