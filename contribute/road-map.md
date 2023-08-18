@@ -5,14 +5,14 @@ title: Road Map
 
 # Road Map for Osm2pgsql
 
-Current as of 2023-08-15.
+Current as of 2023-08-18.
 
 This document is a kind of road map for osm2pgsql development. It's not to be
 understood as a definite "this is what we'll do" document, but as a rough
 overview of the shared understanding of the maintainers about where we are and
 in what areas we see need for work. It is incomplete.
 
-## Where we Are: A Stable Platform
+## Where We Are: A Stable Platform
 
 First and foremost osm2pgsql must be a stable and reliable platform for its
 many users who use it every day to maintain current maps. Backwards
@@ -48,12 +48,15 @@ possible to use it with small data extracts on a hobbyists laptop. Processing
 the full planet file and running minutely updates must be possible on a
 reasonably modern machine (128GB RAM, SSD).
 
-## Where we Want to Go
+## Where We Want to Go
 
 The following sections describe major topics or areas of work. They are roughly
 ordered from the more important, simpler, more near-term to the less important,
 more complex, more "out there" ideas. This does not imply an order in which
 problems will be tackled (or even whether they will be tackled at all).
+
+We also have a [list of project ideas]({% link contribute/project-ideas.md
+%}) with more long-term projects.
 
 Note that many of the following topics overlap. Some topics have related issues
 which are listed below, but not all open concerns appear in Github issues.

@@ -11,12 +11,16 @@ find the source code and issue tracker on
 Please see [CONTRIBUTING.md](https://github.com/openstreetmap/osm2pgsql/blob/master/CONTRIBUTING.md)
 for some information about how to contribute.
 
-There is a kind of [road map]({% link contribute/road-map.md %}) for osm2pgsql
-development. It’s not to be understood as a definite “this is what we’ll do”
-document, but as a rough and incomplete overview of the shared understanding of
-the maintainers about where we are and in what areas we see need for work.
+There is a kind of [**road map**]({% link contribute/road-map.md %}) for
+osm2pgsql development. It’s not to be understood as a definite “this is what
+we’ll do” document, but as a rough and incomplete overview of the shared
+understanding of the maintainers about where we are and in what areas we see
+need for work.
 
 See also the [generalization project]({% link generalization/index.md %}).
+
+We also have a [**list of project ideas**]({% link contribute/project-ideas.md
+%}) with more long-term projects.
 
 <section markdown="1">
 ## Tests and Continuous Integration
