@@ -53,7 +53,6 @@ We strive to support all versions of PostgreSQL and PostGIS that are
 
 <section markdown="1">
 ## Distributions
-</section>
 
 Osm2pgsql is available in several distributions:
 * [Debian](https://tracker.debian.org/pkg/osm2pgsql)
@@ -61,6 +60,16 @@ Osm2pgsql is available in several distributions:
 * [Homebrew](https://formulae.brew.sh/formula/osm2pgsql)
 
 [Installation instructions]({% link doc/install.md %}).
+</section>
+
+<section markdown="1">
+## Architecture
+
+For developers and power users who want to understand the osm2pgsql internals:
+
+* [How osm2pgsql Data Processing Works]({% link contribute/how-osm2pgsql-processing-works.md %})
+
+</section>
 
 <section markdown="1">
 ## License
