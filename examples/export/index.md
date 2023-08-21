@@ -24,7 +24,7 @@ to access exactly the data we want. Lets get all the ways tagged `highway`:
 
 ```sql
 CREATE OR REPLACE VIEW highways AS
-    SELECT way_id, geom, tags->'highway' AS type, tags->'name' AS name
+    SELECT way_id, geom, tags->>'highway' AS type, tags->>'name' AS name
         FROM lines WHERE tags ? 'highway';
 ```
 
@@ -44,16 +44,16 @@ get all the restaurants tagged as nodes:
 
 ```sql
 CREATE OR REPLACE VIEW restaurant_nodes AS
-    SELECT node_id, geom, tags->'name' AS name
-        FROM points WHERE tags->'amenity' = 'restaurant';
+    SELECT node_id, geom, tags->>'name' AS name
+        FROM points WHERE tags->>'amenity' = 'restaurant';
 ```
 
 And now all the areas:
 
 ```sql
 CREATE OR REPLACE VIEW restaurant_areas AS
-    SELECT area_id, geom, tags->'name' AS name
-        FROM polygons WHERE tags->'amenity' = 'restaurant';
+    SELECT area_id, geom, tags->>'name' AS name
+        FROM polygons WHERE tags->>'amenity' = 'restaurant';
 ```
 
 And now combine these into one view with just the center points for areas:
@@ -90,6 +90,6 @@ line:
 
 ```sh
 ogr2ogr -f "GeoJSON" water.geojson PG:"dbname=osm" \
-    -sql "SELECT geom, tags->'name' FROM polygons WHERE tags->'natural' = 'water'"
+    -sql "SELECT geom, tags->>'name' FROM polygons WHERE tags->>'natural' = 'water'"
 ```
 
