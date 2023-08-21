@@ -3,6 +3,8 @@ layout: examples
 title: Geospatial Analysis
 ---
 
+*You need at least osm2pgsql version 1.7.0 for this example.*
+
 An osm2pgsql database and PostGIS are well-suited for geospatial analysis using
 OpenStreetMap data. PostGIS provides a [large number of geometry
 functions](https://postgis.net/docs/manual-3.0/reference.html){:.extlink}
@@ -43,9 +45,9 @@ We'll first find the ID of the polygon we want
 
 ```sql
 SELECT area_id FROM boundaries
-    WHERE tags->'boundary' = 'administrative'
-      AND tags->'admin_level' = '8'
-      AND tags->'name' = 'New Westminster';
+    WHERE tags->>'boundary' = 'administrative'
+      AND tags->>'admin_level' = '8'
+      AND tags->>'name' = 'New Westminster';
 ```
 
 The result is this:
@@ -66,13 +68,15 @@ the city, sorted by road classification. Roads are in the `highways` table, the
 administrative areas in the `boundaries` table:
 
 ```sql
+WITH area_of_interest AS
+  (SELECT geom FROM boundaries WHERE area_id=-1377803)
 SELECT
     round(SUM(
       ST_Length(
-        ST_Intersection(geom, (SELECT geom FROM boundaries WHERE area_id=-1377803))::geography
+        ST_Intersection(geom, (SELECT geom FROM area_of_interest))::geography
     ))) AS "length (meters)", type
   FROM highways
-    WHERE ST_Intersects(geom, (SELECT geom FROM boundaries WHERE area_id=-1377803))
+    WHERE ST_Intersects(geom, (SELECT geom FROM area_of_interest))
     GROUP BY type
     ORDER BY "length (meters)" DESC
     LIMIT 10;

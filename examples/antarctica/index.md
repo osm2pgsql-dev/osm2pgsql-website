@@ -6,6 +6,8 @@ title: Antarctica Map
 <a href="antarctica2.png"><img alt="Map of McMurdo Sound in Antarctica" class="withborder" src="antarctica2.png" width="250" height="250"/></a>
 {:.flright}
 
+*You need at least osm2pgsql version 1.7.0 for this example.*
+
 Typical maps on the web these days use the Mercator projection. And osm2pgsql
 uses that as the default projection, too. But osm2pgsql can handle basically
 any projection out there. It does this by leveraging the capabilities of the

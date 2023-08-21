@@ -13,15 +13,18 @@ tables.boundaries = osm2pgsql.define_area_table('boundaries', {
 
 function osm2pgsql.process_way(object)
     if object.tags.highway then
-        tables.highways:add_row{ type = object.tags.highway }
+        tables.highways:insert{
+            type = object.tags.highway,
+            geom = object.as_linestring()
+        }
     end
 end
 
 function osm2pgsql.process_relation(object)
     if object.tags.boundary == 'administrative' then
-        tables.boundaries:add_row{
+        tables.boundaries:insert{
             tags = object.tags,
-            geom = { create = 'area' }
+            geom = object.as_multipolygon()
         }
     end
 end

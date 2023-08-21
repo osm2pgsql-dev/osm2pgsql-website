@@ -6,6 +6,8 @@ title: Building Map
 <a href="brasilia2.png"><img alt="Map with buildings of a section of Brasília" class="withborder" src="brasilia2.png" width="250" height="250"/></a>
 {:.flright}
 
+*You need at least osm2pgsql version 1.7.0 for this example.*
+
 You don't always have to load all the OSM data into the database to create
 something useful (or beautiful). In this example we take the data from a city
 and only load the building footprints into the database. The whole process only
@@ -65,12 +67,6 @@ Now we load the data:
 
 ```sh
 osm2pgsql -d mbuildings -O flex -S buildings.lua brasilia.osm.pbf
-```
-
-And create an index on the buildings table:
-
-```sh
-psql mbuildings -c "CREATE UNIQUE INDEX ON buildings (id);"
 ```
 
 ## Visualizing

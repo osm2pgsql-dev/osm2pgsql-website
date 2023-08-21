@@ -25,13 +25,13 @@ function osm2pgsql.process_way(object)
         return
     end
 
-    streets:add_row({
+    streets:insert({
         type    = highway_type,
         tags    = object.tags,
         name    = object.tags.name,
         name_fr = object.tags['name:fr'],
         name_nl = object.tags['name:nl'],
-        geom    = { create = 'line' }
+        geom    = object.as_linestring(),
     })
 end
 
