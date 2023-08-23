@@ -15,7 +15,7 @@ function osm2pgsql.process_way(object)
     if object.tags.highway then
         tables.highways:insert{
             type = object.tags.highway,
-            geom = object.as_linestring()
+            geom = object:as_linestring()
         }
     end
 end
@@ -24,7 +24,7 @@ function osm2pgsql.process_relation(object)
     if object.tags.boundary == 'administrative' then
         tables.boundaries:insert{
             tags = object.tags,
-            geom = object.as_multipolygon()
+            geom = object:as_multipolygon()
         }
     end
 end

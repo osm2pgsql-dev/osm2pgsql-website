@@ -31,7 +31,7 @@ function osm2pgsql.process_way(object)
         name    = object.tags.name,
         name_fr = object.tags['name:fr'],
         name_nl = object.tags['name:nl'],
-        geom    = object.as_linestring(),
+        geom    = object:as_linestring(),
     })
 end
 

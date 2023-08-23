@@ -24,7 +24,7 @@ version of osm2pgsql.
 
 For Point layers it is easy to switch. Lets say you have a table that should
 get all names and locations of restaurants. Change the `add_row` to `insert`
-and the `{ create = 'point' }` to `object.as_point()`. Because `{ create =
+and the `{ create = 'point' }` to `object:as_point()`. Because `{ create =
 'point' }` is the default, you might not have that line at all. But you still
 need the new one.
 
@@ -40,7 +40,7 @@ function osm2pgsql.process_node(object)
 <span class="change-aft">       restaurants:<span class="char-aft">insert</span>({</span>
             name = object.tags.name,
 <span class="change-bef">            geom = <span class="char-bef">{ create = 'point' }</span></span>
-<span class="change-aft">            geom = <span class="char-aft">object.as_point()</span></span>
+<span class="change-aft">            geom = <span class="char-aft">object:as_point()</span></span>
         })
     end
 end
@@ -61,7 +61,7 @@ local railroads = osm2pgsql.define_way_table('railroads', {
 function osm2pgsql.process_way(object)
     if object.tags.railway == 'rail' then
 <span class="change-bef">        railroads:<span class="char-bef">add_row</span>({ geom = <span class="char-bef">{ create = 'line' }</span> })</span>
-<span class="change-aft">        railroads:<span class="char-aft">insert</span>({ geom = <span class="char-aft">object.as_linestring()</span> })</span>
+<span class="change-aft">        railroads:<span class="char-aft">insert</span>({ geom = <span class="char-aft">object:as_linestring()</span> })</span>
     end
 end
 </pre>
@@ -85,7 +85,7 @@ function osm2pgsql.process_way(object)
 <span class="change-bef">        railroads:<span class="char-bef">add_row</span>({</span>
 <span class="change-bef">            <span class="char-bef">geom = { create = 'line', split_at = 100 }</span></span>
 <span class="change-bef">        })</span>
-<span class="change-aft">        <span class="char-aft">local mgeom = object.as_linestring():transform(3857):segmentize(100)</span></span>
+<span class="change-aft">        <span class="char-aft">local mgeom = object:as_linestring():transform(3857):segmentize(100)</span></span>
 <span class="change-aft">        <span class="char-aft">for sgeom in mgeom:geometries() do</span></span>
 <span class="change-aft">            railroads:<span class="char-aft">insert({ geom = sgeom })</span></span>
 <span class="change-aft">        <span class="char-aft">end</span></span>
@@ -104,7 +104,7 @@ local railroads = osm2pgsql.define_way_table('railroads', {
 function osm2pgsql.process_way(object)
     if object.tags.railway == 'rail' then
 <span class="change-bef">        railroads:<span class="char-bef">add_row</span>({ geom = <span class="char-bef">{ create = 'line', split_at = 100 }</span> })</span>
-<span class="change-aft">        railroads:<span class="char-aft">insert</span>({ geom = <span class="char-aft">object.as_linestring():transform(3857):segmentize(100)</span> })</span>
+<span class="change-aft">        railroads:<span class="char-aft">insert</span>({ geom = <span class="char-aft">object:as_linestring():transform(3857):segmentize(100)</span> })</span>
     end
 end
 </pre>
@@ -124,7 +124,7 @@ local forests = osm2pgsql.define_way_table('forests', {
 function osm2pgsql.process_way(object)
     if object.is_closed and object.tags.natural == 'wood' then
 <span class="change-bef">        forests:<span class="char-bef">add_row</span>({ geom = <span class="char-bef">{ create = 'area' }</span> })</span>
-<span class="change-aft">        forests:<span class="char-aft">insert</span>({ geom = <span class="char-aft">object.as_polygon()</span> })</span>
+<span class="change-aft">        forests:<span class="char-aft">insert</span>({ geom = <span class="char-aft">object:as_polygon()</span> })</span>
     end
 end
 </pre>
@@ -140,7 +140,7 @@ local forests = osm2pgsql.define_area_table('forests', {
 function osm2pgsql.process_relation(object)
     if object.tags.type == 'multipolygon' and object.tags.natural == 'wood' then
 <span class="change-bef">         forests:<span class="char-bef">add_row</span>({ geom = <span class="char-bef">{ create = 'area' }</span> })</span>
-<span class="change-aft">         forests:<span class="char-aft">insert</span>({ geom = <span class="char-aft">object.as_multipolygon()</span> })</span>
+<span class="change-aft">         forests:<span class="char-aft">insert</span>({ geom = <span class="char-aft">object:as_multipolygon()</span> })</span>
     end
 end
 </pre>
@@ -158,7 +158,7 @@ function osm2pgsql.process_relation(object)
 <span class="change-bef">        forests:<span class="char-bef">add_row</span>({</span>
 <span class="change-bef">            <span class="char-bef">geom = { create = 'area', split_at = 'multi' }</span></span>
 <span class="change-bef">        })</span>
-<span class="change-aft">        <span class="char-aft">local mgeom = object.as_multipolygon()</span></span>
+<span class="change-aft">        <span class="char-aft">local mgeom = object:as_multipolygon()</span></span>
 <span class="change-aft">        <span class="char-aft">for sgeom in mgeom:geometries() do</span></span>
 <span class="change-aft">            forests:<span class="char-aft">insert({ geom = sgeom })</span></span>
 <span class="change-aft">        <span class="char-aft">end</span></span>
@@ -184,7 +184,7 @@ local forests = osm2pgsql.define_way_table('forests', {
 function osm2pgsql.process_way(object)
     if object.is_closed and  object.tags.natural == 'wood' then
 <span class="change-bef">        forests:<span class="char-bef">add_row</span>({ geom = <span class="char-bef">{ create = 'area' }</span> })</span>
-<span class="change-aft">        <span class="char-aft">local poly = object.as_polygon():transform(3857)</span></span>
+<span class="change-aft">        <span class="char-aft">local poly = object:as_polygon():transform(3857)</span></span>
 <span class="change-aft">        forests:<span class="char-aft">insert</span>({ geom = <span class="char-aft">poly, area = poly:area()</span> })</span>
     end
 end
@@ -208,7 +208,7 @@ local forests = osm2pgsql.define_way_table('forests', {
 
 function osm2pgsql.process_way(object)
     if object.is_closed and  object.tags.natural == 'wood' then
-        local poly = object.as_polygon()
+        local poly = object:as_polygon()
         forests:insert({ geom = poly, area = poly:spherical_area() })
     end
 end
@@ -226,7 +226,7 @@ local forests = osm2pgsql.define_area_table('forests', {
 
 function osm2pgsql.process_relation(object)
     if object.tags.type == 'multipolygon' and object.tags.natural == 'wood' then
-        local mgeom = object.as_multipolygon():transform(3857)
+        local mgeom = object:as_multipolygon():transform(3857)
         local marea = mgeom:area()
         for sgeom in mgeom:geometries() do
             forests:insert({ geom = sgeom, marea = marea, sarea = sgeom:area() })

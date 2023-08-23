@@ -27,7 +27,7 @@ function osm2pgsql.process_node(object)
             tags = object.tags,
             place = place,
             name = object.tags.name,
-            geom = object.as_point()
+            geom = object:as_point()
         })
     end
 end
@@ -37,10 +37,10 @@ function osm2pgsql.process_way(object)
     -- Antarctica that are not coastlines. Those have the additional tag
     -- "coastline=bogus", which allows us to make an exception for them.
     if object.tags.natural == 'coastline' and object.tags.coastline ~= 'bogus' then
-        tables.coastlines:insert({ geom = object.as_linestring() })
+        tables.coastlines:insert({ geom = object:as_linestring() })
     end
     if object.tags['glacier:edge'] == 'grounding_line' then
-        tables.ice_shelves:insert({ geom = object.as_linestring() })
+        tables.ice_shelves:insert({ geom = object:as_linestring() })
     end
 end
 

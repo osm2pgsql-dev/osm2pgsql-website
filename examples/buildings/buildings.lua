@@ -14,7 +14,7 @@ local buildings = osm2pgsql.define_area_table('buildings', {
 function osm2pgsql.process_way(object)
     if object.is_closed and object.tags.building then
         buildings:insert({
-            geom = object.as_polygon()
+            geom = object:as_polygon()
         })
     end
 end
@@ -22,7 +22,7 @@ end
 function osm2pgsql.process_relation(object)
     if object.tags.type == 'multipolygon' and object.tags.building then
         -- From the relation we get multipolygons...
-        local mp = object.as_multipolygon()
+        local mp = object:as_multipolygon()
         -- ...and split them into polygons which we insert into the table
         for geom in mp:geometries() do
             buildings:insert({
