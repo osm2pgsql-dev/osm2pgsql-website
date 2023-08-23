@@ -29,12 +29,12 @@ function process_poi(object, geom)
 end
 
 function osm2pgsql.process_node(object)
-    process_poi(object, object.as_point())
+    process_poi(object, object:as_point())
 end
 
 function osm2pgsql.process_way(object)
     if object.is_closed and object.tags.building then
-        process_poi(object, object.as_polygon():centroid())
+        process_poi(object, object:as_polygon():centroid())
     end
 end
 
