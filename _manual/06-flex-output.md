@@ -850,7 +850,7 @@ PostGIS functions with equivalent names.
 | `geometries()`                   | Returns an iterator for iterating over member geometries of a multi-geometry. See below for detail. |
 | `geometry_n()`                   | Returns the nth geometry (1-based) of a multi-geometry. |
 | `geometry_type()`                | Returns the type of geometry as a string: `NULL`, `POINT`, `LINESTRING`, `POLYGON`, `MULTIPOINT`, `MULTILINESTRING`, `MULTIPOLYGON`, or `GEOMETRYCOLLECTION`.
-| `is_null()`                      | Returns `true` if the geometry is a NULL geometry, `false` otherwise. |
+| `is_null()`                      | Returns `true` if the geometry is a NULL geometry, `false` otherwise. Example: `object:as_multipolygon():is_null()` |
 | `length()`                       | *Version >= 1.7.1*{:.version} Returns the length of the geometry. For any geometry type but (MULTI)LINESTRING this is always `0.0`. The length is calculated using the SRS of the geometry, the result is in map units. |
 | `line_merge()`                   | Merge lines in a (MULTI)LINESTRING as much as possible into longer lines. |
 | `num_geometries()`               | Returns the number of geometries in a multi-geometry. Always 0 for NULL geometries and always 1 for non-multi geometries. |
