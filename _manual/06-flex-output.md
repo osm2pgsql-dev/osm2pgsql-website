@@ -516,7 +516,7 @@ The parameter table (`object`) has the following fields and functions:
 | changeset        | Changeset containing this version of the OSM object. (\*) |
 | uid              | User id of the user that created or last changed this OSM object. (\*) |
 | user             | User name of the user that created or last changed this OSM object. (\*) |
-| grab_tag(KEY)    | Return the tag value of the specified key and remove the tag from the list of tags. (Example: `local name = object:grab_tag('name')`) This is often used when you want to store some tags in special columns and the rest of the tags in an jsonb or hstore column. |
+| grab_tag(KEY)    | Return the tag value of the specified key and remove the tag from the list of tags. (Example: `local name = object.grab_tag('name')`) This is often used when you want to store some tags in special columns and the rest of the tags in an jsonb or hstore column. |
 | get_bbox()       | Get the bounding box of the current node, way, or relation. This function returns four result values: the lon/lat values for the bottom left corner of the bounding box, followed by the lon/lat values of the top right corner. Both lon/lat values are identical in case of nodes. Example: `lon, lat, dummy, dummy = object.get_bbox()` (*Version < 1.7.0*{: .version} Only for nodes and ways, *Version >= 1.7.0*{: .version} Also available for relations, relation members (nested relations) are not taken into account.) |
 | is_closed        | Ways only: A boolean telling you whether the way geometry is closed, i.e. the first and last node are the same. |
 | nodes            | Ways only: An array with the way node ids. |
@@ -657,7 +657,7 @@ function osm2pgsql.process_node(object)
     table_pois:insert({
         tags = object.tags,
         name = object.tags.name,
-        geom = object:as_point()
+        geom = object.as_point()
     })
 ...
 end
@@ -831,8 +831,8 @@ your Lua script to those columns yourself.
 
 *Version >= 1.7.0*{:.version}
 
-Lua geometry objects are created by calls such as `object:as_point()` or
-`object:as_polygon()` inside processing functions. It is not possible to
+Lua geometry objects are created by calls such as `object.as_point()` or
+`object.as_polygon()` inside processing functions. It is not possible to
 create geometry objects from scratch, you always need an OSM object.
 
 You can write geometry objects directly into geometry columns in the database
@@ -874,14 +874,14 @@ can always chain geometry functions and if there is any problem on the way, the
 result will be a NULL geometry. Here is an example:
 
 ```lua
-local area = object:as_polygon():transform(3857):area()
+local area = object.as_polygon():transform(3857):area()
 -- area will be 0.0 if not a polygon or transformation failed
 ```
 
 To iterate over the members of a multi-geometry use the `geometries()` function:
 
 ```lua
-local geom = object:as_multipolygon()
+local geom = object.as_multipolygon()
 for g in geom:geometries() do
     landuse.insert({
         geom = g,

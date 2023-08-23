@@ -39,13 +39,13 @@ end
 
 function osm2pgsql.process_way(object)
     if object.is_closed and object.tags.building then
-        add_building(object.tags, object:as_polygon())
+        add_building(object.tags, object.as_polygon())
     end
 end
 
 function osm2pgsql.process_relation(object)
     if object.tags.type == 'multipolygon' and object.tags.building then
-        geom = object:as_multipolygon()
+        geom = object.as_multipolygon()
         for g in geom:geometries() do
             add_building(object.tags, g)
         end
