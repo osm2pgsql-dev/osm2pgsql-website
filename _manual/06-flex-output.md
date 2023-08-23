@@ -37,17 +37,17 @@ directory which contain lots of comments to get you started.
 All configuration is done through the `osm2pgsql` global object in Lua. It has
 the following fields and functions:
 
-| Field / Function                                | Description |
-| ----------------------------------------------- | ----------- |
-| version                                         | The version of osm2pgsql as a string. |
-| config_dir                                      | *Version >=1.5.1*{: .version} The directory where your Lua config file is. Useful when you want to include more files from Lua. |
-| mode                                            | Either `"create"` or `"append"` depending on the command line options (`-c, --create` or `-a, --append`). |
-| stage                                           | Either `1` or `2` (1st/2nd stage processing of the data). See below. |
-| define_node_table(NAME, COLUMNS[, OPTIONS])     | Define a node table. |
-| define_way_table(NAME, COLUMNS[, OPTIONS])      | Define a way table. |
-| define_relation_table(NAME, COLUMNS[, OPTIONS]) | Define a relation table. |
-| define_area_table(NAME, COLUMNS[, OPTIONS])     | Define an area table. |
-| define_table(OPTIONS)                           | Define a table. This is the more flexible function behind all the other `define_*_table()` functions. It gives you more control than the more convenient other functions. |
+| Field / Function                                              | Description |
+| ------------------------------------------------------------- | ----------- |
+| osm2pgsql.**version**                                         | The version of osm2pgsql as a string. |
+| osm2pgsql.**config_dir**                                      | *Version >=1.5.1*{: .version} The directory where your Lua config file is. Useful when you want to include more files from Lua. |
+| osm2pgsql.**mode**                                            | Either `"create"` or `"append"` depending on the command line options (`-c, --create` or `-a, --append`). |
+| osm2pgsql.**stage**                                           | Either `1` or `2` (1st/2nd stage processing of the data). See below. |
+| osm2pgsql.**define_node_table**(NAME, COLUMNS[, OPTIONS])     | Define a node table. |
+| osm2pgsql.**define_way_table**(NAME, COLUMNS[, OPTIONS])      | Define a way table. |
+| osm2pgsql.**define_relation_table**(NAME, COLUMNS[, OPTIONS]) | Define a relation table. |
+| osm2pgsql.**define_area_table**(NAME, COLUMNS[, OPTIONS])     | Define an area table. |
+| osm2pgsql.**define_table**(OPTIONS)                           | Define a table. This is the more flexible function behind all the other `define_*_table()` functions. It gives you more control than the more convenient other functions. |
 {: .desc}
 
 Osm2pgsql also provides some additional functions in the
@@ -98,15 +98,15 @@ they can contain data derived from ways and from (multipolygon) relations.
 
 #### Advanced Table Definition
 
-Sometimes the `define_(node|way|relation|area)_table()` functions are a bit too
-restrictive, for instance if you want more control over the type and naming of
-the Id column(s). In this case you can use the function
+Sometimes the `osm2pgsql.define_(node|way|relation|area)_table()` functions are
+a bit too restrictive, for instance if you want more control over the type and
+naming of the Id column(s). In this case you can use the function
 `osm2pgsql.define_table()`.
 
 Here are the available `OPTIONS` for the `osm2pgsql.define_table(OPTIONS)`
 function. You can use the same options on the
-`define_(node|way|relation|area)_table()` functions, except the `name` and
-`columns` options.
+`osm2pgsql.define_(node|way|relation|area)_table()` functions, except the
+`name` and `columns` options.
 
 | Table Option     | Description |
 | ---------------- | ----------- |
@@ -123,13 +123,13 @@ function. You can use the same options on the
 All the `osm2pgsql.define*table()` functions return a database table Lua
 object. You can call the following functions on it:
 
-| Function  | Description |
-| --------- | ----------- |
-| name()    | The name of the table as specified in the define function. |
-| schema()  | The schema of the table as specified in the define function. |
-| columns() | The columns of the table as specified in the define function. |
-| add_row() | Add a row to the database table. See below for details. |
-| insert()  | *Version >= 1.7.0*{: .version} Add a row to the database table. See below for details. |
+| Function         | Description |
+| ---------------- | ----------- |
+| :name()          | The name of the table as specified in the define function. |
+| :schema()        | The schema of the table as specified in the define function. |
+| :columns()       | The columns of the table as specified in the define function. |
+| :add_row(PARAMS) | Add a row to the database table. See below for details. |
+| :insert(PARAMS)  | *Version >= 1.7.0*{: .version} Add a row to the database table. See below for details. |
 {: .desc}
 
 ### Id Handling
@@ -145,8 +145,8 @@ convenience functions, osm2pgsql will automatically create an id column named
 If you want more control over the id column(s), use the
 `osm2pgsql.define_table()` function. You can then use the `ids` option to
 define how the id column(s) should look like. To generate the same
-"restaurants" table described above, the `define_table()` call will look like
-this:
+"restaurants" table described above, the `osm2pgsql.define_table()` call will
+look like this:
 
 ```lua
 local restaurants = osm2pgsql.define_table({
@@ -310,14 +310,14 @@ error message from osm2pgsql.
 | json               | `json`                 | |
 | jsonb              | `jsonb`                | |
 | direction          | `int2`                 | |
-| geometry           | `geometry(GEOMETRY, *SRID*)`           | (\*) |
-| point              | `geometry(POINT, *SRID*)`              | (\*) |
-| linestring         | `geometry(LINESTRING, *SRID*)`         | (\*) |
-| polygon            | `geometry(POLYGON, *SRID*)`            | (\*) |
-| multipoint         | `geometry(MULTIPOINT, *SRID*)`         | (\*) |
-| multilinestring    | `geometry(MULTILINESTRING, *SRID*)`    | (\*) |
-| multipolygon       | `geometry(MULTIPOLYGON, *SRID*)`       | (\*) |
-| geometrycollection | `geometry(GEOMETRYCOLLECTION, *SRID*)` | (\*) *Only available in version >= 1.7.0*{: .version} |
+| geometry           | `geometry(GEOMETRY,*SRID*)`           | (\*) |
+| point              | `geometry(POINT,*SRID*)`              | (\*) |
+| linestring         | `geometry(LINESTRING,*SRID*)`         | (\*) |
+| polygon            | `geometry(POLYGON,*SRID*)`            | (\*) |
+| multipoint         | `geometry(MULTIPOINT,*SRID*)`         | (\*) |
+| multilinestring    | `geometry(MULTILINESTRING,*SRID*)`    | (\*) |
+| multipolygon       | `geometry(MULTIPOLYGON,*SRID*)`       | (\*) |
+| geometrycollection | `geometry(GEOMETRYCOLLECTION,*SRID*)` | (\*) *Only available in version >= 1.7.0*{: .version} |
 | area               | `real `                | |
 {: .desc}
 
@@ -468,7 +468,7 @@ geometry.
 
 | Field           | Description |
 | --------------- | ----------- |
-| output          | The expire output defined with `define_expire_output()`. |
+| output          | The expire output defined with `osm2pgsql.define_expire_output()`. |
 | mode            | How polygons are converted to tiles. Can be `full-area` (default), `boundary-only`, or `hybrid`. |
 | full_area_limit | In `hybrid` mode, set the maximum area size for which a full-area expiry is done. Above this `boundary-only` is used. |
 | buffer          | The size of the buffer around geometries to be expired as a fraction of the tile size. |
@@ -482,11 +482,11 @@ example config file.
 
 You are expected to define one or more of the following functions:
 
-| Callback function                  | Description                              |
-| ---------------------------------- | ---------------------------------------- |
-| osm2pgsql.process_node(object)     | Called for each new or changed node.     |
-| osm2pgsql.process_way(object)      | Called for each new or changed way.      |
-| osm2pgsql.process_relation(object) | Called for each new or changed relation. |
+| Callback function                      | Description                              |
+| -------------------------------------- | ---------------------------------------- |
+| osm2pgsql.**process_node**(object)     | Called for each new or changed node.     |
+| osm2pgsql.**process_way**(object)      | Called for each new or changed way.      |
+| osm2pgsql.**process_relation**(object) | Called for each new or changed relation. |
 {: .desc}
 
 They all have a single argument of type table (here called `object`) and no
@@ -506,28 +506,28 @@ function. If you want to add the OSM object to some table call the `add_row()`
 
 The parameter table (`object`) has the following fields and functions:
 
-| Field / Function | Description |
-| ---------------- | ----------- |
-| id               | The id of the node, way, or relation. |
-| type             | *Version >= 1.7.0*{: .version} The object type as string (`node`, `way`, or `relation`). |
-| tags             | A table with all the tags of the object. |
-| version          | Version of the OSM object. (\*) |
-| timestamp        | Timestamp of the OSM object, time in seconds since the epoch (midnight 1970-01-01). (\*) |
-| changeset        | Changeset containing this version of the OSM object. (\*) |
-| uid              | User id of the user that created or last changed this OSM object. (\*) |
-| user             | User name of the user that created or last changed this OSM object. (\*) |
-| grab_tag(KEY)    | Return the tag value of the specified key and remove the tag from the list of tags. (Example: `local name = object:grab_tag('name')`) This is often used when you want to store some tags in special columns and the rest of the tags in an jsonb or hstore column. |
-| get_bbox()       | Get the bounding box of the current node, way, or relation. This function returns four result values: the lon/lat values for the bottom left corner of the bounding box, followed by the lon/lat values of the top right corner. Both lon/lat values are identical in case of nodes. Example: `lon, lat, dummy, dummy = object.get_bbox()` (*Version < 1.7.0*{: .version} Only for nodes and ways, *Version >= 1.7.0*{: .version} Also available for relations, relation members (nested relations) are not taken into account.) |
-| is_closed        | Ways only: A boolean telling you whether the way geometry is closed, i.e. the first and last node are the same. |
-| nodes            | Ways only: An array with the way node ids. |
-| members          | Relations only: An array with member tables. Each member table has the fields `type` (values `n`, `w`, or `r`), `ref` (member id) and `role`. |
-| as_point()              | Create point geometry from OSM node object. |
-| as_linestring()         | Create linestring geometry from OSM way object. |
-| as_polygon()            | Create polygon geometry from OSM way object. |
-| as_multipoint()         | *Version >= 1.7.1*{: .version} Create (multi)point geometry from OSM node/relation object. |
-| as_multilinestring()    | Create (multi)linestring geometry from OSM way/relation object. |
-| as_multipolygon()       | Create (multi)polygon geometry from OSM way/relation object. |
-| as_geometrycollection() | Create geometry collection from OSM relation object. |
+| Field / Function  | Description |
+| ----------------- | ----------- |
+| .id               | The id of the node, way, or relation. |
+| .type             | *Version >= 1.7.0*{: .version} The object type as string (`node`, `way`, or `relation`). |
+| .tags             | A table with all the tags of the object. |
+| .version          | Version of the OSM object. (\*) |
+| .timestamp        | Timestamp of the OSM object, time in seconds since the epoch (midnight 1970-01-01). (\*) |
+| .changeset        | Changeset containing this version of the OSM object. (\*) |
+| .uid              | User id of the user that created or last changed this OSM object. (\*) |
+| .user             | User name of the user that created or last changed this OSM object. (\*) |
+| :grab_tag(KEY)    | Return the tag value of the specified key and remove the tag from the list of tags. (Example: `local name = object:grab_tag('name')`) This is often used when you want to store some tags in special columns and the rest of the tags in an jsonb or hstore column. |
+| :get_bbox()       | Get the bounding box of the current node, way, or relation. This function returns four result values: the lon/lat values for the bottom left corner of the bounding box, followed by the lon/lat values of the top right corner. Both lon/lat values are identical in case of nodes. Example: `lon, lat, dummy, dummy = object:get_bbox()` (*Version < 1.7.0*{: .version} Only for nodes and ways, *Version >= 1.7.0*{: .version} Also available for relations, relation members (nested relations) are not taken into account.) |
+| .is_closed        | Ways only: A boolean telling you whether the way geometry is closed, i.e. the first and last node are the same. |
+| .nodes            | Ways only: An array with the way node ids. |
+| .members          | Relations only: An array with member tables. Each member table has the fields `type` (values `n`, `w`, or `r`), `ref` (member id) and `role`. |
+| :as_point()              | Create point geometry from OSM node object. |
+| :as_linestring()         | Create linestring geometry from OSM way object. |
+| :as_polygon()            | Create polygon geometry from OSM way object. |
+| :as_multipoint()         | *Version >= 1.7.1*{: .version} Create (multi)point geometry from OSM node/relation object. |
+| :as_multilinestring()    | Create (multi)linestring geometry from OSM way/relation object. |
+| :as_multipolygon()       | Create (multi)polygon geometry from OSM way/relation object. |
+| :as_geometrycollection() | Create geometry collection from OSM relation object. |
 {: .desc}
 
 These are only available if the `-x|--extra-attributes` option is used and the
@@ -843,23 +843,23 @@ transform geometries in multiple ways.
 Geometry objects have the following functions. They are modelled after the
 PostGIS functions with equivalent names.
 
-| Function                         | Description |
-| -------------------------------- | ----------- |
-| `area()`                         | Returns the area of the geometry calculated on the projected coordinates. The area is calculated using the SRS of the geometry, the result is in map units. For any geometry type but (MULTI)POLYGON the result is always `0.0`. (See also `spherical_area()`.) |
-| `centroid()`                     | Return the centroid (center of mass) of a geometry. (Implemented for all geometry types in *Version >= 1.7.1*{:.version}.) |
-| `geometries()`                   | Returns an iterator for iterating over member geometries of a multi-geometry. See below for detail. |
-| `geometry_n()`                   | Returns the nth geometry (1-based) of a multi-geometry. |
-| `geometry_type()`                | Returns the type of geometry as a string: `NULL`, `POINT`, `LINESTRING`, `POLYGON`, `MULTIPOINT`, `MULTILINESTRING`, `MULTIPOLYGON`, or `GEOMETRYCOLLECTION`.
-| `is_null()`                      | Returns `true` if the geometry is a NULL geometry, `false` otherwise. |
-| `length()`                       | *Version >= 1.7.1*{:.version} Returns the length of the geometry. For any geometry type but (MULTI)LINESTRING this is always `0.0`. The length is calculated using the SRS of the geometry, the result is in map units. |
-| `line_merge()`                   | Merge lines in a (MULTI)LINESTRING as much as possible into longer lines. |
-| `num_geometries()`               | Returns the number of geometries in a multi-geometry. Always 0 for NULL geometries and always 1 for non-multi geometries. |
-| `pole_of_inaccessibility(opts)`  | *Version >= 1.8.0*{:.version} *Experimental*{:.experimental} Calculate "pole of inaccessibility" of a polygon, a point farthest away from the polygon boundary, sometimes called the center of the maximum inscribed circle. Note that for performance reasons this is an approximation. It is intended as a reasonably good labelling point. One optional parameter *opts*, which must be a Lua table with options. The only option currently defined is `stretch`. If this is set to a value larger than 1 an ellipse instead of a circle is inscribed. This might be useful for labels which usually use more space horizontally. Use a value between 0 and 1 for a vertical ellipse. |
-| `segmentize(max_segment_length)` | Segmentize a (MULTI)LINESTRING, so that no segment is longer than `max_segment_length`. Result is a (MULTI)LINESTRING. |
-| `simplify(tolerance)`            | Simplify (MULTI)LINESTRING geometries with the Douglas-Peucker algorithm. (Currently not implemented for other geometry types. For multilinestrings only available in *Version >= 1.7.1*{: .version}) |
-| `spherical_area()`               | *Version >= 1.9.0*{:.version} Returns the area of the geometry calculated on the spheroid. The geometry must be in WGS 84 (4326). For any geometry type but (MULTI)POLYGON the result is always `0.0`. The result is in m². (See also `area()`.) |
-| `srid()`                         | Return SRID of the geometry. |
-| `transform(target_srid)`         | Transform the geometry to the target SRS. |
+| Function                        | Description |
+| ------------------------------- | ----------- |
+| :area()                         | Returns the area of the geometry calculated on the projected coordinates. The area is calculated using the SRS of the geometry, the result is in map units. For any geometry type but (MULTI)POLYGON the result is always `0.0`. (See also `:spherical_area()`.) |
+| :centroid()                     | Return the centroid (center of mass) of a geometry. (Implemented for all geometry types in *Version >= 1.7.1*{:.version}.) |
+| :geometries()                   | Returns an iterator for iterating over member geometries of a multi-geometry. See below for detail. |
+| :geometry_n()                   | Returns the nth geometry (1-based) of a multi-geometry. |
+| :geometry_type()                | Returns the type of geometry as a string: `NULL`, `POINT`, `LINESTRING`, `POLYGON`, `MULTIPOINT`, `MULTILINESTRING`, `MULTIPOLYGON`, or `GEOMETRYCOLLECTION`.
+| :is_null()                      | Returns `true` if the geometry is a NULL geometry, `false` otherwise. |
+| :length()                       | *Version >= 1.7.1*{:.version} Returns the length of the geometry. For any geometry type but (MULTI)LINESTRING this is always `0.0`. The length is calculated using the SRS of the geometry, the result is in map units. |
+| :line_merge()                   | Merge lines in a (MULTI)LINESTRING as much as possible into longer lines. |
+| :num_geometries()               | Returns the number of geometries in a multi-geometry. Always 0 for NULL geometries and always 1 for non-multi geometries. |
+| :pole_of_inaccessibility(opts)  | *Version >= 1.8.0*{:.version} *Experimental*{:.experimental} Calculate "pole of inaccessibility" of a polygon, a point farthest away from the polygon boundary, sometimes called the center of the maximum inscribed circle. Note that for performance reasons this is an approximation. It is intended as a reasonably good labelling point. One optional parameter *opts*, which must be a Lua table with options. The only option currently defined is `stretch`. If this is set to a value larger than 1 an ellipse instead of a circle is inscribed. This might be useful for labels which usually use more space horizontally. Use a value between 0 and 1 for a vertical ellipse. |
+| :segmentize(max_segment_length) | Segmentize a (MULTI)LINESTRING, so that no segment is longer than `max_segment_length`. Result is a (MULTI)LINESTRING. |
+| :simplify(tolerance)            | Simplify (MULTI)LINESTRING geometries with the Douglas-Peucker algorithm. (Currently not implemented for other geometry types. For multilinestrings only available in *Version >= 1.7.1*{: .version}) |
+| :spherical_area()               | *Version >= 1.9.0*{:.version} Returns the area of the geometry calculated on the spheroid. The geometry must be in WGS 84 (4326). For any geometry type but (MULTI)POLYGON the result is always `0.0`. The result is in m². (See also `:area()`.) |
+| :srid()                         | Return SRID of the geometry. |
+| :transform(target_srid)         | Transform the geometry to the target SRS. |
 {:.desc}
 
 The Lua length operator (`#`) returns the number of geometries in the geometry
