@@ -210,3 +210,15 @@ See the [PostgreSQL
 manual](https://www.postgresql.org/docs/current/manage-ag-templatedbs.html){:.extlink}
 for details.
 
+### Database Maintainance
+
+PostgreSQL tables and indexes that change a lot tend to get larger and larger
+over time. This can happen even with autovacuum running. This does not affect
+you if you just import OSM data, but when you update it regularly, you have
+to keep this in mind. You might want to occasionally re-import the database
+from scratch.
+
+This is not something specific to osm2pgsql, but a general PostgreSQL issue.
+If you are running a production database, you should inform yourself about
+possible issues and what to do about them in the PostgreSQL literature.
+
