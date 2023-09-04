@@ -87,6 +87,13 @@ osm2pgsql.run_sql({
 })
 ```
 
+*Version >= 1.9.2*{: .version} The `sql` field can be set to a string or to
+an array of strings in which case the commands in those strings will be run
+one after the other.
+
+*Version >= 1.9.2*{: .version} The optional `transaction` field can be set to
+`true` to run the command(s) from the `sql` field in a transaction.
+
 ### Generalization Strategies
 
 There are currently two types of strategies: Some strategies always work on all
