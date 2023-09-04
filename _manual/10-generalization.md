@@ -15,7 +15,7 @@ itself. The same Lua configuration file that is used for osm2pgsql is also used
 to configure the generalization. Generalization will only work together with
 the *flex* output.
 
-**The documenation in this chapter is incomplete. We are working on it...**
+**The documentation in this chapter is incomplete. We are working on it...**
 
 ### Overview
 
@@ -87,12 +87,15 @@ osm2pgsql.run_sql({
 })
 ```
 
-*Version >= 1.9.2*{: .version} The `sql` field can be set to a string or to
-an array of strings in which case the commands in those strings will be run
-one after the other.
+The following fields are available in the `run_sql()` command:
 
-*Version >= 1.9.2*{: .version} The optional `transaction` field can be set to
-`true` to run the command(s) from the `sql` field in a transaction.
+| Parameter   | Type                   | Description |
+| ----------- | ---------------------- | ----------- |
+| description | text                   | Descriptive name or short text for logging. |
+| sql         | text or array of texts | The SQL command to run. *Version >= 1.9.2*{: .version} The `sql` field can be set to a string or to an array of strings in which case the commands in those strings will be run one after the other. |
+| transaction | bool                   | *Version >= 1.9.2*{: .version} Set to `true` to run the command(s) from the `sql` field in a transaction (Default: `false`). |
+| if_has_rows | text                   | *Version >= 1.9.2*{: .version} SQL command that is run first. If that SQL command returns any rows, the commands in `sql` are run, otherwise nothing is done. This can be used, to trigger generalizations only if something changed, for instance when an expire table contains something. Use a query like `SELECT 1 FROM expire_table LIMIT 1`. Default: none, i.e. the command in `sql` always runs. |
+{:.desc}
 
 ### Generalization Strategies
 
