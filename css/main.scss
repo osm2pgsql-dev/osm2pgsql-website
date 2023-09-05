@@ -287,6 +287,13 @@ a#menu-code {
     }
 }
 
+.star {
+    position: absolute;
+    top: -15px;
+    right: -7px;
+    filter: drop-shadow(0px 0px 2px #e0e0f0);
+}
+
 // ---------------- common elements ----------------
 
 h1,

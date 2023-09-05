@@ -55,7 +55,38 @@ before others. Read the documentation for each used theme for the details.
 
 ## Name Handling
 
-TODO
+There are special topics in the `core` them which allow you to set the policy
+used for names. In the simplest case you just want to have a `name` column
+in all tables based on the `name` tag. This is done with:
+
+```{lua}
+themepark:add_topic('core/name-single', { column = 'name' })
+```
+
+Or you can have several names columns. In this case the `name`, `name:de`, and
+`name:en` tags will end up in the columns `name`, `name_de`, and `name_en`.
+Themepark will automatically relace the colons with underscores (`_`) for
+easier use in the database.
+
+```{lua}
+themepark:add_topic('core/name-list', { keys = {'name', 'name:de', 'name:en'} })
+```
+
+With the `name-with-fallback` topic, you can configure this even further.
+The columns will be filled based on the first tag in the list that's not empty:
+
+```{lua}
+themepark:add_topic('core/name-with-fallback', {
+    keys = {
+        name = { 'name', 'name:en', 'name:de' },
+        name_de = { 'name:de', 'name', 'name:en' },
+        name_en = { 'name:en', 'name', 'name:de' },
+    }
+})
+```
+
+Note that themes need to have support for the naming topics, because only they
+know which tables should get a name at all.
 
 ## Using Plugins
 

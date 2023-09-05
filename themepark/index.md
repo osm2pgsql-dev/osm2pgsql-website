@@ -18,7 +18,7 @@ repository](https://github.com/osm2pgsql-dev/osm2pgsql-themepark).
 **Themepark is currently in BETA test. It already works quite well, but we'll
 probably change some things around when we have some more experience with it.**
 Go to the [*Themepark* discussion category in the osm2pgsql
-repository](https://github.com/osm2pgsql-dev/osm2pgsql/discussions/categories/themepark)
+repository](https://github.com/openstreetmap/osm2pgsql/discussions/categories/themepark)
 to ask questions or discuss anything related to Themepark.
 {:.note}
 
@@ -42,6 +42,18 @@ be provided by third parties, or you can write your own.
 **Plugins:** Themepark *plugins* can do some extra processing beyond the
 processing of OSM data. They can be used, for instance, to generate a config
 file for a tileserver. You can use existing plugins or write your own.
+
+## Features
+
+* You can have several configurations at the same time to support different
+  styles etc.
+* Plugins for extra functionality: Create tile server config files.
+* Works with the experimental generalization support in osm2pgsql to
+  automatically generate tables for low zoom levels when OSM data changes.
+* Sensible defaults with the flexibility to overwrite them if needed.
+* Set policy for naming features based on various OSM tags in one place and
+  use for all layers.
+* Includes support for external layers (such as coastlines).
 
 ## Manuals
 

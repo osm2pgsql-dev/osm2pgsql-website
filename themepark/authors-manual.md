@@ -108,6 +108,22 @@ specific, you can also use the `ids` setting instead as described in the flex
 manual. Set `ids_type = false` if you don't want any ids on a table, but
 such tables can not be updated or expired automatically!
 
+## Adding Support for Naming Policies
+
+Instead of just defining the columns as a list, you can wrap your columns in
+a call to `thempark:columns()` like this:
+
+```{lua}
+    columns = themepark:columns({
+        --- ... put your columns here
+    })
+```
+
+This allows it other topics to set extra columns to add to your tables.
+Specifically this is used to add a name column or columns using several
+`name-*` topics in the `core` theme. See the user manual for how this is
+used.
+
 ## Defining Processing Functions
 
 Processing functions are defined in each topic of each theme with the
