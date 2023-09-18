@@ -67,6 +67,6 @@ if you want to write your own Themepark themes.
 ## Examples
 
 See the [example config
-directory](https://github.com/osm2pgsql-dev/osm2pgsql-themepark/config) for
-some configs to start with.
+directory](https://github.com/osm2pgsql-dev/osm2pgsql-themepark/tree/master/config)
+for some configs to start with.
 

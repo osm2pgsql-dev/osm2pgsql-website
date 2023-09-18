@@ -55,7 +55,7 @@ used to limit import to some area.
 
 Most maps need to differentiate between ocean and land areas or want to render
 the coastline in some way. Currently coastline processing is done with the
-separate program [OSMCoastline](https://osmcode.org/osmcoastline){:.extlink} or
+separate program [OSMCoastline](https://osmcode.org/osmcoastline/){:.extlink} or
 the data is simply downloaded from
 [osmdata.openstreetmap.de](https://osmdata.openstreetmap.de/){:.extlink}. There
 are good reasons for that solution, but it is a bit cumbersome. With the new
