@@ -26,8 +26,8 @@ is less likely.
 The static code check revealed two places in the code where it was possible
 to inject bad SQL code through command-line parameters. These cases are
 already fixed on the master branch
-([#1753](https://github.com/openstreetmap/osm2pgsql/pull/1753),
-[#1758](https://github.com/openstreetmap/osm2pgsql/pull/1758)).
+([#1753](https://github.com/osm2pgsql-dev/osm2pgsql/pull/1753),
+[#1758](https://github.com/osm2pgsql-dev/osm2pgsql/pull/1758)).
 The security risk for these issues is relatively low because an attacker
 would still need access to the command line and credentials to the database to make use of them.
 

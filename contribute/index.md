@@ -6,9 +6,9 @@ title: Contribute
 
 Osm2pgsql is an Open Source project. Your contributions are welcome. You can
 find the source code and issue tracker on
-[Github](https://github.com/openstreetmap/osm2pgsql){:.extlink}.
+[Github](https://github.com/osm2pgsql-dev/osm2pgsql){:.extlink}.
 
-Please see [CONTRIBUTING.md](https://github.com/openstreetmap/osm2pgsql/blob/master/CONTRIBUTING.md)
+Please see [CONTRIBUTING.md](https://github.com/osm2pgsql-dev/osm2pgsql/blob/master/CONTRIBUTING.md)
 for some information about how to contribute.
 
 There is a kind of [**road map**]({% link contribute/road-map.md %}) for
@@ -25,7 +25,7 @@ We also have a [**list of project ideas**]({% link contribute/project-ideas.md
 <section markdown="1">
 ## Tests and Continuous Integration
 
-[![Github Actions Build Status](https://github.com/openstreetmap/osm2pgsql/workflows/CI/badge.svg?branch=master)](https://github.com/openstreetmap/osm2pgsql/actions)
+[![Github Actions Build Status](https://github.com/osm2pgsql-dev/osm2pgsql/workflows/CI/badge.svg?branch=master)](https://github.com/osm2pgsql-dev/osm2pgsql/actions)
 
 We have a growing suite of tests, new features and bug fixes should always
 have test coverage.
@@ -82,7 +82,7 @@ License](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html){:.extlink}.
 ## Contributing to this Website
 
 This website (osm2pgsql.org) is hosted on
-[Github](https://github.com/openstreetmap/osm2pgsql-website){:.extlink}. We
+[Github](https://github.com/osm2pgsql-dev/osm2pgsql-website){:.extlink}. We
 welcome contributions to it. Please open an issue, or even better, a pull
 request with your changes.
 

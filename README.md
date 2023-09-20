@@ -21,7 +21,7 @@ sudo apt install ruby ruby-bundler jekyll jekyll-theme-minima \
 Then check out the repository and build the site:
 
 ```
-git clone https://github.com/openstreetmap/osm2pgsql-website
+git clone https://github.com/osm2pgsql-dev/osm2pgsql-website
 cd osm2pgsql-website
 touch contact.md
 bundle exec jekyll serve

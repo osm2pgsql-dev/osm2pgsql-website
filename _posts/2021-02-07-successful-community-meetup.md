@@ -34,7 +34,7 @@ some good ideas and suggestions from the community. One question that was
 discussed is how to best keep an osm2pgsql database up to date. There are
 several existing solutions but none of them is really easy to use, so Sarah
 wrote a new pyosmium-based script geared towards use with osm2pgsql, the [pull
-request](https://github.com/openstreetmap/osm2pgsql/pull/1411) is currently in
+request](https://github.com/osm2pgsql-dev/osm2pgsql/pull/1411) is currently in
 review.
 
 *Jochen Topf*

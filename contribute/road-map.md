@@ -61,7 +61,7 @@ We also have a [list of project ideas]({% link contribute/project-ideas.md
 Note that many of the following topics overlap. Some topics have related issues
 which are listed below, but not all open concerns appear in Github issues.
 Some major "big picture" issues are highlighted at the top of the [Github
-issues page](https://github.com/openstreetmap/osm2pgsql/issues).
+issues page](https://github.com/osm2pgsql-dev/osm2pgsql/issues).
 
 ### Ongoing Maintainance
 
@@ -109,8 +109,8 @@ file names, etc.)
 
 Issues:
 
-* [142](https://github.com/openstreetmap/osm2pgsql/issues/142)
-* [1680](https://github.com/openstreetmap/osm2pgsql/issues/1680)
+* [142](https://github.com/osm2pgsql-dev/osm2pgsql/issues/142)
+* [1680](https://github.com/osm2pgsql-dev/osm2pgsql/issues/1680)
 
 ### Progress Output and Logging
 
@@ -122,7 +122,7 @@ are still places where it can be done better.
 
 Issues:
 
-* [207](https://github.com/openstreetmap/osm2pgsql/issues/207)
+* [207](https://github.com/osm2pgsql-dev/osm2pgsql/issues/207)
 
 ### Object Store / Middle / Flat Node Store
 
@@ -158,12 +158,12 @@ at the same time.
 
 Issues:
 
-* [193](https://github.com/openstreetmap/osm2pgsql/issues/193)
-* [1086](https://github.com/openstreetmap/osm2pgsql/issues/1086)
-* [1323](https://github.com/openstreetmap/osm2pgsql/issues/1323)
-* [1466](https://github.com/openstreetmap/osm2pgsql/issues/1466)
-* [1501](https://github.com/openstreetmap/osm2pgsql/issues/1501)
-* [1502](https://github.com/openstreetmap/osm2pgsql/issues/1502)
+* [193](https://github.com/osm2pgsql-dev/osm2pgsql/issues/193)
+* [1086](https://github.com/osm2pgsql-dev/osm2pgsql/issues/1086)
+* [1323](https://github.com/osm2pgsql-dev/osm2pgsql/issues/1323)
+* [1466](https://github.com/osm2pgsql-dev/osm2pgsql/issues/1466)
+* [1501](https://github.com/osm2pgsql-dev/osm2pgsql/issues/1501)
+* [1502](https://github.com/osm2pgsql-dev/osm2pgsql/issues/1502)
 
 ### Future of the Outputs
 
@@ -178,9 +178,9 @@ there is no timeline yet.
 
 Most new features are only be available in the flex output.
 
-* [1086](https://github.com/openstreetmap/osm2pgsql/issues/1086)
-* [1130](https://github.com/openstreetmap/osm2pgsql/issues/1130)
-* [1870](https://github.com/openstreetmap/osm2pgsql/issues/1870)
+* [1086](https://github.com/osm2pgsql-dev/osm2pgsql/issues/1086)
+* [1130](https://github.com/osm2pgsql-dev/osm2pgsql/issues/1130)
+* [1870](https://github.com/osm2pgsql-dev/osm2pgsql/issues/1870)
 
 ### Processing Flexibility and Performance
 
@@ -205,14 +205,14 @@ for instance by caching.
 
 Issues:
 
-* [189](https://github.com/openstreetmap/osm2pgsql/issues/189)
-* [193](https://github.com/openstreetmap/osm2pgsql/issues/193)
-* [799](https://github.com/openstreetmap/osm2pgsql/issues/799)
-* [1046](https://github.com/openstreetmap/osm2pgsql/issues/1046)
-* [1248](https://github.com/openstreetmap/osm2pgsql/issues/1248)
-* [1565](https://github.com/openstreetmap/osm2pgsql/issues/1565)
-* [1680](https://github.com/openstreetmap/osm2pgsql/issues/1680)
-* [1751](https://github.com/openstreetmap/osm2pgsql/issues/1751)
+* [189](https://github.com/osm2pgsql-dev/osm2pgsql/issues/189)
+* [193](https://github.com/osm2pgsql-dev/osm2pgsql/issues/193)
+* [799](https://github.com/osm2pgsql-dev/osm2pgsql/issues/799)
+* [1046](https://github.com/osm2pgsql-dev/osm2pgsql/issues/1046)
+* [1248](https://github.com/osm2pgsql-dev/osm2pgsql/issues/1248)
+* [1565](https://github.com/osm2pgsql-dev/osm2pgsql/issues/1565)
+* [1680](https://github.com/osm2pgsql-dev/osm2pgsql/issues/1680)
+* [1751](https://github.com/osm2pgsql-dev/osm2pgsql/issues/1751)
 
 ### Tile Expiry
 
@@ -229,9 +229,9 @@ lists are also just generalizations of geometries.
 
 Issues:
 
-* [709](https://github.com/openstreetmap/osm2pgsql/issues/709)
-* [776](https://github.com/openstreetmap/osm2pgsql/issues/776)
-* [1662](https://github.com/openstreetmap/osm2pgsql/issues/1662)
+* [709](https://github.com/osm2pgsql-dev/osm2pgsql/issues/709)
+* [776](https://github.com/osm2pgsql-dev/osm2pgsql/issues/776)
+* [1662](https://github.com/osm2pgsql-dev/osm2pgsql/issues/1662)
 
 ### Debugging and Testing Support for Style Writers
 
@@ -241,7 +241,7 @@ The new BDD testing framework used points into an interesting direction here.
 
 Issues:
 
-* [1130](https://github.com/openstreetmap/osm2pgsql/issues/1130)
+* [1130](https://github.com/osm2pgsql-dev/osm2pgsql/issues/1130)
 
 ### PostgreSQL and PostGIS Features
 
@@ -256,8 +256,8 @@ longer than probably needed. There is some room for improvement there.
 
 Issues:
 
-* [37](https://github.com/openstreetmap/osm2pgsql/issues/37)
-* [1085](https://github.com/openstreetmap/osm2pgsql/issues/1085)
+* [37](https://github.com/osm2pgsql-dev/osm2pgsql/issues/37)
+* [1085](https://github.com/osm2pgsql-dev/osm2pgsql/issues/1085)
 
 ### Better Relation Support
 
@@ -285,8 +285,8 @@ generalization/index.md %}).
 
 Issues:
 
-* [1663](https://github.com/openstreetmap/osm2pgsql/issues/1663)
-* [1764](https://github.com/openstreetmap/osm2pgsql/issues/1764)
+* [1663](https://github.com/osm2pgsql-dev/osm2pgsql/issues/1663)
+* [1764](https://github.com/osm2pgsql-dev/osm2pgsql/issues/1764)
 
 ## Release Management
 

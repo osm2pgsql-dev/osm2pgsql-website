@@ -19,7 +19,7 @@ description: >- # this means to ignore newlines until "baseurl:"
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://osm2pgsql.org"
 github:
-    repository_url: https://github.com/openstreetmap/osm2pgsql-website
+    repository_url: https://github.com/osm2pgsql-dev/osm2pgsql-website
 #
 # Build settings
 markdown: kramdown

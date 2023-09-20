@@ -11,7 +11,7 @@ and then export it again into about any [GIS vector
 format](https://gdal.org/drivers/vector/index.html){:.extlink} there is.
 
 For this use case we can run osm2pgsql with the flex output and the
-[generic.lua](https://github.com/openstreetmap/osm2pgsql/blob/master/flex-config/generic.lua)
+[generic.lua](https://github.com/osm2pgsql-dev/osm2pgsql/blob/master/flex-config/generic.lua)
 configuration. This imports most of the OSM data into the database using
 convenient `jsonb` columns for the tags:
 

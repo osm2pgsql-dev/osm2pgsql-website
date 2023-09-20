@@ -11,7 +11,7 @@ title: Releases
 
 Released on {{ release.date }}
 
-* [Release notes](https://github.com/openstreetmap/osm2pgsql/releases/tag/{{ release.version }})
+* [Release notes](https://github.com/osm2pgsql-dev/osm2pgsql/releases/tag/{{ release.version }})
 {% if release.manpage -%}
 * [Man page](/doc/man/version-{{ release.version | slugify }}.html)
 {%- endif %}
@@ -19,7 +19,7 @@ Released on {{ release.date }}
 ### Downloads
 
 * [Source code (tar.gz)](/download/osm2pgsql-{{ release.version }}.tar.gz)
-* [Source code (zip)](https://codeload.github.com/openstreetmap/osm2pgsql/zip/{{ release.version }})
+* [Source code (zip)](https://codeload.github.com/osm2pgsql-dev/osm2pgsql/zip/{{ release.version }})
 * [Windows binary (64bit)](/download/windows/osm2pgsql-{{ release.version }}-x64.zip)
 
 </section>
@@ -30,7 +30,7 @@ Released on {{ release.date }}
 ## Older Releases
 
 For older releases see [the Github releases
-page](https://github.com/openstreetmap/osm2pgsql/releases){:.extlink}.
+page](https://github.com/osm2pgsql-dev/osm2pgsql/releases){:.extlink}.
 
 </section>
 

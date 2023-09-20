@@ -37,7 +37,7 @@ compatibility).
 
 Some aspects of how the pgsql output converts OSM data into PostgreSQL tables
 can be configured via a style file. The [default style
-file](https://github.com/openstreetmap/osm2pgsql/blob/master/default.style)
+file](https://github.com/osm2pgsql-dev/osm2pgsql/blob/master/default.style)
 that is usually installed with osm2pgsql is suitable for rendering many styles.
 It contains some documentation of the style syntax and works well as an example
 or starting point for your own changes. With a custom style file, you can
@@ -277,7 +277,7 @@ administrative boundaries). Set the final return value, `roads`, to `1` if the
 geometry should be added to the `roads` table.
 
 There is a [sample tag transform Lua
-script](https://github.com/openstreetmap/osm2pgsql/blob/master/style.lua) in
+script](https://github.com/osm2pgsql-dev/osm2pgsql/blob/master/style.lua) in
 the repository as an example, which (nearly) replicates the built-in
 transformations and can be used as a template for one's own scripts.
 

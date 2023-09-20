@@ -49,11 +49,11 @@ doesn't really fit the problem. This is known as the
 
 ## Reporting Bugs
 
-<a href="https://github.com/openstreetmap/osm2pgsql/issues"><img src="{% link img/github-large.png %}" width="36" height="36" alt="osm2pgsql on Github"/></a>
+<a href="https://github.com/osm2pgsql-dev/osm2pgsql/issues"><img src="{% link img/github-large.png %}" width="36" height="36" alt="osm2pgsql on Github"/></a>
 {:.flright}
 
 You can report bugs and problems by opening an issue on Github. Please check
-[existing issues](https://github.com/openstreetmap/osm2pgsql/issues){:.extlink}
+[existing issues](https://github.com/osm2pgsql-dev/osm2pgsql/issues){:.extlink}
 first.
 
 Please describe
@@ -73,7 +73,7 @@ output. If you have several unrelated problems, open separate issues for each.
 You can ask questions or discuss features and ideas
 
 * using the
-  [discussion](https://github.com/openstreetmap/osm2pgsql/discussions){:.extlink}
+  [discussion](https://github.com/osm2pgsql-dev/osm2pgsql/discussions){:.extlink}
   feature on GitHub.
 * on the [OSM developer mailing
   list](https://lists.openstreetmap.org/listinfo/dev){:.extlink} or

@@ -31,7 +31,7 @@ scripts from trusted sources!
 This description assumes that you
 are somewhat familiar with the Lua language, but it is pretty easy to pick up
 the basics and you can use the example config files in the
-[`flex-config`](https://github.com/openstreetmap/osm2pgsql/tree/master/flex-config){:.extlink}
+[`flex-config`](https://github.com/osm2pgsql-dev/osm2pgsql/tree/master/flex-config){:.extlink}
 directory which contain lots of comments to get you started.
 
 All configuration is done through the `osm2pgsql` global object in Lua. It has
@@ -475,7 +475,7 @@ geometry.
 {: .desc}
 
 For an example showing how the expire output works, see the
-[`flex-config/expire.lua`](https://github.com/openstreetmap/osm2pgsql/blob/master/flex-config/expire.lua){:.extlink}
+[`flex-config/expire.lua`](https://github.com/osm2pgsql-dev/osm2pgsql/blob/master/flex-config/expire.lua){:.extlink}
 example config file.
 
 ### Processing Callbacks
@@ -898,5 +898,5 @@ something with the coordinates will be much slower than writing those functions
 in C++, so Lua scripts should concern themselves only with the high-level
 control flow, not the details of the geometry. If you think you need some
 function to access the internals of a geometry, [start a discussion on
-Github](https://github.com/openstreetmap/osm2pgsql/discussions).
+Github](https://github.com/osm2pgsql-dev/osm2pgsql/discussions).
 

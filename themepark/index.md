@@ -18,7 +18,7 @@ repository](https://github.com/osm2pgsql-dev/osm2pgsql-themepark).
 **Themepark is currently in BETA test. It already works quite well, but we'll
 probably change some things around when we have some more experience with it.**
 Go to the [*Themepark* discussion category in the osm2pgsql
-repository](https://github.com/openstreetmap/osm2pgsql/discussions/categories/themepark)
+repository](https://github.com/osm2pgsql-dev/osm2pgsql/discussions/categories/themepark)
 to ask questions or discuss anything related to Themepark.
 {:.note}
 

@@ -15,7 +15,7 @@ ideas, not complete specifications. For most of the projects the coding part is
 probably going to be smaller than the design, which has to make sure everything
 fits well with other parts of osm2pgsql, is maintainable in the long term and
 so on. (For more concrete projects see the
-[issues](https://github.com/openstreetmap/osm2pgsql/issues)).
+[issues](https://github.com/osm2pgsql-dev/osm2pgsql/issues)).
 
 If you are a developer with some time on your hands and one of these ideas
 seems interesting to you, by all means go ahead and give it a shot. Play around
@@ -23,7 +23,7 @@ a bit and think about how you would solve that problem. Before you invest a lot
 of time or write a lot of code you should come talk to us. All these ideas are
 interconnected with other projects and we want to help getting to a solution
 that fits into osm2pgsql. If there isn't already a
-[discussion](https://github.com/openstreetmap/osm2pgsql/discussions) about that
+[discussion](https://github.com/osm2pgsql-dev/osm2pgsql/discussions) about that
 topic, start one.
 
 If you are the boss of a company or other organization and need one of those

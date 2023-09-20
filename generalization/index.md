@@ -36,8 +36,8 @@ Here are the posts from Jochen's blog describing the progress of the project:
 * [Generalization project wrapup](https://blog.jochentopf.com/2023-03-13-generalization-project-wrapup.html){:.extlink}
 
 And here are the most important related pull requests (already merged):
-* [PR 1822 (Pole of Inaccessibility)](https://github.com/openstreetmap/osm2pgsql/pull/1822){:.extlink}
-* [PR 1942 (Add support for data generalization)](https://github.com/openstreetmap/osm2pgsql/pull/1942){:.extlink}
+* [PR 1822 (Pole of Inaccessibility)](https://github.com/osm2pgsql-dev/osm2pgsql/pull/1822){:.extlink}
+* [PR 1942 (Add support for data generalization)](https://github.com/osm2pgsql-dev/osm2pgsql/pull/1942){:.extlink}
 
 In addition a lot of code has been added in many small PRs to add and extend
 some (basic) functionality needed for this project.

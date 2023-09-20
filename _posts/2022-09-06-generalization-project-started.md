@@ -30,6 +30,6 @@ Thanks to the Prototype Fund and the German Federal Ministry of Education and
 Research we got a [research
 grant](https://prototypefund.de/project/generalisierung-von-openstreetmap-daten-mit-osm2pgsql/)
 to work on this project for half a year starting from now, September 2022. See
-[this issue](https://github.com/openstreetmap/osm2pgsql/issues/1663) for some
+[this issue](https://github.com/osm2pgsql-dev/osm2pgsql/issues/1663) for some
 of the details we'll be working on.
 

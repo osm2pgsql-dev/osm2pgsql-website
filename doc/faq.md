@@ -164,7 +164,7 @@ if you get them.
 Most likely this means that you ran out of memory. But it can also mean there
 is a bug in osm2pgsql. Check that you have enough memory, try with more. If the
 problem persists and you believe you have enough memory for what you are doing,
-[report it](https://github.com/openstreetmap/osm2pgsql/issues/new){:.extlink}.
+[report it](https://github.com/osm2pgsql-dev/osm2pgsql/issues/new){:.extlink}.
 
 Please read the [Notes on Memory Usage](/doc/manual.html#notes-on-memory-usage)
 in the manual to get some ideas how to handle this.

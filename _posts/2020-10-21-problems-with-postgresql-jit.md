@@ -12,7 +12,7 @@ handles certain queries from osm2pgsql leading to massive slowdowns. This is
 only a problem for updates, initial imports are fine. On PostgreSQL 11 JIT is
 still disabled by default, so you are not likely to see it there, but since
 version 12 JIT is usually enabled. The problem was [noticed and
-diagnosed](https://github.com/openstreetmap/osm2pgsql/issues/1045) and we added
+diagnosed](https://github.com/osm2pgsql-dev/osm2pgsql/issues/1045) and we added
 code in release 1.3.0 that was supposed to disable JIT in PostgreSQL for our
 database connections. Unfortunately this code had a bug and JIT was never
 disabled.
