@@ -15,15 +15,15 @@ repositories:
       name: Debian 10 Buster
       date: 2019-07-06
       eol: 2024
+    - id: ubuntu_23_10
+      name: Ubuntu 23.10 (Mantic)
+      date: 2023-10-12
+      eol: 2024-07
+      gs: groupstart
     - id: ubuntu_23_04
       name: Ubuntu 23.04 (Lunar)
       date: 2023-04-20
       eol: 2024-01
-      gs: groupstart
-    - id: ubuntu_22_10
-      name: Ubuntu 22.10 (Kinetic)
-      date: 2022-10-20
-      eol: 2023-07
     - id: ubuntu_22_04
       name: Ubuntu 22.04 (Jammy)
       date: 2022-04-21
