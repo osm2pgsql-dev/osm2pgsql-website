@@ -34,6 +34,7 @@ The following properties are currently defined:
 | ----------------------------- | ------ | ----------- |
 | `attributes`                  | bool   | Import with OSM attributes (i.e. osm2pgsql was run with `-x` or `--extra-attributes`)? |
 | `current_timestamp`           | string | Largest timestamp of any object in any of the input file(s) in ISO format (`YYYY-mm-ddTHH:MM:SSZ`). Updated with each data update. |
+| `db_format`                   | int    | 0 = not updatable, 1 = legacy format, 2 = new format. |
 | `flat_node_file`              | string | Absolute filename of the flat node file (specified with `--flat-nodes`). See below for some details. |
 | `import_timestamp`            | string | Largest timestamp of any object in the in the input file(s) in ISO format (`YYYY-mm-ddTHH:MM:SSZ`). Only set for initial import. |
 | `output`                      | string | The output as set with the `-O` or `--output` option. |
