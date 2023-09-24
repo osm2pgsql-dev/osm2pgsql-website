@@ -54,6 +54,11 @@ the file. You have to clear the file after processing the tiles.
 and `y`. A primary key constraints on those three columns makes sure that
 there is no duplicate data.
 
+*Version >= 1.10.0*{:.version} The expire table has two additional columns
+`first` and `last` containing the timestamp of the first time this tile was
+marked as expired and the last time. These two timestamps can be used to
+implement various expiry strategies.
+
 You have to delete entries from this file after expiry is run.
 
 ### Details of the Expire Calculations
