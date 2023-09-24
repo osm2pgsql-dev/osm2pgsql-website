@@ -43,7 +43,7 @@ Read https://osm2pgsql.org/contribute/ for more about helping out.
 To create the osm2pgsql-replication man page call (in the osm2pgsql repo):
 
 ```
-groff -mandoc -Thtml docs/osm2pgsql-replication.1
+groff -mandoc -Thtml man/osm2pgsql-replication.1
 ```
 
 Copy the result into a page similar to `doc/man/osm2pgsql-replication-1.6.0.md`

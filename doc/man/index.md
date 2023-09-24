@@ -20,7 +20,7 @@ title: Manual Pages
 <p>This man page is only available for newer versions of osm2pgsql.</p>
 
 {% comment %}
-Create man pages with: groff -mandoc -Thtml docs/osm2pgsql-replication.1
+Create man pages with: groff -mandoc -Thtml man/osm2pgsql-replication.1
 {% endcomment %}
 
 <ul>
