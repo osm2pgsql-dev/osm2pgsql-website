@@ -86,9 +86,13 @@ title: Dependencies
 
 # Dependencies
 
-This page shows which versions of software osm2pgsql depends on are available
-on popular Linux distributions and macOS. It sometimes helps maintainers
-decide what versions need to be supported.
+This page shows which versions of software osm2pgsql depends on (or that are
+otherwise related) are available on popular Linux distributions and macOS. It
+sometimes helps maintainers decide what versions need to be supported.
+
+*See the
+[README](https://github.com/osm2pgsql-dev/osm2pgsql/blob/master/README.md) for
+a list of actual dependencies.*
 
 <table class="software-versions">
 <thead>
