@@ -215,7 +215,7 @@ parameters):
 | where           | text | Optional WHERE clause to add to the SQL query getting the input data from the database. Must be empty or a valid SQL snippet. |
 {:.desc}
 
-Actual image extent used will be `image_extent + 2 * margin`. Margin is rounded to nearest multiple of 64.
+Actual image extent used will be `image_extent + 2 * margin * image_extent`. `margin * image_extent` is rounded to nearest multiple of 64.
 
 The `img_path` parameters can be set to help with debugging. Set `img_path` to
 something like this: `some/dir/path/img`. Resulting images will be in the
