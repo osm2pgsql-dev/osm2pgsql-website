@@ -3,7 +3,7 @@ layout: examples
 title: Raw Data Publication
 ---
 
-Exploring the raw OpenStreetMap data can be done in the database itself, but this limits the audience of users. To enable public access we need a web API that allows exploring, filtering and downloading of the data. This objective is achieved through the use of the established OGC API Features standard in conjunction with the [pg_featureserv](https://github.com/CrunchyData/pg_featureserv){:.extlink} program. The following example showcases this process.We want to analyse restaurants, so we create the lua file `restaurants.lua` with this content:
+Exploring the raw OpenStreetMap data can be done in the database itself, but this limits the audience of users. To enable public access we need a web API that allows exploring, filtering and downloading of the data. This objective is achieved through the use of the established OGC API Features standard in conjunction with the [pg_featureserv](https://github.com/CrunchyData/pg_featureserv){:.extlink} program. The following example showcases this process. We want to analyse restaurants, so we create the Lua file `restaurants.lua` with this content:
 
 {% include download.html file="restaurants.lua" %}
 
@@ -17,7 +17,7 @@ Then we load the data in our database.
 osm2pgsql -d osm -O flex -S restaurants.lua OSMDATA.osm.pbf
 ```
 
-We can install `pg_featureserv` by downloading the binary from [here](https://access.crunchydata.com/documentation/pg_featureserv/latest/installation/installing/) {:.extlink}. Normally, `pg_featureserv` can run without any extra settings. But because we plan to show a simple map on the website later, we require further configuration. So, we create a configuration file called `pg_featureserv.toml` that has this content:
+We can install `pg_featureserv` by downloading the binary from [here](https://access.crunchydata.com/documentation/pg_featureserv/latest/installation/installing/){:.extlink}. Normally, `pg_featureserv` can run without any extra settings. But because we plan to show a simple map on the website later, we require further configuration. So, we create a configuration file called `pg_featureserv.toml` that has this content:
 
 ```toml
 [Website]
@@ -54,7 +54,7 @@ http://localhost:9000/collections/public.restaurants/items.json?
 limit=100
 ```
 
-The response can be filtered by both spatial and non-spatial properties. Here we request restaurants restaurants with indian cuisine in an specific area.
+The response can be filtered by both spatial and non-spatial properties. Here we request restaurants with Indian cuisine in an specific area.
 
 ```
 http://localhost:9000/collections/public.restaurants/items.json?
