@@ -47,7 +47,7 @@ http://localhost:9000/collections/public.restaurants/items.html
   <img alt="Screenshot of pg_featureserv" class="fullwidth" src="pg_featureserv.jpg"  />
 </a>
 
-By changing the ".html" ending to ".json," the data will be returned as GeoJSON. It includes all raw data like attributes or geometry. A GeoJSON can be processed with many clients such as OpenLayers, Leaflet, MapLibre, or QGIS. For performance reasons, in default mode `pg_featureserv` returns only 10 features per request. With the parameter `limit` we can increase this count :
+By changing the `.html` ending to `.json`, the data will be returned as GeoJSON. It includes all raw data like attributes or geometry. A GeoJSON can be processed with many clients such as OpenLayers, Leaflet, MapLibre, or QGIS. For performance reasons, in default mode `pg_featureserv` returns only 10 features per request. With the parameter `limit` we can increase this count :
 
 ```
 http://localhost:9000/collections/public.restaurants/items.json?
