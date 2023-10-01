@@ -63,4 +63,10 @@ These examples show some use cases of osm2pgsql and highlight some features.
     into many different GIS formats.</p>
 </a>
 
+<a class="example" href="{% link examples/raw-data-publication/index.md %}">
+    <img alt="" src="{% link examples/raw-data-publication/data-symbol.svg %}"/>
+    <h2>Raw Data Publication</h2>
+    <p>The raw OSM data can be published via a web API using pg_featureserv</p>
+</a>
+
 </div>
