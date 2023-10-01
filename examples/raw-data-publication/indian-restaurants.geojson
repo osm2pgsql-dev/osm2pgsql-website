@@ -1,0 +1,97 @@
+
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    8.6927426,
+                    49.4136089
+                ]
+            },
+            "properties": {
+                "cuisine": "indian",
+                "name": "Moghul Tandoori Restaurant",
+                "osm_id": 364775613
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    8.6894351,
+                    49.3813154
+                ]
+            },
+            "properties": {
+                "cuisine": "indian",
+                "name": "Indian Palace",
+                "osm_id": 767280961
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    8.6916832,
+                    49.4060867
+                ]
+            },
+            "properties": {
+                "cuisine": "indian",
+                "name": "Saffron",
+                "osm_id": 309437260
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    8.6667154,
+                    49.3779958
+                ]
+            },
+            "properties": {
+                "cuisine": "indian",
+                "name": "Athidhi Heidelberg",
+                "osm_id": 4367363371
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    8.6735594,
+                    49.4081527
+                ]
+            },
+            "properties": {
+                "cuisine": "indian",
+                "name": "Taj Mahal",
+                "osm_id": 269790792
+            }
+        }
+    ],
+    "numberReturned": 5,
+    "timeStamp": "2023-10-01T12:47:52+02:00",
+    "links": [
+        {
+            "href": "http://localhost:9000/collections/public.restaurants/items",
+            "rel": "self",
+            "type": "application/json",
+            "title": "This document as JSON"
+        },
+        {
+            "href": "http://localhost:9000/collections/public.restaurants/items.html",
+            "rel": "alternate",
+            "type": "text/html",
+            "title": "This document as HTML"
+        }
+    ]
+}
