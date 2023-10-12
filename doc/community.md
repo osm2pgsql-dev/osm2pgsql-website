@@ -13,7 +13,7 @@ See also the [osm2pgsql
 page](https://wiki.openstreetmap.org/wiki/Osm2pgsql){:.extlink} on the OSM
 wiki.
 
-## Blogs
+## Blogs / Documentation
 
 * The developer Jochen Topf writes occasionally about osm2pgsql in [his
   blog](https://blog.jochentopf.com/tags-osm2pgsql.html){:.extlink}.
@@ -24,7 +24,7 @@ wiki.
   posts related to osm2pgsql.
 * _(French)_ A complete step-by-step guide to setup a PostgreSQL/PostGIS database and using osmp2pgsql to load OSM data by Julien Moura on [Geotribu](https://geotribu.fr/articles/2022/2022-06-28_import-donnees-osm-postgresql-osm2pgsql-osmium/){:.extlink}. On the same website, others blog posts can be found about osm2pgsql using [this search](https://geotribu.fr/?q=osm2pgsql*){:.extlink}.
 * Martijn van Exel has a blog post about [Keeping a thematic OpenStreetMap database up-to-date with osm2pgsql](https://mvexel.prose.sh/20230227-keeping-osm-database-uptodate-osm2pgsql){:.extlink}.
-
+* Mathias Gröbe has a [complete flex config with matching QGIS config file](https://github.com/mathiasgroebe/graubrot){:.extlink}.
 
 ## Talks
 
