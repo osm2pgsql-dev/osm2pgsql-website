@@ -239,6 +239,9 @@ to do this yourself with `CREATE UNIQUE INDEX`. You can also use [`ALTER
 TABLE`](https://www.postgresql.org/docs/current/sql-altertable.html){:.extlink}
 to make the column an "official" primary key column.
 
+*Version >= 1.8.0*{:version} See the chapter on [Defining
+Indexes](#defining-indexes) on how to create this index from osm2pgsql.
+
 #### Using an Additional ID Column
 
 PostgreSQL has the somewhat magic
@@ -264,6 +267,9 @@ data using osm2pgsql, use `CREATE UNIQUE INDEX` to create one. You can also use
 [`ALTER
 TABLE`](https://www.postgresql.org/docs/current/sql-altertable.html){:.extlink}
 to make the column an "official" primary key column.
+
+*Version >= 1.8.0*{:version} See the chapter on [Defining
+Indexes](#defining-indexes) on how to create this index from osm2pgsql.
 
 Since PostgreSQL 10 you can use the `GENERATED ... AS IDENTITY` clause instead
 of the `SERIAL` type which does something very similar, although using anything
