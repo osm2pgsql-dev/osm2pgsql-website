@@ -3,7 +3,7 @@
 | -i, \--tablespace-index=TABLESPC      | Store all indexes in the PostgreSQL tablespace `TABLESPC`. This option also affects the middle tables. |
 | \--tablespace-main-data=TABLESPC      | Store the data tables in the PostgreSQL tablespace `TABLESPC`. |
 | \--tablespace-main-index=TABLESPC     | Store the indexes in the PostgreSQL tablespace `TABLESPC`. |
-| \--latlong                            | Store coordinates in degrees of latitude & longitude. |
+| -l, \--latlong                        | Store coordinates in degrees of latitude & longitude. |
 | -m, \--merc                           | Store coordinates in Spherical Mercator (Web Mercator, EPSG:3857) (the default). |
 | -E, \--proj=SRID                      | Use projection EPSG:`SRID`. |
 | -p, \--prefix=PREFIX                  | Prefix for table names (default: `planet_osm`). This option affects the middle as well as the pgsql output table names. |
