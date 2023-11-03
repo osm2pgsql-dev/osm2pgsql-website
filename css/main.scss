@@ -472,6 +472,11 @@ img.inline {
         text-decoration: none;
     }
 
+    .news-date {
+        vertical-align: top;
+        white-space: nowrap;
+    }
+
     a#news-rss {
         position: absolute;
         right: 4px;
