@@ -456,7 +456,7 @@ following fields:
 
 | Field    | Description |
 | -------- | ----------- |
-| maxzoom  | The maximum zoom level for which tile coordinates are written out. Required. |
+| maxzoom  | The maximum zoom level for which tile coordinates are written out. Default: 0. |
 | minzoom  | The minimum zoom level for which tile coordinates are written out. Optional. Default is the same as maxzoom. |
 | filename | The filename of the output file. Optional. |
 | schema   | The database schema for the output table. The schema must exist in the database and be writable by the database user. Optional. By default the schema set with `--schema` is used, or `public` if that is not set. |

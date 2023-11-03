@@ -31,6 +31,12 @@ needs to be expired, the coordinates of the affected tiles are determined and
 stored. When osm2pgsql is finished with its run, it writes the tile coordinates
 for all zoom levels between minimum and maximum zoom level to the output.
 
+There is a somewhat special case: If you don't define a zoom level for the
+expire output, zoom level 0 is assumed for the minimum and maximum zoom level.
+That means that *any* change will result in an expire entry for tile 0/0/0. You
+can use this to trigger some processing for any and all changes in a certain
+table for instance.
+
 Memory requirements for osm2pgsql rise with the maximum zoom level used and the
 number of changes processed. This is usually no problem for zoom level 12 or 14
 tiles, but might be an issue if you expire on zoom level 18 and have lots of
