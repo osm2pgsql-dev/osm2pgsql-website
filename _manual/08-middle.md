@@ -115,17 +115,16 @@ mode"). For updates (in "append mode") the database format will be
 autodetected.
 
 The details of the legacy format are not documented, you should not rely on
-that format. In the new format the tables have the following structure (all
-columns are `NOT NULL`):
+that format. In the new format the tables have the following structure:
 
-| Column       | Type   | Description |
-| ------------ | ------ | ----------- |
-| id           | int8   | Unique OSM id of this object. Primary key. |
-| lat          | int4   | (Nodes only) Latitude * 10<sup>7</sup>. |
-| lon          | int4   | (Nodes only) Longitude * 10<sup>7</sup>. |
-| nodes        | int8[] | (Ways only) Array of node ids. |
-| members      | jsonb  | (Relations only) Contains all relation members, for the format see below. |
-| tags         | jsonb  | Tags of this OSM object in the obvious key/value format. |
+| Column       | Type              | Description |
+| ------------ | ----------------- | ----------- |
+| id           | `int8 NOT NULL`   | Unique OSM id of this object. Primary key. |
+| lat          | `int4 NOT NULL`   | (Nodes only) Latitude * 10<sup>7</sup>. |
+| lon          | `int4 NOT NULL`   | (Nodes only) Longitude * 10<sup>7</sup>. |
+| nodes        | `int8[] NOT NULL` | (Ways only) Array of node ids. |
+| members      | `jsonb NOT NULL`  | (Relations only) Contains all relation members, for the format see below. |
+| tags         | `jsonb`           | Tags of this OSM object in the obvious key/value format. (*Version == 1.9.x*{:.version} defined as `NOT NULL`) |
 {:.desc}
 
 You can create a PostGIS geometry from the `lat` and `lon` columns like this:
@@ -218,6 +217,20 @@ SELECT * FROM planet_osm_rels
 Make sure to use the right casts (`::char(1)` for the type, `::int8` for the
 ids), without them PostgreSQL sometimes is not able to match the queries to
 the right functions and indexes.
+
+By default there is no index on the `tags` column. If you need this, you can
+create it with
+
+```{sql}
+CREATE INDEX ON planet_osm_nodes USING gin (tags) WHERE tags IS NOT NULL;
+```
+
+Such an index will support queries like
+
+```{sql}
+SELECT id FROM planet_osm_nodes WHERE tags ? 'amenity'; -- check for keys
+SELECT id FROM planet_osm_nodes WHERE tags @> '{"amenity":"post_box"}'::jsonb; -- check for tags
+```
 
 #### Reserved Names and Compatibility
 
