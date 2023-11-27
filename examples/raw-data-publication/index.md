@@ -31,7 +31,7 @@ We must adjust the `DATABASE_URL` to match our setup. Then, we can initiate the 
 DATABASE_URL=postgres://username:password@localhost/osm ./pg_featureserv --config=./pg_featureserv.toml
 ```
 
-This service starts at the address [http://localhost:9000/](http://localhost:9000/){:.extlink}  and can be accessed directly from the browser. The metadata for our table, like the the extent or available attribute names, can be viewed on this page:
+This service starts at the address `http://localhost:9000/` and can be accessed directly from the browser. The metadata for our table, like the the extent or available attribute names, can be viewed on this page:
 
 ```
 http://localhost:9000/collections/public.restaurants.html
