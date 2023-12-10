@@ -28,25 +28,27 @@ wiki.
 
 ## Talks
 
+* From SOTM-EU 2023: "Modern osm2pgsql tricks" by Paul Norman and Jochen Topf
+  [Video on YouTube](https://www.youtube.com/watch?v=wAk_sLOXTT8){:.extlink} (Nov 2023).
 * From PostGIS Day 2022: "Route the Interesting Things (Not Just Roads!) with OpenStreetMap" by Ryan Lambert
-  [Video on Youtube](https://www.youtube.com/watch?v=uydAoMaReos){:.extlink} (Dec 2022).
+  [Video on YouTube](https://www.youtube.com/watch?v=uydAoMaReos){:.extlink} (Dec 2022).
 * From PostGIS Day 2022: "Speedrunning the Open Street Map osm2pgsql Loader" by Greg Smith
-  [Video on Youtube](https://www.youtube.com/watch?v=BCMnu7xay2Y){:.extlink} (Dec 2022).
+  [Video on YouTube](https://www.youtube.com/watch?v=BCMnu7xay2Y){:.extlink} (Dec 2022).
 * From SotM 2021: "News from osm2pgsql" by Jochen Topf.
   [Slides](https://media.jochentopf.com/media/2021-07-10-talk-sotm2021-osm2pgsql-en-slides.pdf){:.extlink},
   [Download Video](https://media.jochentopf.com/media/2021-07-10-talk-sotm2021-osm2pgsql-en-video.mp4){:.extlink},
-  [Video on Youtube](https://www.youtube.com/watch?v=20n4thI7YiI){:.extlink} (July 2021).
+  [Video on YouTube](https://www.youtube.com/watch?v=20n4thI7YiI){:.extlink} (July 2021).
 * From FOSSGIS 2021: "Neues von osm2pgsql" by Jochen Topf (in German).
   [Slides](https://media.jochentopf.com/media/2021-06-09-talk-fossgis2021-osm2pgsql-de-slides.pdf){:.extlink},
   [Download Video](https://media.jochentopf.com/media/2021-06-09-talk-fossgis2021-osm2pgsql-de-video.mp4){:.extlink},
-  [Video on Youtube](https://www.youtube.com/watch?v=XKoNMdtLTbQ){:.extlink} (June 2021).
+  [Video on YouTube](https://www.youtube.com/watch?v=XKoNMdtLTbQ){:.extlink} (June 2021).
 * From SotM 2019: "OSM data processing with PostgreSQL/PostGIS" by Jochen Topf.
   [Slides](https://media.jochentopf.com/media/2019-09-22-talk-sotm2019-osm-postgresql-postgis-en-slides.pdf){:.extlink},
   [Download Video](https://media.jochentopf.com/media/2019-09-22-talk-sotm2019-osm-postgresql-postgis-en-video.mp4){:.extlink},
-  [Video on Youtube](https://www.youtube.com/watch?v=QJF4jLRBFrU){:.extlink} (September 2019).
+  [Video on YouTube](https://www.youtube.com/watch?v=QJF4jLRBFrU){:.extlink} (September 2019).
 * From SotM-US 2014: "osm2pgsql:mapnik — Optimizing the Rendering Toolchain"
   by Paul Norman.
-  [Video on Youtube](https://www.youtube.com/watch?v=Lxloo42gl8A){:.extlink}.
+  [Video on YouTube](https://www.youtube.com/watch?v=Lxloo42gl8A){:.extlink}.
 
 ## Tutorials
 
