@@ -91,7 +91,7 @@ Which tiles are marked to be expired depends on the geometry type generated:
   `boundary-only` mode only the lines along the boundary of the polygon are
   expired. In `hybrid` mode either can happen depending on the area of the
   polygon. Polygons with an area larger than `full_area_limit` are expired
-  as if `bundary-only` is set, smaller areas in `full-area` mode. When using
+  as if `boundary-only` is set, smaller areas in `full-area` mode. When using
   the *flex* output, you can set the `mode` and `full_area_limit` as needed
   for each geometry column. For the *pgsql* output the expire output always
   works in `hybrid` mode, use the `--expire-bbox-size` option to set the
