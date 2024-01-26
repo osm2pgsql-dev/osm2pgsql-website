@@ -5,12 +5,13 @@ title: Manual Pages
 
 <h2>osm2pgsql</h2>
 
-{% assign mpages = site.manpages | where_exp: "item", "item.version != 'Development version'" | sort: "version" | reverse -%}
 {% assign dev = site.manpages | where: "version", "Development version" | first -%}
 <ul>
 <li><a href="{% link doc/man/latest.md %}">Latest version</a></li>
-{% for manpage in mpages -%}
-<li><a href="{{ manpage.url }}">Version {{ manpage.version }}</a></li>
+{% for release in site.data.releases -%}
+{% if release.manpage -%}
+<li><a href="/doc/man/version-{{ release.version | slugify }}.html">Version {{ release.version }}</a></li>
+{%- endif %}
 {% endfor -%}
 <li><a href="{{ dev.url }}">{{ dev.version }}</a></li>
 </ul>
