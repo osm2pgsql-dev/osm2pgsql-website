@@ -122,6 +122,21 @@ osm2pgsql is finished, the data will be consistent again. If you are running a
 tile server and using the expire functionality, you will, at that point,
 re-render all tiles that might be affected making your tiles consistent again.
 
+### Handling Failed Imports or Updates
+
+If a database import with osm2pgsql fails for any reason you have to start from
+the beginning. Fix the problem that caused the failure and run osm2pgsql again.
+You might want to re-initialize the database before that or remove some
+leftover tables and indexes, but you don't have to.
+
+If a database update with osm2pgsql fails for any reason just do the update
+again (after fixing the cause of the failure). As descibed in the previous
+section, you might have inconsistent map data until you run that update to
+completion. If you are running multiple updates and don't know which one failed
+you can always apply all updates again from the beginning. If you are using
+osm2pgsql-replication simply re-run it after fixing the problem, it will figure
+out from where to restart the updates.
+
 ### Clustering by Geometry
 
 Typical use cases for a database created by osm2pgsql require querying the
