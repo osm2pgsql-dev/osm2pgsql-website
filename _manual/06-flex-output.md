@@ -341,7 +341,11 @@ on [Type Conversions](#type-conversions).
 
 The content of the `sql_type` field is not checked by osm2pgsql, it is passed
 on to PostgreSQL as is. Do not set this to anything else but a valid PostgreSQL
-type.
+type. Correct use of `sql_type` is not easy. Only use `sql_type` if you have
+some familiarity with PostgreSQL types and how they are converted from/to text.
+If you get this wrong you'll get error messages about "Ending COPY mode" that
+are hard to interpret. Considering using the `json` or `jsonb` `type` instead,
+for which osm2pgsql does the correct conversions.
 {: .note}
 
 
