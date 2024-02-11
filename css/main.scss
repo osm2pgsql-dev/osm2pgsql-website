@@ -9,12 +9,31 @@ $osm2pgsql-color-light: #a0c0ff; // light blue
 $osm2pgsql-color-news: #c61109; // red
 $osm2pgsql-color-menu-text: #ffffff;
 $osm2pgsql-color-menu-hover: #e0e0e0;
-$osm2pgsql-font: Verdana, sans-serif;
+$osm2pgsql-font: Mulish;
 
 // ---------------- document structure ----------------
 
+@font-face {
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: 500;
+    src: url('/fonts/Mulish-Medium.woff2') format('woff2'),
+         url('/fonts/Mulish-Medium.woff') format('woff');
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Mulish';
+    font-style: normal;
+    font-weight: bold;
+    src: url('/fonts/Mulish-Bold.woff2') format('woff2'),
+         url('/fonts/Mulish-Bold.woff') format('woff');
+    font-display: swap;
+}
+
 body {
     font-family: $osm2pgsql-font;
+    font-size: 110%;
     max-width: 1200px;
     line-height: 130%;
 }
