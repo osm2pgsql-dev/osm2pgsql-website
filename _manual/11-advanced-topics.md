@@ -145,7 +145,7 @@ cluster the data in the output tables by geometry which means that features
 which are in reality near to each other will also be near to each other on
 the disk and access will be faster.
 
-*Version >=1.7.0*{:.version} If a table has multiple geometry columns,
+*Version >= 1.7.0*{:.version} If a table has multiple geometry columns,
 clustering will always be by the first geometry column.
 
 This clustering is achieved by ordering and copying each whole table after
@@ -155,4 +155,19 @@ twice the disk space.
 When you are using the [flex output](#the-flex-output), you can disable
 clustering by setting the `cluster` table option to `no` (see the
 [Advanced Table Definition](#advanced-table-definition) section).
+
+### Logging and Monitoring SQL Commands
+
+The `--log-sql` option allows you to see what SQL commands are issued by
+osm2pgsql. Each log line starts with the date and time and `SQL:`, after that
+you see the connection number `(C3)` and the log information, usually an SQL
+command exactly as it was sent to the database.
+
+For new connections the database backend process id is logged.
+
+*Version >= 1.11.0*{:.version} New connections also show the "context" which
+specifies which part of osm2pgsql has created this connection. The context and
+connection number will also appear in the `application_name` used for this
+connection which can be seen in the `pg_stat_activity` table from inside the
+database.
 
