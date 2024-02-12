@@ -181,10 +181,10 @@ The section titled `synchronous_commit` contains important information to the
 
 ### Number of Connections
 
-Osm2pgsql will open multiple connections to the database to speed up the
-import. The number of connections will depend on the number of tables that
-are configured and the number of threads used. This can easily exceed the
-`max_connections` limit defined in the [PostgreSQL
+*Version < 1.11.0*{:.version} Osm2pgsql will open multiple connections to the
+database to speed up the import. The number of connections will depend on the
+number of tables that are configured and the number of threads used. This can
+easily exceed the `max_connections` limit defined in the [PostgreSQL
 config](https://www.postgresql.org/docs/current/runtime-config-connection.html){:.extlink}.
 
 (Currently there are about `3 + number of tables` connections used on import
@@ -196,6 +196,10 @@ If you are hit by this, your options are to
 * increase the `max_connections` settings in your database configuration, or
 * reduce the number of threads with the `--number-processes=THREADS` command
   line option of osm2pgsql.
+
+*Version >= 1.11.0*{:.version} The number of connections does not depend on the
+number of tables any more. The default number of connections allowed in
+PostgreSQL should be enough for most use cases.
 
 ### Using a Template Database
 
