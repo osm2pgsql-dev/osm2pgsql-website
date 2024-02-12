@@ -1,6 +1,6 @@
 | Option                                | Description |
 | ------------------------------------- | ----------- |
-| -i, \--tablespace-index=TABLESPC      | Store all indexes in the PostgreSQL tablespace `TABLESPC`. This option also affects the middle tables. |
+| -i, \--tablespace-index=TABLESPC      | Store all indexes in the PostgreSQL tablespace `TABLESPC`. This option also affects the middle tables. *Version >= 1.11.0*{:.version} This option is deprecated, use `--tablespace-main-index` and/or `--tablespace-slim-index` instead. |
 | \--tablespace-main-data=TABLESPC      | Store the data tables in the PostgreSQL tablespace `TABLESPC`. |
 | \--tablespace-main-index=TABLESPC     | Store the indexes in the PostgreSQL tablespace `TABLESPC`. |
 | -l, \--latlong                        | Store coordinates in degrees of latitude & longitude. |

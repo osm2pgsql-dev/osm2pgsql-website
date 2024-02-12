@@ -1,6 +1,6 @@
 | Option                                  | Description |
 | --------------------------------------- | ----------- |
-| -i, \--tablespace-index=TABLESPC        | Store all indexes in a separate PostgreSQL tablespace named by this parameter. This allows one to e.g. store the indexes on faster storage like SSDs. This option affects the middle as well as the pgsql output indexes. |
+| -i, \--tablespace-index=TABLESPC        | Store all indexes in a separate PostgreSQL tablespace named by this parameter. This allows one to e.g. store the indexes on faster storage like SSDs. This option affects the middle as well as the pgsql output indexes. *Version >= 1.11.0*{:.version} This option is deprecated, use `--tablespace-main-index` and/or `--tablespace-slim-index` instead. |
 | \--tablespace-slim-data=TABLESPC        | Store the slim mode tables in the given tablespace. |
 | \--tablespace-slim-index=TABLESPC       | Store the indexes of the slim mode tables in the given tablespace. |
 | -p, \--prefix=PREFIX                    | Prefix for table names (default: `planet_osm`). This option affects the middle as well as the pgsql output table names. *Version >= 1.9.0*{: .version} You don't need to add this option any more in append mode, because osm2pgsql will remember it from the import. |
