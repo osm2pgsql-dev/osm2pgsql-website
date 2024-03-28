@@ -3,8 +3,8 @@
 
 // ---------------- set up variables ----------------
 
-$osm2pgsql-color-darker: #2b4ab5; // darker blue
-$osm2pgsql-color-dark: #4b6ac5; // dark blue
+$osm2pgsql-color-link: #216e8d;
+$osm2pgsql-color-dark: #004665;
 $osm2pgsql-color-light: #a0c0ff; // light blue
 $osm2pgsql-color-news: #c61109; // red
 $osm2pgsql-color-menu-text: #ffffff;
@@ -15,7 +15,6 @@ $osm2pgsql-font: Verdana, sans-serif;
 
 body {
     font-family: $osm2pgsql-font;
-    margin: 0;
     max-width: 1200px;
     line-height: 130%;
 }
@@ -29,10 +28,8 @@ body {
 header {
     position: absolute;
     top: 0;
-    padding: 0;
     width: 100%;
     max-width: 1200px;
-    z-index: 1;
 }
 
 @media print {
@@ -65,46 +62,26 @@ footer {
 section {
     position: relative;
     margin-top: 24px;
-    border-top: 1px solid $osm2pgsql-color-light;
 }
 
-// ---------------- "logo" at top ----------------
+// ---------------- logo at top ----------------
 
 #logo {
     position: absolute;
-    top: 0;
-    width: 100%;
-    height: 20px;
-    padding: 10px 0;
-    background-color: $osm2pgsql-color-dark;
-    text-align: center;
+    margin: 10px 20px;
 }
 
-#logo a {
-    color: $osm2pgsql-color-menu-text;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-#logo a:hover {
-    color: $osm2pgsql-color-menu-hover;
-}
-
-@media screen and (min-width: 1000px) {
-    #logo {
-        position: absolute;
-        top: 0;
-        left: calc(50% - 50vw);
-        width: 400px;
-        padding-top: 120px;
-        font-size: 18pt;
-        transform: rotate(-25deg) translate(-105px, -130px);
-    }
+#logo img {
+    width: 100px;
 }
 
 @media screen and (max-width: 999px) {
-    #logo {
-        font-size: 18px;
+    #logo img {
+        width: 60px;
+    }
+
+    main {
+        top: 30px;
     }
 }
 
@@ -136,6 +113,7 @@ a.skip-main:focus {
 
 nav {
     position: absolute;
+    top: 10px;
 }
 
 a#menu-code {
@@ -151,41 +129,54 @@ a#menu-code {
     }
 
     nav {
-        top: 20px;
         right: 0;
         font-size: 120%;
-        padding-right: 20px;
+        margin-right: 20px;
+        height: 5ex;
+        border-bottom: 2px solid $osm2pgsql-color-dark;
     }
 
     nav ul {
         width: 100%;
         list-style: none;
-        margin: 0;
+        margin: 12px 0 0 0;
+        padding: 0;
     }
 
     nav ul > li {
         position: relative;
         float: left;
-        margin-left: 10px;
+        margin-left: 4px;
         height: 2ex;
     }
 
+    nav ul > li:first-child {
+        margin-left: 0px;
+    }
+
     #menu a {
-        background-color: $osm2pgsql-color-dark;
-        color: $osm2pgsql-color-menu-text;
+        color: $osm2pgsql-color-dark;
         text-decoration: none;
+        font-weight: bold;
         padding: 3px 8px;
         border-radius: 2px;
     }
 
     #menu a:hover {
-        color: $osm2pgsql-color-menu-hover;
+        background-color: $osm2pgsql-color-dark;
+        color: #ffffff;
     }
 
     a#menu-code {
+        background-image: url('/img/github-dark.png');
         padding-left: 30px;
         background-position: 8px center;
     }
+
+    a#menu-code:hover {
+        background-image: url('/img/github.png');
+    }
+
 }
 
 @media screen and (max-width: 999px) {
@@ -198,8 +189,8 @@ a#menu-code {
     #menu-toggle {
         display: block;
         position: absolute;
-        top: 9px;
-        right: 23px;
+        top: 16px;
+        right: 32px;
         z-index: 1;
     }
 
@@ -209,7 +200,7 @@ a#menu-code {
     }
 
     #menu-toggle a:hover {
-        color: #e0e0e0;
+        color: $osm2pgsql-color-menu-hover;
     }
 
     #menu-toggle input {
@@ -231,7 +222,7 @@ a#menu-code {
         width: 27px;
         height: 4px;
         margin-bottom: 5px;
-        background-color: #ffffff;
+        background-color: $osm2pgsql-color-dark;
         border-radius: 3px;
         z-index: 1;
         transform-origin: 4px 0;
@@ -246,6 +237,7 @@ a#menu-code {
     }
 
     #menu-toggle input:checked ~ span {
+        background-color: #ffffff;
         transform: rotate(45deg) scale(1.1, 1.1) translate(0, 1px);
     }
 
@@ -304,7 +296,7 @@ h2 a {
 }
 
 a {
-    color: $osm2pgsql-color-darker;
+    color: $osm2pgsql-color-link;
 }
 
 a:visited {
@@ -472,16 +464,16 @@ img.inline {
         text-decoration: none;
     }
 
-    .news-date {
-        vertical-align: top;
-        white-space: nowrap;
-    }
-
     a#news-rss {
         position: absolute;
         right: 4px;
         top: 4px;
     }
+}
+
+.news-date {
+    vertical-align: top;
+    white-space: nowrap;
 }
 
 // ---------------- news pages ----------------
