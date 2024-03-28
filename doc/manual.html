@@ -6,21 +6,35 @@ title: Osm2pgsql Manual
 {%- assign chapters = site.manual | sort: 'chapter' -%}
 
 <div class="toc">
-    <p><b>Table of Contents</b></p>
-    <ol>
+    <h2>Table of Contents</h2>
+    <table>
 {% for oc in chapters %}
 {%-   if oc.appendix -%}
-        <li class="appendix"><a href="#{{ oc.title | slugify }}">{{ oc.appendix }}: {{ oc.title }}</a></li>
+        <tr class="toc-appendix">
+            <td class="arrow"></td>
+            <td class="num">{{ oc.appendix }}</td>
+            <td>
+                <a href="#{{ oc.title | slugify }}">{{ oc.title }}</a>
+                <ul class="sub" id="toc-sub-{{ oc.appendix }}"></ul>
+            </td>
+        </li>
 {%-   else -%}
-        <li><a href="#{{ oc.title | slugify }}">{{ oc.chapter }}. {{ oc.title }}</a></li>
+        <tr class="toc-chapter">
+            <td class="arrow"></td>
+            <td class="num">{{ oc.chapter }}</td>
+            <td>
+                <a href="#{{ oc.title | slugify }}">{{ oc.title }}</a>
+                <ul class="sub" id="toc-sub-{{ oc.chapter }}"></ul>
+            </td>
+        </tr>
 {%-   endif -%}
 {% endfor -%}
-    </ol>
+    </table>
 </div>
 
 <article class="manual">
 {% for oc in chapters %}
-<section class="{% if oc.appendix %}appendix{% else %}chapter{% endif %}">
+<section class="{% if oc.appendix %}appendix{% else %}chapter{% endif %}" data-chapter="{% if oc.appendix %}{{ oc.appendix }}{% else %}{{ oc.chapter }}{% endif %}">
     <h2 id="{{ oc.title | slugify }}">{{ oc.title }}</h2>
     <div class="edit" title="Edit this section"><a href="{{ site.github.repository_url }}/blob/master/{{ oc.relative_path }}">&#9998;</a></div>
 {{ oc.content }}

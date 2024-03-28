@@ -701,19 +701,38 @@ table.software-versions th {
 
 // ---------------- manual: table of contents ----------------
 
-.toc ol {
-    list-style: none;
+.toc {
+    padding: 4px 8px;
+    background-color: $osm2pgsql-color-box-fill;
+    border: 1px solid $osm2pgsql-color-box-border;
+    border-radius: 2px;
 }
 
-.toc li {
-    text-indent: -24px;
+.toc table td {
+    vertical-align: top;
+}
+
+.toc table td.arrow {
+    color: $osm2pgsql-color-dark;
+    cursor: pointer;
+    width: 1em;
+}
+
+.toc table td.num {
+    text-align: right;
+}
+
+.toc table ul.sub {
+    display: none;
+    margin: 2px 0;
+    padding: 0;
     line-height: 150%;
 }
 
-@media screen and (min-width: 400px) and (max-width: 1599px) {
-    .toc li.appendix a::before {
-        content: 'Appendix ';
-    }
+.toc table ul.sub li {
+    list-style: none;
+    padding-left: 2em;
+    text-indent: -2em;
 }
 
 @media screen and (min-width: 1600px) {
@@ -721,7 +740,9 @@ table.software-versions th {
         position: fixed;
         top: 128px;
         left: 20px;
-        width: 200px;
+        width: calc((100vw - 1280px) / 2);
+        height: calc(100vh - 160px);
+        overflow-y: scroll;
     }
 }
 
