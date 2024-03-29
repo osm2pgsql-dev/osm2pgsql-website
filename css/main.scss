@@ -9,7 +9,11 @@ $osm2pgsql-color-light: #a0c0ff; // light blue
 $osm2pgsql-color-news: #c61109; // red
 $osm2pgsql-color-menu-text: #ffffff;
 $osm2pgsql-color-menu-hover: #e0e0e0;
+$osm2pgsql-color-box-fill: #f8f8f8;
+$osm2pgsql-color-box-border: #e8e8e8;
+$osm2pgsql-color-box-border-hover: #a0a0a0;
 $osm2pgsql-font: Mulish;
+$osm2pgsql-grid-gap: 12px;
 
 // ---------------- document structure ----------------
 
@@ -554,28 +558,29 @@ div.news-date-small {
     margin-right: 2em;
 }
 
-// ---------------- flex container on doc page ----------------
+// ---------------- grid on doc page ----------------
 
 .container {
-    display: flex;
-    align-content: stretch;
-    flex-wrap: wrap;
-    margin: -10px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(20em, 1fr));
+    gap: $osm2pgsql-grid-gap;
 }
 
 .box {
-    margin: 10px;
     border-radius: 2px;
     padding: 0 16px 4px 16px;
-    flex-grow: 1;
     text-decoration: none;
     color: #000000;
+    min-height: 5ex;
+    border: 1px solid $osm2pgsql-color-box-border;
 }
 
 .box2 {
-    width: 40%;
-    background-color: #f8f8ff;
-    border: 1px solid $osm2pgsql-color-light;
+    background-color: $osm2pgsql-color-box-fill;
+}
+
+.box:hover {
+    border: 1px solid $osm2pgsql-color-box-border-hover;
 }
 
 .box2 h2 {
@@ -584,9 +589,7 @@ div.news-date-small {
 }
 
 .box3 {
-    width: 25%;
     font-size: 80%;
-    border: 1px solid #e0e0e0;
 }
 
 .box3 img {
@@ -907,14 +910,18 @@ table.proj td {
 div.releases-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(16em, 1fr));
-    gap: 10px;
+    gap: $osm2pgsql-grid-gap;
 }
 
 div.releases-container div {
     padding: 0 16px;
-    background-color: #f0f0f0;
-    border: 1px solid #e0e0e0;
+    background-color: $osm2pgsql-color-box-fill;
+    border: 1px solid $osm2pgsql-color-box-border;
     border-radius: 2px;
+}
+
+div.releases-container div:hover {
+    border: 1px solid $osm2pgsql-color-box-border-hover;
 }
 
 // ---------------- install ----------------
@@ -922,7 +929,7 @@ div.releases-container div {
 div.install {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(16em, 1fr));
-    gap: 10px;
+    gap: $osm2pgsql-grid-gap;
     margin: 20px 0 30px 0;
 }
 
@@ -931,8 +938,8 @@ div.install a {
     line-height: 120%;
     text-indent: -1.3em;
     padding: 8px 10px 10px calc(1.3em + 10px);
-    background-color: #f0f0f0;
-    border: 1px solid #e0e0e0;
+    background-color: $osm2pgsql-color-box-fill;
+    border: 1px solid $osm2pgsql-color-box-border;
     border-radius: 2px;
     font-size: 160%;
     text-decoration: none;
@@ -940,7 +947,7 @@ div.install a {
 }
 
 div.install a:hover {
-    border: 1px solid #808080;
+    border: 1px solid $osm2pgsql-color-box-border-hover;
 }
 
 div.install a img {
@@ -972,14 +979,19 @@ div.install a img {
 .example-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
+    gap: $osm2pgsql-grid-gap;
 }
 
 .example {
     text-decoration: none;
     color: #000000;
-    border: 1px solid $osm2pgsql-color-light;
+    background-color: $osm2pgsql-color-box-fill;
+    border: 1px solid $osm2pgsql-color-box-border;
     border-radius: 2px;
+}
+
+.example:hover {
+    border: 1px solid $osm2pgsql-color-box-border-hover;
 }
 
 .example img {
