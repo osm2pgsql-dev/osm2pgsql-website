@@ -902,6 +902,21 @@ table.proj td {
     padding: 10px;
 }
 
+// ---------------- releases ----------------
+
+div.releases-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(16em, 1fr));
+    gap: 10px;
+}
+
+div.releases-container div {
+    padding: 0 16px;
+    background-color: #f0f0f0;
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+}
+
 // ---------------- install ----------------
 
 div.install {

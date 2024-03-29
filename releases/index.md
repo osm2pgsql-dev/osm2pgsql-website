@@ -4,8 +4,9 @@ title: Releases
 
 # Releases
 
+<div class="releases-container">
 {% for release in site.data.releases -%}
-<section markdown="1">
+<div markdown="1">
 
 ## Release {{ release.version }}
 
@@ -22,8 +23,9 @@ Released on {{ release.date }}
 * [Source code (zip)](https://codeload.github.com/osm2pgsql-dev/osm2pgsql/zip/{{ release.version }})
 * [Windows binary (64bit)](/download/windows/osm2pgsql-{{ release.version }}-x64.zip)
 
-</section>
+</div>
 {% endfor -%}
+</div>
 
 <section markdown="1">
 
