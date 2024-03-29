@@ -15,6 +15,7 @@ currently {{ site.data.releases | map: "version" | first }}.
     <a href="{% link doc/install/windows.md %}"><img alt="" src="{% link img/windows.png %}"/>Installing on Windows</a>
     <a href="{% link doc/install/macos.md %}"><img alt="" src="{% link img/apple.png %}"/>Installing on macOS</a>
     <a href="{% link doc/install/freebsd.md %}"><img alt="" src="{% link img/freebsd.png %}"/>Installing on FreeBSD</a>
+    <a href="{% link doc/install/docker.md %}"><img alt="" src="{% link img/docker.png %}"/>Installing with Docker</a>
     <a href="{% link doc/install/source.md %}"><img alt="" src="{% link img/source.png %}"/>Installing from Source</a>
 </div>
 
