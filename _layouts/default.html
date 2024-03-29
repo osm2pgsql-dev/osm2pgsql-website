@@ -4,6 +4,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <meta charset="utf-8">
     <title>{{ page.title }}{% if layout.title_section %} - {{ layout.title_section }}{% endif %} - osm2pgsql</title>
+    <meta property="og:description" content="OpenStreetMap data to PostgreSQL/PostGIS converter" />
+    <meta property="og:url" content="https://osm2pgsql.org/" />
+    <meta property="og:image" content="https://osm2pgsql.org/img/logo.png" />
     {% feed_meta %}
     <link rel="stylesheet" href="{% link css/main.scss %}">
 {%- for css in page.css %}
