@@ -155,21 +155,21 @@ a#menu-code {
         border-bottom: 2px solid $osm2pgsql-color-dark;
     }
 
-    nav ul {
+    nav ul#menu {
         width: 100%;
         list-style: none;
         margin: 12px 0 0 0;
         padding: 0;
     }
 
-    nav ul > li {
+    nav ul#menu > li {
         position: relative;
         float: left;
         margin-left: 4px;
         height: 2ex;
     }
 
-    nav ul > li:first-child {
+    nav ul#menu > li:first-child {
         margin-left: 0px;
     }
 
@@ -181,7 +181,7 @@ a#menu-code {
         border-radius: 2px;
     }
 
-    #menu a:hover {
+    #menu > li:hover > a {
         background-color: $osm2pgsql-color-dark;
         color: #ffffff;
     }
@@ -196,6 +196,36 @@ a#menu-code {
         background-image: url('/img/github.png');
     }
 
+    #menu > li > ul {
+        position: absolute;
+        visibility: hidden;
+        background-color: $osm2pgsql-color-dark;
+        border: 1px solid #ffffff;
+        border-radius: 2px;
+        list-style: none;
+        padding: 0;
+        margin: 4px 0 0 -1px;
+        z-index: 2;
+        width: 10em;
+    }
+
+    #menu > li > ul > li {
+        text-indent: 0;
+        padding: 6px 2px;
+        margin: 0;
+    }
+
+    #menu > li > ul > li > a {
+        color: #ffffff;
+    }
+
+    #menu > li > ul > li:hover > a {
+        color: $osm2pgsql-color-menu-hover;
+    }
+
+    #menu > li:hover > ul {
+        visibility: visible;
+    }
 }
 
 @media screen and (max-width: 999px) {
@@ -296,13 +326,10 @@ a#menu-code {
         padding-left: 24px;
         background-position: 0 3px;
     }
-}
 
-.star {
-    position: absolute;
-    top: -15px;
-    right: -7px;
-    filter: drop-shadow(0px 0px 2px #e0e0f0);
+    #menu > li > ul {
+        display: none;
+    }
 }
 
 // ---------------- common elements ----------------
