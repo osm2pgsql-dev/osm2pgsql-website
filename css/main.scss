@@ -875,6 +875,40 @@ table.proj td {
     padding: 10px;
 }
 
+// ---------------- install ----------------
+
+div.install {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(16em, 1fr));
+    gap: 10px;
+    margin: 20px 0 30px 0;
+}
+
+div.install a {
+    display: block;
+    line-height: 120%;
+    text-indent: -1.3em;
+    padding: 8px 10px 10px calc(1.3em + 10px);
+    background-color: #f0f0f0;
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    font-size: 160%;
+    text-decoration: none;
+    vertical-align: middle;
+}
+
+div.install a:hover {
+    border: 1px solid #808080;
+}
+
+div.install a img {
+    position: relative;
+    top: 2px;
+    width: 1em;
+    height: 1em;
+    padding-right: 0.3em;
+}
+
 // ---------------- examples ----------------
 
 .download {
