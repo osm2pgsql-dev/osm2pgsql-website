@@ -902,10 +902,15 @@ table.proj td {
     padding: 1px 1px 1px 10px;
 }
 
-.example h2,
+.example h3,
 .example p {
     margin-top: 6px;
     padding: 0 6px;
+}
+
+.example h3 {
+    color: $osm2pgsql-color-dark;
+    text-decoration: none;
 }
 
 img.fullwidth {
