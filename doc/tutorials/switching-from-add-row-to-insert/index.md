@@ -2,9 +2,7 @@
 title: 'Tutorial: Switching from add_row() to insert()'
 ---
 
-[↖ All Tutorials]({% link doc/tutorials/index.md %})
-
-# Switching from `add_row()` to `insert()`
+# Tutorial: Switching from `add_row()` to `insert()`
 
 In 1.7.0 we introduced a new way of doing geometry transformations in flex
 config files. Instead of declaring a geometry transformation in the `add_row()`
