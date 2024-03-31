@@ -1,0 +1,37 @@
+---
+layout: default
+title_section: Releases
+---
+
+<h1>{{ page.title }}</h1>
+
+<p class="release-date"><b>Released:</b> {{ page.date | date: "%Y-%m-%d" }}</p>
+
+<p class="release-github">
+  <a class="extlink" href="https://github.com/osm2pgsql-dev/osm2pgsql/releases/tag/{{ page.version }}">Github release page</a>
+  <img src="{% link img/github-dark.png %}" width="16" height="16"/>
+</p>
+
+{{ content }}
+
+{% if page.manpages %}
+<h2>Man pages</h2>
+
+<ul>
+    {% for mp in page.manpages %}
+        {% if mp == 'osm2pgsql' %}
+    <li><a href="/doc/man/version-{{ page.version | slugify }}.html">osm2pgsql</a></li>
+        {% else %}
+    <li><a href="/doc/man/osm2pgsql-replication-{{ page.version }}.html">osm2pgsql-replication</a></li>
+        {% endif %}
+    {% endfor %}
+</ul>
+{% endif %}
+
+<h2>Downloads</h2>
+
+<ul>
+    <li><a href="/download/osm2pgsql-{{ page.version }}.tar.gz">Source code (tar.gz)</a></li>
+    <li><a href="https://codeload.github.com/osm2pgsql-dev/osm2pgsql/zip/{{ page.version }}">Source code (zip)</li>
+    <li><a href="/download/windows/osm2pgsql-{{ page.version }}-x64.zip">Windows binary (64bit)</li>
+</ul>

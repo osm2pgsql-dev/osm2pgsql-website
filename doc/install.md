@@ -5,7 +5,7 @@ title: Installation
 
 Osm2pgsql works on Linux, Windows, macOS, and other systems. We recommend you
 always use the latest [released version]({% link releases/index.md %}),
-currently {{ site.data.releases | map: "version" | first }}.
+currently {{ site.releases | sort: 'date' | map: "version" | last }}.
 
 [![Packaging status](https://repology.org/badge/tiny-repos/osm2pgsql.svg)](https://repology.org/project/osm2pgsql/versions)
 [![latest packaged version(s)](https://repology.org/badge/latest-versions/osm2pgsql.svg)](https://repology.org/project/osm2pgsql/versions)

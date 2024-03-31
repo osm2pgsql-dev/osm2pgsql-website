@@ -907,6 +907,20 @@ table.proj td {
 
 // ---------------- releases ----------------
 
+.release-date {
+    text-align: center;
+}
+
+.release-github {
+    position: relative;
+    text-align: right;
+}
+
+.release-github img {
+    position: relative;
+    top: 2px;
+}
+
 div.releases-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(16em, 1fr));

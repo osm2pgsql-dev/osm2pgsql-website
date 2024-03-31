@@ -45,6 +45,9 @@ collections:
     manpages:
         output: true
         permalink: doc/man/:name.html
+    releases:
+        output: true
+        permalink: releases/:name.html
     manual:
         output: false
     posts:
@@ -56,6 +59,12 @@ defaults:
             path: ""
         values:
             layout: default
+    -
+        scope:
+            path: ""
+            type: releases
+        values:
+            layout: release
     -
         scope:
             path: ""

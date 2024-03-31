@@ -7,13 +7,12 @@ title: Manual Pages
 
 {% assign dev = site.manpages | where: "version", "Development version" | first -%}
 <ul>
-<li><a href="{% link doc/man/latest.md %}">Latest version</a></li>
-{% for release in site.data.releases -%}
-{% if release.manpage -%}
+{% assign sortedreleases = site.releases | sort: 'date' | reverse %}
+{% for release in sortedreleases -%}
+{% if release.manpages -%}
 <li><a href="/doc/man/version-{{ release.version | slugify }}.html">Version {{ release.version }}</a></li>
 {%- endif %}
 {% endfor -%}
-<li><a href="{{ dev.url }}">{{ dev.version }}</a></li>
 </ul>
 
 <h2>osm2pgsql-replication</h2>

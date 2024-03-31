@@ -5,17 +5,19 @@ title: Releases
 # Releases
 
 <div class="releases-container">
-{% for release in site.data.releases -%}
+{% assign sortedreleases = site.releases | sort: 'date' | reverse %}
+{% for release in sortedreleases -%}
 <div markdown="1">
 
-## Release {{ release.version }}
+## [Release {{ release.version }}]({{ release.version | slugify }}.html)
 
-Released on {{ release.date }}
+Released on {{ release.date | date: "%Y-%m-%d" }}
 
-* [Release notes](https://github.com/osm2pgsql-dev/osm2pgsql/releases/tag/{{ release.version }})
-{% if release.manpage -%}
+* [Release notes]({{ release.version | slugify }}.html)
+{% if release.manpages.first == 'osm2pgsql' -%}
 * [Man page](/doc/man/version-{{ release.version | slugify }}.html)
 {%- endif %}
+* [Github](https://github.com/osm2pgsql-dev/osm2pgsql/releases/tag/{{ release.version }})
 
 ### Downloads
 
