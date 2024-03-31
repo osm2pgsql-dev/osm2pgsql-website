@@ -5,7 +5,7 @@ title: Road Map
 
 # Road Map for Osm2pgsql
 
-Current as of 2023-08-18.
+Current as of 2024-03-31.
 
 This document is a kind of road map for osm2pgsql development. It's not to be
 understood as a definite "this is what we'll do" document, but as a rough
@@ -61,7 +61,7 @@ We also have a [list of project ideas]({% link contribute/project-ideas.md
 Note that many of the following topics overlap. Some topics have related issues
 which are listed below, but not all open concerns appear in Github issues.
 Some major "big picture" issues are highlighted at the top of the [Github
-issues page](https://github.com/osm2pgsql-dev/osm2pgsql/issues).
+issues page](https://github.com/osm2pgsql-dev/osm2pgsql/issues){:.extlink}.
 
 ### Ongoing Maintainance
 
@@ -84,8 +84,7 @@ contribute.
 This cleanup work is mostly something that can be done "on the side" whenever
 that particular piece of code is touched anyway.
 
-The main places left which need updating in this regard are the command line
-parsing and expire code.
+The main places left which need updating in this regard is the expire code.
 
 ### Documentation
 
@@ -109,7 +108,6 @@ file names, etc.)
 
 Issues:
 
-* [142](https://github.com/osm2pgsql-dev/osm2pgsql/issues/142)
 * [1680](https://github.com/osm2pgsql-dev/osm2pgsql/issues/1680)
 
 ### Progress Output and Logging
@@ -136,9 +134,8 @@ The updatable middle uses the PostgreSQL database. Due to its current
 structure and API only some information is available, for instance it isn't
 possible to find node members of relations.
 
-In 1.9.0 we released a major update to the database middle. It currently
-is still marked as experimental, but will over time replace the old middle
-database structure.
+In 1.9.0 we released a major update to the database middle in 1.11.0 this
+became the default. The legacy database middle will be remove in 2.0.0.
 
 In the future we might need some caching mechanism so that expensive database
 operations can be avoided as much as possible if the same information is asked
@@ -210,7 +207,6 @@ Issues:
 * [799](https://github.com/osm2pgsql-dev/osm2pgsql/issues/799)
 * [1046](https://github.com/osm2pgsql-dev/osm2pgsql/issues/1046)
 * [1248](https://github.com/osm2pgsql-dev/osm2pgsql/issues/1248)
-* [1565](https://github.com/osm2pgsql-dev/osm2pgsql/issues/1565)
 * [1680](https://github.com/osm2pgsql-dev/osm2pgsql/issues/1680)
 * [1751](https://github.com/osm2pgsql-dev/osm2pgsql/issues/1751)
 
