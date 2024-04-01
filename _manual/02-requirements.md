@@ -5,18 +5,14 @@ title: System Requirements
 
 ### Operating System
 
-Osm2pgsql works on
-<img class="inline" alt="" src="{% link img/linux.png %}"/> Linux,
-<img class="inline" alt="" src="{% link img/windows.png %}"/> Windows, and
-<img class="inline" alt="" src="{% link img/apple.png %}"/> macOS.
+Osm2pgsql works on Linux, Windows, macOS, and other systems. Only 64bit systems
+are supported.
 
 Osm2pgsql is developed on Linux and most of the developers don't have
-experience with running it on anything but Linux, so it probably functions
-best on that platform. This documentation is also somewhat geared towards Linux users.
-That being said, we strive to make the software work on Windows and macOS as
-well. Please report any problems you might have.
-
-Only 64bit systems are supported.
+experience with running it on anything but Linux, so it probably functions best
+on that platform. This documentation is also somewhat geared towards Linux
+users. That being said, we strive to make the software work well on all
+systems. Please report any problems you might have.
 
 Read the [installation instructions]({% link doc/install.md %}) for details
 on how to install osm2pgsql on your system.
