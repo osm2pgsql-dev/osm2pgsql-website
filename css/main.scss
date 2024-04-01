@@ -5,7 +5,6 @@
 
 $osm2pgsql-color-link: #216e8d;
 $osm2pgsql-color-dark: #004665;
-$osm2pgsql-color-light: #a0c0ff; // light blue
 $osm2pgsql-color-news: #c61109; // red
 $osm2pgsql-color-menu-text: #ffffff;
 $osm2pgsql-color-menu-hover: #e0e0e0;
@@ -72,11 +71,11 @@ main {
 footer {
     position: relative;
     top: 60px;
-    border-top: 1px solid #e0e0e0;
+    border-top: 1px solid $osm2pgsql-color-box-border;
     clear: both;
     text-align: center;
     font-size: 90%;
-    color: #606060;
+    color: $osm2pgsql-color-dark;
     max-width: 1200px;
     padding-bottom: 10px;
     margin: 30px 20px 0 20px;
@@ -350,7 +349,7 @@ a {
 }
 
 a:visited {
-    color: black;
+    color: #000000;
 }
 
 a.extlink::before {
@@ -373,7 +372,7 @@ h2 img, h3 img {
 }
 
 code {
-    background-color: #f0f0f0;
+    background-color: $osm2pgsql-color-box-fill;
     padding: 0 2px;
     border-radius: 2px;
 }
@@ -396,9 +395,9 @@ dd {
 }
 
 pre {
-    background-color: #f0f0f0;
+    background-color: $osm2pgsql-color-box-fill;
     padding: 2px 6px;
-    border: 1px solid #e0e0e0;
+    border: 1px solid $osm2pgsql-color-box-border;
     border-radius: 2px;
 }
 
@@ -536,7 +535,7 @@ img.inline {
 
 div.news-date {
     text-align: center;
-    color: #808080;
+    color: $osm2pgsql-color-dark;
     font-size: 120%;
 }
 
@@ -613,38 +612,39 @@ div.news-date-small {
 #sponsorlist a {
     font-weight: bold;
     text-decoration: none;
-    color: black;
+    color: #000000;
 }
 
 // ---------------- contribute: software list ----------------
 
 table.software-versions {
-    border-top: 1px solid #e0e0e0;
-    border-bottom: 1px solid #e0e0e0;
-    border-right: 1px solid #e0e0e0;
+    border-top: 1px solid $osm2pgsql-color-box-border;
+    border-bottom: 1px solid $osm2pgsql-color-box-border;
+    border-right: 1px solid $osm2pgsql-color-box-border;
     border-spacing: 0;
+    border-radius: 2px;
 }
 
 table.software-versions tbody tr:nth-child(even) {
-    background-color: #f0f0f0;
+    background-color: $osm2pgsql-color-box-fill;
 }
 
 table.software-versions td {
     height: 2em;
-    border-left: 1px solid #e0e0e0;
+    border-left: 1px solid $osm2pgsql-color-box-border;
     padding: 2px 4px;
 }
 
 table.software-versions tr.groupstart td {
-    border-top: 2px solid #e0e0e0;
+    border-top: 2px solid $osm2pgsql-color-box-border;
 }
 
 table.software-versions th {
     height: 2em;
     min-width: 5em;
-    border-left: 1px solid #e0e0e0;
+    border-left: 1px solid $osm2pgsql-color-box-border;
     padding: 2px 4px;
-    background-color: #e0e0e0;
+    background-color: $osm2pgsql-color-box-border;
     text-align: left;
 }
 
@@ -817,7 +817,7 @@ div.edit {
 }
 
 div.edit a {
-    border: 1px solid $osm2pgsql-color-light;
+    border: 1px solid $osm2pgsql-color-box-border;
     border-radius: 2px;
     padding: 0 3px;
     text-decoration: none;
@@ -826,18 +826,18 @@ div.edit a {
 // ---------------- manual: desc table ----------------
 
 table.desc {
-    border: 1px solid $osm2pgsql-color-light;
+    border: 1px solid $osm2pgsql-color-box-border;
     border-spacing: 0;
     border-collapse: collapse;
     width: 100%;
 }
 
 table.desc tbody tr:nth-child(even) {
-    background-color: #f0f0f0;
+    background-color: $osm2pgsql-color-box-fill;
 }
 
 table.desc th {
-    background-color: $osm2pgsql-color-light;
+    background-color: $osm2pgsql-color-box-border;
     text-align: left;
     padding: 4px 8px;
     white-space: nowrap;
@@ -895,8 +895,8 @@ table.lib th::after {
 
 table.lib td {
     width: 100%;
-    border: 1px solid #e0e0e0;
-    background-color: #f0f0f0;
+    border: 1px solid $osm2pgsql-color-box-border;
+    background-color: $osm2pgsql-color-box-fill;
     padding: 4px;
 }
 
@@ -913,7 +913,9 @@ table.lib td {
 // ---------------- manual: projections table ----------------
 
 table.proj {
-    border: 1px solid $osm2pgsql-color-light;
+    background-color: $osm2pgsql-color-box-fill;
+    border: 1px solid $osm2pgsql-color-box-border;
+    border-radius: 2px;
     border-spacing: 0;
     width: 100%;
 }
@@ -1006,7 +1008,7 @@ div.install a img {
     width: 20px;
     height: 20px;
     padding: 4px;
-    background-color: #e0e0e0;
+    background-color: $osm2pgsql-color-box-border;
     border-radius: 2px;
     z-index: 1;
 }
@@ -1056,8 +1058,9 @@ img.fullwidth {
 .map {
     width: calc(100% - 4px);
     height: 400px;
-    background-color: #f0f0f0;
-    border: 1px solid #e0e0e0;
+    background-color: $osm2pgsql-color-box-fill;
+    border: 1px solid $osm2pgsql-color-box-border;
+    border-radius: 2px;
     padding: 1px;
     clear: both;
 }
