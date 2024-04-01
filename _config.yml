@@ -37,7 +37,8 @@ exclude:
    - vendor/cache/
    - vendor/gems/
    - vendor/ruby/
-   - _manual/options
+   - _manual-v1/options
+   - _manual-v2/options
 
 feed:
     path: news/feed.xml
@@ -48,7 +49,9 @@ collections:
     releases:
         output: true
         permalink: releases/:name.html
-    manual:
+    manual-v1:
+        output: false
+    manual-v2:
         output: false
     posts:
         output: true

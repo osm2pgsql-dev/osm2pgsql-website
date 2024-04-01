@@ -3,6 +3,10 @@ chapter: 1
 title: Introduction
 ---
 
+This is the manual for version 1.x.y of osm2pgsql. The manual for the current
+version 2 is [here]({% link doc/manual.html %}).
+{:.note}
+
 Osm2pgsql is used to import OSM data into a PostgreSQL/PostGIS database for
 rendering into maps and many other uses. Usually it is only part of a
 toolchain, for instance other software is needed for the actual rendering
