@@ -744,6 +744,31 @@ table.software-versions th {
         height: calc(100vh - 160px);
         overflow-y: scroll;
     }
+
+    #to-toc {
+        display: none;
+    }
+
+}
+
+@media screen and (max-width: 1599px) {
+    #to-toc {
+        position: fixed;
+        bottom: 40px;
+        right: 0;
+        background-color: $osm2pgsql-color-box-border;
+        border-top: 4px solid #ffffff;
+        border-bottom: 4px solid #ffffff;
+        border-left: 4px solid #ffffff;
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+        z-index: 2;
+        padding: 4px 4px;
+        text-decoration: none;
+        display: block;
+        width: 2em;
+        text-align: center;
+    }
 }
 
 // ---------------- manual: auto-numbering ----------------
