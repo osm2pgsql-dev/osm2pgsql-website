@@ -103,7 +103,7 @@ section {
     }
 
     main {
-        top: 30px;
+        top: 40px;
     }
 }
 
@@ -349,6 +349,7 @@ h2 a {
 
 h2 {
     font-size: 180%;
+    line-height: 120%;
 }
 
 a {
@@ -840,19 +841,27 @@ h4:hover a.heading-link {
 
 // ---------------- manual: edit button ----------------
 
-div.edit {
-    position: absolute;
-    top: 6px;
-    right: 0;
-    text-align: right;
-    font-size: 160%;
+@media screen and (max-width: 1599px) {
+    div.edit {
+        display: none;
+    }
 }
 
-div.edit a {
-    border: 1px solid $osm2pgsql-color-box-border;
-    border-radius: 2px;
-    padding: 0 3px;
-    text-decoration: none;
+@media screen and (min-width: 1600px) {
+    div.edit {
+        position: absolute;
+        top: 6px;
+        right: 0;
+        text-align: right;
+        font-size: 160%;
+    }
+
+    div.edit a {
+        border: 1px solid $osm2pgsql-color-box-border;
+        border-radius: 2px;
+        padding: 0 3px;
+        text-decoration: none;
+    }
 }
 
 // ---------------- manual: desc table ----------------
