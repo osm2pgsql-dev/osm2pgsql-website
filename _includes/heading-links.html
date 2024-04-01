@@ -16,16 +16,12 @@ for (const subchapter of subchapters) {
     sub_num += 1;
     const tdElement = document.getElementById('toc-sub-' + chapter_num);
     tdElement.parentNode.parentNode.children[0].textContent = '▶';
-    const liElement = document.createElement('li');
-    const aElement = document.createElement('a');
-    aElement.textContent = chapter_num + '.' + sub_num + ' ' + subchapter.textContent;
-    aElement.href = '#' + subchapter.id;
-    liElement.appendChild(aElement);
-    tdElement.appendChild(liElement);
+    const link = '<a href="#' + subchapter.id + '">' + subchapter.textContent + '</a>';
+    tdElement.innerHTML += '<li>' + chapter_num + '.' + sub_num + ' ' + link + '</li>';
 }
 
 const toc_toggles = document.querySelectorAll('.toc td.arrow');
-Array.prototype.forEach.call(toc_toggles, function(toggle) {
+for (const toggle of toc_toggles) {
     if (toggle.textContent != '') {
         toggle.addEventListener('click', function(ev) {
             const sub = ev.target.parentNode.getElementsByClassName('sub')[0];
@@ -38,6 +34,6 @@ Array.prototype.forEach.call(toc_toggles, function(toggle) {
             }
         });
     }
-});
+}
 
 </script>
