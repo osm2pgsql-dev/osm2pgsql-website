@@ -13,7 +13,7 @@ and not all the related objects needed for creating an object's geometry.
 
 ### The Properties Table
 
-*Version >= 1.9.0*{: .version} Osm2pgsql stores some *properties* into a
+Osm2pgsql stores some *properties* into a
 database table. This table is always called `osm2pgsql_properties`. It will
 be created in the schema set with the `--middle-schema` option, or the `public`
 schema by default.
@@ -124,7 +124,7 @@ that format. In the new format the tables have the following structure:
 | lon          | `int4 NOT NULL`   | (Nodes only) Longitude * 10<sup>7</sup>. |
 | nodes        | `int8[] NOT NULL` | (Ways only) Array of node ids. |
 | members      | `jsonb NOT NULL`  | (Relations only) Contains all relation members, for the format see below. |
-| tags         | `jsonb`           | Tags of this OSM object in the obvious key/value format. (*Version == 1.9.x*{:.version} defined as `NOT NULL`) |
+| tags         | `jsonb`           | Tags of this OSM object in the obvious key/value format. |
 {:.desc}
 
 You can create a PostGIS geometry from the `lat` and `lon` columns like this:

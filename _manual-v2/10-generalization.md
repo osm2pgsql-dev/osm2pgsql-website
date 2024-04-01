@@ -3,7 +3,7 @@ chapter: 10
 title: Generalization
 ---
 
-*Version >= 1.9.0*{: .version} *Experimental*{: .experimental} Osm2pgsql has
+*Experimental*{: .experimental} Osm2pgsql has
 some limited support for generalization. See [the generalization project
 page]({% link generalization/index.md %}) for some background and details.
 **This work is experimental and everything described here might change without
@@ -92,9 +92,9 @@ The following fields are available in the `run_sql()` command:
 | Parameter   | Type                   | Description |
 | ----------- | ---------------------- | ----------- |
 | description | text                   | Descriptive name or short text for logging. |
-| sql         | text or array of texts | The SQL command to run. *Version >= 1.9.2*{: .version} The `sql` field can be set to a string or to an array of strings in which case the commands in those strings will be run one after the other. |
-| transaction | bool                   | *Version >= 1.9.2*{: .version} Set to `true` to run the command(s) from the `sql` field in a transaction (Default: `false`). |
-| if_has_rows | text                   | *Version >= 1.9.2*{: .version} SQL command that is run first. If that SQL command returns any rows, the commands in `sql` are run, otherwise nothing is done. This can be used, to trigger generalizations only if something changed, for instance when an expire table contains something. Use a query like `SELECT 1 FROM expire_table LIMIT 1`. Default: none, i.e. the command in `sql` always runs. |
+| sql         | text or array of texts | The SQL command to run. The `sql` field can be set to a string or to an array of strings in which case the commands in those strings will be run one after the other. |
+| transaction | bool                   | Set to `true` to run the command(s) from the `sql` field in a transaction (Default: `false`). |
+| if_has_rows | text                   | SQL command that is run first. If that SQL command returns any rows, the commands in `sql` are run, otherwise nothing is done. This can be used, to trigger generalizations only if something changed, for instance when an expire table contains something. Use a query like `SELECT 1 FROM expire_table LIMIT 1`. Default: none, i.e. the command in `sql` always runs. |
 {:.desc}
 
 ### Generalization Strategies

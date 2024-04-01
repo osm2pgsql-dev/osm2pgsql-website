@@ -83,7 +83,7 @@ To keep an osm2pgsql database up to date you need to know the replication
 
 #### Keeping the database up-to-date with osm2pgsql-replication
 
-*Version >=1.4.2*{:.version} Osm2pgsql comes with a script `scripts/osm2pgsql-replication`
+Osm2pgsql comes with a script `scripts/osm2pgsql-replication`
 which is the easiest way to keep an osm2pgsql database up to date. The script
 requires [PyOsmium](https://osmcode.org/pyosmium/){:.extlink} and
 [Psycopg](https://www.psycopg.org/){:.extlink} (psycopg2 and psycopg3 both will work)
@@ -316,15 +316,13 @@ otherwise you might have problems with the data at the boundary (also see
 
 If you are working with extracts you sometimes have several extracts, lets
 say for different countries, that you want to load into the same database.
-The correct approach in this case is to merge those extracts first and then
-import the resulting file with osm2pgsql.
+One approach in this case is to merge those extracts first and then
+import the resulting file with osm2pgsql. But osm2pgsql can also read multiple
+files at once.
 
 You can use the [`osmium
 merge`](https://docs.osmcode.org/osmium/latest/osmium-merge.html){:.extlink}
-command for this.
-
-*Version >= 1.4.0*{:.version} This pre-merging is not necessary for newer
-osm2pgsql version which can read multiple input files at once.
+command for merging the input files.
 
 Note that in any case for this to work the input files must all have their data
 from the same point in time. You can use this to import two or more

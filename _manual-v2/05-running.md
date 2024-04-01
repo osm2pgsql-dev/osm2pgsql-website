@@ -112,7 +112,7 @@ the password to osm2pgsql are inherently insecure. You can either put a
 `.pgpass` file in the user's home directory or supply its location through the
 PGPASSFILE environment variable.
 
-*Version >= 1.4.0*{: .version} Instead of specifying a database name with the
+Instead of specifying a database name with the
 `-d, --database` option you can also specify a connection string in the form of
 a keyword/value connection string (something like `host=localhost port=5432
 dbname=mydb`) or a URI
@@ -180,7 +180,7 @@ Do not use osm2pgsql with more than one input file in versions before 1.4.0.
 It might work or it might not.
 {: .note}
 
-*Version >= 1.4.0*{:.version} Osm2pgsql can read multiple input files at once,
+Osm2pgsql can read multiple input files at once,
 merging the data from the input files ignoring any duplicate data. For this to
 work the input files must all have their data from the same point in time.
 You can use this to import two or more geographical extracts into the same
@@ -210,9 +210,6 @@ for different use cases are available:
 
 The *flex* Output
 
-: *Available as experimental from version >= 1.3.0, stable from
-  version >= 1.5.0*{: .version}
-
 : This is the most modern and most flexible output
   option. If you are starting a new project, use this output. Many future
   improvements to osm2pgsql will only be available in this output.
@@ -238,20 +235,6 @@ The *pgsql* Output
   to the data before it is imported.
 
 : This output is described in detail in [its own chapter](#the-pgsql-output).
-
-The *gazetteer* Output
-
-: The *gazetteer* output is a specialized output used for
-  [Nominatim](https://nominatim.org/){:.extlink} only. There is no information
-  in this manual about its use, see the Nominatim documentation for details.
-
-: *Version >= 1.8.0*{: .version} The *gazetteer* output is deprecated.
-
-The *multi* Output
-
-: *Version < 1.5.0*{: .version} The *multi* output is deprecated.
-
-: *Version >= 1.5.0*{: .version} The *multi* output was removed.
 
 The *null* Output
 

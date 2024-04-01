@@ -23,7 +23,7 @@ types from OSM data:
 | MultiPoint         | Created from nodes or some relations.                 |
 | MultiLineString    | Created from (split up) ways or some relations.       |
 | MultiPolygon       | Created from closed ways or some relations.           |
-| GeometryCollection | *Version >= 1.7.0*{:.version} Created from relations. |
+| GeometryCollection | Created from relations.                               |
 {: .desc}
 
 ### Single vs. Multi Geometries
@@ -48,7 +48,7 @@ same OSM object. See the [Primary Keys and Unique
 IDs](#primary-keys-and-unique-ids) section for an option how to work around
 this.
 
-*Version >= 1.7.0*{:.version} When using the flex output, you can decide
+When using the flex output, you can decide
 yourself what geometries to create using the `as_point()`, `as_linestring()`,
 `as_polygon()`, `as_multipoint()`, `as_multilinestring()`, `as_multipolygon()`,
 and `as_geometrycollection()` functions. See the [Flex Output
@@ -119,7 +119,7 @@ split LineStrings if the `split_at` transformation parameter is used, see the
 output chapter for details. See also the [Single vs. Multi
 Geometries](#single-vs-multi-geometries) section above.
 
-*Version >= 1.7.0*{:.version} When using the flex output, you can decide
+When using the flex output, you can decide
 yourself what geometries to create from a way using the `as_linestring()`, or
 `as_polygon()` functions. See the [Flex Output chapter](#the-flex-output) for
 details.
@@ -137,7 +137,7 @@ geometry it should have:
 | type=route        | (Multi)LineString         |
 {: .desc}
 
-*Version >= 1.7.0*{:.version} When using the [flex output](#the-flex-output),
+When using the [flex output](#the-flex-output),
 you can decide yourself what geometries to create from a way using the
 `as_multipoint()`, `as_multilinestring()`, or `as_multipolygon()` functions.
 Also supported now is the `as_geometrycollection()` function which creates
@@ -187,7 +187,7 @@ pgsql output, the projection can be chosen with command line options. When
 using the flex output, the projections are specified in the Lua style file.
 The default is always "Web Mercator".
 
-*Version >= 1.7.0*{:.version} When using the flex output, osm2pgsql will
+When using the flex output, osm2pgsql will
 usually magically transform any geometry you are writing into a database table
 into the projection you defined your tables with. But you can use the
 `transform()` function on the geometry to force a certain transformation. This
@@ -231,8 +231,8 @@ If osm2pgsql was compiled with support for the [PROJ
 library](https://proj.org/){:.extlink}, it supports all projections supported
 by that library.
 
-*Version >= 1.4.0*{:.version} Call `osm2pgsql --version` to see whether your
-binary was compiled with PROJ and with which version.
+Call `osm2pgsql --version` to see whether your binary was compiled with PROJ
+and with which version.
 
 </td></tr></table>
 

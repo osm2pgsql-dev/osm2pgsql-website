@@ -79,23 +79,6 @@ indexes being built in parallel this can mean quite a lot of memory is needed.
 Use the `--disable-parallel-indexing` option to build the indexes one after
 the other.
 
-### Handling of Forward Dependencies
-
-Whenever a node changes, osm2pgsql will find all ways and relations that have
-this node as a member and reprocess them. Similarly, whenever a way changes,
-their parent relations are reprocessed. So osm2pgsql will automatically handle
-"forward dependencies" from nodes and ways to their parents. Almost always this
-is the behaviour you want.
-
-*Version >= 1.4.0*{: .version} This behaviour can be disabled with the command
-line option `--with-forward-dependencies=false`. It is used by Nominatim which
-uses the specialized Gazetteer output which doesn't need this behaviour.
-
-*Version >= 1.8.0*{: .version} The command line option
-`--with-forward-dependencies` is deprecated and will be removed soon. Nominatim
-has been changed in the mean time to not need this any more and nobody else
-needs it either.
-
 ### Using Database While Updating
 
 To improve performance osm2pgsql uses several parallel threads to import or
@@ -145,7 +128,7 @@ cluster the data in the output tables by geometry which means that features
 which are in reality near to each other will also be near to each other on
 the disk and access will be faster.
 
-*Version >= 1.7.0*{:.version} If a table has multiple geometry columns,
+If a table has multiple geometry columns,
 clustering will always be by the first geometry column.
 
 This clustering is achieved by ordering and copying each whole table after
@@ -165,7 +148,7 @@ command exactly as it was sent to the database.
 
 For new connections the database backend process id is logged.
 
-*Version >= 1.11.0*{:.version} New connections also show the "context" which
+New connections also show the "context" which
 specifies which part of osm2pgsql has created this connection. The context and
 connection number will also appear in the `application_name` used for this
 connection which can be seen in the `pg_stat_activity` table from inside the

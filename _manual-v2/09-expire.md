@@ -20,7 +20,7 @@ you are using the *pgsql* output) is to use the `-e, --expire-tiles`, `-o,
 --expire-output`, and `--expire-bbox-size` command line options. This allows
 only a single expire output to be defined (and it has to go to a file).
 
-*Version >= 1.9.0*{:.version} The new way, which is only available with the
+The new way, which is only available with the
 *flex* output, allows you to define any number of expire outputs (and they can
 go to files or to database tables).
 
@@ -56,14 +56,11 @@ the file. You have to clear the file after processing the tiles.
 
 #### Expire Table
 
-*Version >= 1.9.0*{:.version} The expire table has three columns `zoom`, `x`,
-and `y`. A primary key constraints on those three columns makes sure that
-there is no duplicate data.
-
-*Version >= 1.10.0*{:.version} The expire table has two additional columns
-`first` and `last` containing the timestamp of the first time this tile was
-marked as expired and the last time. These two timestamps can be used to
-implement various expiry strategies.
+The expire table has five columns `zoom`, `x`, `y`, `first`, and `last`. A
+primary key constraints on the first three columns makes sure that there is no
+duplicate data. The `first` and `last` columns contain the timestamp of the
+first time this tile was marked as expired and the last time, respectively.
+These two timestamps can be used to implement various expiry strategies.
 
 You have to delete entries from this file after expiry is run.
 

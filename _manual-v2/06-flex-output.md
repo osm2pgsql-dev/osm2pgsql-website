@@ -3,9 +3,6 @@ chapter: 6
 title: The Flex Output
 ---
 
-*Version 1.3.0 to 1.4.2*{: .version} The *flex* output appeared first in version
-1.3.0 of osm2pgsql. It was marked as experimental until version 1.4.2
-
 The *flex* output, as the name suggests, allows for a flexible configuration
 that tells osm2pgsql what OSM data to store in your database and exactly where
 and how. It is configured through a Lua file which
@@ -40,7 +37,7 @@ the following fields and functions:
 | Field / Function                                              | Description |
 | ------------------------------------------------------------- | ----------- |
 | osm2pgsql.**version**                                         | The version of osm2pgsql as a string. |
-| osm2pgsql.**config_dir**                                      | *Version >=1.5.1*{: .version} The directory where your Lua config file is. Useful when you want to include more files from Lua. |
+| osm2pgsql.**config_dir**                                      | The directory where your Lua config file is. Useful when you want to include more files from Lua. |
 | osm2pgsql.**mode**                                            | Either `"create"` or `"append"` depending on the command line options (`-c, --create` or `-a, --append`). |
 | osm2pgsql.**stage**                                           | Either `1` or `2` (1st/2nd stage processing of the data). See below. |
 | osm2pgsql.**define_node_table**(NAME, COLUMNS[, OPTIONS])     | Define a node table. |
@@ -113,11 +110,11 @@ function. You can use the same options on the
 | name             | The name of the table (without schema). |
 | ids              | A Lua table defining how this table should handle ids (see the [Id Handling](#id-handling) section for details). Note that you can define tables without Ids, but they can not be updated by osm2pgsql. |
 | columns          | An array of columns (see the [Defining Columns](#defining-columns) section for details). |
-| schema           | Set the [PostgreSQL schema](https://www.postgresql.org/docs/current/ddl-schemas.html){:. extlink} to be used for this table. The schema must exist in the database and be writable by the database user. *Version < 1.9.0:*{:.version} By default no schema is set which usually means the tables will be created in the `public` schema. *Version >= 1.9.0:*{:.version} By default the schema set with `--schema` is used, or `public` if that is not set. |
+| schema           | Set the [PostgreSQL schema](https://www.postgresql.org/docs/current/ddl-schemas.html){:. extlink} to be used for this table. The schema must exist in the database and be writable by the database user. By default the schema set with `--schema` is used, or `public` if that is not set. |
 | data_tablespace  | The [PostgreSQL tablespace](https://www.postgresql.org/docs/current/manage-ag-tablespaces.html){:.extlink} used for the data in this table. |
 | index_tablespace | The [PostgreSQL tablespace](https://www.postgresql.org/docs/current/manage-ag-tablespaces.html){:.extlink} used for all indexes of this table. |
-| cluster          | *Version >= 1.5.0*{: .version} Set clustering strategy. Use `"auto"` (default) to enable clustering by geometry, osm2pgsql will choose the best method. Use `"no"` to disable clustering. |
-| indexes          | *Version >= 1.8.0*{: .version} Define indexes to be created on this table. If not set, the default is to create a GIST index on the first (or only) geometry column. |
+| cluster          | Set clustering strategy. Use `"auto"` (default) to enable clustering by geometry, osm2pgsql will choose the best method. Use `"no"` to disable clustering. |
+| indexes          | Define indexes to be created on this table. If not set, the default is to create a GIST index on the first (or only) geometry column. |
 {: .desc}
 
 All the `osm2pgsql.define*table()` functions return a database table Lua
@@ -128,8 +125,7 @@ object. You can call the following functions on it:
 | :name()          | The name of the table as specified in the define function. |
 | :schema()        | The schema of the table as specified in the define function. |
 | :columns()       | The columns of the table as specified in the define function. |
-| :add_row(PARAMS) | Add a row to the database table. See below for details. |
-| :insert(PARAMS)  | *Version >= 1.7.0*{: .version} Add a row to the database table. See below for details. |
+| :insert(PARAMS)  | Add a row to the database table. See below for details. |
 {: .desc}
 
 ### Id Handling
@@ -172,7 +168,7 @@ The following values are allowed for the `type` of the `ids` field:
 | relation | A relation Id will be stored 'as is' in the column named by `id_column`. |
 | area     | A way Id will be stored 'as is' in the column named by `id_column`, for relations the Id will be stored as negative number. |
 | any      | Any type of object can be stored. See below. |
-| tile     | *Version >= 1.9.0*{: .version} Special case for generalized data stored with tile x and y coordinates. See below. |
+| tile     | Special case for generalized data stored with tile x and y coordinates. See below. |
 {: .desc}
 
 The `any` type is for tables that can store any type of OSM object (nodes,

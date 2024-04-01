@@ -71,7 +71,7 @@ read the data. It is recommended that you run these as a different database
 user, distinct from the database user osm2pgsql is using and only give that
 user `SELECT` rights (with the `GRANT` command).
 
-*Version >= 1.4.0*{: .version} If you are using a security scheme based on
+If you are using a security scheme based on
 database schemas in your database you can use the `--schema`, `--middle-schema`
 and `--output-pgsql-schema` options and the `schema` table option in the flex
 output, respectively, to tell osm2pgsql to load data into specific schemas. You
@@ -177,29 +177,6 @@ Additional information is on the PostgreSQL wiki: [Tuning Your PostgreSQL
 Server](https://wiki.postgresql.org/wiki/Tuning_Your_PostgreSQL_Server){:.extlink}.
 The section titled `synchronous_commit` contains important information to the
 `synchronous_commit` and `fsync` settings.
-
-
-### Number of Connections
-
-*Version < 1.11.0*{:.version} Osm2pgsql will open multiple connections to the
-database to speed up the import. The number of connections will depend on the
-number of tables that are configured and the number of threads used. This can
-easily exceed the `max_connections` limit defined in the [PostgreSQL
-config](https://www.postgresql.org/docs/current/runtime-config-connection.html){:.extlink}.
-
-(Currently there are about `3 + number of tables` connections used on import
-and `3 + (1 + number of threads) * number of tables` connections used on
-update. But this might change from version to version of osm2pgsql.)
-
-If you are hit by this, your options are to
-
-* increase the `max_connections` settings in your database configuration, or
-* reduce the number of threads with the `--number-processes=THREADS` command
-  line option of osm2pgsql.
-
-*Version >= 1.11.0*{:.version} The number of connections does not depend on the
-number of tables any more. The default number of connections allowed in
-PostgreSQL should be enough for most use cases.
 
 ### Using a Template Database
 
