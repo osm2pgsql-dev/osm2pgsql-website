@@ -10,9 +10,10 @@ Docker images for the latest and many earlier versions of osm2pgsql are availabl
 docker pull iboates/osm2pgsql:latest
 ```
 
-You can then generally run the image by passing the same arguments to the `docker run iboates/osm2pgsql` as you would to
+You can then generally run the image by passing the same arguments to `docker run iboates/osm2pgsql` as you would to
 `osm2pgsql` itself. It is a little bit more subtle than that (especially regarding `osm2pgsql-replication`, see the
-[readme](https://github.com/iboates/osm-utilities-docker/tree/master/osm2pgsql#usel) for more info.
+[readme](https://github.com/iboates/osm-utilities-docker/tree/master/osm2pgsql#usel) for more info. There are also more
+examples, including one using `docker compose`
 
 Note that these docker images are maintained externally. If you have any questions or bug reports [contact the
 maintainer](https://github.com/iboates/osm-utilities-docker/issues).
