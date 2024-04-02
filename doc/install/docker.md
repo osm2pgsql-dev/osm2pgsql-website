@@ -4,7 +4,7 @@ title: Installing with Docker
 ---
 
 Docker images for the latest and many earlier versions of osm2pgsql are available from
-[Dockerhub](https://hub.docker.com/r/iboates/osm2pgsql). See there for installation details.
+[Dockerhub](https://hub.docker.com/r/iboates/osm2pgsql)
 
 ```sh
 docker pull iboates/osm2pgsql:latest
