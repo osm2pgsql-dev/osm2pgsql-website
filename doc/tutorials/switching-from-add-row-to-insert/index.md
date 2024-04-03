@@ -175,8 +175,8 @@ have to use a normal column type, probably `real` and explicitly call the
 <pre>
 local forests = osm2pgsql.define_way_table('forests', {
     { column = 'geom', type = 'polygon' },
-<span class="change-bef">    { column = 'area', type = <span class="char-bef">'area' }</span></span>
-<span class="change-aft">    { column = 'area', type = <span class="char-aft">'real' }</span></span>
+<span class="change-bef">    { column = 'area', type = '<span class="char-bef">area</span>' }</span>
+<span class="change-aft">    { column = 'area', type = '<span class="char-aft">real</span>' }</span>
 })
 
 function osm2pgsql.process_way(object)
@@ -231,5 +231,23 @@ function osm2pgsql.process_relation(object)
         end
     end
 end
+</pre>
+
+## NULL Geometries
+
+The old code with `add_row()` did never generate `NULL` values in the geometry
+columns, it just suppressed those rows entirely. This has changed with
+`insert()` because now a table can have multiple geometry columns, so a
+situation could arise where some of those columns are `NULL` and others have a
+valid geometry. If you want the old behaviour, you have to declare the geometry
+columns as `NOT NULL`.
+
+Example:
+
+<pre>
+local forests = osm2pgsql.define_area_table('forests', {
+<span class="change-bef"> { column = 'geom', type = 'polygon' }</span>
+<span class="change-aft"> { column = 'geom', type = 'polygon'<span class="char-aft">, not_null = true</span> }</span>
+})
 </pre>
 
