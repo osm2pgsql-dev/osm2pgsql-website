@@ -221,7 +221,7 @@ all cases, but it adds some overhead.
 To use OSM IDs as primary keys, you have to make sure that
 
 * you only ever add a single row per OSM object to an output table, i.e. do
-  not call `add_row` multiple times on the same table for the same OSM object.
+  not call `insert` multiple times on the same table for the same OSM object.
 * osm2pgsql doesn't split long linestrings into smaller ones or multipolygons
   into polygons. So you can not use the `split_at` option on the geometry
   transformation.
@@ -352,15 +352,10 @@ possible depend on the type of the input data. For node tables you are pretty
 much restricted to point geometries, but there is a variety of options for
 relation tables for instance.
 
-*Version < 1.7.0*{: .version} Only zero or one geometry columns are supported.
-
-*Version >= 1.7.0*{: .version} You can have any number of geometry columns if
-you are using the `insert()` command on a table (and not `add_row()`, see
-below).
-
-An index will only be built automatically for the first (or only) geometry
-column you define. The table will be [clustered](#clustering-by-geometry) by
-the first (or only) geometry column (unless disabled).
+You can have zero, one or more geometry columns. An index will only be built
+automatically for the first (or only) geometry column you define. The table
+will be [clustered](#clustering-by-geometry) by the first (or only) geometry
+column (unless disabled).
 
 The supported geometry types are:
 
@@ -380,20 +375,6 @@ By default geometry columns will be created in web mercator (EPSG 3857). To
 change this, set the `projection` parameter of the column to the EPSG code
 you want (or one of the strings `latlon(g)`, `WGS84`, or `merc(ator)`, case
 is ignored).
-
-There is one special geometry column type called `area`. It can be used in
-addition to a `polygon` or `multipolygon` column. Unlike the normal geometry
-column types, the resulting database type will not be a geometry type, but
-`real`. It will be filled automatically with the area of the geometry. The area
-will be calculated in web mercator, or you can set the `projection` parameter
-of the column to `4326` to calculate it with WGS84 coordinates. Other
-projections are currently not supported.
-
-*Version >= 1.7.0*{:.version} If you are using the `insert()` command on a
-table (and not `add_row()`, see below) you can use the `area()` function on any
-geometry in any projection to calculate the area. What you get back is a real
-number that you can put into any normal `real` column. The special case of the
-`area` column type is not needed any more.
 
 Geometry columns can have expire configurations attached to them. See the
 section on [Defining and Using Expire
@@ -507,8 +488,8 @@ for which the functions are called.
 
 You can do anything in those processing functions to decide what to do with
 this data. If you are not interested in that OSM object, simply return from the
-function. If you want to add the OSM object to some table call the `add_row()`
-(*Version >= 1.7.0*{: .version} or `insert()`) function on that table.
+function. If you want to add the OSM object to some table call the `insert()`
+function on that table.
 
 The parameter table (`object`) has the following fields and functions:
 
@@ -568,89 +549,9 @@ geometries with `num_geometries()` and comparing that to the number of
 members of type node and relation.) If no valid geometry can be created, so
 if the geometry collection would be empty, a null geometry is returned instead.
 
-### The `add_row` function
-
-```lua
--- definition of the table:
-table_pois = osm2pgsql.define_node_table('pois', {
-    { column = 'tags', type = 'jsonb' },
-    { column = 'name', type = 'text' },
-    { column = 'geom', type = 'point' },
-})
-...
-function osm2pgsql.process_node(object)
-...
-    table_pois:add_row({
-        tags = object.tags,
-        name = object.tags.name,
-        geom = { create = 'point' }
-    })
-...
-end
-```
-
-The `add_row()` function takes a single table parameter, that describes what to
-fill into all the database columns. Any column not mentioned will be set to
-`NULL`.
-
-The geometry column is somewhat special. You have to define a *geometry
-transformation* that will be used to transform the OSM object data into
-a geometry that fits into the geometry column. See the next section for
-details. If you want more flexible geometry processing you need to use [the
-`insert()` function](#the-insert-function) available in
-*version >= 1.70*{:.version}.
-
-Note that you can't set the object id, this will be handled for you behind the
-scenes.
-
-### Geometry Transformations for the `add_row()` Function
-
-Currently these geometry transformations are supported:
-
-* `{ create = 'point' }`. Only valid for nodes, create a 'point' geometry.
-* `{ create = 'line' }`. For ways or relations. Create a 'linestring' or
-  'multilinestring' geometry.
-* `{ create = 'area' }` For ways or relations. Create a 'polygon' or
-  'multipolygon' geometry.
-
-Some of these transformations can have parameters:
-
-* The `line` transformation has an optional parameter `split_at`. If this
-  is set to anything other than 0, long linestrings will be split up into
-  parts no longer than this value.
-* *Version == 1.3.0*{: .version} The `area` transformation has an optional
-  parameter `multi`. If this is set to `false` (the default), a multipolygon
-  geometry will be split up into several polygons. If this is set to `true`,
-  the multipolygon geometry is kept as one.
-* *Version >= 1.4.0*{: .version} The `area` transformation has an optional
-  parameter `split_at`. If this is not set or set to `nil` (the default),
-  (multi)polygon geometries will be kept as is, if this is set to `'multi'`
-  multipolygon geometries will be split into their polygon parts.
-
-Note that in general it is your responsibility to make sure the column type
-of a geometry column can take the geometries created by the transformation.
-A `point` geometry column will not be able to store the result of an `area`
-transformation.
-
-*Version >= 1.4.0*{: .version} If a transformation will result in a polygon
-geometry, but the column type of the geometry is `multipolygon`. The polygon
-will be "wrapped" automatically in a multipolygon to fit into the column.
-This can be useful when you want all your polygons and multipolygons to be
-of the same database type. Some programs handle columns of uniform geometry
-type better.
-
-If no geometry transformation is set, osm2pgsql will, in some cases, assume
-a default transformation. These are the defaults:
-
-* For node tables, a `point` column gets the node location.
-* For way tables, a `linestring` column gets the complete way geometry, a
-  `polygon` column gets the way geometry as area (if the way is closed and
-  the area is valid).
-
 ### The `insert()` Function
 
-This function is only available in *Version >= 1.7.0*{: .version}. Use
-`add_row()` in earlier versions.
+Use the `insert()` function to add data to a previously defined table:
 
 ```lua
 -- definition of the table:
@@ -780,17 +681,16 @@ any extra time you are using. Keep in mind that:
 
 ### Type Conversions
 
-The `add_row()` and `insert()` functions will try its best to convert Lua
-values into corresponding PostgreSQL values. But not all conversions make
-sense. Here are the detailed rules:
+The `insert()` function will try its best to convert Lua values into
+corresponding PostgreSQL values. But not all conversions make sense. Here are
+the detailed rules:
 
 1. Lua values of type `function`, `userdata`, or `thread` will always result in
    an error.
 2. The Lua type `nil` is always converted to `NULL`.
 3. If the result of a conversion is `NULL` and the column is defined as `NOT
-   NULL`, an error is thrown from the `add_row()` function. See
-   [above](#handling-of-null-in-insert-function) for `NULL` handling in
-   `insert()`.
+   NULL` the data is not inserted, see
+   [above](#handling-of-null-in-insert-function) for details.
 4. The Lua type `table` is converted to the PostgreSQL type `hstore` if and
    only if all keys and values in the table are string values.
 5. For `boolean` columns: The number `0` is converted to `false`, all other
@@ -837,16 +737,13 @@ your Lua script to those columns yourself.
 
 ### Geometry Objects in Lua
 
-*Version >= 1.7.0*{:.version}
-
 Lua geometry objects are created by calls such as `object:as_point()` or
 `object:as_polygon()` inside processing functions. It is not possible to
 create geometry objects from scratch, you always need an OSM object.
 
 You can write geometry objects directly into geometry columns in the database
-using the table `insert()` function. (You can not do that using the `add_row()`
-function, it has a different geometry handling, see above.) But you can also
-transform geometries in multiple ways.
+using the table `insert()` function. But you can also transform geometries in
+multiple ways.
 
 Geometry objects have the following functions. They are modelled after the
 PostGIS functions with equivalent names.
@@ -905,4 +802,3 @@ in C++, so Lua scripts should concern themselves only with the high-level
 control flow, not the details of the geometry. If you think you need some
 function to access the internals of a geometry, [start a discussion on
 Github](https://github.com/osm2pgsql-dev/osm2pgsql/discussions).
-
