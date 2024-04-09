@@ -89,49 +89,7 @@ requires [PyOsmium](https://osmcode.org/pyosmium/){:.extlink} and
 [Psycopg](https://www.psycopg.org/){:.extlink} (psycopg2 and psycopg3 both will work)
 to be installed.
 
-##### Initialising the Update Process (before 1.9.0)
-
-*Version <1.9.0*{:.version}:
-
-Before you can download updates, osm2pgsql-replication needs to find the
-starting point from which to apply the updates.
-
-There are two ways to do that. When you have used an extract from Geofabrik or
-openstreetmap.fr, then these files contain all necessary information to get the
-replication process started. Simply point the initialisation to your extract:
-
-    osm2pgsql-replication init -d <dbname> --osm-file your-extract.pbf
-
-The `-d` parameter tells the replication script which database to connect
-to. The script also supports all other parameters mentioned in the section
-[database connection](#database-connection) including
-[libpq environment variables](https://www.postgresql.org/docs/current/libpq-envars.html).
-The only exception is the '-W' parameter for interactive password prompts.
-When you need to supply a password, always use a
-[pgpass file](https://www.postgresql.org/docs/current/libpq-pgpass.html).
-
-If you have imported the whole planet or you don't have the original import
-file anymore, then the necessary information can be deduced by looking at the
-newest data in the database and asking the OSM API when the data was created.
-A working internet connection is necessary for that to work. Simply run
-the initialisation without any parameters:
-
-    osm2pgsql-replication init -d <dbname>
-
-By default minutely updates from the OSM main servers will be used. If you
-want to use a different replication service, use the `--server` parameter.
-
-No matter which method you use, osm2pgsql-replication creates a table
-`{prefix}_replication_status` where it saves the URL for the replication service
-and the status of the updates.
-
-It is safe to repeat initialisation at any time. For example, when you want
-to change the replication service, simply run the init command again with a
-different `--server` parameter.
-
-##### Initialising the Update Process (version >= 1.9.0)
-
-*Version >=1.9.0*{:.version}:
+##### Initialising the Update Process
 
 Before you can download updates, osm2pgsql-replication needs to find the
 starting point from which to apply the updates. Run the initialisation like
@@ -151,9 +109,8 @@ When you need to supply a password, always use a
 
 Osm2pgsql will [store a table
 `osm2pgsql_properties`](#the-properties-table) to your database for new
-imports. If `osm2pgsql-replication` finds that table, it uses it for storing
-the replication information. If not it will fall back to the same behaviour
-used before version 1.9.0.
+imports. `osm2pgsql-replication` uses that table for storing
+the replication information.
 
 By default the update server and interval will be set from the file headers,
 for planet dumps minutely updates from the OSM main servers will be used. If
@@ -359,12 +316,6 @@ use the [`osmium
 renumber`](https://docs.osmcode.org/osmium/latest/osmium-renumber.html){:.extlink} command
 for this.
 
-Older versions of osm2pgsql will sometimes work or appear to work with
-negative ids, but it is not recommended to rely on this, because the
-processed data might be corrupted. Versions from 1.3.0 warn when you are
-using negative ids. From version 1.4.0 on, only positive ids are allowed.
-{:.note}
-
 #### Handling Unsorted OSM Data
 
 OSM data files are almost always sorted, first nodes in order of their ids,
@@ -377,12 +328,6 @@ optimizations in the code which speed up the normal processing.
 If you have an unsorted input file, you should sort it first. You can use the
 [`osmium sort`](https://docs.osmcode.org/osmium/latest/osmium-sort.html){:.extlink}
 command for this.
-
-Older versions of osm2pgsql will sometimes work or appear to work with
-unsorted data, but it is not recommended to rely on this, because the
-processed data might be corrupted. Versions from 1.3.0 warn when you are
-using unsorted data. From version 1.4.0 on, only sorted OSM files are allowed.
-{:.note}
 
 #### Working with OSM History Data
 

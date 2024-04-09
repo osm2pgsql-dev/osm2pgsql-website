@@ -12,7 +12,6 @@ functions:
       example: |
         osm2pgsql.clamp(2, 3, 4) ⟶ 3
     - name: has_prefix
-      version: 1.4.0
       synopsis: osm2pgsql.has_prefix(STRING, PREFIX)
       description: |
         Returns `true` if the STRING starts with PREFIX. If STRING is `nil`,
@@ -20,7 +19,6 @@ functions:
       example: |
         osm2pgsql.has_prefix('addr:city', 'addr:') ⟶ true
     - name: has_suffix
-      version: 1.4.0
       synopsis: osm2pgsql.has_suffix(STRING, SUFFIX)
       description: |
         Returns `true` if the STRING ends with SUFFIX. If STRING is `nil`,
@@ -60,7 +58,6 @@ functions:
             ...
         end
     - name: split_string
-      version: 1.4.0
       synopsis: osm2pgsql.split_string(STRING[, DELIMITER])
       description: |
         Split STRING on DELIMITER (default: ';' (semicolon)) and return an
@@ -70,7 +67,6 @@ functions:
       example: |
         local opening_hours = osm2pgsql.split_string(object.tags.opening_hours)
     - name: split_unit
-      version: 1.4.0
       synopsis: osm2pgsql.split_unit(STRING, DEFAULT_UNIT)
       description: |
         Split STRING of the form "VALUE UNIT" (something like "10 mph" or
@@ -82,7 +78,6 @@ functions:
       example: |
         value, unit = osm2pgsql.split_unit(object.tags.maxspeed, 'km/h')
     - name: trim
-      version: 1.4.0
       synopsis: osm2pgsql.trim(STRING)
       description: |
         Return STRING with whitespace characters removed from the beginning
