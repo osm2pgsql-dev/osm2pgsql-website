@@ -180,6 +180,9 @@ appear "inverted", with outer and inner rings switching their roles.
 Unfortunately there isn't much that osm2pgsql (or anybody) can do to improve
 this, this is just the nature of OSM data.
 
+In debug mode osm2pgsql will log the ids of missing nodes and the ways they
+are missing from.
+
 ### Projections
 
 Osm2pgsql can create geometries in many projections. If you are using the

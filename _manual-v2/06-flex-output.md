@@ -184,20 +184,19 @@ ways, or relations). There are two ways the id can be stored:
    [Imposm](https://imposm.org/docs/imposm3/latest/){:.extlink} program uses.)
 
 Osm2pgsql will only create these Id indexes if an updatable database is
-created, i.e. if osm2pgsql is run with `--slim` (but not `--drop`). *Version >=
-1.8.0*{: .version} You can set the optional field `create_index` in the `ids`
-setting to `'always'` to force osm2pgsql to always create this index, even in
-non-updatable databases (the default is `'auto'`, only create the index if
-needed for updating).
+created, i.e. if osm2pgsql is run with `--slim` (but not `--drop`). You can set
+the optional field `create_index` in the `ids` setting to `'always'` to force
+osm2pgsql to always create this index, even in non-updatable databases (the
+default is `'auto'`, only create the index if needed for updating).
 
-*Version >= 1.9.0*{: .version} Generalized data (see
-[Generalization](#generalization) chapter) is sometimes stored in tables
-indexed by x, y tile coordinates. For such tables use the `tile` value for the
-`ids` field. Two columns called `x` and `y` with SQL type `int` will be created
-(it is not possible to change those column names or the type). In "create"
-mode, if the database is updatable or when the `create_index` option is set to
-`always`, an index will automatically be generated on those columns *after*
-the generalization step is run with `osm2pgsql-gen`.
+Generalized data (see [Generalization](#generalization) chapter) is sometimes
+stored in tables indexed by x, y tile coordinates. For such tables use the
+`tile` value for the `ids` field. Two columns called `x` and `y` with SQL type
+`int` will be created (it is not possible to change those column names or the
+type). In "create" mode, if the database is updatable or when the
+`create_index` option is set to `always`, an index will automatically be
+generated on those columns *after* the generalization step is run with
+`osm2pgsql-gen`.
 
 #### Unique Ids
 
@@ -218,16 +217,9 @@ all cases, but it adds some overhead.
 
 #### Using Natural Keys for Unique Ids
 
-To use OSM IDs as primary keys, you have to make sure that
-
-* you only ever add a single row per OSM object to an output table, i.e. do
-  not call `insert` multiple times on the same table for the same OSM object.
-* osm2pgsql doesn't split long linestrings into smaller ones or multipolygons
-  into polygons. So you can not use the `split_at` option on the geometry
-  transformation.
-* *Version == 1.3.0*{: .version} osm2pgsql doesn't split multipolygons into
-  polygons. So you have to set `multi = true` on all `area` geometry
-  transformations.
+To use OSM IDs as primary keys, you have to make sure that you only ever add a
+single row per OSM object to an output table, i.e. do not call `insert`
+multiple times on the same table for the same OSM object.
 
 You probably also want an index on the ID column. If you are running in slim
 mode, osm2pgsql will create that index for you. But in non-slim mode you have
@@ -235,8 +227,8 @@ to do this yourself with `CREATE UNIQUE INDEX`. You can also use [`ALTER
 TABLE`](https://www.postgresql.org/docs/current/sql-altertable.html){:.extlink}
 to make the column an "official" primary key column.
 
-*Version >= 1.8.0*{:version} See the chapter on [Defining
-Indexes](#defining-indexes) on how to create this index from osm2pgsql.
+See the chapter on [Defining Indexes](#defining-indexes) on how to create this
+index from osm2pgsql.
 
 #### Using an Additional ID Column
 
@@ -264,8 +256,8 @@ data using osm2pgsql, use `CREATE UNIQUE INDEX` to create one. You can also use
 TABLE`](https://www.postgresql.org/docs/current/sql-altertable.html){:.extlink}
 to make the column an "official" primary key column.
 
-*Version >= 1.8.0*{:version} See the chapter on [Defining
-Indexes](#defining-indexes) on how to create this index from osm2pgsql.
+See the chapter on [Defining Indexes](#defining-indexes) on how to create this
+index from osm2pgsql.
 
 Since PostgreSQL 10 you can use the `GENERATED ... AS IDENTITY` clause instead
 of the `SERIAL` type which does something very similar, although using anything
@@ -280,7 +272,7 @@ with the following keys:
 | ----------- | ----------- |
 | column      | The name of the PostgreSQL column (required). |
 | type        | The type of the column (Optional, default `'text'`). |
-| sql_type    | *Version >= 1.5.0*{: .version} The SQL type of the column (Optional, default depends on `type`, see next table). In versions before 1.5.0 the `type` field was used for this also. |
+| sql_type    | The SQL type of the column (Optional, default depends on `type`, see next table). |
 | not_null    | Set to `true` to make this a `NOT NULL` column. (Optional, default `false`.) |
 | create_only | Set to `true` to add the column to the `CREATE TABLE` command, but do not try to fill this column when adding data. This can be useful for `SERIAL` columns or when you want to fill in the column later yourself. (Optional, default `false`.) |
 | projection  | On geometry columns only. Set to the EPSG id or name of the projection. (Optional, default web mercator, `3857`.) |
@@ -292,13 +284,6 @@ osm2pgsql, the `sql_type` describes the type of the column from the point of
 view of the PostgreSQL database. Usually they are either the same or the
 SQL type is derived directly from the `type` according to the following table.
 But it is possible to set them individually for special cases.
-
-*Version < 1.5.0*{: .version} The `sql_type` field did not exist in earlier
-versions. Use the `type` field instead. If you are upgrading from a version <
-1.5.0 to 1.5.0 or above, it is usually enough to set the `sql_type` to the same
-value that the `type` field had before for every `type` field where you get an
-error message from osm2pgsql.
-{: .note}
 
 | `type`             | Default for `sql_type` | Notes       |
 | ------------------ | ---------------------- | ----------- |
@@ -319,7 +304,7 @@ error message from osm2pgsql.
 | multipoint         | `geometry(MULTIPOINT,*SRID*)`         | (\*) |
 | multilinestring    | `geometry(MULTILINESTRING,*SRID*)`    | (\*) |
 | multipolygon       | `geometry(MULTIPOLYGON,*SRID*)`       | (\*) |
-| geometrycollection | `geometry(GEOMETRYCOLLECTION,*SRID*)` | (\*) *Only available in version >= 1.7.0*{: .version} |
+| geometrycollection | `geometry(GEOMETRYCOLLECTION,*SRID*)` | (\*) |
 | area               | `real `                | |
 {: .desc}
 
@@ -367,7 +352,7 @@ The supported geometry types are:
 | multipoint         | Currently not used. |
 | multilinestring    | Created from (possibly split up) ways or relations. |
 | multipolygon       | For area tables, created from ways or relations. |
-| geometrycollection | Geometry collection, created from relations. *Only available in version >= 1.7.0*{: .version} |
+| geometrycollection | Geometry collection, created from relations. |
 | geometry           | Any kind of geometry. Also used for area tables that should hold both polygon and multipolygon geometries. |
 {: .desc}
 
@@ -388,16 +373,11 @@ update the database. You can not control those indexes with the settings
 described in this section.
 {: .note}
 
-*Version >= 1.8.0*{:.version} Indexes can only be defined in version 1.8.0 and
-above, before that there was always a GIST index created on the first (or only)
-geometry column of any table.
-
 To define indexes, set the `indexes` field of the table definition to an array
 of Lua tables. If the array is empty, no indexes are created for this table
 (except possibly an index on the id column(s)). If there is no `indexes` field
 (or if it is set to `nil`) a GIST index will be created on the first (or only)
-geometry column of this table. This is the same behavior as before version
-1.8.0.
+geometry column of this table.
 
 The following fields can be set in an index definition. You have to set at
 least the `method` and either `column` or `expression`.
@@ -420,15 +400,11 @@ after osm2pgsql has finished its job.
 
 ### Defining and Using Expire Outputs
 
-*Version >= 1.9.0*{:.version} Expire outputs can only be defined this way in
-version 1.9.0 and above. Before that only a single expire output could be
-configured through command line parameters. See the [Expire chapter](#expire)
-for some general information about expiry.
-
 When osm2pgsql is working in 'append' mode, i.e. when it is updating an
 existing database from OSM change files, it can figure out which changes will
 potentially affect which Web Mercator tiles, so that you can re-render those
-tiles later.
+tiles later. See the [Expire chapter](#expire) for some general information
+about expiry.
 
 The list of tile coordinates can be written to a file and/or to a database
 table. Use the `osm2pgsql.define_expire_output()` Lua function to define an
@@ -496,7 +472,7 @@ The parameter table (`object`) has the following fields and functions:
 | Field / Function  | Description |
 | ----------------- | ----------- |
 | .id               | The id of the node, way, or relation. |
-| .type             | *Version >= 1.7.0*{: .version} The object type as string (`node`, `way`, or `relation`). |
+| .type             | The object type as string (`node`, `way`, or `relation`). |
 | .tags             | A table with all the tags of the object. |
 | .version          | Version of the OSM object. (\*) |
 | .timestamp        | Timestamp of the OSM object, time in seconds since the epoch (midnight 1970-01-01). (\*) |
@@ -504,14 +480,14 @@ The parameter table (`object`) has the following fields and functions:
 | .uid              | User id of the user that created or last changed this OSM object. (\*) |
 | .user             | User name of the user that created or last changed this OSM object. (\*) |
 | :grab_tag(KEY)    | Return the tag value of the specified key and remove the tag from the list of tags. (Example: `local name = object:grab_tag('name')`) This is often used when you want to store some tags in special columns and the rest of the tags in an jsonb or hstore column. |
-| :get_bbox()       | Get the bounding box of the current node, way, or relation. This function returns four result values: the lon/lat values for the bottom left corner of the bounding box, followed by the lon/lat values of the top right corner. Both lon/lat values are identical in case of nodes. Example: `lon, lat, dummy, dummy = object:get_bbox()` (*Version < 1.7.0*{: .version} Only for nodes and ways, *Version >= 1.7.0*{: .version} Also available for relations, relation members (nested relations) are not taken into account.) |
+| :get_bbox()       | Get the bounding box of the current node, way, or relation. This function returns four result values: the lon/lat values for the bottom left corner of the bounding box, followed by the lon/lat values of the top right corner. Both lon/lat values are identical in case of nodes. Example: `lon, lat, dummy, dummy = object:get_bbox()`. Relation members (nested relations) are not taken into account.) |
 | .is_closed        | Ways only: A boolean telling you whether the way geometry is closed, i.e. the first and last node are the same. |
 | .nodes            | Ways only: An array with the way node ids. |
 | .members          | Relations only: An array with member tables. Each member table has the fields `type` (values `n`, `w`, or `r`), `ref` (member id) and `role`. |
 | :as_point()              | Create point geometry from OSM node object. |
 | :as_linestring()         | Create linestring geometry from OSM way object. |
 | :as_polygon()            | Create polygon geometry from OSM way object. |
-| :as_multipoint()         | *Version >= 1.7.1*{: .version} Create (multi)point geometry from OSM node/relation object. |
+| :as_multipoint()         | Create (multi)point geometry from OSM node/relation object. |
 | :as_multilinestring()    | Create (multi)linestring geometry from OSM way/relation object. |
 | :as_multipolygon()       | Create (multi)polygon geometry from OSM way/relation object. |
 | :as_geometrycollection() | Create geometry collection from OSM relation object. |
@@ -530,9 +506,9 @@ You can check the [geometry object](#geometry-objects-in-lua) for
 
 The `as_linestring()` and `as_polygon()` functions can only be used on ways.
 
-*Version >= 1.7.1*{: .version} The `as_multipoint()` function can be used on
-nodes and relations. For nodes it will always return a point geometry, for
-relations a point or multipoint geometry with all available node members.
+The `as_multipoint()` function can be used on nodes and relations. For nodes it
+will always return a point geometry, for relations a point or multipoint
+geometry with all available node members.
 
 The `as_multilinestring()` and `as_multipolygon()` functions, on the other
 hand, can be used for ways and for relations. The latter will either return
@@ -709,31 +685,25 @@ the detailed rules:
    positive numbers in `1`, all negative numbers in `-1`. Strings `"yes"` and
    `"1"` will result in `1`, `"no"` and `"0"` in `0`, `"-1"` in `-1`. All
    other strings will result in `NULL`.
-9. *Version >= 1.5.0*{: .version} For `json` and `jsonb` columns string,
-   number, and boolean values are converted to their JSON equivalent as you
-   would expect. (The special floating point numbers `NaN` and `Inf` can not be
-   represented in JSON and are converted to `null`). An empty table is converted
-   to an (empty) JSON object, tables that only have consecutive integer keys
-   starting from 1 are converted into JSON arrays. All other tables are converted
-   into JSON objects. Mixed key types are not allowed. Osm2pgsql will detect loops
-   in tables and return an error.
+9. For `json` and `jsonb` columns string, number, and boolean values are
+   converted to their JSON equivalent as you would expect. (The special
+   floating point numbers `NaN` and `Inf` can not be represented in JSON and
+   are converted to `null`). An empty table is converted to an (empty) JSON
+   object, tables that only have consecutive integer keys starting from 1 are
+   converted into JSON arrays. All other tables are converted into JSON
+   objects. Mixed key types are not allowed. Osm2pgsql will detect loops in
+   tables and return an error.
 10. For text columns and any other not specially recognized column types,
     booleans result in an error and numbers are converted to strings.
-11. *Version >= 1.7.0*{: .version} For `insert()` only: Geometry objects are
-    converted to their PostGIS counterparts. Null geometries are converted to
-    database `NULL`. Geometries in WGS84 will automatically be transformed into
-    the target column SRS if needed. Non-multi geometries will automatically be
-    transformed into multi-geometries if the target column has a multi-geometry
-    type.
+11. Geometry objects are converted to their PostGIS counterparts. Null
+    geometries are converted to database `NULL`. Geometries in WGS84 will
+    automatically be transformed into the target column SRS if needed.
+    Non-multi geometries will automatically be transformed into
+    multi-geometries if the target column has a multi-geometry type.
 
 If you want any other conversions, you have to do them yourself in your Lua
 code. Osm2pgsql provides some helper functions for other conversions, see
 the Lua helper library ([Appendix B](#lua-library-for-flex-output)).
-
-Conversion to `json` and `jsonb` columns is only available from osm2pgsql
-1.5.0 onwards. In versions before that you have to provide valid JSON from
-your Lua script to those columns yourself.
-{: .note}
 
 ### Geometry Objects in Lua
 
@@ -751,18 +721,18 @@ PostGIS functions with equivalent names.
 | Function                        | Description |
 | ------------------------------- | ----------- |
 | :area()                         | Returns the area of the geometry calculated on the projected coordinates. The area is calculated using the SRS of the geometry, the result is in map units. For any geometry type but (MULTI)POLYGON the result is always `0.0`. (See also `:spherical_area()`.) |
-| :centroid()                     | Return the centroid (center of mass) of a geometry. (Implemented for all geometry types in *Version >= 1.7.1*{:.version}.) |
+| :centroid()                     | Return the centroid (center of mass) of a geometry. Implemented for all geometry types. |
 | :geometries()                   | Returns an iterator for iterating over member geometries of a multi-geometry. See below for detail. |
 | :geometry_n()                   | Returns the nth geometry (1-based) of a multi-geometry. |
 | :geometry_type()                | Returns the type of geometry as a string: `NULL`, `POINT`, `LINESTRING`, `POLYGON`, `MULTIPOINT`, `MULTILINESTRING`, `MULTIPOLYGON`, or `GEOMETRYCOLLECTION`.
 | :is_null()                      | Returns `true` if the geometry is a NULL geometry, `false` otherwise. |
-| :length()                       | *Version >= 1.7.1*{:.version} Returns the length of the geometry. For any geometry type but (MULTI)LINESTRING this is always `0.0`. The length is calculated using the SRS of the geometry, the result is in map units. |
+| :length()                       | Returns the length of the geometry. For any geometry type but (MULTI)LINESTRING this is always `0.0`. The length is calculated using the SRS of the geometry, the result is in map units. |
 | :line_merge()                   | Merge lines in a (MULTI)LINESTRING as much as possible into longer lines. |
 | :num_geometries()               | Returns the number of geometries in a multi-geometry. Always 0 for NULL geometries and always 1 for non-multi geometries. |
-| :pole_of_inaccessibility(opts)  | *Version >= 1.8.0*{:.version} *Experimental*{:.experimental} Calculate "pole of inaccessibility" of a polygon, a point farthest away from the polygon boundary, sometimes called the center of the maximum inscribed circle. Note that for performance reasons this is an approximation. It is intended as a reasonably good labelling point. One optional parameter *opts*, which must be a Lua table with options. The only option currently defined is `stretch`. If this is set to a value larger than 1 an ellipse instead of a circle is inscribed. This might be useful for labels which usually use more space horizontally. Use a value between 0 and 1 for a vertical ellipse. |
+| :pole_of_inaccessibility(opts)  | Calculate "pole of inaccessibility" of a polygon, a point farthest away from the polygon boundary, sometimes called the center of the maximum inscribed circle. Note that for performance reasons this is an approximation. It is intended as a reasonably good labelling point. One optional parameter *opts*, which must be a Lua table with options. The only option currently defined is `stretch`. If this is set to a value larger than 1 an ellipse instead of a circle is inscribed. This might be useful for labels which usually use more space horizontally. Use a value between 0 and 1 for a vertical ellipse. |
 | :segmentize(max_segment_length) | Segmentize a (MULTI)LINESTRING, so that no segment is longer than `max_segment_length`. Result is a (MULTI)LINESTRING. |
-| :simplify(tolerance)            | Simplify (MULTI)LINESTRING geometries with the Douglas-Peucker algorithm. (Currently not implemented for other geometry types. For multilinestrings only available in *Version >= 1.7.1*{: .version}) |
-| :spherical_area()               | *Version >= 1.9.0*{:.version} Returns the area of the geometry calculated on the spheroid. The geometry must be in WGS 84 (4326). For any geometry type but (MULTI)POLYGON the result is always `0.0`. The result is in m². (See also `:area()`.) |
+| :simplify(tolerance)            | Simplify (MULTI)LINESTRING geometries with the Douglas-Peucker algorithm. (Currently not implemented for other geometry types.) |
+| :spherical_area()               | Returns the area of the geometry calculated on the spheroid. The geometry must be in WGS 84 (4326). For any geometry type but (MULTI)POLYGON the result is always `0.0`. The result is in m². (See also `:area()`.) |
 | :srid()                         | Return SRID of the geometry. |
 | :transform(target_srid)         | Transform the geometry to the target SRS. |
 {:.desc}

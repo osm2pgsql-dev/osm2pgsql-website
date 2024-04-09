@@ -106,8 +106,9 @@ of the tile size, in the *flex* output it is possible to change it using the
 These are the command line options to configure expiry. Use them with the
 *pgsql* or *flex* output.
 
-*Version >= 1.9.0*{:.version} When using the *flex* output it is recommended
-you switch to the new way of defining the expire output explained in [Defining
-and Using Expire Outputs](#defining-and-using-expire-outputs).
+When using the *flex* output it is recommended you switch to the new way of
+defining the expire output explained in [Defining and Using Expire
+Outputs](#defining-and-using-expire-outputs).
+{:.tip}
 
 {% include_relative options/expire.md %}

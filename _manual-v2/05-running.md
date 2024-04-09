@@ -101,6 +101,10 @@ username) using a unix domain socket. Most usage only requires setting
 
 {% include_relative options/database.md %}
 
+Note that the `-W` or `--password` option does not take a password as argument!
+It just makes sure that osm2pgsql will ask for a password interactively.
+{:.tip}
+
 You can also use libpq environment variables to set connection parameters. For
 a full list of available parameters, please consult the
 [PostgreSQL documentation](https://www.postgresql.org/docs/current/libpq-envars.html).
@@ -154,12 +158,6 @@ planet files, change files, and usual extracts all follow this convention.
 Osm2pgsql can only read OSM files ordered in this way. This allows some
 optimizations in the code which speed up the normal processing.
 
-Older versions of osm2pgsql will sometimes work or appear to work with
-unsorted data, but it is not recommended to rely on this, because the
-processed data might be corrupted. Versions from 1.3.0 warn when you are
-using unsorted data. From version 1.4.0 on, only sorted OSM files are allowed.
-{:.note}
-
 See the [Appendix A](#getting-and-preparing-osm-data) for more information on
 how to get and prepare OSM data for use with osm2pgsql.
 
@@ -175,10 +173,6 @@ osm2pgsql. See [Appendix A](#getting-and-preparing-osm-data) for options.
 #### Working with Multiple Input Files
 
 Usually you are using osm2pgsql with a single input file.
-
-Do not use osm2pgsql with more than one input file in versions before 1.4.0.
-It might work or it might not.
-{: .note}
 
 Osm2pgsql can read multiple input files at once,
 merging the data from the input files ignoring any duplicate data. For this to

@@ -20,8 +20,7 @@ schema by default.
 
 The properties table tracks some settings derived from the command line options
 and from the input file(s). It allows osm2pgsql to make sure that updates are
-run with compatible options. Versions before 1.9.0 do not create this table
-and so they don't offer the checks specified below.
+run with compatible options.
 
 The `osm2pgsql_properties` table contains two columns: The `property` column
 contains the name of a property and the `value` column its value. Properties
@@ -34,7 +33,7 @@ The following properties are currently defined:
 | ----------------------------- | ------ | ----------- |
 | `attributes`                  | bool   | Import with OSM attributes (i.e. osm2pgsql was run with `-x` or `--extra-attributes`)? |
 | `current_timestamp`           | string | Largest timestamp of any object in any of the input file(s) in ISO format (`YYYY-mm-ddTHH:MM:SSZ`). Updated with each data update. |
-| `db_format`                   | int    | 0 = not updatable, 1 = legacy format, 2 = new format. |
+| `db_format`                   | int    | 0 = not updatable, 1 = legacy format (not supported any more), 2 = current format. |
 | `flat_node_file`              | string | Absolute filename of the flat node file (specified with `--flat-nodes`). See below for some details. |
 | `import_timestamp`            | string | Largest timestamp of any object in the in the input file(s) in ISO format (`YYYY-mm-ddTHH:MM:SSZ`). Only set for initial import. |
 | `output`                      | string | The output as set with the `-O` or `--output` option. |
@@ -95,27 +94,12 @@ The middle stores its data in the database in the following tables. The
 | PREFIX_users | OSM users     |
 {:.desc}
 
-Note that if a flat node file is used (see below) the `PREFIX_nodes` table
-might be missing or empty, because nodes are stored in the flat node file
-instead. The users table is only used in the new database format and when the
-`-x, --extra-attributes` command line option is used (see below).
+If a flat node file is used (see below) the `PREFIX_nodes` table might be
+missing or empty, because nodes are stored in the flat node file instead. The
+users table is only used when the `-x, --extra-attributes` command line option
+is set (see below).
 
-Historically the names and structure of these tables, colloquially referred to
-as "slim tables", are an internal implementation detail of osm2pgsql that users
-should not rely on. We are currently in the process of moving from the `legacy`
-table format to the `new` format which is designed to be easier to use also for
-users.
-
-*Version < 1.9.0*{: .version} Only the `legacy` format is available.
-
-*Version == 1.9.0*{: .version} The `legacy` format is the default. The `new`
-format is experimental. To set the format use the
-`--middle-database-format=FORMAT` command line option on import (in "create
-mode"). For updates (in "append mode") the database format will be
-autodetected.
-
-The details of the legacy format are not documented, you should not rely on
-that format. In the new format the tables have the following structure:
+The tables have the following structure:
 
 | Column       | Type              | Description |
 | ------------ | ----------------- | ----------- |
@@ -282,9 +266,6 @@ ignored. All data is stored in RAM and uses however much memory it needs.
 
 ### Bucket Index for Slim Mode
 
-*Version >= 1.4.0*{: .version} This is only available from osm2pgsql version
-1.4.0! It is enabled by default since 1.7.0.
-
 Osm2pgsql can use an index for way node lookups in slim mode that needs a lot
 less disk space than earlier versions did. For a planet the savings can be
 about 200 GB! Because the index is so much smaller, imports are faster, too.
@@ -293,68 +274,6 @@ people.
 
 *If you are not using slim mode and/or not doing updates of your database, this
 does not apply to you.*
-
-For backwards compatibility osm2pgsql will never update an existing database
-to the new index. It will keep using the old index. So you do not have to do
-anything when upgrading osm2pgsql.
-
-If you want to use the new index, there are two ways of doing this: The "safe"
-way for most users and the "do-it-yourself" way for expert users. Note that
-once you switched to the new index, older versions of osm2pgsql will not work
-correctly any more.
-
-#### Update for Most Users
-
-*Version >= 1.7.0*{: .version} In versions 1.4.0 to 1.6.0 the index was not
-enabled by default. Add `--middle-way-node-index-id-shift=5` as command line
-option for these versions. Do not use a number different than 5 unless you
-know what you are doing.
-
-If your database was created with an older version of osm2pgsql you might want
-to start again from an empty database. Just do a reimport and osm2pgsql will
-use the new space-saving index.
-
-#### Update for Expert Users
-
-This is only for users who are very familiar with osm2pgsql and PostgreSQL
-operation. You can break your osm2pgsql database beyond repair if something
-goes wrong here and you might not even notice.
-
-You can create the index yourself by following these steps:
-
-Drop the existing index. Replace `{prefix}` by the prefix you are using.
-Usually this is `planet_osm`:
-
-```sql
-DROP INDEX {prefix}_ways_nodes_idx;
-```
-
-Create the `index_bucket` function needed for the index. Replace
-`{way_node_index_id_shift}` by the number of bits you want the id to be
-shifted. If you don't have a reason to use something else, use `5`:
-
-```sql
-CREATE FUNCTION {prefix}_index_bucket(int8[]) RETURNS int8[] AS $$
-  SELECT ARRAY(SELECT DISTINCT unnest($1) >> {way_node_index_id_shift})
-$$ LANGUAGE SQL IMMUTABLE;
-```
-
-Now you can create the new index. Again, replace `{prefix}` by the prefix
-you are using:
-
-```sql
-CREATE INDEX {prefix}_ways_nodes_bucket_idx ON {prefix}_ways
-  USING GIN ({prefix}_index_bucket(nodes))
-  WITH (fastupdate = off);
-```
-
-If you want to create the index in a specific tablespace you can do this:
-
-```sql
-CREATE INDEX {prefix}_ways_nodes_bucket_idx ON {prefix}_ways
-  USING GIN ({prefix}_index_bucket(nodes))
-  WITH (fastupdate = off) TABLESPACE {tablespace};
-```
 
 #### Id Shift (for Experts)
 
@@ -379,10 +298,8 @@ You can set the shift with the command line option
 `--middle-way-node-index-id-shift`. Values between about 3 and 6 might make
 sense, from some tests it looks like 5 is a good value.
 
-To completely disable the bucket index and create an index compatible with
-earlier versions of osm2pgsql, use `--middle-way-node-index-id-shift=0`.
+To completely disable the bucket index use `--middle-way-node-index-id-shift=0`.
 
 ### Middle Command Line Options
 
 {% include_relative options/middle.md %}
-
