@@ -997,20 +997,17 @@ table.proj td {
 }
 
 div.releases-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(16em, 1fr));
-    gap: $osm2pgsql-grid-gap;
+    column-width: 25em;
+    column-gap: 20px;
 }
 
 div.releases-container div {
-    padding: 0 16px;
-    background-color: $osm2pgsql-color-box-fill;
-    border: 1px solid $osm2pgsql-color-box-border;
-    border-radius: 2px;
+    margin: 0 0 16px 0;
+    break-inside: avoid;
 }
 
-div.releases-container div:hover {
-    border: 1px solid $osm2pgsql-color-box-border-hover;
+div.releases-container ul {
+    margin: 0;
 }
 
 // ---------------- install ----------------
