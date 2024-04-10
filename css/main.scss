@@ -1010,6 +1010,32 @@ div.releases-container ul {
     margin: 0;
 }
 
+.release-links {
+    margin-top: 20px;
+    text-align: center;
+    line-height: 200%;
+}
+
+.release-links span {
+    padding: 2px 4px;
+    background-color: $osm2pgsql-color-box-border;
+    border: 1px solid $osm2pgsql-color-box-border;
+    border-radius: 2px;
+}
+
+.release-links a {
+    padding: 2px 4px;
+    text-decoration: none;
+    background-color: $osm2pgsql-color-box-fill;
+    border: 1px solid $osm2pgsql-color-box-border;
+    border-radius: 2px;
+    color: #000000;
+}
+
+.release-links a:hover {
+    border: 1px solid $osm2pgsql-color-box-border-hover;
+}
+
 // ---------------- install ----------------
 
 div.install {

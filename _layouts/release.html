@@ -35,3 +35,14 @@ title_section: Releases
     <li><a href="https://codeload.github.com/osm2pgsql-dev/osm2pgsql/zip/{{ page.version }}">Source code (zip)</a></li>
     <li><a href="/download/windows/osm2pgsql-{{ page.version }}-x64.zip">Windows binary (64bit)</a></li>
 </ul>
+
+<div class="release-links">
+{% assign sortedreleases = site.releases | sort: 'date' | reverse %}
+{% for release in sortedreleases -%}
+{% if release.version == page.version %}
+<span>{{ release.version }}</span>
+{% else %}
+<a href="{{ release.version | slugify }}.html">{{ release.version }}</a>
+{% endif %}
+{% endfor -%}
+</div>
