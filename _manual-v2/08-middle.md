@@ -75,7 +75,7 @@ the database. That program will also update those fields. If you import
 multiple files, these properties will not be set.
 
 The contents of the `osm2pgsql_properties` table are internal to osm2pgsql and
-you should never change them. Theres is one exception: You can add your own
+you should never change them. There is one exception: You can add your own
 properties for anything you need, but make sure to start the property names
 with an underscore (`_`). this way the property names will never clash with any
 names that osm2pgsql might introduce in the future.
@@ -168,9 +168,8 @@ PostgreSQL will automatically create BTREE indexes for primary keys on all
 middle tables. In addition there are the following indexes:
 
 An GIN index on the `nodes` column of the `ways` table allows you to find all
-ways referencing a give node. If you are using a bucket index (which is the
-default, see [below](#bucket-index-for-slim-mode)) you need to access this
-index with a query like this (which finds all ways referencing node 123):
+ways referencing a give node. You need to access this index with a query like
+this (which finds all ways referencing node 123):
 
 ```{sql}
 SELECT * FROM planet_osm_ways
@@ -181,12 +180,6 @@ SELECT * FROM planet_osm_ways
 Note the extra condition using the `planet_osm_index_bucket()` function which
 makes sure the index can be used. The function will have the same prefix as
 your tables (by default `planet_osm`).
-
-Without the bucket index, use a query like this:
-
-```{sql}
-SELECT * FROM planet_osm_ways WHERE nodes && ARRAY[123::int8];
-```
 
 To find the relations referencing specific nodes or ways use the
 `planet_osm_member_ids()` function described [above](#the-members-column).
@@ -237,7 +230,7 @@ offers significant space savings and speed increases, particularly on
 mechanical drives.
 
 The file will need approximately `8 bytes * maximum node ID`, regardless of the
-size of the extract. With current OSM data (in 2023) that's more than 80 GB.
+size of the extract. With current OSM data (in 2024) that's about 100 GB.
 As a good rule of thumb you can look at the current PBF planet file [on
 planet.osm.org](https://planet.openstreetmap.org/), the flat node file will
 probably be somewhat larger than that.
@@ -274,31 +267,6 @@ people.
 
 *If you are not using slim mode and/or not doing updates of your database, this
 does not apply to you.*
-
-#### Id Shift (for Experts)
-
-When an OSM node is changing, the way node index is used to look up all ways
-that use that particular node and therefore might have to be updated, too.
-This index is quite large, because most nodes are in at least one way.
-
-When creating a new database (when used in create mode with slim option),
-osm2pgsql can create a "bucket index" using a configurable id shift for the
-nodes in the way node index. This bucket index will create index entries not
-for each node id, but for "buckets" of node ids. It does this by shifting the
-node ids a few bits to the right. As a result there are far fewer entries
-in the index, it becomes a lot smaller. This is especially true in our case,
-because ways often contain consecutive nodes, so if node id `n` is in a way,
-there is a good chance, that node id `n+1` is also in the way.
-
-On the other hand, looking up an id will result in false positives, so the
-database has to retrieve more ways than absolutely necessary, which leads to
-the considerable slowdown.
-
-You can set the shift with the command line option
-`--middle-way-node-index-id-shift`. Values between about 3 and 6 might make
-sense, from some tests it looks like 5 is a good value.
-
-To completely disable the bucket index use `--middle-way-node-index-id-shift=0`.
 
 ### Middle Command Line Options
 

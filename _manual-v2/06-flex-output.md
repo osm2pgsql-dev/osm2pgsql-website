@@ -14,9 +14,10 @@ Use the `-S, --style=FILE` option to specify the name of the Lua file along
 with the `-O flex` or `--output=flex` option to specify the use of the flex
 output.
 
-Unlike the pgsql output, the flex output doesn't use command line options
-for configuration, but the Lua config file only.
-{: .note}
+The *flex* output is much more capable than the legacy *pgsql*, which will
+be removed at some point. Use the *flex* output for any new projects and
+switch old projects over.
+{:.tip}
 
 The flex style file is a Lua script. You can use all the power of the [Lua
 language](https://www.lua.org/){:.extlink}. It gives you a lot of freedom to
@@ -39,7 +40,9 @@ the following fields and functions:
 | osm2pgsql.**version**                                         | The version of osm2pgsql as a string. |
 | osm2pgsql.**config_dir**                                      | The directory where your Lua config file is. Useful when you want to include more files from Lua. |
 | osm2pgsql.**mode**                                            | Either `"create"` or `"append"` depending on the command line options (`-c, --create` or `-a, --append`). |
+| osm2pgsql.**properties**                                      | A Lua table which gives read-only access to the contents of [the properties](#the-properties-table). |
 | osm2pgsql.**stage**                                           | Either `1` or `2` (1st/2nd stage processing of the data). See below. |
+| osm2pgsql.**define_expire_output**(OPTIONS)                   | Define an expire output table or file. See below. |
 | osm2pgsql.**define_node_table**(NAME, COLUMNS[, OPTIONS])     | Define a node table. |
 | osm2pgsql.**define_way_table**(NAME, COLUMNS[, OPTIONS])      | Define a way table. |
 | osm2pgsql.**define_relation_table**(NAME, COLUMNS[, OPTIONS]) | Define a relation table. |
@@ -52,11 +55,11 @@ Lua helper library described in [Appendix B](#lua-library-for-flex-output).
 
 ### Defining a Table
 
-You have to define one or more database tables where your data should end up.
-This is done with the `osm2pgsql.define_table()` function or, more commonly,
-with one of the slightly more convenient functions
-`osm2pgsql.define_(node|way|relation|area)_table()`.
-In create mode, osm2pgsql will create those tables for you in the database.
+Usually you want to define one or more database tables where your data should
+end up. This is done with the `osm2pgsql.define_table()` function or, more
+commonly, with one of the slightly more convenient functions
+`osm2pgsql.define_(node|way|relation|area)_table()`. In create mode, osm2pgsql
+will create those tables for you in the database.
 
 #### Basic Table Definition
 
@@ -204,11 +207,10 @@ It is often desirable to have a unique PRIMARY KEY on database tables. Many
 programs need this.
 
 There seems to be a natural unique key, the OSM node, way, or relation ID the
-data came from. But there is a problem with that: Depending on the
-configuration, osm2pgsql sometimes adds several rows to the output tables with
-the same OSM ID. This typically happens when long linestrings are split into
-shorter pieces or multipolygons are split into their constituent polygons, but
-it can also happen if your Lua configuration adds two rows to the same table.
+data came from. But there is a problem with that: It depends on the Lua config
+file whether a key is unique or not. Nothing prevents you from inserting
+multiple rows into the database with the same id. It often makes sense in fact,
+for instance when splitting a multipolygon into its constituent polygons.
 
 If you need unique keys on your database tables there are two options: Using
 those natural keys and making sure that you don't have duplicate entries. Or
@@ -221,14 +223,9 @@ To use OSM IDs as primary keys, you have to make sure that you only ever add a
 single row per OSM object to an output table, i.e. do not call `insert`
 multiple times on the same table for the same OSM object.
 
-You probably also want an index on the ID column. If you are running in slim
-mode, osm2pgsql will create that index for you. But in non-slim mode you have
-to do this yourself with `CREATE UNIQUE INDEX`. You can also use [`ALTER
-TABLE`](https://www.postgresql.org/docs/current/sql-altertable.html){:.extlink}
-to make the column an "official" primary key column.
-
-See the chapter on [Defining Indexes](#defining-indexes) on how to create this
-index from osm2pgsql.
+Set the `create_index` option in the `ids` setting (see above) to `'unique'`
+to get a `UNIQUE` index instead of the normal non-unique index for the ID
+column.
 
 #### Using an Additional ID Column
 
@@ -250,14 +247,8 @@ like this:
 The `create_only` tells osm2pgsql that it should create this column but not
 try to fill it when adding rows (because PostgreSQL does it for us).
 
-You probably also want an index on this column. After the first import of your
-data using osm2pgsql, use `CREATE UNIQUE INDEX` to create one. You can also use
-[`ALTER
-TABLE`](https://www.postgresql.org/docs/current/sql-altertable.html){:.extlink}
-to make the column an "official" primary key column.
-
-See the chapter on [Defining Indexes](#defining-indexes) on how to create this
-index from osm2pgsql.
+You probably also want an index on this column. See the chapter on [Defining
+Indexes](#defining-indexes) on how to create this index from osm2pgsql.
 
 Since PostgreSQL 10 you can use the `GENERATED ... AS IDENTITY` clause instead
 of the `SERIAL` type which does something very similar, although using anything
@@ -305,7 +296,6 @@ But it is possible to set them individually for special cases.
 | multilinestring    | `geometry(MULTILINESTRING,*SRID*)`    | (\*) |
 | multipolygon       | `geometry(MULTIPOLYGON,*SRID*)`       | (\*) |
 | geometrycollection | `geometry(GEOMETRYCOLLECTION,*SRID*)` | (\*) |
-| area               | `real `                | |
 {: .desc}
 
 The `SRID` for the geometry SQL types comes from the `projection` parameter.
@@ -385,11 +375,12 @@ least the `method` and either `column` or `expression`.
 | Key        | Description |
 | ---------- | ----------- |
 | column     | The name of the column the index should be created on. Can also be an array of names. Required, unless `expression` is set. |
+| name       | Optional name of this index. (Default: Let PostgreSQL choose the name.) |
 | expression | A valid SQL expression used for [indexes on expressions](https://www.postgresql.org/docs/current/indexes-expressional.html){:.extlink}. Can not be used together with `column`. |
 | include    | A column name or list of column names to include in the index as non-key columns. (Only available from PostgreSQL 11.) |
 | method     | The index method ('btree', 'gist', ...). See the [PostgreSQL docs](https://www.postgresql.org/docs/current/indexes-types.html){:.extlink} for available types (required). |
 | tablespace | The tablespace where the index should be created. Default is the tablespace set with `index_tablespace` in the table definition. |
-| unique     | Set this to `true` or `false` (default). |
+| unique     | Set this to `true` or `false` (default). Note that you have to make sure yourself never to add non-unique data to this column. |
 | where      | A condition for a [partial index](https://www.postgresql.org/docs/current/indexes-partial.html){:.extlink}. This has to be set to a text that makes valid SQL if added after a `WHERE` in the `CREATE INDEX` command. |
 {: .desc}
 
@@ -445,16 +436,25 @@ example config file.
 
 You are expected to define one or more of the following functions:
 
-| Callback function                      | Description                              |
-| -------------------------------------- | ---------------------------------------- |
-| osm2pgsql.**process_node**(object)     | Called for each new or changed node.     |
-| osm2pgsql.**process_way**(object)      | Called for each new or changed way.      |
-| osm2pgsql.**process_relation**(object) | Called for each new or changed relation. |
+| Callback function                               | Description                                       |
+| ----------------------------------------------- | ------------------------------------------------- |
+| osm2pgsql.**process_node**(object)              | Called for each new or changed tagged node.       |
+| osm2pgsql.**process_way**(object)               | Called for each new or changed tagged way.        |
+| osm2pgsql.**process_relation**(object)          | Called for each new or changed tagged relation.   |
+| osm2pgsql.**process_untagged_node**(object)     | Called for each new or changed untagged node.     |
+| osm2pgsql.**process_untagged_way**(object)      | Called for each new or changed untagged way.      |
+| osm2pgsql.**process_untagged_relation**(object) | Called for each new or changed untagged relation. |
 {: .desc}
 
 They all have a single argument of type table (here called `object`) and no
 return value. If you are not interested in all object types, you do not have
 to supply all the functions.
+
+Usually you are only interested in tagged objects, i.e. OSM objects that have
+at least one tag, so you will only define one or more of the first three
+functions. But if you are interested in untagged objects also, define the
+last three functions. If you want to have the same behaviour for untagged
+and tagged objects, you can define the functions to be the same.
 
 These functions are called for each new or modified OSM object in the input
 file. No function is called for deleted objects, osm2pgsql will automatically
@@ -479,11 +479,11 @@ The parameter table (`object`) has the following fields and functions:
 | .changeset        | Changeset containing this version of the OSM object. (\*) |
 | .uid              | User id of the user that created or last changed this OSM object. (\*) |
 | .user             | User name of the user that created or last changed this OSM object. (\*) |
-| :grab_tag(KEY)    | Return the tag value of the specified key and remove the tag from the list of tags. (Example: `local name = object:grab_tag('name')`) This is often used when you want to store some tags in special columns and the rest of the tags in an jsonb or hstore column. |
-| :get_bbox()       | Get the bounding box of the current node, way, or relation. This function returns four result values: the lon/lat values for the bottom left corner of the bounding box, followed by the lon/lat values of the top right corner. Both lon/lat values are identical in case of nodes. Example: `lon, lat, dummy, dummy = object:get_bbox()`. Relation members (nested relations) are not taken into account.) |
 | .is_closed        | Ways only: A boolean telling you whether the way geometry is closed, i.e. the first and last node are the same. |
 | .nodes            | Ways only: An array with the way node ids. |
 | .members          | Relations only: An array with member tables. Each member table has the fields `type` (values `n`, `w`, or `r`), `ref` (member id) and `role`. |
+| :grab_tag(KEY)    | Return the tag value of the specified key and remove the tag from the list of tags. (Example: `local name = object:grab_tag('name')`) This is often used when you want to store some tags in special columns and the rest of the tags in an jsonb or hstore column. |
+| :get_bbox()       | Get the bounding box of the current node, way, or relation. This function returns four result values: the lon/lat values for the bottom left corner of the bounding box, followed by the lon/lat values of the top right corner. Both lon/lat values are identical in case of nodes. Example: `lon, lat, dummy, dummy = object:get_bbox()`. Relation members (nested relations) are not taken into account. |
 | :as_point()              | Create point geometry from OSM node object. |
 | :as_linestring()         | Create linestring geometry from OSM way object. |
 | :as_polygon()            | Create polygon geometry from OSM way object. |
@@ -493,8 +493,9 @@ The parameter table (`object`) has the following fields and functions:
 | :as_geometrycollection() | Create geometry collection from OSM relation object. |
 {: .desc}
 
-These are only available if the `-x|--extra-attributes` option is used and the
-OSM input file actually contains those fields.
+These are only available if the OSM input file actually contains those fields.
+When handling updates they are only included if the middle table contain this
+data (i.e. when `-x|--extra-attributes` option was used).
 {: .table-note}
 
 The `as_*` functions will return a NULL geometry if
@@ -525,13 +526,30 @@ geometries with `num_geometries()` and comparing that to the number of
 members of type node and relation.) If no valid geometry can be created, so
 if the geometry collection would be empty, a null geometry is returned instead.
 
+### The `after` Callback Functions
+
+There are three additional processing functions that are sometimes useful:
+
+| Callback function               | Description                               |
+| ------------------------------- | ----------------------------------------- |
+| osm2pgsql.**after_nodes**()     | Called after all nodes are processed.     |
+| osm2pgsql.**after_ways**()      | Called after all ways are processed.      |
+| osm2pgsql.**after_relations**() | Called after all relations are processed. |
+{: .desc}
+
+OSM data files contain objects in the order nodes, then ways, then relations.
+This means you will first get all the `process_(untagged_)node` calls, then
+the `after_nodes` call, then all the `process_(untagged_)way` calls, then the
+`after_ways` call, then all the `process_(untagged_)relation` calls, and
+lastly the `after_relations`call.
+
 ### The `insert()` Function
 
 Use the `insert()` function to add data to a previously defined table:
 
 ```lua
 -- definition of the table:
-table_pois = osm2pgsql.define_node_table('pois', {
+local table_pois = osm2pgsql.define_node_table('pois', {
     { column = 'tags', type = 'jsonb' },
     { column = 'name', type = 'text' },
     { column = 'geom', type = 'point' },
@@ -584,58 +602,65 @@ The last three are only set if the first is `false`.
 ### Stages
 
 When processing OSM data, osm2pgsql reads the input file(s) in order, nodes
-first, then ways, then relations. This means that when the ways are read and
-processed, osm2pgsql can't know yet whether a way is in a relation (or in
-several). But for some use cases we need to know in which relations a way is
-and what the tags of these relations are or the roles of those member ways.
-The typical case are relations of type `route` (bus routes etc.) where we
-might want to render the `name` or `ref` from the route relation onto the
-way geometry.
+first, then ways, then relations. This means that when the nodes or ways are
+read and processed, osm2pgsql can't know yet whether a node or way is in a
+relation (or in several). But for some use cases we need to know in which
+relations a node or way is and what the tags of these relations are or the
+roles of those member ways. The typical case are relations of type `route` (bus
+routes etc.) where we might want to render the `name` or `ref` from the route
+relation onto the way geometry.
 
 The osm2pgsql flex output supports this use case by adding an additional
 "reprocessing" step. Osm2pgsql will call the Lua function
 `osm2pgsql.select_relation_members()` for each added, modified, or deleted
-relation. Your job is to figure out which way members in that relation might
-need the information from the relation to be rendered correctly and return
-those ids in a Lua table with the only field 'ways'. This is usually done with
-a function like this:
+relation. Your job is to figure out which node or way members in that relation
+might need the information from the relation to be rendered correctly and
+return those ids in a Lua table with the 'nodes' and/or 'ways' fields. This is
+usually done with a function like this:
 
 ```lua
 function osm2pgsql.select_relation_members(relation)
     if relation.tags.type == 'route' then
-        return { ways = osm2pgsql.way_member_ids(relation) }
+        return {
+            nodes = {},
+            ways = osm2pgsql.way_member_ids(relation)
+        }
     end
 end
 ```
 
-Instead of using the helper function `osm2pgsql.way_member_ids()` which
-returns the ids of all way members, you can write your own code, for instance
-if you want to check the roles.
+Instead of using the helper function `osm2pgsql.way_member_ids()` which returns
+the ids of all way members (or the analog `osm2pgsql.node_member_ids()`
+function), you can write your own code, for instance if you want to check the
+roles.
 
 Note that `select_relation_members()` is called for deleted relations and for
 the old version of a modified relation as well as for new relations and the
 new version of a modified relation. This is needed, for instance, to correctly
 mark member ways of deleted relations, because they need to be updated, too.
-The decision whether a way is to be marked or not can only be based on the
+The decision whether a node/way is to be marked or not can only be based on the
 tags of the relation and/or the roles of the members. If you take other
 information into account, updates might not work correctly.
 
 In addition you have to store whatever information you need about the relation
 in your `process_relation()` function in a global variable.
 
-Make sure you use `select_relation_members()` *only for deciding which ways to
-reprocess*, do not store information about the relations from that function,
-it will not work with updates. Use the `process_relation()` function instead.
-{: .note}
+Make sure you use `select_relation_members()` *only for deciding which
+nodes/ways to reprocess*, do not store information about the relations from
+that function, it will not work with updates. Use the `process_relation()`
+function instead.
+{:.note}
 
-After all relations are processed, osm2pgsql will reprocess all marked ways by
-calling the `process_way()` function for them again. This time around you have
-the information from the relation in the global variable and can use it.
+After all relations are processed, osm2pgsql will reprocess all marked
+nodes/ways by calling the `process_node()` and `process_way()` functions,
+respectively, for them again. This time around you have the information from
+the relation in the global variable and can use it.
 
-If you don't mark any ways, nothing will be done in this reprocessing stage.
+If you don't mark any nodes or ways, nothing will be done in this reprocessing
+stage.
 
-(It is currently not possible to mark nodes or relations. This might or might
-not be added in future versions of osm2pgsql.)
+(It is currently not possible to mark relations. This might or might not be
+added in future versions of osm2pgsql.)
 
 You can look at `osm2pgsql.stage` to see in which stage you are.
 
@@ -722,6 +747,7 @@ PostGIS functions with equivalent names.
 | ------------------------------- | ----------- |
 | :area()                         | Returns the area of the geometry calculated on the projected coordinates. The area is calculated using the SRS of the geometry, the result is in map units. For any geometry type but (MULTI)POLYGON the result is always `0.0`. (See also `:spherical_area()`.) |
 | :centroid()                     | Return the centroid (center of mass) of a geometry. Implemented for all geometry types. |
+| :get_bbox()                     | Get the bounding box of this geometry. This function returns four result values: the lon/lat values for the bottom left corner of the bounding box, followed by the lon/lat values of the top right corner. Both lon/lat values are identical in case of points. Example: `lon, lat, dummy, dummy = object:as_polygon():centroid():get_bbox()`. If possible use the `get_bbox()` function on the OSM object instead, it is more efficient. |
 | :geometries()                   | Returns an iterator for iterating over member geometries of a multi-geometry. See below for detail. |
 | :geometry_n()                   | Returns the nth geometry (1-based) of a multi-geometry. |
 | :geometry_type()                | Returns the type of geometry as a string: `NULL`, `POINT`, `LINESTRING`, `POLYGON`, `MULTIPOINT`, `MULTILINESTRING`, `MULTIPOLYGON`, or `GEOMETRYCOLLECTION`.

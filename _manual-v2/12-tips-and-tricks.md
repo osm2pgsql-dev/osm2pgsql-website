@@ -157,7 +157,7 @@ Here are some tips:
 * Don't do work more than once. Store intermediate results in local variables
   instead of recomputing it. For instance if you need the geometry of an OSM
   object several times, get it once and store it (`local geom =
-  object.as_polygon(); local center = geom:centroid()`).
+  object:as_polygon(); local center = geom:centroid()`).
 
 See [Lua Performance Tips](https://www.lua.org/gems/sample.pdf){:.extlink} from
 the author of Lua for some in-depth tips on how to improve your Lua code. [This

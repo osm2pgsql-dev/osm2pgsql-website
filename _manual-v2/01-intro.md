@@ -32,7 +32,9 @@ useful.
 
 This manual always documents the current version of osm2pgsql. If same
 information is only valid in [certain versions]({% link releases/index.md %}),
-the section will have a note like this: *Version >= 1.4.0*{: .version}
+the section will have a note like this: *Version >= 2.0.0*{: .version}
+This manual is only for version 2 and above, refer to the
+[manual v1]({% link doc/manual-v1.html %}) for older versions.
 
 Sections labelled *Experimental*{:.experimental} describe new features which
 might change at any point without notice. We encourage you to experiment with

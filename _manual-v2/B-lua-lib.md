@@ -84,6 +84,16 @@ functions:
         and end. If STRING is `nil`, `nil` is returned.
       example: |
         local name = osm2pgsql.trim(object.tags.name)
+    - name: node_member_ids
+      synopsis: osm2pgsql.node_member_ids(RELATION)
+      description: |
+        Return an array table with the ids of all node members of RELATION.
+      example: |
+        function osm2pgsql.select_relation_members(relation)
+            if relation.tags.type == 'boundary' then
+                return { ways = osm2pgsql.node_member_ids(relation) }
+            end
+        end
     - name: way_member_ids
       synopsis: osm2pgsql.way_member_ids(RELATION)
       description: |

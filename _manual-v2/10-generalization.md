@@ -206,7 +206,7 @@ parameters):
 | --------------- | ---- | ----------- |
 | image_extent    | int  | Width/height of the raster used for generalization (Default: 2048). |
 | margin          | real | The overlapping margin as a percentage of `image_extent` for raster processing of tiles. |
-| buffer_size     | text | Amount by which polygons are buffered in pixels. |
+| buffer_size     | text | Amount by which polygons are buffered in pixels (Default: 10). |
 | zoom            | int  | Zoom level. |
 | group_by_column | text | Name of a column in the source and destination tables used to group the geometries by some kind of classification (Optional). |
 | expire_list     | text | |
@@ -267,6 +267,23 @@ parameters):
 | zoom            | int  | Zoom level. |
 | expire_list     | text | |
 {:.desc}
+
+#### Strategy `tile-sql`
+
+Run some SQL code for each tile. Use {ZOOM}, {X}, and {Y} in the SQL command to
+set the zoom level and tile coordinates.
+
+This strategy is tile-based.
+
+Parameters used by this strategy (see below for some additional general
+parameters):
+
+| Parameter       | Type | Description |
+| --------------- | ---- | ----------- |
+| sql             | int  | The SQL code to run. |
+| zoom            | int  | Zoom level. |
+{:.desc}
+
 
 ### Running osmp2gsql-gen
 

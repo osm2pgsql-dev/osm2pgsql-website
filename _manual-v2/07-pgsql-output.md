@@ -5,14 +5,15 @@ title: The Pgsql Output
 
 The pgsql output is the original output osm2pgsql started with. It was designed
 for rendering OpenStreetMap data, principally with Mapnik. It is still widely
-used although it is somewhat limited in how the data can be represented in
-the database.
+used although it is much more limited than the more modern ["flex"
+output](#the-flex-output) in how the data can be represented in the
+database.
 
 If you are starting a new project with osm2pgsql, we recommend you use the
-[flex output](#the-flex-output) instead. The pgsql output does not receive all
-the new features that the flex output has or will get in the future. The pgsql
-output will be removed at some point, so you should think about migrating your
-existing projects.
+[flex output](#the-flex-output) instead. The pgsql output is marked as
+deprecated now and does not get any of the new features that the flex output
+has or will get in the future. The pgsql output will be removed at some point,
+so you should think about migrating your existing projects.
 {: .note}
 
 ### Database Layout

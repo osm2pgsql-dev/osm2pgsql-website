@@ -153,11 +153,10 @@ Note that osm2pgsql will ignore the roles (`inner` and `outer`) on multipolygon
 and boundary relations when assembling multipolygons, because the roles are
 sometimes wrong or missing.
 
-Relations with more than 32767 members are ignored by osm2pgsql. This is due to
-some internal limitations in the way we store relations in the database. The
-OSM database limits the number of members to 32000, but historically more
-members were allowed, so keep this in mind if you are working with older OSM
-data.
+Relations with more than 32767 members are ignored by osm2pgsql. This protects
+osm2pgsql and any post-processing against bad data. The OSM database limits the
+number of members to 32000, but historically more members were allowed, so keep
+this in mind if you are working with older OSM data.
 {:.note}
 
 ### Handling of Incomplete OSM Data

@@ -107,10 +107,10 @@ It just makes sure that osm2pgsql will ask for a password interactively.
 
 You can also use libpq environment variables to set connection parameters. For
 a full list of available parameters, please consult the
-[PostgreSQL documentation](https://www.postgresql.org/docs/current/libpq-envars.html).
+[PostgreSQL documentation](https://www.postgresql.org/docs/current/libpq-envars.html){:.extlink}.
 
 When you need a password for your database connection and want to run osm2pgsql
-inside scripts, then use a [pgpass file](https://www.postgresql.org/docs/current/libpq-pgpass.html)
+inside scripts, then use a [pgpass file](https://www.postgresql.org/docs/current/libpq-pgpass.html){:.extlink}
 with appropriate permissions to store the password. All other methods of giving
 the password to osm2pgsql are inherently insecure. You can either put a
 `.pgpass` file in the user's home directory or supply its location through the
@@ -205,7 +205,7 @@ for different use cases are available:
 The *flex* Output
 
 : This is the most modern and most flexible output
-  option. If you are starting a new project, use this output. Many future
+  option. If you are starting a new project, use this output. Future
   improvements to osm2pgsql will only be available in this output.
 
 : Unlike all the other output options there is almost no limit to how the OSM
@@ -219,10 +219,10 @@ The *flex* Output
 
 The *pgsql* Output
 
-: The *pgsql* output is the original output and the one that most people who
-  have been using osm2pgsql know about. Many tutorials you find on the Internet
-  only describe this output. It is quite limited in how the data can be
-  written to the database, but many setups still use it.
+: The *pgsql* output is the original output. It is now deprecated but still
+  widely used. Many tutorials you find on the Internet only describe this
+  output. It is quite limited in how the data can be written to the database,
+  but many setups still use it.
 
 : This output comes in two "flavours": With the original "C transformation"
   and with the somewhat newer "Lua transformation" which allows some changes

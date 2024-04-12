@@ -22,8 +22,7 @@ title: Documentation
 <a class="box box2" href="{% link doc/manual-v1.html %}">
     <h2>{% include img/book.svg %} Manual v1</h2>
 
-    <p>The manual contains all the details about running the old osm2pgsql
-    version 1.x.y.</p>
+    <p>This is the manual for older versions of osm2pgsql (1.x.y).</p>
 </a>
 
 <a class="box box2" href="{% link doc/tutorials/index.md %}">

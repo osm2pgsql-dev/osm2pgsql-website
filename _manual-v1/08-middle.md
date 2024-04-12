@@ -76,7 +76,7 @@ the database. That program will also update those fields. If you import
 multiple files, these properties will not be set.
 
 The contents of the `osm2pgsql_properties` table are internal to osm2pgsql and
-you should never change them. Theres is one exception: You can add your own
+you should never change them. There is one exception: You can add your own
 properties for anything you need, but make sure to start the property names
 with an underscore (`_`). this way the property names will never clash with any
 names that osm2pgsql might introduce in the future.
@@ -253,7 +253,7 @@ offers significant space savings and speed increases, particularly on
 mechanical drives.
 
 The file will need approximately `8 bytes * maximum node ID`, regardless of the
-size of the extract. With current OSM data (in 2023) that's more than 80 GB.
+size of the extract. With current OSM data (in 2024) that's about 100 GB.
 As a good rule of thumb you can look at the current PBF planet file [on
 planet.osm.org](https://planet.openstreetmap.org/), the flat node file will
 probably be somewhat larger than that.

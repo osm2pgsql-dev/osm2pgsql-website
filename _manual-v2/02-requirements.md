@@ -37,6 +37,9 @@ Requirements for your system will vary widely depending on
 * the amount of data you want to store (city-sized extract or the whole planet?)
 * whether or not you want to update the data regularly
 
+See the [Sizing appendix](#sizing) for some ideas on how large a disk you might
+need.
+
 ### Database Software
 
 You need the [PostgreSQL](https://www.postgresql.org/){:.extlink} database
@@ -62,16 +65,10 @@ tell us if you have any experience with them.
 
 ### Lua Scripting Language
 
-Some parts of osm2pgsql require the use of the
-[Lua](https://www.lua.org/){:.extlink} scripting language. It is highly
-recommended that you use a version of osm2pgsql with Lua support enabled,
-because it gives you a much more flexible configuration. If available osm2pgsql
-can also be compiled using the Lua JIT (just in time) compiler. Use of Lua JIT
-is recommended, especially for larger systems, because it will speed up
-processing.
-
-Osm2pgsql can also be compiled without Lua support. In that case you can not
-use the modern *flex* output.
+Osm2pgsql requires the use of the [Lua](https://www.lua.org/){:.extlink}
+scripting language. If available osm2pgsql can also be compiled using the Lua
+JIT (just in time) compiler. Use of Lua JIT is recommended, especially for
+larger systems, because it will speed up processing.
 
 Security Note: Lua scripts can do basically anything on your computer that the
 user running osm2pgsql is allowed to do, such as reading and writing files,

@@ -24,7 +24,9 @@ To create a database that can be used by osm2pgsql follow these steps:
    any special rights. We'll use `osmuser` here.
 2. Create a database that osm2pgsql will use belonging to the user you just
    created. We'll use `osm` as a name here.
-3. Enable the `postgis` and `hstore` extensions in the newly created database.
+3. Enable the `postgis` extension in the newly created database.
+4. Optionally enable the `hstore` extension in the database, it is used in
+   some popular configurations, but not needed by osm2pgsql itself.
 
 On a typical Linux system you'll have a system user called `postgres` which
 has admin privileges for the database system. We'll use that user for these
@@ -106,7 +108,7 @@ is not well tuned for large databases. You should change these settings in
 `postgresql.conf` and restart PostgreSQL before running osm2pgsql, otherwise
 your system will be much slower than necessary.
 
-The following settings are geared towards a system with 64GB RAM and a fast
+The following settings are geared towards a system with 128GB RAM and a fast
 SSD. The values in the second column are suggestions to provide a good starting
 point for a typical setup, you might have to adjust them for your use case. The
 value in the third column is the default set by PostgreSQL 15.
