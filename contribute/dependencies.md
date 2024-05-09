@@ -15,15 +15,15 @@ repositories:
       name: Debian 10 Buster
       date: 2019-07-06
       eol: 2024
+    - id: ubuntu_24_04
+      name: Ubuntu 24.04 (Noble)
+      date: 2024-04-25
+      eol: 2029-06
+      gs: groupstart
     - id: ubuntu_23_10
       name: Ubuntu 23.10 (Mantic)
       date: 2023-10-12
       eol: 2024-07
-      gs: groupstart
-    - id: ubuntu_23_04
-      name: Ubuntu 23.04 (Lunar)
-      date: 2023-04-20
-      eol: 2024-01
     - id: ubuntu_22_04
       name: Ubuntu 22.04 (Jammy)
       date: 2022-04-21
@@ -32,25 +32,21 @@ repositories:
       name: Ubuntu 20.04 (Focal)
       date: 2020-04-23
       eol: 2025-04
-    - id: ubuntu_18_04
-      name: Ubuntu 18.04 (Bionic)
-      date: 2018-04-26
-      eol: 2023-04
     - id: fedora_rawhide
       name: Fedora Rawhide
       gs: groupstart
+    - id: fedora_40
+      name: Fedora 40
+      date: 2024-04-23
+      eol: 2025-05-13
+    - id: fedora_39
+      name: Fedora 39
+      date: 2023-11-07
+      eol: 2024-11-12
     - id: fedora_38
       name: Fedora 38
       date: 2023-04-18
       eol: 2024-05-14
-    - id: fedora_37
-      name: Fedora 37
-      date: 2022-11-15
-      eol: 2023-11-14
-    - id: fedora_36
-      name: Fedora 36
-      date: 2022-05-10
-      eol: 2023-05-16
     - id: centos_8
       name: CentOS 8
       date: 2019-09-24
