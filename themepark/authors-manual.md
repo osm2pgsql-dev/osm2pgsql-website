@@ -65,7 +65,7 @@ All sections are optional.
 
 ## Defining a Table
 
-Tables are defined with `themepark::add_table(SETTINGS)`. It has many of the
+Tables are defined with `themepark:add_table(SETTINGS)`. It has many of the
 same settings as the underlaying `osm2pgsql.define_table()` function, but adds
 some extra functionality.
 
@@ -74,7 +74,7 @@ Here are all the settings:
 | Setting  | Description |
 | -------- | ----------- |
 | columns  | Column definitions, see below. |
-| geom     | The type of the geometry column. |
+| geom     | If this is a string, sets the type of the geometry column (`point`, `linestring`, ...); the column will be named `geom`. If this is a Lua table, use `column` key to define the name of the geometry column and `type` for the geometry type.  |
 | external | Set this to `true` if the table is created outside osm2pgsql. |
 | ids_type | See below. |
 | indexes  | Index definitions. See [Flex manual]({% link doc/manual.html %}#defining-indexes) for details. |
@@ -198,7 +198,7 @@ It has the following parameters:
 | Parameter  | Description |
 | ---------- | ----------- |
 | TABLE_NAME | The name of the table as defined with `themepark:add_table()` |
-| ATTRS      | A Lua table with the column names mapping to their values. Use `geom` for the geometry column. |
+| ATTRS      | A Lua table with the column names mapping to their values. (Use `geom` for the geometry column unless you have defined it with a different name.) |
 | TAGS       | The tags straight from the OSM object. Optional, see [Debug mode](#debug-mode) below. |
 | DEBUG      | A Lua table with any extra data to be stored in the debug column. Optional, see [Debug mode](#debug-mode) below. |
 {:.desc}
@@ -208,7 +208,6 @@ It has the following parameters:
 Themepark uses some conventions when naming things and proposes others to make
 config files more consistent and easier to use.
 
-* Geometry columns are always called `geom`. This is currently not configurable.
 * Id columns are named `node_id`, `way_id`, `relation_id` or `area_id` for
   the respective `ids_type` settings. For the `any` type, columns `osm_id`
   and `osm_type` are used. For `tile` type, columns `x` and `y` are used.
