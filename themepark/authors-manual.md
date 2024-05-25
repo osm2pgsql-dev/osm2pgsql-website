@@ -80,7 +80,7 @@ Here are all the settings:
 | indexes  | Index definitions. See [Flex manual]({% link doc/manual.html %}#defining-indexes) for details. |
 | name     | The table name for the database and also used in the config file to refer to the table. |
 | schema   | Schema override. Use option `schema` to set for all tables. |
-| tags     | Set OSM tags use in this table (optional, used for `taginfo` plugin only). |
+| tags     | Set OSM tags used in this table (optional, used for `taginfo` plugin only). |
 | tiles    | Set settings for tileservers (optional, used with tileserver plugins only).|
 {:.desc}
 
