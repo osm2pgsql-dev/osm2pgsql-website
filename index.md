@@ -20,58 +20,21 @@ title: Home
 
 Osm2pgsql is an Open Source tool for importing
 [OpenStreetMap](https://www.openstreetmap.org/){:.extlink} (OSM) data into a
-PostgreSQL/PostGIS database. It is an essential part of many rendering
-toolchains, the Nominatim geocoder and other applications processing OSM data.
+PostgreSQL/PostGIS database. Essentially it is a very specialized ETL
+(Extract-Transform-Load) tool for OpenStreetMap data. [PostgreSQL
+database](https://www.postgresql.org/){:.extlink} is the most advanced Open
+Source database, together with the [PostGIS](https://postgis.net/){:.extlink}
+extension for handling geographical data it offers an extremely powerful
+way of working with OpenStreetMap data.
 
-Who is using osm2pgsql? [Find out]({% link about/users/index.md %}).
-</section>
+Osm2pgsql is an essential part of many services that take OSM data and create
+maps from it. It is also used in the Nominatim geocoder and numerous other
+applications processing OSM data.
 
-<section markdown="1">
-## Features
-
-Flexible configuration
-
-: Clean up and convert the OSM data in any way you like before importing into
-  the database. Database table names, column structure, data types, can all
-  be configured the way your application or style needs it.
-
-Stay up-to-date with OSM
-
-: An osm2pgsql database can be updated from OSM change files. If you want to,
-  you can keep your database current with only a few minutes delay from the
-  main OSM database.
-
-Valid Geometries
-
-: Osm2pgsl creates point, line, polygon, and multipolygon geometries from OSM
-  data and makes sure they are always valid.
-
-Portable
-
-: Osm2pgsql is a command line program written in portable C++. It works on
-  <img class="inline" alt="" src="{% link img/linux.png %}"/> Linux,
-  <img class="inline" alt="" src="{% link img/windows.png %}"/> Windows, and
-  <img class="inline" alt="" src="{% link img/apple.png %}"/> macOS.
-
-Many OSM input formats
-
-: Process OSM files of any type (in XML, PBF, or O5M format).
-
-Any Projection
-
-: Import geometries in Lon/Lat (WGS84), Web Mercator (most popular format for
-  map tiles), or any other projection.
-
-Support for json, jsonb and hstore columns
-
-: Use `json`, `jsonb`, and `hstore` PostgreSQL data types to store the complete
-  set of tags of an OSM object in a single database column.
-
-Resource friendly
-
-: You can run a database with *all* OpenStreetMap data for the whole planet
-  on a single, reasonable-sized machine.
-
+[More about osm2pgsql:]({% link about/index.md %})
+* [Features]({% link about/features/index.md %})
+* [Project history]({% link about/history/index.md %})
+* [Who is using osm2pgsql?]({% link about/users/index.md %})
 </section>
 
 <section markdown="1">

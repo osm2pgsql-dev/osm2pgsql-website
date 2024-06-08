@@ -1062,6 +1062,71 @@ div.install a svg {
     height: 1em;
 }
 
+// ---------------- history ----------------
+
+.history-chart {
+    text-align: center;
+}
+
+.history-chart img {
+    width: 100%;
+    max-width: 800px;
+}
+
+@media screen and (min-width: 600px) {
+    .contributors-list {
+        float: right;
+        width: 200px;
+        min-height: 1000px;
+        margin-left: 40px;
+        background-color: $osm2pgsql-color-box-fill;
+        border: 1px solid $osm2pgsql-color-box-border;
+        border-radius: 2px;
+        padding: 10px;
+    }
+
+    .contributors-list h2 {
+        margin-top: 0;
+        text-align: center;
+    }
+
+    .contributors-list table {
+        width: 100%;
+    }
+
+    .contributors-list td:nth-child(3) {
+        text-align: right;
+    }
+
+    .contributors-list img {
+        width: 32px;
+        height: 32px;
+        border-radius: 4px;
+    }
+
+    .history {
+        margin-left: 100px;
+        margin-right: 280px;
+    }
+
+    .history h2 {
+        position: absolute;
+        left: 20px;
+        margin: 2px 0 0 0;
+        border-radius: 4px;
+        color: #ffffff;
+        background-color: $osm2pgsql-color-dark;
+        padding: 0 8px 1px 8px;
+        font-size: 150%;
+    }
+}
+
+@media screen and (max-width: 599px) {
+    .contributors-list {
+        display: none;
+    }
+}
+
 // ---------------- users ----------------
 
 .user-container {
@@ -1124,6 +1189,59 @@ div.install a svg {
 .user li {
     list-style-type: '▶  ';
     line-height: 150%;
+}
+
+// ---------------- features ----------------
+
+.features {
+    display: grid;
+}
+
+.features > * {
+    margin-top: 0;
+}
+
+.features h3 {
+    padding-top: 10px;
+    padding-right: 20px;
+}
+
+.features-info {
+}
+
+.features-info p:first-child  {
+    margin-top: 0;
+}
+
+.features-info p:last-child  {
+    margin-bottom: 0;
+}
+
+@media screen and (min-width: 860px) {
+    .features {
+        grid-template-columns: 20em 1fr 20em;
+    }
+    .features > * {
+        border-top: 1px dotted #a0a0a0;
+        padding: 10px 0;
+    }
+}
+
+.features-link {
+    position: relative;
+    transform: scale(1.5);
+    top: 2px;
+    padding-left: 4px;
+    width: 1em;
+    height: 1em;
+}
+
+.features-list {
+    padding: 10px 0 10px 20px;
+}
+
+.features-list ul {
+    margin: 0;
 }
 
 // ---------------- examples ----------------

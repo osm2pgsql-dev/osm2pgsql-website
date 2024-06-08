@@ -25,8 +25,14 @@
                 <input type="checkbox"/>
                 <span></span><span></span><span></span>
                 <ul id="menu">
-                    <li><a href="{% link index.md %}">Home</a></li>
                     <li><a href="{% link news/index.md %}">News</a></li>
+                    <li><a href="{% link about/index.md %}">About</a>
+                        <ul>
+                            <li><a href="{% link about/features/index.md %}">Features</a></li>
+                            <li><a href="{% link about/history/index.md %}">History</a></li>
+                            <li><a href="{% link about/users/index.md %}">Users</a></li>
+                        </ul>
+                    </li>
                     <li><a href="{% link doc/index.md %}">Documentation</a>
                         <ul>
                             <li><a href="{% link doc/install.md %}">Installation</a></li>
