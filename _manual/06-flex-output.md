@@ -574,6 +574,10 @@ if the geometry collection would be empty, a null geometry is returned instead.
 
 ### The `add_row` function
 
+The `add_row()` function is deprecated, use `insert()` [described
+below](#the-insert-function) instead.
+{: .note}
+
 ```lua
 -- definition of the table:
 table_pois = osm2pgsql.define_node_table('pois', {
