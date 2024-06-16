@@ -53,6 +53,8 @@ collections:
     posts:
         output: true
         permalink: /news/:year/:month/:day/:title:output_ext
+    users:
+        output: false
 defaults:
     -
         scope:

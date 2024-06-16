@@ -17,13 +17,6 @@ These examples show some use cases of osm2pgsql and highlight some features.
     it easy to generate any kind of vector tiles.</p>
 </a>
 
-<a class="example" href="{% link examples/nominatim/index.md %}">
-    <h3>Nominatim</h3>
-    <p>The Nominatim Geocoder uses osm2pgsql for the import of OSM data. It
-    adds its own postprocessing to create the special data structures needed
-    for geocoding.</p>
-</a>
-
 <a class="example" href="{% link examples/buildings/index.md %}">
     <img alt="" src="{% link examples/buildings/brasilia2-small.png %}"/>
     <h3>Building Map</h3>

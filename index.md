@@ -23,6 +23,7 @@ Osm2pgsql is an Open Source tool for importing
 PostgreSQL/PostGIS database. It is an essential part of many rendering
 toolchains, the Nominatim geocoder and other applications processing OSM data.
 
+Who is using osm2pgsql? [Find out]({% link about/users/index.md %}).
 </section>
 
 <section markdown="1">
@@ -70,7 +71,6 @@ Resource friendly
 
 : You can run a database with *all* OpenStreetMap data for the whole planet
   on a single, reasonable-sized machine.
-
 
 </section>
 
