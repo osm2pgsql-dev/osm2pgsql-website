@@ -22,7 +22,7 @@ But the distinctive shape of this planned city shows up nevertheless.
 
 First, we need some data. The smallest extract available from the [Geofabrik
 Download server](https://download.geofabrik.de/) containing the city is the
-"centro-oeste" region. Lets download that:
+"centro-oeste" region. Let's download that:
 
 ```sh
 wget https://download.geofabrik.de/south-america/brazil/centro-oeste-latest.osm.pbf
@@ -32,7 +32,7 @@ A quick search on the OSM web site find the [Distrito
 Federal](https://www.openstreetmap.org/relation/421151) as a good boundary
 of the area of interest. If we scroll down to the end of the box on the left
 side of that page we find a link "Download XML". We get the URL from that
-and add "/full" to the end. Downloading that gives use the relation containing
+and add "/full" to the end. Downloading that gives us the relation containing
 the boundary including all ways and nodes needed:
 
 ```sh
