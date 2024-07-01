@@ -7,45 +7,45 @@ title: Documentation
 <div class="container">
 
 <a class="box box2" href="{% link doc/install.md %}">
-    <h2><img src="{% link img/download.svg %}" alt=""/> Installation</h2>
+    <h2>{% include img/download.svg %} Installation</h2>
 
     <p>Instructions for downloading and installing osm2pgsql on different architectures.</p>
 </a>
 
 <a class="box box2" href="{% link doc/manual.html %}">
-    <h2><img src="{% link img/book.svg %}" alt=""/> Manual</h2>
+    <h2>{% include img/book.svg %}  Manual</h2>
 
     <p>The manual contains all the details about running osm2pgsql.</p>
 </a>
 
 <a class="box box2" href="{% link doc/tutorials/index.md %}">
-    <h2><img src="{% link img/document.svg %}" alt=""/> Tutorials</h2>
+    <h2>{% include img/tutorials.svg %} Tutorials</h2>
 
     <p>Tutorials help new and advanced users with specific tasks around
     <tt>osm2pgsql</tt>.</p>
 </a>
 
 <a class="box box2" href="{% link doc/man/index.md %}">
-    <h2><img src="{% link img/document.svg %}" alt=""/> Man Pages</h2>
+    <h2>{% include img/manpages.svg %} Man Pages</h2>
 
     <p>The man pages have short overviews about running the <tt>osm2pgsql</tt>
     and <tt>osm2pgsql-replication</tt> commands.</p>
 </a>
 
 <a class="box box2" href="{% link doc/faq.md %}">
-    <h2><img src="{% link img/faq.svg %}" alt=""/> FAQ</h2>
+    <h2>{% include img/faq.svg %} FAQ</h2>
 
     <p>The FAQ is a list of frequently asked questions and answers.</p>
 </a>
 
 <a class="box box2" href="{% link doc/community.md %}">
-    <h2><img src="{% link img/users.svg %}" alt=""/> Community Docs</h2>
+    <h2>{% include img/community.svg %} Community Docs</h2>
 
     <p>Blog posts, videos, and more on osm2pgsql from the community.</p>
 </a>
 
 <a class="box box2" href="{% link releases/index.md %}">
-    <h2><img src="{% link img/archive.svg %}" alt=""/> Releases</h2>
+    <h2>{% include img/archive.svg %} Releases</h2>
 
     <p>All releases with release notes and download links.</p>
 </a>
