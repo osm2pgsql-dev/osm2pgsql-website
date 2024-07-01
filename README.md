@@ -49,3 +49,7 @@ groff -mandoc -Thtml man/osm2pgsql-replication.1
 Copy the result into a page similar to `doc/man/osm2pgsql-replication-1.6.0.md`
 and add a link to `doc/man/index.md`.
 
+## Icons
+
+Some icons are from [Ionicons](https://github.com/ionic-team/ionicons).
+
