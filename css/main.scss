@@ -1062,12 +1062,11 @@ div.install a:hover {
     border: 1px solid $osm2pgsql-color-box-border-hover;
 }
 
-div.install a img {
+div.install a svg {
     position: relative;
-    top: 2px;
+    top: 4px;
     width: 1em;
     height: 1em;
-    padding-right: 0.3em;
 }
 
 // ---------------- users ----------------

@@ -11,12 +11,12 @@ currently {{ site.releases | sort: 'date' | map: "version" | last }}.
 [![latest packaged version(s)](https://repology.org/badge/latest-versions/osm2pgsql.svg)](https://repology.org/project/osm2pgsql/versions)
 
 <div class="install">
-    <a href="{% link doc/install/linux.md %}"><img alt="" src="{% link img/linux.png %}"/>Installing on Linux</a>
-    <a href="{% link doc/install/windows.md %}"><img alt="" src="{% link img/windows.png %}"/>Installing on Windows</a>
-    <a href="{% link doc/install/macos.md %}"><img alt="" src="{% link img/apple.png %}"/>Installing on macOS</a>
-    <a href="{% link doc/install/freebsd.md %}"><img alt="" src="{% link img/freebsd.png %}"/>Installing on FreeBSD</a>
-    <a href="{% link doc/install/docker.md %}"><img alt="" src="{% link img/docker.png %}"/>Installing with Docker</a>
-    <a href="{% link doc/install/source.md %}"><img alt="" src="{% link img/source.png %}"/>Installing from Source</a>
+    <a href="{% link doc/install/linux.md %}">{% include img/logo-tux.svg %}Installing on Linux</a>
+    <a href="{% link doc/install/windows.md %}">{% include img/logo-windows.svg %}Installing on Windows</a>
+    <a href="{% link doc/install/macos.md %}">{% include img/logo-apple.svg %}Installing on macOS</a>
+    <a href="{% link doc/install/freebsd.md %}">{% include img/logo-freebsd.svg %}Installing on FreeBSD</a>
+    <a href="{% link doc/install/docker.md %}">{% include img/logo-docker.svg %}Installing with Docker</a>
+    <a href="{% link doc/install/source.md %}">{% include img/from-source.svg %}Installing from Source</a>
 </div>
 
 ## Upgrading an Existing Installation
