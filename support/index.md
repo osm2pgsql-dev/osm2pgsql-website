@@ -55,9 +55,6 @@ You can also ask questions or discuss features and ideas
 <section markdown="1">
 ## Reporting Bugs
 
-<a href="https://github.com/osm2pgsql-dev/osm2pgsql/issues"><img src="{% link img/github-large.png %}" width="36" height="36" alt="osm2pgsql on Github"/></a>
-{:.flright}
-
 You can report bugs and problems by opening an issue on Github. Please check
 [existing issues](https://github.com/osm2pgsql-dev/osm2pgsql/issues){:.extlink}
 first.
