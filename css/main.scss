@@ -1004,6 +1004,11 @@ div.releases-container ul {
     line-height: 200%;
 }
 
+.release-links h2 {
+    font-size: 100%;
+    margin: 2px;
+}
+
 .release-links span {
     padding: 2px 4px;
     background-color: $osm2pgsql-color-box-border;

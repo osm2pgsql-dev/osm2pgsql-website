@@ -36,6 +36,7 @@ title_section: Releases
 </ul>
 
 <div class="release-links">
+<h2>&mdash; Recent releases &mdash;</h2>
 {% assign sortedreleases = site.releases | sort: 'date' | reverse %}
 {% for release in sortedreleases -%}
 {% if release.version == page.version %}
