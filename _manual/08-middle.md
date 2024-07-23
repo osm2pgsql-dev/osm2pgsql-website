@@ -130,7 +130,7 @@ that format. In the new format the tables have the following structure:
 You can create a PostGIS geometry from the `lat` and `lon` columns like this:
 
 ```{sql}
-SELECT id, ST_SetSRID(ST_MakePoint(lat / 10000000.0, lon / 10000000.0), 4326) AS geom FROM planet_osm_nodes;
+SELECT id, ST_SetSRID(ST_MakePoint(lon / 10000000.0, lat / 10000000.0), 4326) AS geom FROM planet_osm_nodes;
 ```
 
 #### The `members` Column
