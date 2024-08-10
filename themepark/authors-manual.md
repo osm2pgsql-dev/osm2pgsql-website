@@ -1,8 +1,8 @@
 ---
-title: Themepark Authors Manual
+title: Themepark Author's Manual
 ---
 
-# Themepark Authors Manual
+# Themepark Author's Manual
 
 This manual is for authors of Themepark themes and topics. You should also
 refer to the [chapter on the Flex Output in the osm2pgsql manual]({% link

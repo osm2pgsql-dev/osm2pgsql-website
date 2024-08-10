@@ -1,8 +1,8 @@
 ---
-title: Themepark Users Manual
+title: Themepark User's Manual
 ---
 
-# Themepark Users Manual
+# Themepark User's Manual
 
 You need a config file to give to osm2pgsql. It first has to load the Themepark
 framework:

@@ -57,11 +57,11 @@ file for a tileserver. You can use existing plugins or write your own.
 
 ## Manuals
 
-Read the [**Themepark Users Manual**]({% link themepark/users-manual.md %}) if
+Read the [**Themepark User's Manual**]({% link themepark/users-manual.md %}) if
 you want to use (and possibly modify) a configuration based on Themepark for
 your map.
 
-Read the [**Themepark Authors Manual**]({% link themepark/authors-manual.md %})
+Read the [**Themepark Author's Manual**]({% link themepark/authors-manual.md %})
 if you want to write your own Themepark themes.
 
 ## Examples
