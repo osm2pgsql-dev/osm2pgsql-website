@@ -21,13 +21,20 @@ will be valid Lua identifier.
 3. Create a file `hotdog/init.lua` with the following content:
 
 ```lua
+local themepark = ...
 local theme = {}
+
+-- your code here
+
 return theme
 ```
 
-You can add any code common to your theme in that file, between the two lines
-just added. Make sure all variables are `local` to that script. Add anything
-you might need outside the file to the `theme` table.
+*(Add the three dots exactly as you see them above.)*
+
+You can add any code common to your theme in that file. You can access
+functions from the themepark framework through the `themepark` variable. Make
+sure all variables are `local` to that script. Add anything you might need
+outside the file to the `theme` table.
 
 Now you are ready to add topics...
 
