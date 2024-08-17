@@ -71,7 +71,7 @@ This approach needs more disk space for your database than the "Import Only"
 approach, because all the information necessary for the updates must be stored
 somewhere.
 
-Usually you will need to use at least the `-C, --cache` or `--flat-nodes`
+Usually you will need to use at least the `-C, --cache` or `-F, --flat-nodes`
 command line options when doing imports and updates. See the chapter
 [Middle](#middle) for details.
 

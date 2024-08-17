@@ -34,7 +34,7 @@ The following properties are currently defined:
 | `attributes`                  | bool   | Import with OSM attributes (i.e. osm2pgsql was run with `-x` or `--extra-attributes`)? |
 | `current_timestamp`           | string | Largest timestamp of any object in any of the input file(s) in ISO format (`YYYY-mm-ddTHH:MM:SSZ`). Updated with each data update. |
 | `db_format`                   | int    | 0 = not updatable, 1 = legacy format (not supported any more), 2 = current format. |
-| `flat_node_file`              | string | Absolute filename of the flat node file (specified with `--flat-nodes`). See below for some details. |
+| `flat_node_file`              | string | Absolute filename of the flat node file (specified with `-F` or `--flat-nodes`). See below for some details. |
 | `import_timestamp`            | string | Largest timestamp of any object in the in the input file(s) in ISO format (`YYYY-mm-ddTHH:MM:SSZ`). Only set for initial import. |
 | `output`                      | string | The output as set with the `-O` or `--output` option. |
 | `prefix`                      | string | Table name prefix set with `-p` or `--prefix`. |
@@ -60,7 +60,7 @@ converted to absolute file names and stored in the `flat_node_file` and `style`
 property, respectively. That means that osm2pgsql will find the files again
 even if you start it from a different current working directory. If you need to
 move the flat node or style file somewhere else, you can do that. The next time
-you run osm2pgsql, add the `--flat-nodes` or `-S, --style` option again with
+you run osm2pgsql, add the `-F, --flat-nodes` or `-S, --style` option again with
 the new file name and osm2pgsql will use the new name and update the properties
 table accordingly.
 
@@ -114,7 +114,7 @@ The tables have the following structure:
 You can create a PostGIS geometry from the `lat` and `lon` columns like this:
 
 ```{sql}
-SELECT id, ST_SetSRID(ST_MakePoint(lat / 10000000.0, lon / 10000000.0), 4326) AS geom FROM planet_osm_nodes;
+SELECT id, ST_SetSRID(ST_MakePoint(lon / 10000000.0, lat / 10000000.0), 4326) AS geom FROM planet_osm_nodes;
 ```
 
 #### The `members` Column
@@ -230,7 +230,7 @@ the database that you might be using.
 
 ### Flat Node Store
 
-`--flat-nodes` specifies that instead of a table in PostgreSQL, a binary
+`-F` or `--flat-nodes` specifies that instead of a table in PostgreSQL, a binary
 file is used as a database of node locations. This should only be used on full
 planet imports or very large extracts (e.g. Europe) but in those situations
 offers significant space savings and speed increases, particularly on

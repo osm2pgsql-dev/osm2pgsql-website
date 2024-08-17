@@ -501,7 +501,7 @@ The `as_*` functions will return a NULL geometry if
 the geometry can not be created for some reason, for instance a polygon can
 only be created from closed ways. This can also happen if your input data is
 incomplete, for instance when nodes referenced from a way are missing.
-You can check the [geometry object](#geometry-objects-in-lua) for 
+You can check the [geometry object](#geometry-objects-in-lua) for
 `is_null()`, for example `object:as_multipolygon():is_null()`.
 
 The `as_linestring()` and `as_polygon()` functions can only be used on ways.
