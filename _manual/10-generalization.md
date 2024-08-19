@@ -206,7 +206,7 @@ parameters):
 | --------------- | ---- | ----------- |
 | image_extent    | int  | Width/height of the raster used for generalization (Default: 2048). |
 | margin          | real | The overlapping margin as a percentage of `image_extent` for raster processing of tiles. |
-| buffer_size     | text | Amount by which polygons are buffered in pixels. |
+| buffer_size     | text | Amount by which polygons are buffered in pixels (Default 10). |
 | zoom            | int  | Zoom level. |
 | group_by_column | text | Name of a column in the source and destination tables used to group the geometries by some kind of classification (Optional). |
 | expire_list     | text | |
