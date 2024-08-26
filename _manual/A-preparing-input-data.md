@@ -261,6 +261,12 @@ your database completely and re-import from a more current OSM data file
 instead of updating the database from change files.
 {:.note}
 
+Processing a daily update in one step is fine, but if you want to update data
+for longer time periods update it in steps, one for each day or so. If you
+update too much data in one step, there is a good chance the update will take
+a long time or even fail.
+{:.note}
+
 If you have imported an extract into an osm2pgsql database but there are no
 change files for the area of the extract, you can still use the replication
 diffs from planet.osm.org to update your database. But, because those extracts
