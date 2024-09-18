@@ -3,6 +3,7 @@ layout: doc
 title: Frequently Asked Questions (FAQ)
 ---
 
+<article>
 <section markdown="1">
 
 ## Usage
@@ -199,5 +200,45 @@ with other databases (or can't even do it because we don't have access to those
 databases), we can not guarantee that things will not break in the future.
 
 </section>
+<section markdown="1">
+
+## Deprecations
+
+### The "pgsql" output is deprecated. What does that mean?
+
+Osm2pgsql supports several different "outputs", basically different ways of
+configuring osm2pgsql to achieve the database structure that you want. The
+"pgsql" output is the original one and it isn't up to the task any more.
+Modern OSM data is much more complex and varied than it can handle. So since
+2020 we developed the "flex" output with its own config file format which can
+do all the "pgsql" output can do and much more.
+
+Switching the output mostly means you need a config file in the new format.
+There is no way to just rewrite a config file automatically, you have to do
+that yourself. Also a lot of stuff that used to be configured on the command
+line for the "pgsql" output is now set in the config file, you have to change
+your command lines accordingly. At a minimum you need to change `-O pgsql` (the
+default) to `-O flex` and specify the new config file with `-S`.
+
+It depends on your configuration whether you need a reimport. It is possible
+to write a "flex" configuration in a way that it creates the same database
+as a "pgsql" configuration in which case you do not need a reimport. But
+chances are you want to take advantage of some of the "flex" capabilities and
+use the switch to improve your database layout and contents.
+
+If you are using the popular OSM Carto style: A "flex" version of that style
+has been available for a while, chances are it will be merged into OSM Carto
+at some point (see
+[PR](https://github.com/gravitystorm/openstreetmap-carto/pull/4978){:.extlink}).
+It is 100% compatible to the old configuration, no reimport is necessary.
+
+The "pgsql" output has been marked as deprecated in the version 2.0.0 of
+osm2pgsql (slated for release in September 2024). We'll remove it in version
+3.0.0 which is not anywhere near, so there is some time to switch. But start
+doing that now, you'll not only be more future-proof, you'll get to use all the
+new features and capabilities.
+
+</section>
+</article>
 
 {% include heading-links.html %}
