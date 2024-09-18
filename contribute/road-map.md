@@ -5,7 +5,7 @@ title: Road Map
 
 # Road Map for Osm2pgsql
 
-Current as of 2024-03-31.
+Current as of 2024-09-18.
 
 This document is a kind of road map for osm2pgsql development. It's not to be
 understood as a definite "this is what we'll do" document, but as a rough
@@ -84,7 +84,10 @@ contribute.
 This cleanup work is mostly something that can be done "on the side" whenever
 that particular piece of code is touched anyway.
 
-The main places left which need updating in this regard is the expire code.
+The main place left which needs updating in this regard is the expire code.
+Some of the code in the pgsql output also shows its C legacy, but because
+that code is deprecated anyway and will be removed, cleaning it up is not a
+priority.
 
 ### Documentation
 
@@ -96,31 +99,15 @@ with some tutorials and how-to type documents.
 
 ### Configuration / Command Line
 
-Currently a lot of osm2pgsql options are only available through the command
-line and most likely there will be more things we want configurable in the
-future. We'll need to think about a more consistent story what options are
-available where, how they interact and how to configure things that go beyond
-the option=value paradigm.
+The command line options show the history of osm2pgsql. A lot of options
+would look different if we'd do them today. With the switch to version 2 we
+have cleaned up a lof of that and with the removal of the pgsql output in
+version 3 we'll be able to clean up a lot more.
 
 Where possible we should differentiate clearly between style configuration
-(everything related to tags etc.) and operational configuration (cache sizes,
-file names, etc.)
-
-Issues:
-
-* [1680](https://github.com/osm2pgsql-dev/osm2pgsql/issues/1680)
-
-### Progress Output and Logging
-
-While running osm2pgsql produces a lot of output telling the user what's going
-on. But the output is sometimes inconsistent, sometimes osm2pgsql goes for a
-long time without any output (especially when building indexes). With the
-better logging code in 1.4.0 the situation is now much improved, but there
-are still places where it can be done better.
-
-Issues:
-
-* [207](https://github.com/osm2pgsql-dev/osm2pgsql/issues/207)
+(everything related to tags etc.) which belong in the config files and
+operational configuration (cache sizes, file names, etc.) which belong on
+the command line.
 
 ### Object Store / Middle / Flat Node Store
 
@@ -135,7 +122,7 @@ structure and API only some information is available, for instance it isn't
 possible to find node members of relations.
 
 In 1.9.0 we released a major update to the database middle in 1.11.0 this
-became the default. The legacy database middle will be remove in 2.0.0.
+became the default. The legacy database middle will be removed in 2.0.0.
 
 In the future we might need some caching mechanism so that expensive database
 operations can be avoided as much as possible if the same information is asked
@@ -156,11 +143,8 @@ at the same time.
 Issues:
 
 * [193](https://github.com/osm2pgsql-dev/osm2pgsql/issues/193)
-* [1086](https://github.com/osm2pgsql-dev/osm2pgsql/issues/1086)
 * [1323](https://github.com/osm2pgsql-dev/osm2pgsql/issues/1323)
 * [1466](https://github.com/osm2pgsql-dev/osm2pgsql/issues/1466)
-* [1501](https://github.com/osm2pgsql-dev/osm2pgsql/issues/1501)
-* [1502](https://github.com/osm2pgsql-dev/osm2pgsql/issues/1502)
 
 ### Future of the Outputs
 
@@ -169,19 +153,17 @@ used in production environments for a long time. Some originally missing
 features have been added and it is ready to replace the other outputs. Users
 should all be able to switch to the flex output without missing any features
 they had in any of the other outputs. The *multi* output was already removed in
-version 1.5.0. The *gazetteer* output is already marked as deprecated and will
-be removed soon. Long term we want to also remove the *pgsql* output, but
-there is no timeline yet.
+version 1.5.0. The *gazetteer* output will be removed in version 2.0.0.0. Long
+term we want to also remove the *pgsql* output, it is marked as deprecated in
+2.0.0., but there is no timeline yet.
 
-Most new features are only be available in the flex output.
+New features are only available in the flex output.
 
-* [1086](https://github.com/osm2pgsql-dev/osm2pgsql/issues/1086)
 * [1130](https://github.com/osm2pgsql-dev/osm2pgsql/issues/1130)
-* [1870](https://github.com/osm2pgsql-dev/osm2pgsql/issues/1870)
 
 ### Processing Flexibility and Performance
 
-osm2pgsql processes data in several steps: Database tables are created, then
+Osm2pgsql processes data in several steps: Database tables are created, then
 data is imported, then clustered, then indexes created. Some of those steps are
 already configurable, but there is a lot of hardcoded logic in here. Users have
 repeatedly asked for more flexibility, for instance for index creation, which
@@ -202,12 +184,10 @@ for instance by caching.
 
 Issues:
 
-* [189](https://github.com/osm2pgsql-dev/osm2pgsql/issues/189)
 * [193](https://github.com/osm2pgsql-dev/osm2pgsql/issues/193)
 * [799](https://github.com/osm2pgsql-dev/osm2pgsql/issues/799)
 * [1046](https://github.com/osm2pgsql-dev/osm2pgsql/issues/1046)
 * [1248](https://github.com/osm2pgsql-dev/osm2pgsql/issues/1248)
-* [1680](https://github.com/osm2pgsql-dev/osm2pgsql/issues/1680)
 * [1751](https://github.com/osm2pgsql-dev/osm2pgsql/issues/1751)
 
 ### Tile Expiry
@@ -216,12 +196,11 @@ Osm2pgsql can generate a list of tiles that need to be expired due to updates
 to the database. It is memory intensive and the performance could probably
 be improved.
 
-This needs a deep look into what users actually need (the OSMF tile servers
-don't even use this but have a different way of calculating expired tiles)
-and how we can best support it. We should also think about whether we can do
-expiry calculations based on output tables, not data input. This ties in
-with the generalization work mentioned below, because -- in a way -- expire
-lists are also just generalizations of geometries.
+This needs a deep look into what users actually need and how we can best
+support it. We should also think about whether we can do expiry calculations
+based on output tables, not data input. This ties in with the generalization
+work mentioned below, because -- in a way -- expire lists are also just
+generalizations of geometries.
 
 Issues:
 
@@ -246,9 +225,6 @@ have grown tremendously and we haven't always kept up to be able to take
 advantage of new features like JSON(B) columns or GENERATED columns or new
 index types. In some cases our understanding of what the database is doing
 has improved and changes could introduce performance gains.
-
-Currently osm2pgsql opens a lot more database connections and keeps them open
-longer than probably needed. There is some room for improvement there.
 
 Issues:
 
