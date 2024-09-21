@@ -98,7 +98,7 @@ doc/manual-v1.html %}#upgrading).
 
 **Pgsql output deprecated**
 
-: The old "pgsql" output id deprecated now, it will be removed in the version 3
+: The old "pgsql" output is deprecated now, it will be removed in the version 3
   series. This is still a few years off, but please start moving your
   configurations over to the "flex" output.
 
