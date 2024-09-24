@@ -208,7 +208,7 @@ process. Then you load the changes into the database using osm2pgsql's "append"
 mode.
 
 We recommend the
-[`pyosmium_get_changes.py`](https://docs.osmcode.org/pyosmium/latest/tools_get_changes.html){:.extlink}
+[`pyosmium_get_changes.py`](https://docs.osmcode.org/pyosmium/latest/user_manual/10-Replication-Tools/){:.extlink}
 tool from the [PyOsmium](https://osmcode.org/pyosmium/){:.extlink} project.
 With it, downloading all changes since you ran the program the last time is
 just a single command.
