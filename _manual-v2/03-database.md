@@ -14,7 +14,7 @@ Linux this can almost always be done with the package manager of your
 distribution.
 
 * [PostgreSQL download page](https://www.postgresql.org/download/){:.extlink}
-* [PostGIS download page](https://postgis.net/install/){:.extlink}
+* [PostGIS install page](https://postgis.net/documentation/getting_started/){:.extlink}
 
 ### Creating a Database
 
