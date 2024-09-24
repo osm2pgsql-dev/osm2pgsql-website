@@ -225,6 +225,16 @@ config files more consistent and easier to use.
   data that is normally not shown. (Those tables will usually have setting
   `tiles = false`.)
 
+## Helper Functions
+
+The Themepark framework has a few helper functions:
+
+| Function                       | Description |
+| ------------------------------ | ----------- |
+| themepark.expand_template(str) | Expand instances of `{schema}` and `{prefix}` in the input `str` to the settings of the same name and return the result. |
+| themepark.with_prefix(name)    | Add configured prefix to a table name (if any) and return the full name. |
+{:.desc}
+
 ## Debug Mode
 
 For this to work you need to call `themepark:add_debug_info(ATTRS, TAGS, DEBUG)`
@@ -241,6 +251,7 @@ source code for details.
 | themepark:ids_policy()       | Decides how `ids_type` settings are translated into column names. |
 | themepark:way_is_area()      | Decides which ways are considered to be areas. |
 | themepark:relation_is_area() | Decides which relations are considered to be area. |
+{:.desc}
 
 ## Tileserver Plugins
 
