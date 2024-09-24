@@ -2,7 +2,7 @@
 title: Thunderforest
 order: 3
 links:
-    - href: https://thunderforest.com/
+    - href: https://www.thunderforest.com/
       title: Thunderforest
     - href: https://www.thunderforest.com/maps/opencyclemap/
       title: OpenCycleMap information
