@@ -75,6 +75,11 @@ Usually you will need to use at least the `-C, --cache` or `-F, --flat-nodes`
 command line options when doing imports and updates. See the chapter
 [Middle](#middle) for details.
 
+Osm2pgsql needs the tables, indexes, etc. that it creates to be where it
+expects them to be. Do not rename of otherwise change anything created by
+osm2pgsql!
+{:.note}
+
 #### Getting Help or Version
 
 To get help or the program version call osm2pgsql with one of the following
