@@ -113,10 +113,9 @@ segments. This can make rendering of tiles faster, because smaller geometries
 need to be retrieved from the database when rendering a specific tile. The
 pgsql output always splits up long LineStrings, in latlong projection, lines
 will not be longer than 1°, in Web Mercator lines will not be longer than
-100,000 units (about 100,000 meters at the equator). The flex output will only
-split LineStrings if the `split_at` transformation parameter is used, see the
-[Geometry transformations](#geometry-transformations) section in the flex
-output chapter for details. See also the [Single vs. Multi
+100,000 units (about 100,000 meters at the equator). In the flex output you hae
+full control over line splitting by using (or not using) the `segmentize()`
+function. See also the [Single vs. Multi
 Geometries](#single-vs-multi-geometries) section above.
 
 When using the flex output, you can decide
