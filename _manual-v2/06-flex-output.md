@@ -254,6 +254,17 @@ Since PostgreSQL 10 you can use the `GENERATED ... AS IDENTITY` clause instead
 of the `SERIAL` type which does something very similar, although using anything
 but a proper PostgreSQL type here is not officially supported.
 
+You can also use a uuid primary key as your id column instead of the `SERIAL`
+type:
+
+```lua
+...
+{ column = 'id', sql_type = 'uuid PRIMARY KEY DEFAULT gen_random_uuid()', create_only = true },
+...
+```
+The same caveat applies that using anything but a proper PostgreSQL type for
+the sql_type is unsupported.
+
 ### Defining Columns
 
 In the table definitions the columns are specified as a list of Lua tables
