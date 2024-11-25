@@ -110,9 +110,11 @@ generate Taginfo project files.
 
 ## Debug Mode
 
-Set `themepark.debug = true` to enable debug mode at the beginning of your
-config file. When running osm2pgsql, you'll get some more output telling you
-what Themepark is doing. It will also enable extra debugging columns on your
+To enable debug mode, set `themepark.debug = true` at the beginning of your
+config file or set the environment variable `THEMEPARK_DEBUG`.
+
+In debug mode you'll get some more output telling you what Themepark is doing
+when running osm2pgsql. It will also enable extra debugging columns on your
 database tables as follows:
 
 **Tags:** If you set a tags column name with `themepark:set_option('tags',

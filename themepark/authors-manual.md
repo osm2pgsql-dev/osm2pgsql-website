@@ -206,8 +206,8 @@ It has the following parameters:
 | ---------- | ----------- |
 | TABLE_NAME | The name of the table as defined with `themepark:add_table()` |
 | ATTRS      | A Lua table with the column names mapping to their values. (Use `geom` for the geometry column unless you have defined it with a different name.) |
-| TAGS       | The tags straight from the OSM object. Optional, see [Debug mode](#debug-mode) below. |
-| DEBUG      | A Lua table with any extra data to be stored in the debug column. Optional, see [Debug mode](#debug-mode) below. |
+| TAGS       | The tags straight from the OSM object. Optional, used in debug mode. |
+| DEBUG      | A Lua table with any extra data to be stored in the debug column. Optional, used in debug mode. |
 {:.desc}
 
 ## Naming Conventions
@@ -234,11 +234,6 @@ The Themepark framework has a few helper functions:
 | themepark.expand_template(str) | Expand instances of `{schema}` and `{prefix}` in the input `str` to the settings of the same name and return the result. |
 | themepark.with_prefix(name)    | Add configured prefix to a table name (if any) and return the full name. |
 {:.desc}
-
-## Debug Mode
-
-For this to work you need to call `themepark:add_debug_info(ATTRS, TAGS, DEBUG)`
-XXX.
 
 ## Customization Points
 
