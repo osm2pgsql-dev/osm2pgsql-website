@@ -44,7 +44,7 @@ plugins only.
 Add any topics you want to use in your map using the
 `themepark:add_topic('THEME/TOPIC', OPTIONS)` command. In most cases there
 are no OPTIONS, but if the topic has some configuration options, you can set
-them
+them.
 
 Example: `themepark:add_topic('shortbread_v1/water')`
 
@@ -150,4 +150,12 @@ something like
 ```{sh}
 osm2pgsql -d DATABASE -O flex -S CONFIG.lua OSM-DATA-FILE
 ```
+
+## Using Themepark Functions without Theme
+
+It is possible to use the Themepark functions for creating tables or adding
+processing functions directly in your config file, without a theme. This can be
+useful, for instance, to modify some tags before the processing functions of a
+theme are run. See the [Author's Manual]({% link themepark/authors-manual.md %})
+for available functions.
 

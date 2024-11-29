@@ -157,8 +157,8 @@ data of a specific theme in a sub-table under the name of that theme
 of the same type called on the same object. If any of your function returns the
 text `'stop'`, processing for that object will end there. You can also change
 anything in the supplied "object", but beware that other themes might expect
-the object to look in a certain way, so this should only done in specific well
-documented cases.
+the object to look in a certain way, so this should only be done in specific
+well documented cases.
 
 The `area` function type behaves similarly to the `node`, `way`, and `relation`
 types, but it is called for all ways and all relations that *describe an area*.
