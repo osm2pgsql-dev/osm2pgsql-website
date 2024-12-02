@@ -1,5 +1,7 @@
 ---
 version: 1.5.2
+program: osm2pgsql
+title: osm2pgsql 1.5.2
 ---
 {::options header_offset="1"/}
 

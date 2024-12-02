@@ -19,7 +19,9 @@ title_section: Releases
 <ul>
     {% for mp in page.manpages %}
         {% if mp == 'osm2pgsql' %}
-    <li><a href="/doc/man/version-{{ page.version | slugify }}.html">osm2pgsql</a></li>
+    <li><a href="/doc/man/osm2pgsql-{{ page.version | slugify }}.html">osm2pgsql</a></li>
+        {% elsif mp == 'osm2pgsql-gen' %}
+    <li><a href="/doc/man/osm2pgsql-gen-{{ page.version | slugify }}.html">osm2pgsql-gen</a></li>
         {% else %}
     <li><a href="/doc/man/osm2pgsql-replication-{{ page.version }}.html">osm2pgsql-replication</a></li>
         {% endif %}
