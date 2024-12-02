@@ -10,7 +10,7 @@ title: Manual Pages
 {% assign sortedreleases = site.releases | sort: 'date' | reverse %}
 {% for release in sortedreleases -%}
 {% if release.manpages -%}
-<li><a href="/doc/man/version-{{ release.version | slugify }}.html">Version {{ release.version }}</a></li>
+<li><a href="/doc/man/osm2pgsql-{{ release.version | slugify }}.html">Version {{ release.version }}</a></li>
 {%- endif %}
 {% endfor -%}
 </ul>
