@@ -39,6 +39,18 @@ following options are currently used:
 The `attribution`, `extent`, and `tileset` settings are used by the tileserver
 plugins only.
 
+## Theme Search Path
+
+Themepark will look for themes in the directories specified in the *theme
+search path*. The search path can be set with the `THEMEPARK_PATH` environment
+variable, it must contain a list of directory names separated with colons
+(`:`). Additionally the search path will always contain the `themes` directory
+in the Themepark repository.
+
+Use `themepark:add_theme_dir(DIR)` to prepend `DIR` to the theme search path.
+If `DIR` is a relative path, interpret it relative to the file the function was
+called from, usually your config file.
+
 ## Adding Topics
 
 Add any topics you want to use in your map using the
