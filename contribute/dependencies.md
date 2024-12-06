@@ -20,10 +20,6 @@ repositories:
       date: 2024-04-25
       eol: 2029-06
       gs: groupstart
-    - id: ubuntu_23_10
-      name: Ubuntu 23.10 (Mantic)
-      date: 2023-10-12
-      eol: 2024-07
     - id: ubuntu_22_04
       name: Ubuntu 22.04 (Jammy)
       date: 2022-04-21
@@ -35,6 +31,10 @@ repositories:
     - id: fedora_rawhide
       name: Fedora Rawhide
       gs: groupstart
+    - id: fedora_41
+      name: Fedora 41
+      date: 2024-10-29
+      eol: 2025-11-19
     - id: fedora_40
       name: Fedora 40
       date: 2024-04-23
@@ -52,10 +52,6 @@ repositories:
       date: 2019-09-24
       eol: 2029-05-31
       gs: groupstart
-    - id: centos_7
-      name: CentOS 7
-      date: 2014-07-07
-      eol: 2024-06-30
     - id: homebrew
       name: Homebrew
       gs: groupstart
