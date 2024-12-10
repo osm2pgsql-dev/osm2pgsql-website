@@ -63,6 +63,14 @@ database systems. There are some database systems out there which claim
 compatibility with PostgreSQL, they might work or they might not work. Please
 tell us if you have any experience with them.
 
+Osm2pgsql uses [prepared
+statements](https://www.postgresql.org/docs/current/sql-prepare.html){:.extlink}.
+This sometimes causes issues with connection poolers that either don't work
+correctly with prepared statements or are not configured correctly. Please make
+sure you understand what issues your connection pooler might have with prepared
+statements and configure it correctly if you are using a connection pooler.
+{:.note}
+
 ### Lua Scripting Language
 
 Osm2pgsql requires the use of the [Lua](https://www.lua.org/){:.extlink}
@@ -75,5 +83,5 @@ user running osm2pgsql is allowed to do, such as reading and writing files,
 opening network connections etc. This makes the Lua config files really
 versatile and allows lots of great functionality. But you should never use a
 Lua configuration file from an unknown source without checking it.
-{:note}
+{:.note}
 
