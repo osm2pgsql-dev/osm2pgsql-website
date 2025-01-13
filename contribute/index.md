@@ -25,7 +25,9 @@ We also have a [**list of project ideas**]({% link contribute/project-ideas.md
 <section markdown="1">
 ## Tests and Continuous Integration
 
-[![Github Actions Build Status](https://github.com/osm2pgsql-dev/osm2pgsql/workflows/CI/badge.svg?branch=master)](https://github.com/osm2pgsql-dev/osm2pgsql/actions)
+[![Build status](https://github.com/osm2pgsql-dev/osm2pgsql/actions/workflows/ci.yml/badge.svg)](https://github.com/osm2pgsql-dev/osm2pgsql/actions/workflows/ci.yml)
+[![Test install](https://github.com/osm2pgsql-dev/osm2pgsql/actions/workflows/test-install.yml/badge.svg)](https://github.com/osm2pgsql-dev/osm2pgsql/actions/workflows/test-install.yml)
+[![Lua scripts](https://github.com/osm2pgsql-dev/osm2pgsql/actions/workflows/luacheck.yml/badge.svg)](https://github.com/osm2pgsql-dev/osm2pgsql/actions/workflows/luacheck.yml)
 
 We have a growing suite of tests, new features and bug fixes should always
 have test coverage.
