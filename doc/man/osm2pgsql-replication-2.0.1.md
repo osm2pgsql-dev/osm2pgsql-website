@@ -41,7 +41,7 @@ title: "Manual Page: osm2pgsql-replication(1)"
 
 
 <p style="margin-left:11%; margin-top: 1em">Update an
-osm2pgsql database with changes from a OSM replication
+osm2pgsql database with changes from an OSM replication
 server.</p>
 
 <p style="margin-left:11%; margin-top: 1em">This tool
@@ -434,7 +434,7 @@ object.</p>
 is 0 if there were no problems getting the status. 1 &amp; 2
 for <br>
 improperly set up replication. 3 for network issues. If
-status &acirc;&nbsp; 0, then <br>
+status is greater 0, then <br>
 the &rsquo;error&rsquo; key is an error message (as string).
 &rsquo;status&rsquo; is used as the <br>
 exit code.</p>
@@ -442,7 +442,7 @@ exit code.</p>
 
 <p style="margin-left:11%; margin-top: 1em">&rsquo;server&rsquo;
 is the replication server&rsquo;s current status.
-&rsquo;sequence&rsquo; is it&rsquo;s <br>
+&rsquo;sequence&rsquo; is its <br>
 sequence number, &rsquo;timestamp&rsquo; the time of that,
 and &rsquo;age_sec&rsquo; the age of the <br>
 data in seconds.</p>
