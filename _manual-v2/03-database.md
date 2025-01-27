@@ -111,9 +111,9 @@ your system will be much slower than necessary.
 The following settings are geared towards a system with 128GB RAM and a fast
 SSD. The values in the second column are suggestions to provide a good starting
 point for a typical setup, you might have to adjust them for your use case. The
-value in the third column is the default set by PostgreSQL 15.
+value in the third column is the default set by PostgreSQL 17.
 
-| Config Option                                                                                                                    | Proposed Value  | Pg 15 Default | Remark |
+| Config Option                                                                                                                    | Proposed Value  | Pg 17 Default | Remark |
 | -------------------------------------------------------------------------------------------------------------------------------- | --------------- | ------------- | ------ |
 | [shared_buffers](https://www.postgresql.org/docs/current/runtime-config-resource.html#GUC-SHARED-BUFFERS)                        | 1GB             | 128MB         | Lower than typical PostgreSQL recommendations to give osm2pgsql priority to RAM. |
 | [work_mem](https://www.postgresql.org/docs/current/runtime-config-resource.html#GUC-WORK-MEM)                                    | 50MB            | 4MB           | |
@@ -169,7 +169,7 @@ suitable for all environments. These settings can cause crashes and/or
 corruption.  Corruption in a PostgreSQL instance can lead to a "bricked"
 instance affecting all databases in the instance.
 
-| Config Option                | Proposed Value  | Pg 15 Default | Remark |
+| Config Option                | Proposed Value  | Pg 17 Default | Remark |
 | ---------------------------- | --------------- | ------------- | ------ |
 | full_page_writes             | off             | on            |  Warning: Risks data corruption.  Set back to `on` after import. |
 | fsync                        | off             | on            |  Warning: Risks data corruption.  Set back to `on` after import. |
