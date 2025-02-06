@@ -78,7 +78,7 @@ Paul Norman ([@pnorman](https://github.com/pnorman)) take over as maintainers.
 ## 2015
 
 osm2pgsql starts using the [libosmium
-library](https://osmcode.org/libosmium){:extlink} for parsing OSM data.
+library](https://osmcode.org/libosmium/){:extlink} for parsing OSM data.
 First parsing of XML and PBF files was switched, later on also the o5m parsing
 code.
 

@@ -20,8 +20,8 @@ In a real world application you'd have to look into more details of those and
 other tags, the height is sometimes given in feet for instance. But for this
 demo this simplified setup should suffice.
 
-To get some nice sample data, lets look at New York. You can use the [Protomaps
-download service](https://app.protomaps.com/) to get the extract.
+To get some nice sample data, lets look at New York. You can use the [OSM by
+the slice download service](https://slice.openstreetmap.us/) to get the extract.
 Zoom to New York and draw a polygon around the tip of Manhattan, add the name
 "newyork" and click on "Create Extract". In a few seconds you'll get a download
 button to download a file `newyork.osm.pbf`.
