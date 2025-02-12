@@ -66,7 +66,6 @@ packages:
     - python
     - boost
     - proj
-    - geos
     - catch
     - fmt
     - libosmium
