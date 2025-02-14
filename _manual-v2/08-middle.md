@@ -111,10 +111,20 @@ The tables have the following structure:
 | tags         | `jsonb`           | Tags of this OSM object in the obvious key/value format. |
 {:.desc}
 
-You can create a PostGIS geometry from the `lat` and `lon` columns like this:
+If you need the PostGIS gemetries for nodes and ways you can create a view
+with something like this:
 
 ```{sql}
-SELECT id, ST_SetSRID(ST_MakePoint(lon / 10000000.0, lat / 10000000.0), 4326) AS geom FROM planet_osm_nodes;
+CREATE VIEW nodes_geom AS
+    SELECT id, tags, ST_SetSRID(ST_MakePoint(lon::float / 10000000, lat::float / 10000000), 4326) AS geom
+        FROM planet_osm_nodes;
+
+CREATE VIEW ways_geom AS
+    SELECT id, nodes, tags, ST_MakeLine(g.points) AS geom
+        FROM planet_osm_ways w, LATERAL (
+            SELECT array_agg(ST_SetSRID(ST_MakePoint(n.lon::float / 10000000, n.lat::float / 10000000), 4326)) AS points
+            FROM unnest(nodes) AS x, planet_osm_nodes n WHERE x = n.id
+        ) AS g;
 ```
 
 #### The `members` Column
