@@ -21,7 +21,7 @@ on how to install osm2pgsql on your system.
 
 Memory requirements for your system will vary widely depending on the size of
 your input file. Is it city-sized extract or the whole planet? As a rule of
-thumb you need at least as much main memory as the PBF file with the OSM data
+thumb you need at least as much main memory as the PBF file when the OSM data
 is large. So for a planet file you currently need at least 64 GB RAM, better
 are 128 GB. Osm2pgsql will not work with less than 2 GB RAM.
 
