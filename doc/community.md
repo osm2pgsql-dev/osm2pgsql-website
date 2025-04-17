@@ -53,6 +53,7 @@ wiki.
 
 ## Tutorials
 
+* Thomas Skowron writes about [Keeping your OpenStreetMap Database Replicated](https://thomas.skowron.eu/blog/osm2pgsql-logical-replication/){:.extlink} (April 2025)
 * Book [Mastering PostGIS and OpenStreetMap](https://postgis-osm.com/){:.extlink} by Ryan
   Lambert (released October 2022).
 * Webinar [OpenStreetMap to PostGIS: Easier and
