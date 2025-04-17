@@ -69,6 +69,8 @@ This sometimes causes issues with connection poolers that either don't work
 correctly with prepared statements or are not configured correctly. Please make
 sure you understand what issues your connection pooler might have with prepared
 statements and configure it correctly if you are using a connection pooler.
+(It is also recommended that you use version 2.1.0 or newer if using a
+connection pooler, because it contains some key improvements.)
 {:.note}
 
 ### Lua Scripting Language
