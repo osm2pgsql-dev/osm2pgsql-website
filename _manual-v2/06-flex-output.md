@@ -223,10 +223,10 @@ To use OSM IDs as primary keys, you have to make sure that you only ever add a
 single row per OSM object to an output table, i.e. do not call `insert`
 multiple times on the same table for the same OSM object.
 
-Set the `create_index` option in the `ids` setting (see above) to `'unique'`
-to get a `UNIQUE` index instead of the normal non-unique index for the ID
-column. Set it to `'primary_key'` to define a primary key for this table
-instead of just a unique index.
+Set the `create_index` option in the `ids` setting (see above) to `'unique'` to
+get a `UNIQUE` index instead of the normal non-unique index for the ID column.
+*Version >= 2.1.0*{:.version} Set it to `'primary_key'` to define a primary key
+for this table instead of just a unique index.
 
 #### Using an Additional ID Column
 
