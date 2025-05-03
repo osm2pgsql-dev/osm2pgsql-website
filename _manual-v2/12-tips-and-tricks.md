@@ -162,6 +162,16 @@ Here are some tips:
 See [Lua Performance Tips](https://www.lua.org/gems/sample.pdf){:.extlink} from
 the author of Lua for some in-depth tips on how to improve your Lua code. [This
 stackoverflow
-question](https://stackoverflow.com/questions/154672/what-can-i-do-to-increase-the-performance-of-a-lua-program)
+question](https://stackoverflow.com/questions/154672/what-can-i-do-to-increase-the-performance-of-a-lua-program){:.extlink}
 also has some great information.
+
+### Lua Debug Output
+
+Sometimes it is useful to print some debug output from a Lua script. For simple
+variables this can easily be done with the Lua built-in `print()` function.
+
+For more complex data you can use the `inspect` Lua library. It is available
+from [the source](https://github.com/kikito/inspect.lua){:.extlink} or using
+[LuaRocks](https://luarocks.org/modules/kikito/inspect){:.extlink}.
+Debian/Ubuntu users can install the `lua-inspect` package.
 
