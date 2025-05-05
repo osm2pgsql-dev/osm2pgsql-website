@@ -116,7 +116,7 @@ project files.
 | Plugin | For | Usage |
 | ------ | --- | ----- |
 | bbox   | [BBOX Server](https://www.bbox.earth/) | Call `themepark:plugin('bbox'):write_config(FILENAME.toml)`. |
-| t-rex  | [T-Rex](https://t-rex.tileserver.ch/) tileserver | Call `themepark:plugin('t-rex'):write_config(FILENAME.toml)`. You need the [Lua toml module](https://luarocks.org/modules/LebJe/toml) installed. Usually this is done with `luarocks install toml`. |
+| t-rex  | [T-Rex](https://t-rex.tileserver.ch/) tileserver | Call `themepark:plugin('t-rex'):write_config(FILENAME.toml)`. You need the [Lua toml module](https://luarocks.org/modules/lebje/toml) installed. Usually this is done with `luarocks install toml`. |
 | tilekiln | [Tilekiln](https://github.com/pnorman/tilekiln) tileserver | Call `themepark:plugin('tilekiln'):write_config(DIR)`. The directory must exist. For this to work you need the [Lua lyaml module](https://luarocks.org/modules/gvvaughan/lyaml) installed. Usually this is done with `luarocks install lyaml`. Or install the `lua-yaml` debian package. |
 | taginfo | [Taginfo Projects](https://wiki.openstreetmap.org/wiki/Taginfo/Projects) | Call `themepark:plugin('taginfo'):write_config(FILENAME.json)` to generate a skeleton of a projects file for taginfo. |
 {:.desc}

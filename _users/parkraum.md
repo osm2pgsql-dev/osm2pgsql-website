@@ -4,7 +4,7 @@ order: 5
 links:
     - href: https://parkraum.osm-verkehrswende.org/
       title: Project page "Parkraumanalyse"
-    - href: https://radverkehrsatlas.de/regionen/parkraum
+    - href: https://tilda-geo.de/regionen/parkraum
       title: Map page "Parkraumanalyse"
     - href: https://github.com/osmberlin/osm-parking-processing
       title: Github project page
