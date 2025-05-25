@@ -58,6 +58,8 @@ collections:
         permalink: /news/:year/:month/:day/:title:output_ext
     users:
         output: false
+    dependencies:
+        output: false
 defaults:
     -
         scope:

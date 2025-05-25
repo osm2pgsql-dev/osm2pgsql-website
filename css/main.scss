@@ -653,6 +653,15 @@ table.software-versions th {
     text-align: left;
 }
 
+.repology-version-badge {
+    display: inline-block;
+    background: #888 border-box;
+    color: #fff;
+    padding: 1px 5px;
+    text-align: center;
+    min-width: 3em;
+}
+
 // ---------------- man pages ----------------
 
 .manpage-version {
