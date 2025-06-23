@@ -574,7 +574,7 @@ fill into all the database columns. Any column not mentioned will be set to
 Note that you can't set the object id, this will be handled for you behind the
 scenes.
 
-### Handling of NULL in `insert()` Function
+#### Handling of NULL in `insert()` Function
 
 Any column not set, or set to `nil` (which is the same thing in Lua), or set to
 the null geometry, will be set to `NULL` in the database. If the column is
@@ -799,3 +799,116 @@ in C++, so Lua scripts should concern themselves only with the high-level
 control flow, not the details of the geometry. If you think you need some
 function to access the internals of a geometry, [start a discussion on
 Github](https://github.com/osm2pgsql-dev/osm2pgsql/discussions).
+
+### Locators
+
+*Version >= 2.2.0*{:.version} This feature is only available from version 2.2.0.
+
+When processing OSM data it is often useful to know in which area some OSM
+object is. Maybe you want to draw specific highway shields in each state. Or
+you want to transliterate labels in different ways depending on the country the
+label is in. Or draw features differently depending on whether they are inside
+a national park or outside. Or set different default values for speed limits
+based on the country a highway is in. To do this you can use a *locator*.
+
+A *locator* is initialized with one or more *regions*, each region has a name
+and a polygon or bounding box. A geometry of an OSM object can then be checked
+against this list of regions to figure out in which region(s) it is located.
+
+Locators are created in Lua with `define_locator()`:
+
+```lua
+local countries = osm2pgsql.define_locator({ name = 'countries' })
+```
+
+The name of the locator is used for informational and error messages only. You
+can have as many locators as you want, they work independently of each other.
+
+Bounding boxes can be added to a locator with `add_bbox()`. Use the longitude
+and latitude of the lower left and upper right corners of the box as
+parameters:
+
+```lua
+local extract = osm2pgsql.define_locator({ name = 'extract' })
+extract:add_bbox(-32.35, 62.22, -7.35, 68.16)
+```
+
+Polygons can be added from the database by calling `add_from_db()` and
+specifying a SQL query which can return any number of rows, each defining a
+region with the name and the (multi)polygon as columns:
+
+```lua
+local extract = osm2pgsql.define_locator({ name = 'extract' })
+extract:add_from_db("SELECT country_code, geom FROM countries")
+```
+
+The name can be any string (or anything the database can convert to a string
+when reading the data), for instance the name of a country or an ISO country
+code. You can have multiple regions with the same name, but you can not
+differentiate between them later. The geometry must be in WGS84 (EPSG:4326).
+
+You can get region data from OSM or any other source, you'll just have to
+import it into the database before running osm2pgsql. If you want to use
+OSM data, you can run osm2pgsql twice, once with a config file importing
+only the polygons and then with your normal config which reads the just
+imported data into a locator.
+
+A locator can then be queried in the callbacks using `all_intersecting()` which
+returns a list of names of all regions that intersect the specified OSM object
+geometry. The results are not in any specific order.
+
+```lua
+local country_codes = extract:all_intersecting(object:as_point())
+```
+
+If the result is an empty array (Lua table), the object isn't in any of the
+regions. (You can check for that with `if #country_codes == 0 then ...`).
+
+Or you can use the function `first_intersecting()` which only returns a single
+region for those cases where there can be no overlapping data or where the
+details of objects straddling region boundaries don't matter. It is faster
+than `all_intersecting()` because the search returns after the first region
+is found.
+
+```lua
+local cc = extract:first_intersecting(object:as_linestring())
+```
+
+The result is `nil` if the geometry isn't in any of the regions.
+
+Several example config files are provided in the
+[flex-config/locator](https://github.com/osm2pgsql-dev/osm2pgsql/tree/master/flex-config/locator)
+directory of the source code repository.
+
+#### Locator Performance
+
+Working with a Locator while the data is being loaded into the database is much
+faster than to do the same operations inside the database after the import.
+
+You can have hundreds of thousands of regions in a locator, osm2pgsql handles
+that fine. Checking each OSM object against a list of all OSM country
+boundaries works just fine, even when importing a full planet.
+
+Because the region polygons are stored in an
+[R-tree](https://en.wikipedia.org/wiki/R-tree){:.extlink} internally, the
+biggest performance problem comes from very large polygons. It is much better
+to separate the polygons inside a multipolygon (for instance using
+[ST_Dump](https://postgis.net/docs/manual-3.3/ST_Dump.html){:.extlink}) and to
+split polygons into smaller chunks (for instance using the
+[ST_SubDivide](https://postgis.net/docs/manual-3.3/ST_Subdivide.html){:.extlink}
+function):
+
+```lua
+local extract = osm2pgsql.define_locator({ name = 'extract' })
+extract:add_from_db([[
+WITH polys AS (
+    SELECT cc, (ST_Dump(geom)).geom AS geom FROM countries
+)
+SELECT cc, ST_Subdivide(geom, 200) FROM polys")
+]])
+```
+
+It can take a while to compute the subdivision. So if you run osm2pgsql often,
+compute the subdivision once and store the result in an extra table and just
+load that from osm2pgsql.
+
