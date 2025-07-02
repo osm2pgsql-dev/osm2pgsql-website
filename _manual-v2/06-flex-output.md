@@ -830,7 +830,7 @@ parameters:
 
 ```lua
 local extract = osm2pgsql.define_locator({ name = 'extract' })
-extract:add_bbox(-32.35, 62.22, -7.35, 68.16)
+extract:add_bbox('inside', -32.35, 62.22, -7.35, 68.16)
 ```
 
 Polygons can be added from the database by calling `add_from_db()` and
