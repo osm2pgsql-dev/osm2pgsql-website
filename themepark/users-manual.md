@@ -23,8 +23,8 @@ See the `config` directory for some example config files.
 Global options can be set with `themepark:set_option(OPTION, VALUE)`. The
 following options are currently used:
 
-| Option      | Type  | Default           | Desciption |
-| ----------- | ----- | ----------------- | ---------- |
+| Option      | Type  | Default           | Description |
+| ----------- | ----- | ----------------- | ----------- |
 | attribution | text  | `© OpenStreetMap contributors - https://openstreetmap.org/copyright` | Attribution. |
 | debug       | bool  | *none (disabled)* | Set name of debug column. See the [Debug Mode section](#debug-mode) below for details. |
 | extent      | array | *none*            | Extent of your map as array table with (xmin, ymin, xmax, ymax). |
