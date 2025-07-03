@@ -137,17 +137,27 @@ Processing functions are defined in each topic of each theme with the
 `themepark:add_proc(TYPE, FUNC)` function. The following processing types
 are available:
 
-| Type                    | Plain osm2pgsql config equivalent     | Description |
-| ----------------------- | ------------------------------------- | ----------- |
-| node                    | `osm2pgsql.process_node()`            | Called for each (tagged) node. |
-| way                     | `osm2pgsql.process_way()`             | Called for each (tagged) way.  |
-| relation                | `osm2pgsql.process_relation()`        | Called for each (tagged) relation. |
-| area                    | *none*                                | Called for ways or relations that are areas. |
-| select_relation_members | `osm2pgsql.select_relation_members()` | Does the same thing as equivalent function, results are collected. |
-| gen                     | `osm2pgsql.process_gen()`             | Generalization (see below). |
+| Type                    | Plain osm2pgsql config equivalent       | Description |
+| ----------------------- | --------------------------------------- | ----------- |
+| node                    | `osm2pgsql.process_node()`              | Called for each (tagged) node. |
+| way                     | `osm2pgsql.process_way()`               | Called for each (tagged) way.  |
+| relation                | `osm2pgsql.process_relation()`          | Called for each (tagged) relation. |
+| untagged_node           | `osm2pgsql.process_untagged_node()`     | Called for each untagged node. |
+| untagged_way            | `osm2pgsql.process_untagged_way()`      | Called for each untagged way.  |
+| untagged_relation       | `osm2pgsql.process_untagged_relation()` | Called for each untagged relation. |
+| deleted_node            | `osm2pgsql.process_deleted_node()`      | Called for each (tagged) node (only with osm2pgsql >= 2.2.0). |
+| deleted_way             | `osm2pgsql.process_deleted_way()`       | Called for each (tagged) way (only with osm2pgsql >= 2.2.0).  |
+| deleted_relation        | `osm2pgsql.process_deleted_relation()`  | Called for each (tagged) relation (only with osm2pgsql >= 2.2.0). |
+| area                    | *none*                                  | Called for ways or relations that are areas. |
+| select_relation_members | `osm2pgsql.select_relation_members()`   | Does the same thing as equivalent function, results are collected. |
+| after_nodes             | `osm2pgsql.after_nodes()`               | Called after all nodes have been processed. |
+| after_ways              | `osm2pgsql.after_ways()`                | Called after all ways have been processed. |
+| after_relations         | `osm2pgsql.after_relations()`           | Called after all relations have been processed. |
+| gen                     | `osm2pgsql.process_gen()`               | Generalization (see below). |
 {:.desc}
 
-All functions of type `node`, `way`, and `relation` defined in the different
+All functions of type `[untagged|deleted]node`, `[untagged|deleted]way`, and
+`[untagged|deleted]relation` defined in the different
 topics are called in the order they were defined. The functions have two
 parameters, the OSM object (just like in normal flex output callbacks) and a
 `data` object that is initially an empty Lua table and that you can use to
