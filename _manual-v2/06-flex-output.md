@@ -544,6 +544,9 @@ the `after_nodes` call, then all the `process_(untagged_)way` calls, then the
 `after_ways` call, then all the `process_(untagged_)relation` calls, and
 lastly the `after_relations`call.
 
+All `after_*` callbacks are called at the appropriate place even if there are
+no objects of the corresponding type in the input.
+
 ### The `insert()` Function
 
 Use the `insert()` function to add data to a previously defined table:
