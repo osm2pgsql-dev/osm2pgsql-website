@@ -12,6 +12,7 @@ tags:
     - map
     - analysis
     - search
+    - open source
 ---
 
 Bellingcat is an independent investigative collective of researchers,
