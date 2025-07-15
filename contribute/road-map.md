@@ -3,111 +3,63 @@ layout: default
 title: Road Map
 ---
 
-# Road Map for Osm2pgsql
+# Road Map for osm2pgsql
 
-Current as of 2024-09-18.
-
-This document is a kind of road map for osm2pgsql development. It's not to be
+This document is a road map for osm2pgsql development. It's not to be
 understood as a definite "this is what we'll do" document, but as a rough
 overview of the shared understanding of the maintainers about where we are and
-in what areas we see need for work. It is incomplete.
+what we are working towards in the next years.
 
-## Where We Are: A Stable Platform
+If you are interested in more concrete features to expect or implement,
+have a look at the [list of project ideas]({% link contribute/project-ideas.md
+%}).
 
-First and foremost osm2pgsql must be a stable and reliable platform for its
-many users who use it every day to maintain current maps. Backwards
-compatibility is important and must be kept wherever possible. This makes
-developing new features more difficult, but it gives the users a way forward,
-using new features as they are needed without the need for a break-the-world
-update.
+## What osm2pgsql is and what it isn't
 
-This also means that often ongoing maintenance, bugfixing, attending to
-issues, making sure everything keeps working with old and new library and
-operating system versions etc. is more important than new features.
+osm2pgsql is a software that reads OpenStreetMap data in all common formats
+and puts the data into a PostgreSQL/PostGIS database to be further processed.
+osm2pgsql is not just a backend for rendering. It needs to be flexible enough
+to support many kinds of application on top of the resulting database.
 
-The development mostly is done on Linux and most users use osm2pgsql on Linux.
-Osm2pgsql must work well on all current and some older versions of major Linux
-distributions.
+The import process needs to make it easy to apply common transformations
+to OSM data. The most important example here is the creation of Simple
+Feature geometries but other common patterns may emerge and need to be
+supported. That said, osm2pgsql is not a general transformation library and will
+stay away from tasks that can be solved by database operations just as easily.
 
-Because we currently have no Windows or macOS developers the support for these
-operating systems is "best effort", we try to keep it working but can not
-promise anything.
+osm2pgsql must give good results when used with minimal configuration. At the
+same time it should remain flexible enough that power users can cover complex
+use cases with a bit of additional configuration work. Hard-coded policy
+decisions should be avoided if possible.
 
-Only 64 bit systems are supported.
+Updating databases is supported through diff files and replication processes.
+In its standard operation mode, the user should be able to write a single
+configuration file that transparently works for imports and updates in the
+same way. Power users should be provided with the necessary information and
+tools to create dedicated update processes and configurations.
 
-Osm2pgsql currently needs a C++17 compiler, switching to newer C++ versions
-will be considered based on availability in the Linux distributions we want to
-support.
+## Towards osm2pgsql version 3
 
-Osm2pgsql must always support all officially supported versions of PostgreSQL
-(currently 11 and above) and maybe more. Some optional features might only be
-supported in newer PostgreSQL versions.
+The following sections describe the major areas of interest that we have on
+our road map for the medium to long-term future of osm2pgsql.
 
-Osm2pgsql wants to be as resource-friendly as possible. It must always be
-possible to use it with small data extracts on a hobbyists laptop. Processing
-the full planet file and running minutely updates must be possible on a
-reasonably modern machine (128GB RAM, SSD).
+Next to these wider reaching goals, there is of course always maintenance:
+responding to bug reports, keeping the code clean and making sure everything
+runs with old and new versions of the libraries we use and on old and new
+versions of operating systems.
 
-## Where We Want to Go
+### Moving away from Multiple Outputs
 
-The following sections describe major topics or areas of work. They are roughly
-ordered from the more important, simpler, more near-term to the less important,
-more complex, more "out there" ideas. This does not imply an order in which
-problems will be tackled (or even whether they will be tackled at all).
+osm2pgsql used to provide some flexibility for the output tables through
+different output implementations. With the introduction of the flex output,
+separate C++ implementation of outputs are no longer necessary. Users can
+easily implement arbitrary output layouts through its Lua configuration.
 
-We also have a [list of project ideas]({% link contribute/project-ideas.md
-%}) with more long-term projects.
-
-Note that many of the following topics overlap. Some topics have related issues
-which are listed below, but not all open concerns appear in Github issues.
-Some major "big picture" issues are highlighted at the top of the [Github
-issues page](https://github.com/osm2pgsql-dev/osm2pgsql/issues){:.extlink}.
-
-### Ongoing Maintainance
-
-There is always the ongoing maintainance. Making sure everything runs with
-old and new versions of the libraries we use and on old and new versions of
-operating systems.
-
-### Code Cleanup and Modernization
-
-Osm2pgsql started as a C program, later it was converted to C++03, then to
-C++11, C++14, and C++17. Most of the code has been cleaned up over the years,
-but there is still some old code in there that could do with some cleanup. And
-there are still some places where code linting tools such as clang-tidy report
-potential problems.
-
-The goal is to have clean and modern code that's easy to understand and change.
-This is especially important to make it easier for non-core developers to
-contribute.
-
-This cleanup work is mostly something that can be done "on the side" whenever
-that particular piece of code is touched anyway.
-
-The main place left which needs updating in this regard is the expire code.
-Some of the code in the pgsql output also shows its C legacy, but because
-that code is deprecated anyway and will be removed, cleaning it up is not a
-priority.
-
-### Documentation
-
-In 2020 the documentation for osm2pgsql has moved to a new website at
-osm2pgsql.org. Lots of examples have been put on the website, too. There is
-still work to be done to complete the docs. This can be done "on the side"
-whenever it makes sense. It would also be nice to amend the documentation
-with some tutorials and how-to type documents.
-
-### Configuration / Command Line
-
-The command line options show the history of osm2pgsql. A lot of options
-would look different if we'd do them today. With the switch to version 2 we
-have cleaned up a lof of that and with the removal of the pgsql output in
-version 3 we'll be able to clean up a lot more.
-
-Where possible we should differentiate clearly between style configuration
-(everything related to tags etc.) which belong in the config files and
-operational configuration (cache sizes, file names, etc.) which belong on
-the command line.
+Version 2.0 has already removed most of the outputs. The *pqsql* output
+has been deprecated and is now in maintenance mode. It will be removed in
+version 3.0. Future extensions to the output model will only be implemented
+in what is now called the *flex* output and will just be *the* output in
+version 3.
 
 ### Object Store / Middle / Flat Node Store
 
@@ -117,154 +69,88 @@ keep an object store of all OSM objects it has seen and their relationship with
 each other. This is often called "middle" in osm2pgsql-speak. It comes in two
 "flavours" depending on whether it supports updates or not.
 
-The updatable middle uses the PostgreSQL database. Due to its current
-structure and API only some information is available, for instance it isn't
-possible to find node members of relations.
+The updatable middle uses the PostgreSQL database. We have already moved to
+a more approachable data structure here, which makes the stored information
+easily accessible for users. This comes at a price in terms of storage space
+and some performance penalty. Given OSMs current rate of growth, the size
+of the middle tables alone may become too large for average users to handle.
+We are also running into performance problems due to large GIN indexes.
 
-In 1.9.0 we released a major update to the database middle in 1.11.0 this
-became the default. The legacy database middle will be removed in 2.0.0.
+We need to look into more size efficient data structures for this middle
+cache. This will very likely mean to move it out of the PostgreSQL database.
+At the same time we would like to keep the new-found possibility for users
+to access the data from inside the database. How these two goals can be consolidated,
+is still a matter of discussion.
 
-In the future we might need some caching mechanism so that expensive database
-operations can be avoided as much as possible if the same information is asked
-for multiple times.
+The flat node store, which stores coordinates of nodes, is also part of this
+topic.
 
-The flat node store is also part of this topic. We need to re-think the
-structure of the middle, the integration of the flat node store and caching
-mechanism in a unified way.
+### Future of the Processing Pipeline
 
-A lot of the other topics mentioned below rely on a flexible and performant
-middle.
+osm2pgsql started out with processing OSM data in fixed number of sequential
+steps: Database tables are created, then data is imported, then clustered,
+then indexes created. This view of an import process only works well under
+the assumption that every OSM object can be processed independently from
+each other. This assumption has never really held. OSM's topological data model
+has inherent dependencies between nodes, ways and relations. osm2pgsql
+has always gone to some length to hide this reality from the users: the
+data import is internally split into two stages where first the actual input
+is processed and then any objects that depend on the input.
 
-As a possible future step we might want to look into (optionally) removing the
-need for PostgreSQL for the updatable object store. Specialized file-based
-data storage could improve performance considerably and reduce disk consumption
-at the same time.
+With the growing complexities of OSM data, there are more and more external
+dependencies. Hiking and cycling routes depend on information from the ways
+they go along. The available amenities of a camping site can only be determined
+by looking at the POIs inside the camping area.
+[Two-stage processing](https://osm2pgsql.org/doc/manual.html#stages) and
+the [generalization project](https://osm2pgsql.org/generalization/) tried
+to address this need to process dependent data. They both have their uses
+and limitations.
 
-Issues:
+We'd like to come to a unified processing model that covers the use cases
+of these two extensions but also includes internal processing steps like
+the setup of the middle storage, clustering and index building. By viewing
+these steps rather as building blocks with dependencies on each other, we
+might be able to create a model that is easier to distribute over available
+resources and parallelize.
 
-* [193](https://github.com/osm2pgsql-dev/osm2pgsql/issues/193)
-* [1323](https://github.com/osm2pgsql-dev/osm2pgsql/issues/1323)
-* [1466](https://github.com/osm2pgsql-dev/osm2pgsql/issues/1466)
+The challenge here will be to make such a processing pipeline work with
+updates in a way that is mostly transparent to the user. The model also
+needs to be easily configurable by the user. In particular, it must remain
+easy to understand for those users that just want to quickly load OSM data
+into a database.
 
-### Future of the Outputs
-
-The flex output has taken some great strides in the last years and has been
-used in production environments for a long time. Some originally missing
-features have been added and it is ready to replace the other outputs. Users
-should all be able to switch to the flex output without missing any features
-they had in any of the other outputs. The *multi* output was already removed in
-version 1.5.0. The *gazetteer* output will be removed in version 2.0.0.0. Long
-term we want to also remove the *pgsql* output, it is marked as deprecated in
-2.0.0., but there is no timeline yet.
-
-New features are only available in the flex output.
-
-* [1130](https://github.com/osm2pgsql-dev/osm2pgsql/issues/1130)
-
-### Processing Flexibility and Performance
-
-Osm2pgsql processes data in several steps: Database tables are created, then
-data is imported, then clustered, then indexes created. Some of those steps are
-already configurable, but there is a lot of hardcoded logic in here. Users have
-repeatedly asked for more flexibility, for instance for index creation, which
-is now much more flexible.
-
-We need some way of making this more configurable without breaking backwards
-compatibility and without making the common use case too complicated. How to
-best do this is currently unclear. The direction we have been going in with
-the Lua configuration points towards a possible solution: Move more of the
-decisions about *what* needs to be done into Lua, keeping the *how* in C++.
-Then most users can use higher level Lua functions that hide some of the
-complexity, but power users can still access lower-level functionality to
-solve their specific needs.
-
-Another issue which probably fits in here are performance aspects of the
-processing steps and possible performance improvements to be gained here
-for instance by caching.
-
-Issues:
-
-* [193](https://github.com/osm2pgsql-dev/osm2pgsql/issues/193)
-* [799](https://github.com/osm2pgsql-dev/osm2pgsql/issues/799)
-* [1046](https://github.com/osm2pgsql-dev/osm2pgsql/issues/1046)
-* [1248](https://github.com/osm2pgsql-dev/osm2pgsql/issues/1248)
-* [1751](https://github.com/osm2pgsql-dev/osm2pgsql/issues/1751)
 
 ### Tile Expiry
 
-Osm2pgsql can generate a list of tiles that need to be expired due to updates
-to the database. It is memory intensive and the performance could probably
-be improved.
+osm2pgsql can generate a list of tiles that need to be expired due to updates
+to the database. The code creating the expire lists is very outdated and
+needs to be modernised. The expiry lists are also far from optimal and
+often contain more expired tiles than necessary, especially for polygons.
 
+We'd like to rethink how expiry works and modernize and optimise the code
+along the way.
 This needs a deep look into what users actually need and how we can best
 support it. We should also think about whether we can do expiry calculations
 based on output tables, not data input. This ties in with the generalization
 work mentioned below, because -- in a way -- expire lists are also just
 generalizations of geometries.
 
-Issues:
 
-* [709](https://github.com/osm2pgsql-dev/osm2pgsql/issues/709)
-* [776](https://github.com/osm2pgsql-dev/osm2pgsql/issues/776)
-* [1662](https://github.com/osm2pgsql-dev/osm2pgsql/issues/1662)
+### Advanced OSM Object Processing
 
-### Debugging and Testing Support for Style Writers
+One of the goals of osm2pgsql is to give the user a generic toolbox for
+commonly used operations on OSM objects. Right now this is mainly restricted
+to processing of tags and creation of geometries for nodes, ways and areas.
 
-The flex output introduces a lot of flexibility and we should find ways of
-aiding the style writers with testing and debugging their Lua config files.
-The new BDD testing framework used points into an interesting direction here.
+Since version 1.9.0 we have explicit generalization support, providing some
+additional advanced geometry processing. But there is still a long way to go.
 
-Issues:
-
-* [1130](https://github.com/osm2pgsql-dev/osm2pgsql/issues/1130)
-
-### PostgreSQL and PostGIS Features
-
-Since osm2pgsql was first developed the capabilities of PostgreSQL and PostGIS
-have grown tremendously and we haven't always kept up to be able to take
-advantage of new features like JSON(B) columns or GENERATED columns or new
-index types. In some cases our understanding of what the database is doing
-has improved and changes could introduce performance gains.
-
-Issues:
-
-* [37](https://github.com/osm2pgsql-dev/osm2pgsql/issues/37)
-* [1085](https://github.com/osm2pgsql-dev/osm2pgsql/issues/1085)
-
-### Better Relation Support
-
-Currently osm2pgsql only supports multipolygon, boundary, and route relations
-in any meaningful way. Other relation types such as turn restrictions and
-destination signs should be supported explicitly.
-
-Ideally there should also be better mechanisms to work with *any* relation
-type but it is unclear what this could look like beyond writing them to the
-database as a GeometryCollection which is possible in version 1.7.0.
+We'd also like to extend support for relation types besides multipolygon,
+boundary, and route relations. Ideally there should also be better mechanisms
+to work with *any* relation type but it is unclear what this could look like
+beyond writing them to the database as a GeometryCollection which is possible
+since version 1.7.0.
 
 This is an area where we need more input from users to see what their needs
-are.
-
-### Advanced Geometry Options and Generalization
-
-One area where osm2pgsql is lacking in functionality is advanced geometry
-handling. Historically all it did was creating point geometries from nodes and
-linestring or polygon geometries from ways and relations. With version 1.7.0
-and especially version 1.9.0 with explicit generalization support this has
-improved a lot, but there is still some way to go.
-
-This is explored in the [generalization project]({% link
-generalization/index.md %}).
-
-Issues:
-
-* [1663](https://github.com/osm2pgsql-dev/osm2pgsql/issues/1663)
-* [1764](https://github.com/osm2pgsql-dev/osm2pgsql/issues/1764)
-
-## Release Management
-
-We do releases "whenever the time is right", lately this has been about
-twice per year. Plus smaller bug fix releases in between.
-
-Sometime in 2024 we plan to release a 2.0.0 that will remove some deprecated
-features.
-
+are. And we need to do more research where OSM data handling can be generalized
+and where domain-specific knowledge is needed.

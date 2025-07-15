@@ -22,9 +22,8 @@ seems interesting to you, by all means go ahead and give it a shot. Play around
 a bit and think about how you would solve that problem. Before you invest a lot
 of time or write a lot of code you should come talk to us. All these ideas are
 interconnected with other projects and we want to help getting to a solution
-that fits into osm2pgsql. If there isn't already a
-[discussion](https://github.com/osm2pgsql-dev/osm2pgsql/discussions) about that
-topic, start one.
+that fits into osm2pgsql. You find a link to a discussion page for the project
+below each description.
 
 If you are the boss of a company or other organization and need one of those
 features, you can help getting it done by paying somebody. If you have
@@ -34,22 +33,6 @@ kind of money to support development of a complete feature but have some money,
 [contact us]({% link support/index.md %}#commercial-support) and tell us what
 you need. Sometimes we can get several people with similar goals together to
 jointly fund something.
-
-## Area Checks on Import
-
-There are many cases where you need to know in which country (or state or
-region or some kind of area) a feature is to process or style it properly. For
-instance, highway shields look different in each country, so you might want to
-style them differently. Or you want to do something different with name labels
-depending on the language spoken in some area. For routing you might need
-different default speed limits depending on country.
-
-You can do this check in the database after running osm2pgsql, but it would be
-nice (and more performant) to be able to do this on the fly on import. We'd
-need some facility to define areas of interest, for instance from GeoJSON files
-or from a database table. And then all imported objects need to be checked
-against those areas and labelled accordingly in some way. This could also be
-used to limit import to some area.
 
 ## Coastline Processing
 
@@ -67,80 +50,6 @@ broken somewhere on the planet creating invalid data. That's why this is
 somewhat tricky and not just a case of merging all ways tagged
 `natural=coastline` and creating polygons from that.
 
-## Generalization
-
-There are many opportunities to improve generalization support in osm2pgsql for
-specific data types. Most important are probably buildings, the road network,
-and boundaries.
-
-See also the [generalization project page]({% link generalization/index.md %}).
-
-## Using Information from Associated OSM Objects
-
-The classic osm2pgsql processing models is based on the idea that each OSM
-object can be processed on its own. You look at each node, way, or relation
-separately. You'll need the node locations for the ways and you'll need the
-member geometries for the relation, but that was it. But that's not really
-enough. For many things we need the tags of related (member or parent) objects.
-
-Maybe you want to treat a node tagged `barrier=gate` differently depending on
-the type of highway it is on. Or you need the tags from a bus stop together
-with the tags of the bus route relation.
-
-There is already the two-stage processing which allows you to do some of that,
-but it is limited.
-
-## Processing Stages and Data Access
-
-With the recent addition of generalization support we have two kinds of
-processing in osm2pgsql. The first happens while the input data is read and you
-get the usual callbacks into your Lua code. The important characteristic of
-this phase is that you only work on one OSM object at a time. (There is
-two-stage processing which allows limited access to other objects, but it works
-essentially on the same model.)
-
-In the generalization phase the whole model is different: You have access to
-all data (as long as it is in the database already, either because it is in the
-middle tables or because it was put into specific tables in the first phase).
-But in that phase you don't have access to those objects from Lua, you either
-have to trigger SQL code or you can use the predefined generalization code.
-
-There are, of course, reasons for this and the combination does work well, but
-maybe this is not all it could be. Specifically we could allow some kind of
-Lua processing in later phases where access to all objects is possible. This
-would make some processing easier than today where you either need to use
-two-stage processing for some use cases or you need to split processing into
-Lua in the first phase and some extra SQL processing in a later phase.
-
-## Processing Stages and Dependencies
-
-Osm2pgsql processes incoming data in several stages, first nodes, then ways,
-then relations. Processing happens in the middle and in the output, data is
-stored in the database, indexes are built which are needed for later processing
-steps, and so on.
-
-These stages are "hard-coded" in osm2pgsql in the sense that there is code that
-says, do this first, then do this other thing, then these two things at the
-same time and so on. Some work could probably be done in parallel, but we'd
-have to write explicit code to do that, making sure that every stage is
-finished before some later stage is started that needs the results of the
-earlier stage (for instance an index must have been built in the database). As
-we do more and more complex processing this becomes more and more difficult to
-handle.
-
-We need to think about a design where the processing stages are made explicit
-in the code and dependencies between stages are modelled in the code. Ideally
-we can then let things run and whenever something can be done in parallel,
-osm2pgsql would "magically" do that. In practice this will probably not work,
-because we have external constrains, chiefly the database I/O bandwith and
-available RAM to consider. Running things in parallel might actually slow them
-down. But without making those stages explicit we can't even begin to manage
-the complexity that we are working towards.
-
-If we have something like this we can also think about having some kind of
-function to resume imports that have been broken off at some point. For that
-each stage would have to be idempotent and we have to store somewhere which
-stages have been completed.
 
 ## Handling Changed and Deleted Objects
 
@@ -173,7 +82,7 @@ middle and pretend that it just got it from the input file.
 
 In osm2pgsql-speak the "middle" is the part of the code that stores OSM objects
 for dependency management and updates. Currently there are two middle
-implementation, the "ram" middle for the non-slim mode which doesn't support
+implementations, the "ram" middle for the non-slim mode which doesn't support
 updates and the "pgsql" middle for slim mode which stores the data in the
 PostgreSQL database and which supports updates. There are many advantages to
 having this data in the database and we'll always have that and support that.
@@ -189,6 +98,17 @@ they want the more efficient one or the more flexible PostreSQL-based one.
 Extra points for writing a foreign data wrapper for PostgreSQL that can access
 the external database. That would allow us to combine the advantages of both
 solutions.
+
+## Improving Efficiency of Flat-Node Store
+
+The flat-node store is part of the 'middle' storage and stores locations for
+all OSM nodes. It's very simply array structure makes it easy to use and very fast.
+It needs nearly 100GB storage, though, no matter if you are importing a
+planet or just a small extract. We need a data structure that better
+compresses the data and works well for full planets and extracts alike.
+
+One possible venue to explore here is to find a more efficient encoding for
+locations, for example through [interleaving encoding](https://github.com/osm2pgsql-dev/osm2pgsql/issues/1466).
 
 ## Keeping Extracts Up-to-date
 
@@ -206,3 +126,64 @@ problems. It would be great to have a better solution here. Ideally osm2pgsql
 could just consume the diffs downloaded from planet.osm.org and do the right
 thing.
 
+[Discussion](https://github.com/osm2pgsql-dev/osm2pgsql/issues/1248){:.extlink}
+
+## Resuming imports/updates
+
+Imports with osm2pgsql can take quite some time and if something breaks you
+have to start from scratch. Some kind of "resume" feature is requested often
+and we should look into what's needed for that.
+
+We'd have to define checkpoints and make sure that all data is written to disk
+at that point. Then on restart osm2pgsql has to detect that it failed and
+resume at the correct point. In
+[some situations](https://github.com/osm2pgsql-dev/osm2pgsql/issues/799), the
+user might also want to start osm2pgsql processing at a well defined point.
+
+[Discussion](https://github.com/osm2pgsql-dev/osm2pgsql/issues/1755){:.extlink}
+
+## Processing Flexibility
+
+Osm2pgsql processes data in several steps: Database tables are created, then
+data is imported, then clustered, then indexes created. Some of those steps are
+already configurable, but there is a lot of hardcoded logic in here. Users have
+repeatedly asked for more flexibility, for instance for index creation, which
+is now much more flexible.
+
+We need some way of making this more configurable without breaking backwards
+compatibility and without making the common use case too complicated. How to
+best do this is currently unclear. The direction we have been going in with
+the Lua configuration points towards a possible solution: Move more of the
+decisions about *what* needs to be done into Lua, keeping the *how* in C++.
+Then most users can use higher level Lua functions that hide some of the
+complexity, but power users can still access lower-level functionality to
+solve their specific needs.
+
+
+## Tile Expiry
+
+Osm2pgsql can generate a list of tiles that need to be expired due to updates
+to the database. It is memory intensive and tends to create larger tile expiry
+lists than necessary.
+
+Polygon expiry is the most obvious target for improvements. We should expire
+only tiles directly affected instead of the whole bounding box of the polygon.
+Also on the wish list is an expiry that only takes the areas that have changed
+into account instead of the whole polygon.
+
+There are other parameters to expiry which we might want to give the user
+an influence over. This needs a deep look into what users actually need and
+how we can best support it.
+
+[Discussion](https://github.com/osm2pgsql-dev/osm2pgsql/issues/1662){:.extlink}
+
+
+## Debugging and Testing Support for Style Writers
+
+The flex output introduces a lot of flexibility and we should find ways of
+aiding the style writers with testing and debugging their Lua config files.
+
+The new BDD testing framework might serve as a base for such a test tool.
+It needs to be reviewed and the exising BDD commands cleaned up. Then we
+need some scaffolding that allows the user to invoke the tests and some
+user documentation on how to test user laud scripts.
