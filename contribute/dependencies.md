@@ -62,8 +62,11 @@ for (var pkg of packages) {
       .then((infolist) => {
           for (var info of infolist) {
             const span = document.getElementById(`pkg-version-${pkgname}-${info.repo}`);
-            if (span !== null && info.status !== 'rolling') {
-                span.innerHTML = info.version;
+            if (span !== null && info.status !== 'rolling'
+                && info.version.localeCompare(span.innerText, undefined, { numeric: true, sensitivity: "case", caseFirst: "upper" }) >= 0
+                && (info.origversion !== null || info.repo == 'homebrew')
+                && info.version.indexOf('.') > 0) {
+                span.innerText = info.version;
             }
           }
       });
