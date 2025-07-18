@@ -54,6 +54,10 @@ yourself what geometries to create using the `as_point()`, `as_linestring()`,
 and `as_geometrycollection()` functions. See the [Flex Output
 chapter](#the-flex-output) for details.
 
+There are two helper to [work with multi*-geometry objects in LUA](https://osm2pgsql.org/doc/manual-v1.html#geometry-objects-in-lua):
+- Use `:geometries()` to iterate over members
+- Use `:num_geometries()` to retrive the number of geometries
+
 ### Geometry Validity
 
 Point geometries are always valid (as long as the coordinates are inside the
