@@ -31,5 +31,9 @@ applications processing OSM data.
         <h2>{% include img/users.svg %} Users</h2>
         <p>Who is using osm2pgsql and what are they using it for?</p>
     </a>
+    <a class="box box2" href="{% link about/road-map.md %}">
+        <h2>{% include img/users.svg %} Road Map</h2>
+        <p>What is the future of osm2pgsql?</p>
+    </a>
 </div>
 

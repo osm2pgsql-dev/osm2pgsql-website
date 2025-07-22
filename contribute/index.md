@@ -27,12 +27,12 @@ Before starting to code, make sure you have read
 
 We like best, when you scratch your own itches and implement what solves your
 own use cases. If you want to check if your ideas are a good fit, have a look
-at our [road map]({% link contribute/road-map.md %}). If you need some
-inspiration where to start, the [list of Project Ideas]({% link contribute/project-ideas.md %})
+at our [road map]({% link about/road-map.md %}). If you need some
+inspiration where to start, the [List of Project Ideas]({% link contribute/project-ideas.md %})
 might help.
 
 To get an overview over the architecture of osm2pgsql, we have an introduction
-* [How osm2pgsql Data Processing Works]({% link contribute/how-osm2pgsql-processing-works.md %}).
+on [How osm2pgsql Data Processing Works]({% link contribute/how-osm2pgsql-processing-works.md %}).
 
 ### Writing Tests
 
@@ -114,8 +114,8 @@ developers directly to know more.
 
 osm2pgsql is a stable software with quite mature code. That does not mean that
 its development is finished. We want to see it evolve along the lines as
-described in the [Road Map](). To ensure continuity, we have a few basic
-requirements for all code contributions. Please keep those in mind.
+described in the [Road Map]({% link about/road-map.md %}). To ensure continuity,
+we have a few basic requirements for all code contributions described here.
 
 ### Software and Hardware Requirements
 
