@@ -102,7 +102,7 @@ solutions.
 ## Improving Efficiency of Flat-Node Store
 
 The flat-node store is part of the 'middle' storage and stores locations for
-all OSM nodes. It's very simply array structure makes it easy to use and very fast.
+all OSM nodes. It's very simple array structure makes it easy to use and very fast.
 It needs nearly 100GB storage, though, no matter if you are importing a
 planet or just a small extract. We need a data structure that better
 compresses the data and works well for full planets and extracts alike.
@@ -141,23 +141,6 @@ resume at the correct point. In
 user might also want to start osm2pgsql processing at a well defined point.
 
 [Discussion](https://github.com/osm2pgsql-dev/osm2pgsql/issues/1755){:.extlink}
-
-## Processing Flexibility
-
-Osm2pgsql processes data in several steps: Database tables are created, then
-data is imported, then clustered, then indexes created. Some of those steps are
-already configurable, but there is a lot of hardcoded logic in here. Users have
-repeatedly asked for more flexibility, for instance for index creation, which
-is now much more flexible.
-
-We need some way of making this more configurable without breaking backwards
-compatibility and without making the common use case too complicated. How to
-best do this is currently unclear. The direction we have been going in with
-the Lua configuration points towards a possible solution: Move more of the
-decisions about *what* needs to be done into Lua, keeping the *how* in C++.
-Then most users can use higher level Lua functions that hide some of the
-complexity, but power users can still access lower-level functionality to
-solve their specific needs.
 
 
 ## Tile Expiry

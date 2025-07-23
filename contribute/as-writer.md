@@ -11,7 +11,7 @@ the next person.
 
 Most of our documentation lives on the website of osm2pgsql.org.
 There are three sections, which would particularly benefit from your
-contributions: the manual, usage examples and tutorials
+contributions: the manual, usage examples and tutorials.
 
 You find the source code for the documentation in the
 [osm2pgsql-website repo](https://github.com/osm2pgsql-dev/osm2pgsql-website){:.extlink}.
