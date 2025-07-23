@@ -15,7 +15,7 @@ ideas, not complete specifications. For most of the projects the coding part is
 probably going to be smaller than the design, which has to make sure everything
 fits well with other parts of osm2pgsql, is maintainable in the long term and
 so on. (For more concrete projects see the
-[issues](https://github.com/osm2pgsql-dev/osm2pgsql/issues)).
+[issues](https://github.com/osm2pgsql-dev/osm2pgsql/issues){:.extlink}).
 
 If you are a developer with some time on your hands and one of these ideas
 seems interesting to you, by all means go ahead and give it a shot. Play around
@@ -108,7 +108,7 @@ planet or just a small extract. We need a data structure that better
 compresses the data and works well for full planets and extracts alike.
 
 One possible venue to explore here is to find a more efficient encoding for
-locations, for example through [interleaving encoding](https://github.com/osm2pgsql-dev/osm2pgsql/issues/1466).
+locations, for example through [interleaving encoding](https://github.com/osm2pgsql-dev/osm2pgsql/issues/1466){:.extlink}.
 
 ## Keeping Extracts Up-to-date
 
@@ -137,7 +137,7 @@ and we should look into what's needed for that.
 We'd have to define checkpoints and make sure that all data is written to disk
 at that point. Then on restart osm2pgsql has to detect that it failed and
 resume at the correct point. In
-[some situations](https://github.com/osm2pgsql-dev/osm2pgsql/issues/799), the
+[some situations](https://github.com/osm2pgsql-dev/osm2pgsql/issues/799){:.extlink}, the
 user might also want to start osm2pgsql processing at a well defined point.
 
 [Discussion](https://github.com/osm2pgsql-dev/osm2pgsql/issues/1755){:.extlink}
