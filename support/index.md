@@ -47,9 +47,14 @@ You can also ask questions or discuss features and ideas
 * using the
   [discussion](https://github.com/osm2pgsql-dev/osm2pgsql/discussions){:.extlink}
   feature on GitHub.
-* on the [OSM developer mailing
-  list](https://lists.openstreetmap.org/listinfo/dev){:.extlink} or
+* on the [community forum](https://community.openstreetmap.org/tag/osm2pgsql){:.extlink} or
 * the [#osm-dev IRC channel](https://wiki.openstreetmap.org/wiki/IRC){:.extlink}.
+
+Describe the feature you want and give us details about your use case for the
+feature. Try to think about how the feature fits into the general road map
+of osm2pgsql and what other use cases it could cover. The more universal a
+feature request, the more likely it is to be picked up.
+
 </section>
 
 <section markdown="1">
@@ -59,7 +64,7 @@ You can report bugs and problems by opening an issue on Github. Please check
 [existing issues](https://github.com/osm2pgsql-dev/osm2pgsql/issues){:.extlink}
 first.
 
-Please describe
+Please use the [provided form](https://github.com/osm2pgsql-dev/osm2pgsql/issues/new?template=bug-report.md){:.extlink} to describe
 * what you are trying to achieve in the end,
 * what you did,
 * what behaviour you expected from osm2pgsql,
