@@ -121,7 +121,7 @@ different areas of the world even if the landuse tagging is incomplete.
 This strategy is tile-based. Internally it uses a similar approach as the
 `raster-union` strategy but can work with several input tables.
 
-Parameters used by this strategy (see below for some additional general
+Parameters used by this strategy (see above for some additional general
 parameters):
 
 | Parameter    | Type | Description |
@@ -154,7 +154,7 @@ importance which tends to create a more evenly filled map.
 
 This strategy always processes all features in a table.
 
-Parameters used by this strategy (see below for some additional general
+Parameters used by this strategy (see above for some additional general
 parameters):
 
 | Parameter         | Type | Description |
@@ -199,7 +199,7 @@ should be aggregated into larger ones. It does a very similar job as the
 
 This strategy is tile-based.
 
-Parameters used by this strategy (see below for some additional general
+Parameters used by this strategy (see above for some additional general
 parameters):
 
 | Parameter       | Type | Description |
@@ -234,7 +234,7 @@ at the moment.**
 
 This strategy always processes all features in a table.
 
-Parameters used by this strategy (see below for some additional general
+Parameters used by this strategy (see above for some additional general
 parameters):
 
 | Parameter    | Type | Description |
@@ -256,7 +256,7 @@ should be aggregated into larger ones. It does a very similar job as the
 
 This strategy is tile-based.
 
-Parameters used by this strategy (see below for some additional general
+Parameters used by this strategy (see above for some additional general
 parameters):
 
 | Parameter       | Type | Description |
@@ -275,7 +275,7 @@ set the zoom level and tile coordinates.
 
 This strategy is tile-based.
 
-Parameters used by this strategy (see below for some additional general
+Parameters used by this strategy (see above for some additional general
 parameters):
 
 | Parameter       | Type | Description |
