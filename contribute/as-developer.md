@@ -7,7 +7,7 @@ title: Contribute as a Developer
 We are always looking for a helping hand for keeping the code up-to-date
 and bug-free, as well as, with implementing new features and performance
 improvements. This page gives some hints where to get started and outlines
-the expectations we have set for code development
+the expectations we have set for code development.
 
 ## Where to Start
 
