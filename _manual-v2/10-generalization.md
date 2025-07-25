@@ -72,7 +72,7 @@ The following parameters are used by most generalizers:
 | schema      | text | Database schema for all tables. Default: `public`. |
 | src_table   | text | The table with the input data. |
 | dest_table  | text | The table where generalizer output data is written to. |
-| geom_column | text | The name of the geometry column in the input and output tables (default: `geom`). |
+| geom_column | text | The name of the geometry column in the input and output tables (default: `geom`). This is also used to find the extent of the input data. |
 {:.desc}
 
 For more specific parameters see below.
