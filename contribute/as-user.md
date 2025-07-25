@@ -22,7 +22,7 @@ something interesting to show, please share it in the
 
 ## Becoming a Featured User
 
-Here on the website we have a [list of users of osm2pgsql](% link about/users/index.md %}),
+Here on the website we have a [list of users of osm2pgsql]({% link about/users/index.md %}),
 where we showcase different applications where osm2pgsql is used to solve real-world
 problem.
 

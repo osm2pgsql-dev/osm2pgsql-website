@@ -11,7 +11,7 @@ work on now that makes sense on its own but can also later be a part of
 something bigger?
 
 To help with this big-picture view we maintain a kind of [road
-map](https://osm2pgsql.org/contribute/road-map.html). It is by no means
+map](https://osm2pgsql.org/about/road-map.html). It is by no means
 complete, and always changing, but it gives you some idea on where we are and
 where we want to go.
 

@@ -11,7 +11,7 @@ about plans and ideas and many questions could be answered.
 I started the meeting with a short intro about the development and
 documentation work we did in the last year, talked about where we are at the
 moment, and where our [current development
-priorities](https://osm2pgsql.org/contribute/road-map.html) are.
+priorities](https://osm2pgsql.org/about/road-map.html) are.
 
 After the intro we had a wide-ranging discussion about existing and missing
 features in osm2pgsql. One hot topic were geometry transformations and
