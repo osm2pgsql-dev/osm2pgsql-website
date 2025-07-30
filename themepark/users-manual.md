@@ -26,6 +26,7 @@ following options are currently used:
 | Option      | Type  | Default           | Description |
 | ----------- | ----- | ----------------- | ----------- |
 | attribution | text  | `© OpenStreetMap contributors - https://openstreetmap.org/copyright` | Attribution. |
+| cluster     | text  | `auto`            | Cluster setting to be used for all tables unless overwritten in `add_table()`. |
 | debug       | bool  | *none (disabled)* | Set name of debug column. See the [Debug Mode section](#debug-mode) below for details. |
 | extent      | array | *none*            | Extent of your map as array table with (xmin, ymin, xmax, ymax). |
 | prefix      | text  | *none*            | Prefix to be used on all table names. |

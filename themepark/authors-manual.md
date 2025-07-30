@@ -80,6 +80,7 @@ Here are all the settings:
 
 | Setting  | Description |
 | -------- | ----------- |
+| cluster  | Cluster override. Use option `cluster` to set for all tables. |
 | columns  | Column definitions, see below. |
 | geom     | If this is a string, sets the type of the geometry column (`point`, `linestring`, ...); the column will be named `geom`. If this is a Lua table, use `column` key to define the name of the geometry column and `type` for the geometry type.  |
 | external | Set this to `true` if the table is created outside osm2pgsql. |
