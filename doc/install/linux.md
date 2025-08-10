@@ -24,9 +24,9 @@ apt install osm2pgsql
 ### <img alt="" src="{% link img/debian.svg %}"/>Installing on Debian
 
 ![Debian 11 (Bullseye) package](https://repology.org/badge/version-for-repo/debian_11/osm2pgsql.svg)
-![Debian 11 (Bullseye) Backports package](https://repology.org/badge/version-for-repo/debian_11_backports/osm2pgsql.svg)
 ![Debian 12 (Bookworm) package](https://repology.org/badge/version-for-repo/debian_12/osm2pgsql.svg)
-![Debian Testing package](https://repology.org/badge/version-for-repo/debian_13/osm2pgsql.svg)
+![Debian 12 (Bookworm) Backports package](https://repology.org/badge/version-for-repo/debian_12_backports/osm2pgsql.svg)
+![Debian 13 (Trixie) package](https://repology.org/badge/version-for-repo/debian_13/osm2pgsql.svg)
 
 For Debian installation is usually as simple as
 
@@ -40,8 +40,8 @@ really good at keeping these up-to-date.
 
 ### <img alt="" src="{% link img/fedora.svg %}"/>Installing on Fedora
 
-![Fedora 37 package](https://repology.org/badge/version-for-repo/fedora_37/osm2pgsql.svg)
-![Fedora 38 package](https://repology.org/badge/version-for-repo/fedora_38/osm2pgsql.svg)
+![Fedora 41 package](https://repology.org/badge/version-for-repo/fedora_41/osm2pgsql.svg)
+![Fedora 42 package](https://repology.org/badge/version-for-repo/fedora_42/osm2pgsql.svg)
 ![Fedora Rawhide package](https://repology.org/badge/version-for-repo/fedora_rawhide/osm2pgsql.svg)
 
 Fedora has packages of osm2pgsql available. Install with
@@ -56,7 +56,7 @@ First add the "Geo" package repository (adapt URL to the openSUSE version you
 use):
 
 ```sh
-zypper ar https://download.opensuse.org/repositories/Application:/Geo/openSUSE_Leap_15.2/ "Geo"
+zypper ar https://download.opensuse.org/repositories/Application:/Geo/openSUSE_Leap_15.6/ "Geo"
 zypper refresh
 ```
 
