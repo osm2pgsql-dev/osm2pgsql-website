@@ -310,18 +310,25 @@ reprocessing way2 or relation3. This is accomplished by running
 `select_relation_members()` only on relation1, not relation2, so the recursion
 stops there.
 
-### Stage 2: Process Marked Ways
+When in stage 1c the `process_relation()` is called, inserting of data into the
+database is disabled! So the function runs, but no data is written to the
+database. That's important because otherwise this data would be in the database
+twice. But the function still needs to be run, so it can store any information
+about the relation inside Lua globals so that we later have this information
+for stage 2.
 
-In this stage all ways marked in stages 1a and 1b are reprocessed. That means
-we...
+### Stage 2: Process Marked Nodes and Ways
 
-* delete all entries in the output tables generated from those ways, and
-* run the `process_way()` function on all marked ways which will make new
-  entries in the database.
+In this stage all nodes and ways marked in stages 1a and 1b are reprocessed.
+That means we...
+
+* delete all entries in the output tables generated from those objects, and
+* run the `process_node()` or `process_way()` function on all marked nodes/ways
+  which will make new entries in the database.
 
 ## Source Code
 
 If you want to have a look at the source code:
-* `src/input.[ch]pp` contains the code to read the input file(s)
-* `src/osmdata.[ch]pp` contains code orchestrating the process described above
+* `src/input.[ch]pp` contains the code to read the input file(s) and
+* `src/osmdata.[ch]pp` contains code orchestrating the process described above.
 
