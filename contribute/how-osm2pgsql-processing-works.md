@@ -130,14 +130,14 @@ them in the object store in the database. Instead it can use a so-called
 flat node file, which is much more efficient for whole planet imports or
 large extracts.
 
-## The Dependency Manager
+## Dependency Management
 
-The dependency manager makes sure that all changes in input data are propagated
-to the right places.
+Dependency management is concerned with making sure that all changes in input
+data are propagated to the right places.
 
-The dependency manager will
-* find parent ways and relations for all changed nodes
-* find parent relations for all changed ways.
+This consists of
+* finding parent ways and relations for all changed nodes
+* finding parent relations for all changed ways.
 
 Note that for deleted objects no explicit processing of parent objects is done,
 because when an object is deleted parent objects must necessarily change also
@@ -209,33 +209,32 @@ then relations.
 **[A]** Every input node is read and
 * **[A.M]** delivered to the middle for storage
 * **[A.O]** delivered to the output for processing
-* **[A.D]** delivered to the dependency manager which stores the node id
+* **[A.D]** its node id is stored
 
 **[B]** After all input nodes are processed and before the first input way is
-processed the dependency manager requests from the middle the ids of all parent
-ways and all parent relations of all the node ids it has stored in [A.D]. These
-are kept for later.
+processed we request from the middle the ids of all parent ways and all parent
+relations of all the node ids we have stored in [A.D]. These are kept for later.
 
 **[C]** Then every input way is read and
 * **[C.M]** delivered to the middle for storage
 * **[C.O]** delivered to the output for processing
-* **[C.D]** delivered to the dependency manager which stores the way id
+* **[C.D]** its way id is stored
 
 **[D]** After all input ways are processed and before the first input relation
-is processed the dependency manager requests from the middle the ids of all
-parent relations of all the way ids it has stored in [C.D]. These are merged
-with the parent relations of the nodes found in [B] and kept for later. It
-removes from the list of node parent ways it has stored in [B] all input ways
-it has already processed in [C].
+is processed we request from the middle the ids of all parent relations of all
+the way ids we have stored in [C.D]. These are merged with the parent relations
+of the nodes found in [B] and kept for later. It removes from the list of node
+parent ways it has stored in [B] all input ways it has already processed in
+[C].
 
 **[E]** Then every input relation is read and
 * **[E.M]** delivered to the middle for storage
 * **[E.O]** delivered to the output for processing
-* **[E.D]** delivered to the dependency manager which stores the relation id
+* **[E.D]** its relation id is stored
 
-**[F]** After all input relations are processed the dependency manager removes
-from the list of (node or way) parent relation ids assembled in [B] and [D] all
-input relations it has already processed in [E].
+**[F]** After all input relations are processed we remove from the list of
+(node or way) parent relation ids assembled in [B] and [D] all input relations
+we have already processed in [E].
 
 ### Stage 1b (Append Mode Only)
 
@@ -325,5 +324,4 @@ we...
 If you want to have a look at the source code:
 * `src/input.[ch]pp` contains the code to read the input file(s)
 * `src/osmdata.[ch]pp` contains code orchestrating the process described above
-* `src/dependency-manager.[ch]pp` contains the dependency management
 
