@@ -154,3 +154,35 @@ since version 1.7.0.
 This is an area where we need more input from users to see what their needs
 are. And we need to do more research where OSM data handling can be generalized
 and where domain-specific knowledge is needed.
+
+
+### Generalization
+
+For small zoom levels, geodata needs to be generalized. This is needed for
+speed and to reduce the amount of data being moved around over the network. But
+it is also needed to show maps that are usable and useful, and that look good.
+We have started work on this with the [generalization
+project](https://osm2pgsql.org/generalization/), but there is much more to do.
+
+Generalization is implemented in several "strategies" that deal with certain
+types of data and solve specialized use cases. Currently there are only a few
+strategies implemented and we plan to add many more. For instance there are
+existing strategies to generalize landcover data, but no strategies yet to do
+generalizations of road networks.
+
+Generalization strategies fall into several "families". Some strategies always
+work on *all* data. Those are easier to implement but make updates more
+expensive. Some strategies are tile-based, updates can be done tile-by-tile.
+Missing is a general framework for implementing strategies with object-based
+updates. For this osm2pgsql needs to keep track of all input objects that have
+been used for some generalized object so that changes in those objects can be
+reflected in the generalized object. Such a mechanism probably also has to
+keep track of specific attributes of those objects so that new objects with
+those attributes can be taken into account.
+
+Currently generalization is still marked as experimental. It is used through
+the `osm2pgsql-gen` program and only loosely integrated with the rest of
+osm2pgsql. We want to get to a better integration but it is as yet unclear
+how exactly this should look. This is also related to several other topics
+mentioned in this road map.
+
