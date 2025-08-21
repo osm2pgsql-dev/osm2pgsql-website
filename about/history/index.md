@@ -135,6 +135,13 @@ Nominatim switches to the *flex* output, which makes the *gazetteer* output
 obsolete. It is removed along with a lot of other obsolete functionality and
 [version 2.0 is released]({% link _posts/2024-09-19-release-2.0.0.md %}).
 
+## 2025
+
+Zero warnings achievement unlocked: Code has compiled with zero warnings on GCC
+and Clang for a long time. Now this works for MSVC, too. And the code also
+passes all configured checks in clang-tidy. The CI now checks this to make
+sure we don't introduce any new problems in the future.
+
 </div>
 
 <script>
