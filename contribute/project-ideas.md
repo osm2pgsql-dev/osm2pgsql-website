@@ -50,6 +50,8 @@ broken somewhere on the planet creating invalid data. That's why this is
 somewhat tricky and not just a case of merging all ways tagged
 `natural=coastline` and creating polygons from that.
 
+[Discussion](https://github.com/osm2pgsql-dev/osm2pgsql/issues/2408){:.extlink}
+
 
 ## Handling Changed and Deleted Objects
 
@@ -66,6 +68,8 @@ processing chain, but that information is lost once we are inside the database.
 
 We might need some extra callbacks into the Lua code for this and/or change the
 DELETE/COPY we are doing now into some kind of "UPSERT".
+
+[Discussion](https://github.com/osm2pgsql-dev/osm2pgsql/issues/2407){:.extlink}
 
 ## Handling of Dependent Objects
 
@@ -87,6 +91,7 @@ hash must be calculated in the Lua config based on the tags used in an object.
 And osm2pgsql would keep track of those hashes and make sure objects with the
 same hash are re-processed whenever an object with that hash changes.
 
+[Discussion](https://github.com/osm2pgsql-dev/osm2pgsql/issues/2406){:.extlink}
 
 ## Marking Objects as Changed
 
@@ -98,6 +103,8 @@ makes only sense in slim mode, of course.
 
 To implement this, osm2pgsql basically would have to read that object from the
 middle and pretend that it just got it from the input file.
+
+[Discussion](https://github.com/osm2pgsql-dev/osm2pgsql/issues/2405){:.extlink}
 
 ## Non-PostgreSQL Middle
 
@@ -120,6 +127,8 @@ Extra points for writing a foreign data wrapper for PostgreSQL that can access
 the external database. That would allow us to combine the advantages of both
 solutions.
 
+[Discussion](https://github.com/osm2pgsql-dev/osm2pgsql/issues/2404){:.extlink}
+
 ## Improving Efficiency of Flat-Node Store
 
 The flat-node store is part of the 'middle' storage and stores locations for
@@ -130,6 +139,8 @@ compresses the data and works well for full planets and extracts alike.
 
 One possible venue to explore here is to find a more efficient encoding for
 locations, for example through [interleaving encoding](https://github.com/osm2pgsql-dev/osm2pgsql/issues/1466){:.extlink}.
+
+[Discussion](https://github.com/osm2pgsql-dev/osm2pgsql/issues/2403){:.extlink}
 
 ## Keeping Extracts Up-to-date
 
@@ -191,4 +202,4 @@ It needs to be reviewed and the exising BDD commands cleaned up. Then we
 need some scaffolding that allows the user to invoke the tests and some
 user documentation on how to test user laud scripts.
 
-[Discussion](https://github.com/osm2pgsql-dev/osm2pgsql/issues/1130)
+[Discussion](https://github.com/osm2pgsql-dev/osm2pgsql/issues/1130){:.extlink}
