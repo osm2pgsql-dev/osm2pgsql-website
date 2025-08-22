@@ -67,6 +67,27 @@ processing chain, but that information is lost once we are inside the database.
 We might need some extra callbacks into the Lua code for this and/or change the
 DELETE/COPY we are doing now into some kind of "UPSERT".
 
+## Handling of Dependent Objects
+
+Processing of dependent objects currently only works through OSM object
+dependencies: when a node changes, all ways and relations containing the node
+are reprocessed, same for ways. This can be at the same time, invalidate
+too many objects (changing the tags on a node might have no influence on the way)
+or too few (you might want to invalidate near-by nodes). The dependency
+handling also works the same for all tables: it is the input object that
+gets recomputed for all tables.
+
+osm2pgsql needs a more flexible mechanism to handle dependent updates. Ideally
+the mechanism also allows to express transitive relationships: a change in
+OpenStreetMap triggers changes in table A, which in turn triggers updates in
+table B.
+
+One option would be to add some kind of hash to each database entry. That
+hash must be calculated in the Lua config based on the tags used in an object.
+And osm2pgsql would keep track of those hashes and make sure objects with the
+same hash are re-processed whenever an object with that hash changes.
+
+
 ## Marking Objects as Changed
 
 Sometimes it can be useful to mark certain OSM objects as changed so that
@@ -128,7 +149,7 @@ thing.
 
 [Discussion](https://github.com/osm2pgsql-dev/osm2pgsql/issues/1248){:.extlink}
 
-## Resuming imports/updates
+## Resuming Imports/Updates
 
 Imports with osm2pgsql can take quite some time and if something breaks you
 have to start from scratch. Some kind of "resume" feature is requested often
@@ -160,7 +181,6 @@ how we can best support it.
 
 [Discussion](https://github.com/osm2pgsql-dev/osm2pgsql/issues/1662){:.extlink}
 
-
 ## Debugging and Testing Support for Style Writers
 
 The flex output introduces a lot of flexibility and we should find ways of
@@ -170,3 +190,5 @@ The new BDD testing framework might serve as a base for such a test tool.
 It needs to be reviewed and the exising BDD commands cleaned up. Then we
 need some scaffolding that allows the user to invoke the tests and some
 user documentation on how to test user laud scripts.
+
+[Discussion](https://github.com/osm2pgsql-dev/osm2pgsql/issues/1130)
