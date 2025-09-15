@@ -435,7 +435,8 @@ example config file.
 
 ### Processing Callbacks
 
-You are expected to define one or more of the following functions:
+You are expected to define one or more of the following functions. Each defines
+how osm2pgsql is supposed to handle specific types of objects.
 
 | Callback function                               | Description                                       |
 | ----------------------------------------------- | ------------------------------------------------- |
@@ -445,6 +446,9 @@ You are expected to define one or more of the following functions:
 | osm2pgsql.**process_untagged_node**(object)     | Called for each new or changed untagged node.     |
 | osm2pgsql.**process_untagged_way**(object)      | Called for each new or changed untagged way.      |
 | osm2pgsql.**process_untagged_relation**(object) | Called for each new or changed untagged relation. |
+| osm2pgsql.**process_deleted_node**(object)      | *Version >= 2.2.0*{:.version} Called for each deleted node.     |
+| osm2pgsql.**process_deleted_way**(object)       | *Version >= 2.2.0*{:.version} Called for each deleted way.      |
+| osm2pgsql.**process_deleted_relation**(object)  | *Version >= 2.2.0*{:.version} Called for each deleted relation. |
 {: .desc}
 
 They all have a single argument of type table (here called `object`) and no
@@ -453,15 +457,21 @@ to supply all the functions.
 
 Usually you are only interested in tagged objects, i.e. OSM objects that have
 at least one tag, so you will only define one or more of the first three
-functions. But if you are interested in untagged objects also, define the
-last three functions. If you want to have the same behaviour for untagged
-and tagged objects, you can define the functions to be the same.
+functions. But if you are interested in untagged objects also, define one or
+more of the `process_untagged_*` functions. If you want to have the same
+behaviour for untagged and tagged objects, you can define the functions to be
+the same.
 
-These functions are called for each new or modified OSM object in the input
-file. No function is called for deleted objects, osm2pgsql will automatically
-delete all data in your database tables that were derived from deleted objects.
-Modifications are handled as deletions followed by creation of a "new" object,
-for which the functions are called.
+One of the first six functions is called for each new or modified OSM object in
+the input file. Usually you don't need to think about deleted objects, because
+osm2pgsql will automatically delete all data in your database tables that were
+derived from deleted objects. Modifications are handled as deletions followed
+by creation of a "new" object, for which the functions are called.
+
+*Version < 2.2.0*{:.version} No function is called for deleted objects.
+
+*Version >= 2.2.0*{:.version} The `process_deleted_*` functions are called
+for actually deleted objects (not for changed objects).
 
 You can do anything in those processing functions to decide what to do with
 this data. If you are not interested in that OSM object, simply return from the
@@ -499,6 +509,11 @@ When handling updates they are only included if the middle table contain this
 data (i.e. when `-x|--extra-attributes` option was used).
 {: .table-note}
 
+*Version >= 2.2.0*{:.version} In the `process_deleted_*` callbacks, the object
+will only have the `.type` and `.id` fields and possibly the `.version`,
+`.timestamp`, `.changeset`, `.uid`, and `.user` fields. None of the functions
+are available.
+
 The `as_*` functions will return a NULL geometry if
 the geometry can not be created for some reason, for instance a polygon can
 only be created from closed ways. This can also happen if your input data is
@@ -512,10 +527,10 @@ The `as_multipoint()` function can be used on nodes and relations. For nodes it
 will always return a point geometry, for relations a point or multipoint
 geometry with all available node members.
 
-The `as_multilinestring()` and `as_multipolygon()` functions, on the other
-hand, can be used for ways and for relations. The latter will either return
-a linestring/polygon or a multilinestring/multipolygon, depending on whether
-the result is a single geometry or a multi-geometry.
+The `as_multilinestring()` and `as_multipolygon()` functions can be used for
+ways and for relations. The latter will either return a linestring/polygon or a
+multilinestring/multipolygon, depending on whether the result is a single
+geometry or a multi-geometry.
 
 If you need all geometries of a relation, you can use
 `as_geometrycollection()`. It will contain all geometries which can be
