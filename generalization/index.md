@@ -6,11 +6,11 @@ title: Generalization
 
 [*Cartographic
 generalization*](https://en.wikipedia.org/wiki/Cartographic_generalization){:.extlink}
-is the process turning detailed geographic data into more general data for
+is the process of turning detailed geographic data into more general data for
 smaller zoom levels or smaller scale maps. It is essential for generating
 good-looking, easy to interpret, and fast rendering small scale maps.
 
-Currently osm2pgsql has almost no built-in support for generalization, usually
+Historically osm2pgsql has almost no built-in support for generalization, usually
 it is done using lots of SQL magic after the initial import of the data with
 osm2pgsql. From September 2022 to February 2023 we ran a
 [project](https://prototypefund.de/project/generalisierung-von-openstreetmap-daten-mit-osm2pgsql/){:.extlink}
@@ -43,8 +43,7 @@ In addition a lot of code has been added in many small PRs to add and extend
 some (basic) functionality needed for this project.
 
 The code is now merged into osm2pgsql master branch but still marked as
-experimental. See the [preliminary
-documentation](/doc/manual.html#generalization) for all the details.
+experimental. See the [documentation](/doc/manual.html#generalization) for all the details.
 
 Jochen gave a talk (in German) about this project at FOSSGIS 2023:
 [slides](https://media.jochentopf.com/media/2023-03-16-talk-fossgis2023-generalisierung-von-osm-daten-de-slides.pdf){:.extlink},
@@ -58,7 +57,7 @@ Jochen gave a talk (in German) about this project at FOSSGIS 2023:
 
 <div style="text-align: center;">
 <a href="https://www.bmbf.de/"><img src="bmbf-logo.png" height="110"/></a>
-<p>September 2022 bis Februar 2023<br/>FKZ 01IS22S29</p>
+<p>September 2022 to February 2023<br/>FKZ 01IS22S29</p>
 </div>
 
 </div>
