@@ -25,7 +25,7 @@ wiki.
 * Martijn van Exel has a blog post about [Keeping a thematic OpenStreetMap database up-to-date with osm2pgsql](https://mvexel.prose.sh/20230227-keeping-osm-database-uptodate-osm2pgsql){:.extlink}.
 * Mathias Gröbe has a [complete flex config with matching QGIS config file](https://github.com/mathiasgroebe/graubrot){:.extlink}.
 * The CrunchyData blog explores how to do quick imports: [Loading the World! OpenStreetMap Import In Under 4 Hours](https://www.crunchydata.com/blog/loading-the-world-openstreetmap-import-in-under-4-hours){:.extlink}.
-* Marcos Dione: [Bus routes with osm2pgsql flex backend](https://www.grulic.org.ar/~mdione/glob/posts/bus-routes-with-osm2pgsql-flex-backend/){:.extlink}.
+* Marcos Dione: [Bus routes with osm2pgsql flex backend](https://web.archive.org/web/20250617161108/https://www.grulic.org.ar/~mdione/glob/posts/bus-routes-with-osm2pgsql-flex-backend/){:.extlink}.
 
 ## Talks
 
