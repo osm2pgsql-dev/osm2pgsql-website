@@ -207,7 +207,7 @@ Databases are actually created in PostgreSQL by copying a *template database*.
 If you don't specify a database to copy from, the `template1` database is used.
 PostgreSQL allows you to change `template1` or to create additional template
 databases. If you create a lot of databases for use with osm2pgsql, you can do
-initializations like `CREATE EXTENSTION postgis;` once in a template database
+initializations like `CREATE EXTENSION postgis;` once in a template database
 and they will be available in any database you create from them.
 
 See the [PostgreSQL
