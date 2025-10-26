@@ -173,7 +173,7 @@ configurable:
 
 | Column    | Type | Description |
 | --------- | ---- | ----------- |
-| discr_iso | real | Discrete isolation value. This is the smallest distance from this feature to all other features on the map in map units. |
+| discr_iso | real | Discrete isolation value. This is the distance from this feature to the closest features with higher importance. Distance is in map units. |
 | irank     | int  | Absolute importance rank derived from `importance_column`. Most important feature gets 0, next important one gets 1, and so on. |
 | dirank    | int  | Discrete isolation rank derived from the discrete isolation value. Most important feature gets 0, next important one gets 1, and so on. |
 {:.desc}
