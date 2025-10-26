@@ -160,7 +160,7 @@ parameters):
 | Parameter         | Type | Description |
 | ----------------- | ---- | ----------- |
 | id_column         | text | The name of the id column in the source table. |
-| importance_column | text | The column in the source table with the importance metric. Column type must be a number type. |
+| importance_column | text | The column in the source table with the importance metric. Column type must be a number type. Numbers must be positive, larger number means more important. |
 {:.desc}
 
 The `src_table` and `dest_table` have always to be the same.
@@ -173,9 +173,9 @@ configurable:
 
 | Column    | Type | Description |
 | --------- | ---- | ----------- |
-| discr_iso | real | Discrete isolation value |
-| irank     | int  | Importance rank |
-| dirank    | int  | Discrete isolation rank |
+| discr_iso | real | Discrete isolation value. This is the smallest distance from this feature to all other features on the map in map units. |
+| irank     | int  | Absolute importance rank derived from `importance_column`. Most important feature gets 0, next important one gets 1, and so on. |
+| dirank    | int  | Discrete isolation rank derived from the discrete isolation value. Most important feature gets 0, next important one gets 1, and so on. |
 {:.desc}
 
 Use these column definitions in your config file to add them:
@@ -186,9 +186,22 @@ Use these column definitions in your config file to add them:
 { column = 'dirank', type = 'int', create_only = true },
 ```
 
-See [this blog
+When deciding what features to render on some map, you can take the following
+into account:
+
+* The `irank` value, the absolute importance of a feature.
+* The `dirank` value, the relative importance of a feature.
+* The zoom level or scale of the map. Basically this decides how much space
+  there is on the map to put stuff into.
+
+You can give different weights to the absolute and the relative importance,
+respectively. See [this blog
 post](https://blog.jochentopf.com/2022-12-19-selecting-settlements-to-display.html){:.extlink}
-for some background.
+for some background and an example formula.
+
+This strategy is based on this paper: [Scale-Dependent Point Selection Methods
+for Web Maps](https://dx.doi.org/10.1007/s42489-021-00079-y){:.extlink} by
+Mathias Gröbe and Dirk Burghardt.
 
 #### Strategy `raster-union`
 
