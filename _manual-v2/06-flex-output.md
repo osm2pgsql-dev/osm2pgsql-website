@@ -494,7 +494,7 @@ The parameter table (`object`) has the following fields and functions:
 | .nodes            | Ways only: An array with the way node ids. |
 | .members          | Relations only: An array with member tables. Each member table has the fields `type` (values `n`, `w`, or `r`), `ref` (member id) and `role`. |
 | :grab_tag(KEY)    | Return the tag value of the specified key and remove the tag from the list of tags. (Example: `local name = object:grab_tag('name')`) This is often used when you want to store some tags in special columns and the rest of the tags in an jsonb or hstore column. |
-| :get_bbox()       | Get the bounding box of the current node, way, or relation. This function returns four result values: the lon/lat values for the bottom left corner of the bounding box, followed by the lon/lat values of the top right corner. Both lon/lat values are identical in case of nodes. Example: `lon, lat, dummy, dummy = object:get_bbox()`. Relation members (nested relations) are not taken into account. |
+| :get_bbox()       | Get the bounding box of the current node, way, or relation. This function returns four result values: the lon/lat values for the bottom left corner of the bounding box, followed by the lon/lat values of the top right corner. Both lon/lat values are identical in case of nodes. Example: `lon, lat, dummy, dummy = object:get_bbox()`. Relation members (nested relations) are not taken into account. Returns `nil` if a valid bounding box can not be created for some reason. |
 | :as_point()              | Create point geometry from OSM node object. |
 | :as_linestring()         | Create linestring geometry from OSM way object. |
 | :as_polygon()            | Create polygon geometry from OSM way object. |
