@@ -233,7 +233,7 @@ at some point (see
 It is 100% compatible to the old configuration, no reimport is necessary.
 
 The "pgsql" output has been marked as deprecated in the version 2.0.0 of
-osm2pgsql (slated for release in September 2024). We'll remove it in version
+osm2pgsql (released in September 2024). We'll remove it in version
 3.0.0 which is not anywhere near, so there is some time to switch. But start
 doing that now, you'll not only be more future-proof, you'll get to use all the
 new features and capabilities.
