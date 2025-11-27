@@ -142,6 +142,9 @@ and Clang for a long time. Now this works for MSVC, too. And the code also
 passes all configured checks in clang-tidy. The CI now checks this to make
 sure we don't introduce any new problems in the future.
 
+Jochen Topf ([@joto](https://github.com/joto)) officially joins the group of
+maintainers.
+
 </div>
 
 <script>
