@@ -103,7 +103,7 @@ The `-d` parameter tells the replication script which database to connect
 to. The script also supports all other parameters mentioned in the section
 [database connection](#database-connection) including
 [libpq environment variables](https://www.postgresql.org/docs/current/libpq-envars.html).
-The only exception is the '-W' parameter for interactive password prompts.
+The only exception is the `-W` parameter for interactive password prompts.
 When you need to supply a password, always use a
 [pgpass file](https://www.postgresql.org/docs/current/libpq-pgpass.html).
 
@@ -115,7 +115,8 @@ the replication information.
 By default the update server and interval will be set from the file headers,
 for planet dumps minutely updates from the OSM main servers will be used. If
 you want to use a different replication service, use the `--server`
-parameter.
+parameter. You can also use `--osm-file <osm-file>` to retrieve the update 
+server from a data file.
 
 It is safe to repeat initialisation at any time. For example, when you want
 to change the replication service, simply run the init command again with a
@@ -129,10 +130,11 @@ Fetching updates is as simple as running:
 
 This fetches data from the replication service, saves it in a temporary file
 and calls osm2pgsql with the given parameters to apply the changes. Note that
-osm2pgsql-replication makes sure to only fetch a limited amount of data at the
+osm2pgsql-replication makes sure to only fetch a limited amount of data at a
 time to make sure that it does not use up too much RAM. If more data is
 available it will repeat the download and call of osm2pgsql until the database
-is up to date. You can change the amount of data downloaded at once with
+is up to date. Use the option `--once` to stop after the first change file has
+been applied. You can change the amount of data downloaded at a time with
 `--max-diff-size`, the default is 500MB.
 
 Sometimes you need to run additional commands after osm2pgsql has updated the
@@ -140,6 +142,12 @@ database, for example, when you use the expiry function. You can use the
 option `--post-processing` to give osm2pgsql-replication a script it is
 supposed to run after each call to osm2pgsql. Note that if the script fails,
 then the entire update process is considered a failure and aborted.
+
+You can use the option `--diff-file <file>` to specify a file where osm2pgsql-replication
+will save the changes before they are applied to the database.
+
+After the update has finished, osm2pgsql-replication can run a script specified
+by the option `--post-processing <script>`.
 
 ##### Putting it all together with systemd
 
