@@ -130,11 +130,12 @@ Fetching updates is as simple as running:
 
 This fetches data from the replication service, saves it in a temporary file
 and calls osm2pgsql with the given parameters to apply the changes. Note that
-osm2pgsql-replication makes sure to only fetch a limited amount of data at the
+osm2pgsql-replication makes sure to only fetch a limited amount of data at a
 time to make sure that it does not use up too much RAM. If more data is
 available it will repeat the download and call of osm2pgsql until the database
-is up to date (unless the option `--once` is used). You can change the amount 
-of data downloaded per at once with `--max-diff-size`, the default is 500MB.
+is up to date. Use the option `--once` to stop after the first change file has
+been applied. You can change the amount of data downloaded at a time with
+`--max-diff-size`, the default is 500MB.
 
 Sometimes you need to run additional commands after osm2pgsql has updated the
 database, for example, when you use the expiry function. You can use the
