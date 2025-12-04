@@ -3,6 +3,10 @@ chapter: 13
 title: Style Testing
 ---
 
+This is only available from 2.3.0 but you can use the style test script as
+described below also with older versions of osm2pgsql. *Version >= 2.3.0*{: .version}
+{:.note}
+
 osm2pgsql flex styles can become complex very quickly. Style testing can
 help ensure that there are no bugs in the lua style and the database tables
 contain the desired data. osm2pgsql comes with a osm2pgsql-test-style that
