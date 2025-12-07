@@ -26,6 +26,7 @@ wiki.
 * Mathias Gröbe has a [complete flex config with matching QGIS config file](https://github.com/mathiasgroebe/graubrot){:.extlink}.
 * The CrunchyData blog explores how to do quick imports: [Loading the World! OpenStreetMap Import In Under 4 Hours](https://www.crunchydata.com/blog/loading-the-world-openstreetmap-import-in-under-4-hours){:.extlink}.
 * Marcos Dione: [Bus routes with osm2pgsql flex backend](https://web.archive.org/web/20250617161108/https://www.grulic.org.ar/~mdione/glob/posts/bus-routes-with-osm2pgsql-flex-backend/){:.extlink}.
+* Martijn van Exel: [ETL With OpenStreetMap: Simple Things Are Simple, But Then What?](https://martijn.vanexel.net/etl-with-openstreetmap-simple-things-are-simple/).
 
 ## Talks
 
