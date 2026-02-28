@@ -44,9 +44,8 @@ blogpost](https://www.paulnorman.ca/blog/2014/03/osm2pgsql-multipolygons/){:.ext
 has some deeper discussion of this issue. See the flex and pgsql output
 chapters for details on how to configure this. It will also mean that your id
 columns are not unique, because there are now multiple rows created from the
-same OSM object. See the [Primary Keys and Unique
-IDs](#primary-keys-and-unique-ids) section for an option how to work around
-this.
+same OSM object. See the [Id Handling](#id-handling) section for information on
+how to work around this.
 
 When using the flex output, you can decide
 yourself what geometries to create using the `as_point()`, `as_linestring()`,

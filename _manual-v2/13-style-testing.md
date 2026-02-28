@@ -227,7 +227,7 @@ As with external code, you may include further lua modules here but need to
 make sure they can be found by setting the appropriate `LUA_PATH`
 environment variable.
 
-### Running osm2pgsql
+### Executing osm2pgsql
 
 ```gherkin
 When running osm2pgsql <output>
