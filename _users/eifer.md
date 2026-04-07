@@ -1,6 +1,6 @@
 ---
 title: EIfER
-order: 6
+order: 11
 links:
     - href: https://www.eifer.kit.edu/
       title: EIfER - European Institute for Energy Research
