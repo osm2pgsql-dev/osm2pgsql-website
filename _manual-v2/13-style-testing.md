@@ -499,6 +499,10 @@ A _point_ in the geo format can either be a pair of floats separated by
 spaces, just like in the WKT format. Or a point can be a single integer,
 in which case it refers to the coordinates of a node in the node grid.
 
+Using a single integer to reference the node grid only works when the WGS84
+projection (4326) is used on the table.
+{:.note}
+
 The follow tests are all equivalent:
 
 ```gherkin
