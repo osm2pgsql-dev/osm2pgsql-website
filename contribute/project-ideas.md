@@ -172,7 +172,7 @@ resume at the correct point. In
 [some situations](https://github.com/osm2pgsql-dev/osm2pgsql/issues/799){:.extlink}, the
 user might also want to start osm2pgsql processing at a well defined point.
 
-[Discussion](https://github.com/osm2pgsql-dev/osm2pgsql/issues/1755){:.extlink}
+[Discussion](https://github.com/osm2pgsql-dev/osm2pgsql/issues/1751){:.extlink}
 
 
 ## Tile Expiry

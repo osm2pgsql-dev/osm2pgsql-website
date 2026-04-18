@@ -6,7 +6,7 @@ links:
       title: GeoDataMine web site
     - href: https://framagit.org/PanierAvide/GeoDataMine
       title: Source code
-    - href: https://pavie.info/2020/03/09/openstreetmap-data-processing-osm2pgsql-flex/
+    - href: https://pavie.info/blog/openstreetmap-data-processing-osm2pgsql-flex/
       title: Blog post
 tags:
     - vector data
