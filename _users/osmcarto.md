@@ -6,7 +6,7 @@ links:
       title: www.openstreetmap.org
     - href: https://switch2osm.org/serving-tiles/
       title: Switch2OSM
-    - href: https://github.com/gravitystorm/openstreetmap-carto
+    - href: https://github.com/openstreetmap-carto/openstreetmap-carto
       title: OSM Carto
 tags:
     - raster map

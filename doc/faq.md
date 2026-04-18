@@ -229,7 +229,7 @@ use the switch to improve your database layout and contents.
 If you are using the popular OSM Carto style: A "flex" version of that style
 has been available for a while, chances are it will be merged into OSM Carto
 at some point (see
-[PR](https://github.com/gravitystorm/openstreetmap-carto/pull/4978){:.extlink}).
+[PR](https://github.com/openstreetmap-carto/openstreetmap-carto/pull/4978){:.extlink}).
 It is 100% compatible to the old configuration, no reimport is necessary.
 
 The "pgsql" output has been marked as deprecated in the version 2.0.0 of
