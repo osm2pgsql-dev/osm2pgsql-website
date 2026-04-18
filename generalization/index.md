@@ -16,7 +16,7 @@ osm2pgsql. From September 2022 to February 2023 we ran a
 [project](https://prototypefund.de/project/generalisierung-von-openstreetmap-daten-mit-osm2pgsql/){:.extlink}
 funded by the [Prototype Fund](https://prototypefund.de/){:.extlink} and the
 [German Federal Ministry of Education and
-Research](https://www.bmbf.de/){:.extlink} to add more support for
+Research](https://www.bmftr.bund.de/){:.extlink} to add more support for
 generalization to osm2pgsql. This included adding some generalization support
 directly to osm2pgsql but also using the capabilities of the PostgreSQL
 database and especially the PostGIS extension in a more easy to use fashion.
@@ -56,7 +56,7 @@ Jochen gave a talk (in German) about this project at FOSSGIS 2023:
 </div>
 
 <div style="text-align: center;">
-<a href="https://www.bmbf.de/"><img src="bmbf-logo.png" height="110"/></a>
+<a href="https://www.bmftr.bund.de/"><img src="bmbf-logo.png" height="110"/></a>
 <p>September 2022 to February 2023<br/>FKZ 01IS22S29</p>
 </div>
 
