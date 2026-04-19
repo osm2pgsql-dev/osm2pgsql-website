@@ -226,11 +226,9 @@ as a "pgsql" configuration in which case you do not need a reimport. But
 chances are you want to take advantage of some of the "flex" capabilities and
 use the switch to improve your database layout and contents.
 
-If you are using the popular OSM Carto style: A "flex" version of that style
-has been available for a while, chances are it will be merged into OSM Carto
-at some point (see
-[PR](https://github.com/openstreetmap-carto/openstreetmap-carto/pull/4978){:.extlink}).
-It is 100% compatible to the old configuration, no reimport is necessary.
+If you are using the popular [OSM Carto
+style](https://github.com/openstreetmap-carto/openstreetmap-carto): It switched
+to using the "flex" output in version 6.0.0 in March 2026.
 
 The "pgsql" output has been marked as deprecated in the version 2.0.0 of
 osm2pgsql (released in September 2024). We'll remove it in version
