@@ -31,12 +31,24 @@ wiki.
 
 ## Talks
 
+* From FOSSGIS 2026: "Aufbau und Aktualisierung einer OSM-basierten Karten mit osm2pgsql" by Mathias Gröbe (in German).
+  [Slides](https://pretalx.com/media/fossgis2026/submissions/YWPLQE/resources/fossgis_osm2pg_681ThIk.pdf){:.extlink},
+  [Video on media.ccc.de](https://media.ccc.de/v/fossgis2026-83981-aufbau-und-aktualisierung-einer-osm-basierten-karten-mit-osm2pgsql){:.extlink},
+  [Video on YouTube](https://www.youtube.com/watch?v=tUuuxyKLjLY){:.extlink} (March 2026).
+* From PostGIS Day 2025: "Getting OpenStreetMap Data In PostGIS With osm2pgsql" by Jochen Topf.
+  [Slides](https://media.jochentopf.com/media/2025-11-20-talk-postgisday2025-getting-osm-data-into-postgis-en-slides.pdf){:.extlink},
+  [Video Download](https://media.jochentopf.com/media/2025-11-20-talk-postgisday2025-getting-osm-data-into-postgis-en-video.mp4){:.extlink},
+  [Video on YouTube](https://www.youtube.com/watch?v=oFg3nh3hZ7I){:.extlink} (November 2025).
+* From FOSSGIS 2024: "osm2pgsql - OSM Daten mit PostGIS verarbeiten" by Jakob Miksch (in German).
+  [Slides](https://pretalx.com/media/fossgis2024/submissions/9QUB7F/resources/osm2pgqsql_LXT0b53.pdf){:.extlink},
+  [Video on media.ccc.de](https://media.ccc.de/v/fossgis2024-38344-osm2pgsql-osm-daten-mit-postgis-verarbeiten){:.extlink},
+  [Video on YouTube](https://www.youtube.com/watch?v=6NQ2kwzBcoQ){:.extlink} (March 2024).
 * From SOTM-EU 2023: "Modern osm2pgsql tricks" by Paul Norman and Jochen Topf
-  [Video on YouTube](https://www.youtube.com/watch?v=wAk_sLOXTT8){:.extlink} (Nov 2023).
+  [Video on YouTube](https://www.youtube.com/watch?v=wAk_sLOXTT8){:.extlink} (November 2023).
 * From PostGIS Day 2022: "Route the Interesting Things (Not Just Roads!) with OpenStreetMap" by Ryan Lambert
-  [Video on YouTube](https://www.youtube.com/watch?v=uydAoMaReos){:.extlink} (Dec 2022).
+  [Video on YouTube](https://www.youtube.com/watch?v=uydAoMaReos){:.extlink} (December 2022).
 * From PostGIS Day 2022: "Speedrunning the Open Street Map osm2pgsql Loader" by Greg Smith
-  [Video on YouTube](https://www.youtube.com/watch?v=BCMnu7xay2Y){:.extlink} (Dec 2022).
+  [Video on YouTube](https://www.youtube.com/watch?v=BCMnu7xay2Y){:.extlink} (December 2022).
 * From SotM 2021: "News from osm2pgsql" by Jochen Topf.
   [Slides](https://media.jochentopf.com/media/2021-07-10-talk-sotm2021-osm2pgsql-en-slides.pdf){:.extlink},
   [Download Video](https://media.jochentopf.com/media/2021-07-10-talk-sotm2021-osm2pgsql-en-video.mp4){:.extlink},
