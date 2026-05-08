@@ -23,4 +23,6 @@ Foundation](https://osmfoundation.org/){:.extlink} or one of its local chapters.
 Former Sponsors:
 
 * 2020: <a href="https://osmfoundation.org/">OpenStreetMap Foundation</a>
+* 2022/2023: <a href="{% link generalization/index.md %}">Prototype Fund</a>
+* <a href="https://www.geofabrik.de/">Geofabrik</a>
 
