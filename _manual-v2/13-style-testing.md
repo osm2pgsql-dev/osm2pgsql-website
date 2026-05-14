@@ -58,15 +58,16 @@ Scenario: An OSM tree node will be imported
         """
         local trees = osm2pgsql.define_node_table('trees', {
             { column = 'name', type = 'text' },
-            { column = 'geom', type = 'point', srid=4326 })
+            { column = 'geom', type = 'point', srid = 4326 }
+        })
 
         function osm2pgsql.process_node(object)
-          if object.tags.natural == 'tree' then
-            trees:insert{
-              name = tags.name,
-              geom = geom:as_point()
-            }
-          end
+            if object.tags.natural == 'tree' then
+                trees:insert {
+                    name = object.tags.name,
+                    geom = object:as_point()
+                }
+            end
         end
         """
     When running osm2pgsql flex
