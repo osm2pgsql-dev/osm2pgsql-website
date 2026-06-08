@@ -369,10 +369,12 @@ code {
     background-color: $osm2pgsql-color-box-fill;
     padding: 0 2px;
     border-radius: 2px;
+    white-space: nowrap;
 }
 
 pre code {
     padding: 0;
+    white-space: pre;
 }
 
 ul,
