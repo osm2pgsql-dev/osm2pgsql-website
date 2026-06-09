@@ -65,14 +65,15 @@ Lua table.
 
 The following parameters are used by most generalizers:
 
-| Parameter   | Type | Description |
-| ----------- | ---- | ----------- |
-| name        | text | Identifier for this generalizer used for debug outputs and error message etc. |
-| debug       | bool | Set to `true` to enable debug logging for this generalizer. Debug logging must also be enabled with `-l, --log-level=debug` on the command line. |
-| schema      | text | Database schema for all tables. Default: `public`. |
-| src_table   | text | The table with the input data. |
-| dest_table  | text | The table where generalizer output data is written to. |
-| geom_column | text | The name of the geometry column in the input and output tables (default: `geom`). This is also used to find the extent of the input data. |
+| Parameter         | Type | Description |
+| ----------------- | ---- | ----------- |
+| name              | text | Identifier for this generalizer used for debug outputs and error message etc. |
+| debug             | bool | Set to `true` to enable debug logging for this generalizer. Debug logging must also be enabled with `-l, --log-level=debug` on the command line. |
+| schema            | text | Database schema for all tables. Default: `public`. |
+| src_table         | text | The table with the input data. |
+| dest_table        | text | The table where generalizer output data is written to. |
+| geom_column       | text | The name of the geometry column in the input and output tables (default: `geom`). This is also used to find the extent of the input data. |
+| max_tiles_per_run | int  | *Version >= 2.3.0*{:.version} Process at most this many tiles (tile-based strategies only). |
 {:.desc}
 
 For more specific parameters see below.
@@ -110,6 +111,14 @@ zoom levels are only updated occasionally.
 The other type of strategy uses a tile-based approach. Whenever something
 changes, all tiles intersecting with the change will be re-processed. Osm2pgsql
 uses the existing [expire mechanism](#expire) to keep track of what to change.
+
+*Version >= 2.3.0*{:.version} By default all expired tiles will be processed in
+the tile-based approach. Sometimes generalization is too expensive to always
+run for all expired tiles. And there is a good chance that later changes in the
+data affect the same tile again, so it makes sense to only process some number
+of tiles each time saving effort in the long run. The option `max_tiles_per_run`
+can be set on all tile-based strategies to set this limit, the default is 0,
+which means process all changed tiles. Oldest expire tiles are processed first.
 
 #### Strategy `builtup`
 
