@@ -123,12 +123,13 @@ function. You can use the same options on the
 All the `osm2pgsql.define*table()` functions return a database table Lua
 object. You can call the following functions on it:
 
-| Function         | Description |
-| ---------------- | ----------- |
-| :name()          | The name of the table as specified in the define function. |
-| :schema()        | The schema of the table as specified in the define function. |
-| :columns()       | The columns of the table as specified in the define function. |
-| :insert(PARAMS)  | Add a row to the database table. See below for details. |
+| Function            | Description |
+| ------------------- | ----------- |
+| :name()             | The name of the table as specified in the define function. |
+| :schema()           | The schema of the table as specified in the define function. |
+| :columns()          | The columns of the table as specified in the define function. |
+| :insert(PARAMS)     | Add a row to the database table. See below for details. |
+| :in_id_cache(NODES) | *Version >= 2.3.0*{:.version} Check which of the specified member nodes in this way is in the id cache. See the [Id Cache section for details](#the-id-cache). |
 {: .desc}
 
 ### Id Handling
@@ -191,6 +192,9 @@ created, i.e. if osm2pgsql is run with `--slim` (but not `--drop`). You can set
 the optional field `create_index` in the `ids` setting to `'always'` to force
 osm2pgsql to always create this index, even in non-updatable databases (the
 default is `'auto'`, only create the index if needed for updating).
+
+*Version >= 2.3.0*{:.version} The `ids` setting can also contain a `cache =
+true` field. See the [Id Cache section](#the-id-cache) for details.
 
 Generalized data (see [Generalization](#generalization) chapter) is sometimes
 stored in tables indexed by x, y tile coordinates. For such tables use the
@@ -942,4 +946,30 @@ SELECT cc, ST_Subdivide(geom, 200) FROM polys")
 It can take a while to compute the subdivision. So if you run osm2pgsql often,
 compute the subdivision once and store the result in an extra table and just
 load that from osm2pgsql.
+
+### The Id Cache
+
+*Version >= 2.3.0*{:.version}
+
+It is sometimes useful to know whether a way contains nodes of a certain type,
+i.e. with certain tags. Examples are gates on highways or a ford in a river. If
+we know that a gate is on a specific node in a highway, we can render the gate
+as a line perpendicular to the highway and with the correct length based on the
+highway type. The Id cache helps in those cases by storing tagged nodes and
+making them available efficiently to the `process_way()` function.
+
+When defining a node table in Lua with `define_table` the `ids` section can
+contain a field `cache = true`. If this is set the ids of all nodes written to
+that table are stored in memory. Later, when processing ways, that cache can be
+queried with `tablename:in_id_cache()`. Usually this would be used to query all
+the member nodes of a way: `...:in_id_cache(object.nodes)`. The `in_id_cache()`
+function returns the indexes into the `object.nodes` array where the id
+matches. From there it is possible to get the id of the matching node (with
+`object.nodes[idx]`) or the location of that node (with `object:as_point(idx)`.
+This information can be stored in a way table which will be correctly updated
+in append mode. (In append mode the in-memory id cache is populated with all
+the ids of the table for which the cache was defined.)
+
+The Id cache only works for node tables and querying only works in the
+`process_way()` function.
 
