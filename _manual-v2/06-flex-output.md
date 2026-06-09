@@ -285,6 +285,9 @@ But it is possible to set them individually for special cases.
 | int4, int, integer | `int4`                 | |
 | int8, bigint       | `int8`                 | |
 | real               | `real`                 | |
+| double             | `double precision`     | *Version >= 2.3.0*{:.version} |
+| timestamp          | `timestamp`            | *Version >= 2.3.0*{:.version} |
+| timestamptz        | `timestamp with time zone` | *Version >= 2.3.0*{:.version} |
 | hstore             | `hstore`               | PostgreSQL extension `hstore` must be loaded |
 | json               | `json`                 | |
 | jsonb              | `jsonb`                | |
@@ -496,6 +499,7 @@ The parameter table (`object`) has the following fields and functions:
 | :grab_tag(KEY)    | Return the tag value of the specified key and remove the tag from the list of tags. (Example: `local name = object:grab_tag('name')`) This is often used when you want to store some tags in special columns and the rest of the tags in an jsonb or hstore column. |
 | :get_bbox()       | Get the bounding box of the current node, way, or relation. This function returns four result values: the lon/lat values for the bottom left corner of the bounding box, followed by the lon/lat values of the top right corner. Both lon/lat values are identical in case of nodes. Example: `lon, lat, dummy, dummy = object:get_bbox()`. Relation members (nested relations) are not taken into account. Returns `nil` if a valid bounding box can not be created for some reason. |
 | :as_point()              | Create point geometry from OSM node object. |
+| :as_point(n)             | *Version >= 2.3.0*{:.version} Create point geometry from OSM way object. The parameter `n` is the 1-based index of the member nodes. Negative `n` counts from the back. `:as_point()`, `:as_point(nil)`, `:as_point(1)` will return the first node, `:as_point(2)` the second node and so on. `:as_point(-1)` will return the last node. If the index is 0 or out of range a null geometry will be returned. If the parameter is not a number an error will be generated. |
 | :as_linestring()         | Create linestring geometry from OSM way object. |
 | :as_polygon()            | Create polygon geometry from OSM way object. |
 | :as_multipoint()         | Create (multi)point geometry from OSM node/relation object. |
@@ -721,25 +725,29 @@ the detailed rules:
    to `1`, `false` to `0`. Numbers that are not integers or outside the range
    of the type result in `NULL`. Strings are converted to integers if possible
    otherwise the result is `NULL`.
-7. For `real` columns: Booleans result in an error, all numbers are used as
-   is, strings are converted to a number, if that is not possible the result
-   is `NULL`.
-8. For `direction` columns (stored as `int2` in the database): Boolean `true`
+7. For `real` and `double` columns: Booleans result in an error, all numbers
+   are used as is, strings are converted to a number, if that is not possible
+   the result is `NULL`.
+8. *Version >= 2.3.0*{:.version} For `timestamp`and `timestamptz` columns:
+   Text values are used as is, the value must be in a format understood by
+   PostgreSQL. Integers are interpreted as seconds since 1970-01-01T00:00:00Z.
+   All other data types will result in an error.
+9. For `direction` columns (stored as `int2` in the database): Boolean `true`
    is converted to `1`, `false` to `0`. The number `0` results in `0`, all
    positive numbers in `1`, all negative numbers in `-1`. Strings `"yes"` and
    `"1"` will result in `1`, `"no"` and `"0"` in `0`, `"-1"` in `-1`. All
    other strings will result in `NULL`.
-9. For `json` and `jsonb` columns string, number, and boolean values are
-   converted to their JSON equivalent as you would expect. (The special
-   floating point numbers `NaN` and `Inf` can not be represented in JSON and
-   are converted to `null`). An empty table is converted to an (empty) JSON
-   object, tables that only have consecutive integer keys starting from 1 are
-   converted into JSON arrays. All other tables are converted into JSON
-   objects. Mixed key types are not allowed. Osm2pgsql will detect loops in
-   tables and return an error.
-10. For text columns and any other not specially recognized column types,
+10. For `json` and `jsonb` columns string, number, and boolean values are
+    converted to their JSON equivalent as you would expect. (The special
+    floating point numbers `NaN` and `Inf` can not be represented in JSON and
+    are converted to `null`). An empty table is converted to an (empty) JSON
+    object, tables that only have consecutive integer keys starting from 1 are
+    converted into JSON arrays. All other tables are converted into JSON
+    objects. Mixed key types are not allowed. Osm2pgsql will detect loops in
+    tables and return an error.
+12. For text columns and any other not specially recognized column types,
     booleans result in an error and numbers are converted to strings.
-11. Geometry objects are converted to their PostGIS counterparts. Null
+12. Geometry objects are converted to their PostGIS counterparts. Null
     geometries are converted to database `NULL`. Geometries in WGS84 will
     automatically be transformed into the target column SRS if needed.
     Non-multi geometries will automatically be transformed into
@@ -771,16 +779,21 @@ PostGIS functions with equivalent names.
 | :geometry_n()                   | Returns the nth geometry (1-based) of a multi-geometry. |
 | :geometry_type()                | Returns the type of geometry as a string: `NULL`, `POINT`, `LINESTRING`, `POLYGON`, `MULTIPOINT`, `MULTILINESTRING`, `MULTIPOLYGON`, or `GEOMETRYCOLLECTION`.
 | :is_null()                      | Returns `true` if the geometry is a NULL geometry, `false` otherwise. |
-| :length()                       | Returns the length of the geometry. For any geometry type but (MULTI)LINESTRING this is always `0.0`. The length is calculated using the SRS of the geometry, the result is in map units. |
+| :length()                       | Returns the length of the geometry. For any geometry type but (MULTI)LINESTRING this is always `0.0`. The length is calculated using the SRS of the geometry, the result is in map units. (See also `:spherical_area()`.) |
 | :line_merge()                   | Merge lines in a (MULTI)LINESTRING as much as possible into longer lines. |
 | :num_geometries()               | Returns the number of geometries in a multi-geometry. Always 0 for NULL geometries and always 1 for non-multi geometries. |
+| :n_points()                     | *Version >= 2.3.0*{:.version} Returns the number of points in a geometry. Works for all geometries. |
 | :pole_of_inaccessibility(opts)  | Calculate "pole of inaccessibility" of a polygon, a point farthest away from the polygon boundary, sometimes called the center of the maximum inscribed circle. Note that for performance reasons this is an approximation. It is intended as a reasonably good labelling point. One optional parameter *opts*, which must be a Lua table with options. The only option currently defined is `stretch`. If this is set to a value larger than 1 an ellipse instead of a circle is inscribed. This might be useful for labels which usually use more space horizontally. Use a value between 0 and 1 for a vertical ellipse. |
 | :segmentize(max_segment_length) | Segmentize a (MULTI)LINESTRING, so that no segment is longer than `max_segment_length`. Result is a (MULTI)LINESTRING. |
 | :simplify(tolerance)            | Simplify (MULTI)LINESTRING geometries with the Douglas-Peucker algorithm. (Currently not implemented for other geometry types.) |
 | :spherical_area()               | Returns the area of the geometry calculated on the spheroid. The geometry must be in WGS 84 (4326). For any geometry type but (MULTI)POLYGON the result is always `0.0`. The result is in m². (See also `:area()`.) |
+| :spherical_length()             | *Version >= 2.3.0*{:.version} Returns the length of the geometry calculated on the spheroid. The geometry must be in WGS 84 (4326). For any geometry type but (MULTI)LINESTRING the result is always `0.0`. The result is in meters. (See also `:length()`.) |
 | :srid()                         | Return SRID of the geometry. |
 | :transform(target_srid)         | Transform the geometry to the target SRS. |
 {:.desc}
+
+*Version >= 2.3.0*{:.version} Geometries can be compared for equality using
+the `==` operator.
 
 The Lua length operator (`#`) returns the number of geometries in the geometry
 object, it is synonymous to calling `num_geometries()`.
