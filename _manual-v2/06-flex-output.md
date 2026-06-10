@@ -410,13 +410,15 @@ table. Use the `osm2pgsql.define_expire_output()` Lua function to define an
 expire output. The function has a single paramater, a Lua table with the
 following fields:
 
-| Field    | Description |
-| -------- | ----------- |
-| maxzoom  | The maximum zoom level for which tile coordinates are written out. Default: 0. |
-| minzoom  | The minimum zoom level for which tile coordinates are written out. Optional. Default is the same as maxzoom. |
-| filename | The filename of the output file. Optional. |
-| schema   | The database schema for the output table. The schema must exist in the database and be writable by the database user. Optional. By default the schema set with `--schema` is used, or `public` if that is not set. |
-| table    | The database table for the output. Optional. |
+| Field              | Description |
+| ------------------ | ----------- |
+| maxzoom            | The maximum zoom level for which tile coordinates are written out. Default: 0. |
+| minzoom            | The minimum zoom level for which tile coordinates are written out. Optional. Default is the same as maxzoom. |
+| filename           | The filename of the output file. Optional. |
+| schema             | The database schema for the output table. The schema must exist in the database and be writable by the database user. Optional. By default the schema set with `--schema` is used, or `public` if that is not set. |
+| table              | The database table for the output. Optional. |
+| max_tiles_geometry | *Version >= 2.3.0*{:.version} Set the maximum number of tiles that a single change in a geometry can affect (default: 10 million). ([Details](#limiting-the-number-of-tiles-to-be-expired).) |
+| max_tiles_overall  | *Version >= 2.3.0*{:.version} Set the maximum number of tiles that will be expired in a single run of osm2pgsql (default: 50 million). ([Details](#limiting-the-number-of-tiles-to-be-expired).) |
 {: .desc}
 
 You have to supply the `filename` and/or the `table` (possibly with `schema`).
@@ -434,11 +436,39 @@ geometry.
 | mode            | How polygons are converted to tiles. Can be `full-area` (default), `boundary-only`, or `hybrid`. |
 | full_area_limit | In `hybrid` mode, set the maximum area size for which a full-area expiry is done. Above this `boundary-only` is used. |
 | buffer          | The size of the buffer around geometries to be expired as a fraction of the tile size. |
+| diff_expire     | *Version >= 2.3.0*{:.version} If `true`, expire based on symmetric difference of old and new geometries, if `false` (default) expire based on union of old and new geometries. See [the expire chapter](#details-of-the-expire-calculations) for details. |
 {: .desc}
 
 For an example showing how the expire output works, see the
 [`flex-config/expire.lua`](https://github.com/osm2pgsql-dev/osm2pgsql/blob/master/flex-config/expire.lua){:.extlink}
 example config file.
+
+#### Limiting the Number of Tiles to be Expired
+
+*Version >= 2.3.0*{:.version}
+
+The number of tiles to be expired can be quite large if the input geometries
+are large or if there are many geometries. Numbers of tiles in the billions can
+crash osm2pgsql because it runs out of memory. Such large numbers can also
+overwhelm any kind of re-rendering mechanism run after osm2pgsql to bring tiles
+up to date. In day-to-day processing this should not happen, but it can happen
+due to vandalism or misconfiguration.
+
+To protect against this problem, osm2pgsql has limits on the number of tiles
+that can be affected by a single geometry and the overall number of tiles that
+an expire output will generate for each run of osm2pgsql.
+
+* If a single geometry would result in the expire of more than
+  `max_tiles_geometry` this geometry will be ignored for the purposes of
+  expiry. Note that the geometry will still be written to the database,
+  but no tiles will be added to the expire output.
+* If the number of tiles generated during a single run of osm2pgsql for an
+  expire output grows beyond `max_tiles_overall`, no further tiles will be
+  written to this output.
+
+See [the 45e330c6 commit
+message](https://github.com/osm2pgsql-dev/osm2pgsql/commit/45e330c6){:.extern}
+for details on how the default values for these limits were chosen.
 
 ### Processing Callbacks
 

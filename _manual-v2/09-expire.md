@@ -79,6 +79,17 @@ touched by either or both of those geometries. For new features, there is only
 the new geometry, of course. For deleted features only the old geometry is
 used.
 
+*Version >= 2.3.0*{:.version} If `diff_expire` is [enabled in a table
+definition](#defining-and-using-expire-outputs), expire will be based not on
+the union of old and new geometry but on the symmetric difference, because
+parts of the geometry that did not change will not need re-rendering. This has
+to be explicitly enabled because osm2pgsql can not know the details of the
+rendering configuration or other post-processing done. Diff expire will only
+happen if the change of a way is due to some node changing or the change of a
+relation is due to members changing, because of the way or relation itself
+changes different tags on the object could lead to a completely different
+rendering.
+
 If the geometry of a feature didn't change but the tags changed in some way
 that will always trigger the expiry mechanism. It might well be that the tag
 change does not result in any visible change to the map, but osm2pgsql can't
@@ -91,7 +102,7 @@ Which tiles are marked to be expired depends on the geometry type generated:
 * For line geometries (linestring or multilinestring) all tiles intersected
   by the line are marked as expired.
 * For (multi)polygons there are several expire modes: In `full-area` mode
-  all tiles in the bounding box of the polygon are marked as expired. In
+  all tiles in the polygon are marked as expired. In
   `boundary-only` mode only the lines along the boundary of the polygon are
   expired. In `hybrid` mode either can happen depending on the area of the
   polygon. Polygons with an area larger than `full_area_limit` are expired
@@ -100,6 +111,12 @@ Which tiles are marked to be expired depends on the geometry type generated:
   for each geometry column. For the *pgsql* output the expire output always
   works in `hybrid` mode, use the `--expire-bbox-size` option to set the
   `full_area_limit` (default is 20000).
+
+*Version < 2.3.0*{:.version} All tiles intersecting the bounding box of the
+polygon are expired.
+
+*Version >= 2.3.0*{:.version} All tiles intersecting the actual polygon are
+expired.
 
 In each case neighboring tiles might also be marked as expired if the feature
 is within a buffer of the tile boundary. This is so that larger icons, thick
