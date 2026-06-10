@@ -39,6 +39,23 @@ title: Manual Pages
 </div>
 <div class="box box2">
 
+<h2>osm2pgsql-expire</h2>
+
+<p>This man page is only available for newer versions of osm2pgsql.</p>
+
+{% assign dev = site.manpages | where: "version", "Development version" | first -%}
+<ul>
+{% assign sortedreleases = site.releases | where_exp:"item", "item.manpages contains 'osm2pgsql-expire'" | sort: 'date' | reverse %}
+{% for release in sortedreleases -%}
+{% if release.manpages -%}
+<li><a href="/doc/man/osm2pgsql-expire-{{ release.version | slugify }}.html">Version {{ release.version }}</a></li>
+{%- endif %}
+{% endfor -%}
+</ul>
+
+</div>
+<div class="box box2">
+
 <h2>osm2pgsql-replication</h2>
 
 <p>This man page is only available for newer versions of osm2pgsql.</p>
