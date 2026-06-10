@@ -62,5 +62,20 @@ Create man pages with: groff -mandoc -Thtml man/osm2pgsql-replication.1
 </ul>
 
 </div>
+<div class="box box2">
+
+<h2>osm2pgsql-test-style</h2>
+
+<p>This man page is only available for newer versions of osm2pgsql.</p>
+
+{% comment %}
+Create man pages with: groff -mandoc -Thtml man/osm2pgsql-replication.1
+{% endcomment %}
+
+<ul>
+<li><a href="{% link doc/man/osm2pgsql-test-style-2.3.0.md %}">Version 2.3.0</a></li>
+</ul>
+
+</div>
 </div>
 

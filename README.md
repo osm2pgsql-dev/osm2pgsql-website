@@ -40,14 +40,17 @@ Read https://osm2pgsql.org/contribute/ for more about helping out.
 
 ## Manpages
 
-To create the osm2pgsql-replication man page call (in the osm2pgsql repo):
+To create the osm2pgsql-replication and osm2pgsql-test-style man pages call (in
+the osm2pgsql repo):
 
 ```
-groff -mandoc -Thtml man/osm2pgsql-replication.1
+groff -mandoc -Thtml man/osm2pgsql-replication.1 >osm2pgsql-replication.html
+groff -mandoc -Thtml man/osm2pgsql-test-style.1 >osm2pgsql-test-style.html
 ```
 
-Copy the result into a page similar to `doc/man/osm2pgsql-replication-1.6.0.md`
-and add a link to `doc/man/index.md`.
+Copy the results into pages similar to `doc/man/osm2pgsql-replication-1.6.0.md`
+(you need to edit the beginning and end of the html documents) and add links to
+`doc/man/index.md`.
 
 ## Icons
 
