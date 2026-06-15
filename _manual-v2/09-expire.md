@@ -66,7 +66,7 @@ You have to delete entries from this file after expiry is run.
 
 To visualize the contents of an expire table there is an easy trick: Create
 a database view like this:
-`CREATE VIEW <table>_with_geom AS SELECT *, ST_TileEnvelope(zoom, x, y) AS geom FROM <table>`.
+`CREATE VIEW <table>_with_geom AS SELECT *, ST_TileEnvelope(zoom, x, y)::geometry(Polygon, 3857) AS geom FROM <table>`.
 When you access this view from QGIS or other GIS tools, you'll get polygons
 for the tiles in the `geom` column.
 {:.tip}
