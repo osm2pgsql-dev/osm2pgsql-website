@@ -16,7 +16,7 @@ allows you to write integration tests using
 
 ### Prerequisites
 
-osm2pgsql-test-style uses [behave](https://behave.readthedocs.io){:.extlink}
+osm2pgsql-test-style uses [behave](https://behave.readthedocs.io/){:.extlink}
 under the hood together with [psycopg](https://www.psycopg.org/psycopg3/)
 for connecting to the database. Make sure you have both Python packages installed.
 
