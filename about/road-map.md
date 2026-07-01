@@ -120,22 +120,6 @@ easy to understand for those users that just want to quickly load OSM data
 into a database.
 
 
-### Tile Expiry
-
-osm2pgsql can generate a list of tiles that need to be expired due to updates
-to the database. The code creating the expire lists is very outdated and
-needs to be modernised. The expiry lists are also far from optimal and
-often contain more expired tiles than necessary, especially for polygons.
-
-We'd like to rethink how expiry works and modernize and optimise the code
-along the way.
-This needs a deep look into what users actually need and how we can best
-support it. We should also think about whether we can do expiry calculations
-based on output tables, not data input. This ties in with the generalization
-work mentioned below, because -- in a way -- expire lists are also just
-generalizations of geometries.
-
-
 ### Advanced OSM Object Processing
 
 One of the goals of osm2pgsql is to give the user a generic toolbox for

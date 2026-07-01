@@ -174,32 +174,3 @@ user might also want to start osm2pgsql processing at a well defined point.
 
 [Discussion](https://github.com/osm2pgsql-dev/osm2pgsql/issues/1751){:.extlink}
 
-
-## Tile Expiry
-
-Osm2pgsql can generate a list of tiles that need to be expired due to updates
-to the database. It is memory intensive and tends to create larger tile expiry
-lists than necessary.
-
-Polygon expiry is the most obvious target for improvements. We should expire
-only tiles directly affected instead of the whole bounding box of the polygon.
-Also on the wish list is an expiry that only takes the areas that have changed
-into account instead of the whole polygon.
-
-There are other parameters to expiry which we might want to give the user
-an influence over. This needs a deep look into what users actually need and
-how we can best support it.
-
-[Discussion](https://github.com/osm2pgsql-dev/osm2pgsql/issues/1662){:.extlink}
-
-## Debugging and Testing Support for Style Writers
-
-The flex output introduces a lot of flexibility and we should find ways of
-aiding the style writers with testing and debugging their Lua config files.
-
-The new BDD testing framework might serve as a base for such a test tool.
-It needs to be reviewed and the exising BDD commands cleaned up. Then we
-need some scaffolding that allows the user to invoke the tests and some
-user documentation on how to test user laud scripts.
-
-[Discussion](https://github.com/osm2pgsql-dev/osm2pgsql/issues/1130){:.extlink}
