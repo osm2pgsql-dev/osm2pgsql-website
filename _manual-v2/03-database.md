@@ -155,6 +155,10 @@ setting `autovacuum_max_workers = 1` and reduce `autovacuum_work_mem` even
 further. This will reduce the amount of memory that autovacuum takes away from
 the import process.
 
+While the import runs osm2pgsql can keep a single COPY statement running for
+hours. Do not set a `statement_timeout` or make sure it is large enough. By
+default the PostgreSQL statement timeout is disabled.
+
 For additional details see the [Server Configuration
 chapter](https://www.postgresql.org/docs/current/runtime-config.html){:.extlink}
 and [Populating a Database in the Performance Tips chapter](
@@ -166,7 +170,7 @@ PostgreSQL documentation.
 
 The suggestions in this section are *potentially dangerous* and are not
 suitable for all environments. These settings can cause crashes and/or
-corruption.  Corruption in a PostgreSQL instance can lead to a "bricked"
+corruption. Corruption in a PostgreSQL instance can lead to a "bricked"
 instance affecting all databases in the instance.
 
 | Config Option                | Proposed Value  | Pg 17 Default | Remark |
