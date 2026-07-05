@@ -2,7 +2,7 @@
 title: EIfER
 order: 11
 links:
-    - href: https://www.eifer.kit.edu/
+    - href: https://www.eifer.org/
       title: EIfER - European Institute for Energy Research
 tags:
     - map
