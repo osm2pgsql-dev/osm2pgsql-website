@@ -65,6 +65,7 @@ Create man pages with: groff -mandoc -Thtml man/osm2pgsql-replication.1
 {% endcomment %}
 
 <ul>
+<li><a href="{% link doc/man/osm2pgsql-replication-2.3.1.md %}">Version 2.3.1</a></li>
 <li><a href="{% link doc/man/osm2pgsql-replication-2.3.0.md %}">Version 2.3.0</a></li>
 <li><a href="{% link doc/man/osm2pgsql-replication-2.2.0.md %}">Version 2.2.0</a></li>
 <li><a href="{% link doc/man/osm2pgsql-replication-2.1.1.md %}">Version 2.1.1</a></li>
@@ -90,6 +91,7 @@ Create man pages with: groff -mandoc -Thtml man/osm2pgsql-replication.1
 {% endcomment %}
 
 <ul>
+<li><a href="{% link doc/man/osm2pgsql-test-style-2.3.1.md %}">Version 2.3.1</a></li>
 <li><a href="{% link doc/man/osm2pgsql-test-style-2.3.0.md %}">Version 2.3.0</a></li>
 </ul>
 
