@@ -2,7 +2,7 @@
 title: Project CODA
 ---
 
-# Project CODA: Reduce osm2pgsql resource usage
+# Project CODA: Reduce osm2pgsql Resource Usage
 
 The amount of data in OSM is climbing continually, and therefore the memory and
 disk requirements of osm2pgsql have risen as well. In this project we want to
@@ -15,7 +15,7 @@ This will not only help with resource consumption on the community-run OSM
 servers, but also enable wider use of OSM data, even on planet-scale, in
 low-resource environments available to small NGOs or to students.
 
-## Project plan
+## Project Plan
 
 The project starts in April/May 2026 and runs for about a year. We'll first
 look at the requirements in detail, then research possible solutions using
@@ -27,6 +27,34 @@ osm2pgsql.
 ## Progress
 
 *Here we'll document the progress of the project.*
+
+### Planning Phase
+
+* The detailed [requirements]({% link project-coda/requirements.md %}).
+* [Characteristics of OSM Data]({% link
+  project-coda/characteristics-of-osm-data.md %}) that can help with the
+  implementation.
+* The [baseline]({% link project-coda/baseline.md %}) gives us something to
+  compare to when evaluating alternatives.
+* As part of this project we looked at some [other databases storing OSM
+  data]({% link project-coda/others.md%}). The [Imposm3 program]({% link
+  project-coda/imposm.md %}) is especially interesting.
+* Some [notes about DuckDB]({% link project-coda/duckdb.md %}).
+* The way we [store node locations]({% link
+  project-coda/storing-node-locations.md %}) is really important. Not only are
+  there a lot of them, we basically needs them for everything, so lookup has to
+  be fast. There is another option: We could [store the node locations on the
+  ways]({% link project-coda/storing-node-locations-on-ways.md %})!
+* [Storing tags]({% link project-coda/tags.md %}) in a sensible way is
+  important. Tags are strings that can contain anything and they need a
+  lot of space. But some tags are used very often (for instance 560 million
+  ways, almost half of all ways, have a tag `building=yes`) so there must be
+  better ways of storing them. We'll also look at [tag combinations]({% link
+  project-coda/tag-combinations.md %}).
+* The [implementation plan]({% link project-coda/plan.md %}) shows the next
+  steps.
+
+
 
 ## Funding
 
