@@ -68,7 +68,7 @@ type as you need them. Use builtin data conversion or define your own
 conversion functions to get the data in the format best suited for your
 applications.
 
-Use PostgreSQL JSON and hstore data types to store the complete set of tags of
+Use PostgreSQL JSON or hstore data types to store the complete set of tags of
 an OSM object in a single database column for maximum flexiblity or use
 specific columns for specific attributes.
 [<img class="features-link" src="/img/infolink.svg" alt="More information" title="More information"/>](/doc/manual.html#defining-columns)
@@ -81,6 +81,8 @@ specific columns for specific attributes.
 * bool
 * json(b)
 * hstore
+* double precision (since 2.3.0)
+* timestamp with or without timezone (since 2.3.0)
 * (any other PostgreSQL datatype)
 </div>
 
@@ -95,6 +97,9 @@ configured with Lua code as well as the data cleanup and transformations.
 The Lua config has access to environment variables allowing even more flexible
 configuration. And with the use of Lua libraries functionality can be extended
 even further.
+
+Since version 2.3.0 osm2pgsql comes with a "style tester" that helps with
+writing tests for config files.
 [<img class="features-link" src="/img/infolink.svg" alt="More information" title="More information"/>](/doc/manual.html#the-flex-output)
 </div>
 
@@ -126,6 +131,7 @@ intermediate steps.
 * Centroid, Labelling point
 * Simplification
 * Splitting of multi-geometries
+* Length and area functions
 * ...
 </div>
 
@@ -205,6 +211,9 @@ Most online maps use a tile-based approach, where the map is split into
 rectangular (raster or vector) tiles that can be created, delivered and updated
 independently. Osm2pgsql can create list of tiles that need updating based on
 the changed OSM data.
+
+Since version 2.3.0 osm2pgsql supports "diff expire" which only expires the
+parts of a larger geometry that actually changed.
 [<img class="features-link" src="/img/infolink.svg" alt="More information" title="More information"/>](/doc/manual.html#expire)
 </div>
 
@@ -266,6 +275,20 @@ Osm2pgsql has advanced support for working with OSM relations. Using optional
 two-stage processing tags and other information from relations can be attached
 to their member objects. This is useful for *route* relations, for instance.
 [<img class="features-link" src="/img/infolink.svg" alt="More information" title="More information"/>](/doc/manual.html#stages)
+</div>
+
+<div class="features-list" markdown="1">
+</div>
+
+<h3>Matching OSM data to areas</h3>
+
+<div class="features-info" markdown="1">
+On import osm2pgsql can check all objects against a configurable list of areas
+and store the result with the data. This allows, for instance, to annotate all
+data with the country it is in. This matching is much faster than doing the
+same thing after import.
+(Since Version 2.2.0)
+[<img class="features-link" src="/img/infolink.svg" alt="More information" title="More information"/>](/doc/manual.html#locators)
 </div>
 
 <div class="features-list" markdown="1">
