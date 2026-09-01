@@ -153,7 +153,7 @@ a#menu-code svg {
 
     nav {
         right: 0;
-        font-size: 120%;
+        font-size: 16px;
         margin-right: 20px;
         height: 5ex;
         border-bottom: 2px solid $osm2pgsql-color-dark;
@@ -198,7 +198,7 @@ a#menu-code svg {
         border-radius: 2px;
         list-style: none;
         padding: 0;
-        margin: 4px 0 0 -1px;
+        margin: 2px 0 0 -1px;
         z-index: 2;
         width: 11em;
     }
@@ -351,6 +351,7 @@ a.extlink::before {
 }
 
 h1 {
+    margin-top: 40px;
     text-transform: uppercase;
     text-align: center;
     font-size: 240%;
