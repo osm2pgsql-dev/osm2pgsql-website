@@ -64,7 +64,7 @@ osm2pgsql.
 </div>
 
 [This project](https://nlnet.nl/project/Osm2pgsql/) is funded through the [NGI0
-Commons Fund](https://nlnet.nl/commonsfund), a fund established by
+Commons Fund](https://nlnet.nl/commonsfund/), a fund established by
 [NLnet](https://nlnet.nl/) with financial support from the European
 Commission's [Next Generation Internet](https://ngi.eu/) programme, under the
 aegis of [DG Communications Networks, Content and
@@ -72,5 +72,5 @@ Technology](https://commission.europa.eu/about-european-commission/departments-a
 under grant agreement No
 [101135429](https://cordis.europa.eu/project/id/101135429). Additional funding
 is made available by the [Swiss State Secretariat for Education, Research and
-Innovation](https://www.sbfi.admin.ch/sbfi/en/home.html) (SERI).
+Innovation](https://www.sbfi.admin.ch/en) (SERI).
 
