@@ -38,3 +38,52 @@ used blocks due to the geographic closeness of ids.
 When we have the final implementation, we should experiment with various block
 sizes to determine the best one for our needs.
 
+## Static vs. dynamic block sizes
+
+There are two ways we can store the data in blocks:
+
+With *static blocks* all blocks have the same number of slots to put Locations
+in, for instance 32 locations of 32 specific nodes. Some of the slots will be
+empty if the associated node doesn't exists. Using static blocks is easy,
+because we know exactly which block a specific node id is in, but it wastes
+some space, because some blocks will only contain a single node's location
+or locations for very few nodes which makes the delta encoding not work so
+well.
+
+With *dynamic blocks* each blocks can contain a variable number of node
+locations. During import we fill them to some maximum number of node locations,
+but if later on something changes, we might delete nodes or add nodes, so the
+number of entries can change.
+
+Dynamic blocks are only possible if the underlying storage can find an object
+based on the id even if the object is not stored under that id but a smaller
+one. Typical key-value-stores support this, because they store objects in key
+order and allow access through an iterator. Getting an object involves asking
+for an interator for that key position, you get back one that points to the
+nearest previous key which is the one that contains the block of data with
+the key you are actually interested in.
+
+Dynamic blocks seem to work well with OSM data, because node locations
+occasionally change and sometimes nodes are deleted, but it doesn't happen
+often that new nodes are added except nodes "at the end", i.e. new nodes have
+ids larger than any nodes before them, so they are added at the end of the
+store. New nodes between existing nodes only happen in few cases, for instance
+if a change that deleted those nodes is reverted. So in normal processing it
+doesn't happen that often that a block that started out small will get so many
+node locations added that it becomes slow to use.
+
+But there is another ting to take into account: How are the node locations
+actually stored inside that block? For static blocks we can use a bit map at
+the beginning which tells us for which nodes we actually have data. Then the
+varint and delta-encoded node locations. For dynamic blocks we need to store
+the actual node ids (also delta-encoded) to figure out which nodes we have
+locations for. I tried implementing both solutions (with some variations) and
+tested it with a planet file and various extracts. As expected for small
+extracts the dynamic blocks work better, we need 10% to 30% less space then for
+static blocks. But the larger the extract the more this changes. For the
+Germany extract we reach the "break-even" point, the planet needs about 15%
+more space with dynamic blocks than with static blocks. If we consider that for
+small extracts even large percentual savings only amount to a few Megabytes,
+but for the planet the small percentual savings amount to 8 Gigabytes of data,
+we can see that it makes sense to go with the static blocks.
+
