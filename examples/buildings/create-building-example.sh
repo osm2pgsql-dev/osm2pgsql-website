@@ -8,5 +8,3 @@ osmium extract -p federal-district.osm -o brasilia.osm.pbf centro-oeste-latest.o
 
 osm2pgsql -d mbuildings -O flex -S buildings.lua brasilia.osm.pbf
 
-psql mbuildings -c "CREATE UNIQUE INDEX ON buildings (id);"
-
